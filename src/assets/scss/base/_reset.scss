@@ -1,3 +1,9 @@
+@import '../abstracts/variables';
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $main-font;
 }

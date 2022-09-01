@@ -1,8 +1,8 @@
 import React from "react";
 
-import '../../assets/scss/pages/_login.scss';
-
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
+import Button from "../../components/UI/Button";
+import Input from "../../components/UI/Input";
 
 const Login = () => {
   return (
@@ -20,24 +20,8 @@ const Login = () => {
                 </p>
               </div>
               <form className="auth-container__form">
-                <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Enter Username"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter Password"
-                  />
-                </div>
+              <Input label="Username" id="username" placeholder="Enter username" type="text" />
+              <Input label="Password" id="password" placeholder="Enter password" type="password" />
                 <div className="form-check">
                   <input
                     type="checkbox"
@@ -48,10 +32,11 @@ const Login = () => {
                     Remember Me
                   </label>
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Sign in
-                </button>
+                <Button type="submit" className="btn btn-primary" innerText="Sign in" />
               </form>
+              <div className="register-link">
+                Don't Have An Account? <a href="/register">Sign Up</a>
+              </div>
             </div>
           </div>
         </div>
