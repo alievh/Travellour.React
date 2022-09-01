@@ -1,0 +1,9 @@
+@import '../abstracts/variables';
+
+.auth-poster {
+    background-color: $primary;
+
+    @media screen and (max-width: 992px) {
+        display: none;
+    }
+}

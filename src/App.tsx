@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Newsfeed from "./pages/Newsfeed/Newsfeed";
 
 const App = () => {
   return (
@@ -10,11 +11,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            {/* <Route index element={<Home />} />
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/profile" element={<Profile />} /> */}
+           <Route path="/newsfeed" element={<Newsfeed />} />
+            {/* <Route path="/landing" element={<Landing />} />
+            <Route path="/profile" element={<Profile />} />  */}
           </Route>
-          <Route path="/login" element={<Login />} />
+          <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
