@@ -1,4 +1,3 @@
-import React from "react";
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
