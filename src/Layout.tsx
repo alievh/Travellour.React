@@ -6,15 +6,18 @@ import Sidebar from "./layouts/Sidebar/Sidebar";
 const Layout = () => {
   return (
     <>
-      <Navbar />
-      <Sidebar />
+      <header>
+        <Navbar />
+      </header>
       <main>
+        <Sidebar />
         <Outlet />
       </main>
-
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </>
-  )
-}
+  );
+};
 
 export default Layout;

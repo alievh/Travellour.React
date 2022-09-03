@@ -17,18 +17,64 @@ body {
 }
 
 .sidebar {
-  width: 270px;
   height: 100vh;
-  padding: 0 2rem;
   position: fixed;
   left: 0;
   top: 0;
-  background-color: pink;
+  background-color: #fff;
+}
+
+.sidebar__toggle {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 110px;
+  right: -18px;
+  transform: rotate(45deg);
+  background-color: #fff;
+  width: 36px;
+  height: 36px;
+  z-index: 5;
+}
+
+.sidebar__toggle i {
+  transform: rotate(-45deg);
+}
+
+.sidebar .sidebar-section {
+  padding: 0 2rem;
+}
+
+.sidebar .sidebar-section.toggle {
+  padding: 0 0.5rem;
 }
 
 .sidebar .sidebar-section__logo {
-  padding: 16px 32px;
+  padding: 20px 7px;
   border-bottom: 1px solid #f1f1f1;
+}
+
+.sidebar .sidebar-section__logo a {
+  display: flex;
+  justify-content: none;
+  align-items: none;
+  text-decoration: none;
+  color: #000;
+}
+
+.sidebar .sidebar-section__logo h2 {
+  margin: 0;
+}
+
+.sidebar .sidebar-section__logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.sidebar .sidebar-section__logo.sidebar-notactive {
+  padding: 15px 10px;
 }
 
 .sidebar .sidebar-section__profile {
@@ -107,9 +153,14 @@ body {
 }
 
 .sidebar .sidebar-section__main ul li a:hover {
-  color: #2f65b9;
+  color: #4fb5ff;
   background-color: #eaeff8;
   transition: 0.2s ease-out;
+}
+
+.sidebar .sidebar-section__main ul li a i {
+  margin: 0 10px;
+  font-size: 18px;
 }
 
 .sidebar .sidebar-section__menu {
@@ -124,28 +175,144 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 270px;
-  height: 100px;
-  background-color: red;
-  padding: 0 16px;
+  padding: 16px 16px;
 }
 
 .sidebar .sidebar-section__settings {
   width: 100%;
   background-color: #fff;
+  border-radius: 5px;
+  background-color: #f8f9fa;
 }
 
-.sidebar .sidebar-section__settings ul {
+.sidebar .sidebar-section__settings .list {
   margin: 0;
   padding: 16px 0px;
   list-style: none;
   display: flex;
-  justify-content: space-evenly;
-  align-items: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar .sidebar-section__settings .list.sidebar-notactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidebar .sidebar-section__settings .list li {
+  margin: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar .sidebar-section__settings .list li a {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 45px;
+  height: 45px;
+  color: #6f7f92;
+  transition: 0.5s ease-in;
+}
+
+.sidebar .sidebar-section__settings .list li a:hover {
+  color: #4fb5ff;
+  background-color: #edf7ff;
+  transition: 0.2s ease-out;
+}
+
+.sidebar .sidebar-section__settings .list li a i {
+  font-size: 18px;
 }
 
 .nav-bar {
   margin-left: 270px;
+  padding: 21px 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+}
+
+.nav-bar.sidebar-notactive {
+  margin-left: 70px;
+}
+
+.nav-bar__container {
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: none;
+}
+
+.nav-bar__container input {
+  width: 40rem;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.nav-bar__container input:focus {
+  box-shadow: none;
+}
+
+.nav-bar__container input:focus {
+  border-color: #4fb5ff;
+}
+
+.nav-bar__container input::placeholder {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-bar__container input {
+    width: 25rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .nav-bar__container input {
+    width: 15rem;
+  }
+}
+
+.nav-bar__navigation {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.nav-bar__navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: none;
+  align-items: none;
+}
+
+.nav-bar__navigation ul li {
+  padding: 0 6px;
+}
+
+.nav-bar__navigation ul li button {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #6f7f92;
+}
+
+.nav-bar__navigation ul li button.switch-mode:hover {
+  color: #4fb5ff;
+  background-color: #edf7ff;
+  transition: 0.2s ease-out;
 }
 
 .login-section {
@@ -456,5 +623,11 @@ body {
   .register-section .auth-container .login-link {
     font-size: 12px;
   }
+}
+
+.newsfeed {
+  width: 100%;
+  height: 300vh;
+  background-color: #F8F9FA;
 }
 /*# sourceMappingURL=main.css.map */

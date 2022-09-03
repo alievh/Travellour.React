@@ -1,12 +1,6 @@
 import React from "react";
 
-interface IButton {
-    type: any,
-    className: string,
-    innerText: string
-};
-
-const Button = (props: IButton) => {
+const Button: React.FC<{ type: any, className: string, innerText: string}> = (props) => {
   return (
     <button type={props.type} className={props.className}>
       {props.innerText}

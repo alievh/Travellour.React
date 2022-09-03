@@ -1,15 +1,13 @@
 import React from "react";
 
-interface IInput {
+const Input: React.FC<{
   type: string;
   id: string;
   placeholder: string;
   label: string;
-  mainDivClass?: string
-}
-
-const Input = (props: IInput) => {
-  const mainDivClassName = 'form-group ' + props.mainDivClass;
+  mainDivClass?: string;
+}> = (props) => {
+  const mainDivClassName = "form-group " + props.mainDivClass;
 
   return (
     <div className={mainDivClassName}>

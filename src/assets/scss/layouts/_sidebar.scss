@@ -1,18 +1,59 @@
 @import "../abstracts/mixins";
+@import "../abstracts/variables";
 
 .sidebar {
-  width: 270px;
   height: 100vh;
-  padding: 0 2rem;
   position: fixed;
   left: 0;
   top: 0;
-  background-color: pink;
+  background-color: #fff;
+
+  &__toggle {
+    cursor: pointer;
+    @include flex(center, center);
+    position: absolute;
+    top: 110px;
+    right: -18px;
+    transform: rotate(45deg);
+    background-color: #fff;
+    width: 36px;
+    height: 36px;
+    z-index: 5;
+
+    i {
+      transform: rotate(-45deg);
+    }
+  }
 
   .sidebar-section {
+    padding: 0 2rem;
+
+    &.toggle {
+      padding: 0 0.5rem;
+    }
+
     &__logo {
-      padding: 16px 32px;
+      padding: 20px 7px;
       border-bottom: 1px solid #f1f1f1;
+
+      a {
+        @include flex(none, none);
+        text-decoration: none;
+        color: #000;
+      }
+
+      h2 {
+        margin: 0;
+      }
+
+      img {
+        width: 40px;
+        margin-right: 10px;
+      }
+
+      &.sidebar-notactive {
+        padding: 15px 10px;
+      }
     }
 
     &__profile {
@@ -81,9 +122,14 @@
             border-radius: 5px;
 
             &:hover {
-              color: #2f65b9;
+              color: $primary;
               background-color: #eaeff8;
               transition: 0.2s ease-out;
+            }
+
+            i {
+              margin: 0 10px;
+              font-size: 18px;
             }
           }
         }
@@ -102,21 +148,50 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      width: 270px;
-      height: 100px;
-      background-color: red;
-      padding: 0 16px;
+      padding: 16px 16px;
     }
 
     &__settings {
-        width: 100%;
+      width: 100%;
       background-color: #fff;
-      ul {
+      border-radius: 5px;
+      background-color: #f8f9fa;
 
+      .list {
         margin: 0;
         padding: 16px 0px;
         list-style: none;
-        @include flex(space-evenly, none);
+        @include flex(center, center);
+
+        &.sidebar-notactive {
+          @include flex(center, center);
+          flex-direction: column;
+        }
+
+        li {
+          margin: 0 8px;
+          @include flex(center, center);
+
+          a {
+            display: block;
+            @include flex(center, center);
+            text-decoration: none;
+            width: 45px;
+            height: 45px;
+            color: #6f7f92;
+            transition: 0.5s ease-in;
+
+            &:hover {
+              color: #4fb5ff;
+              background-color: #edf7ff;
+              transition: 0.2s ease-out;
+            }
+
+            i {
+              font-size: 18px;
+            }
+          }
+        }
       }
     }
   }
