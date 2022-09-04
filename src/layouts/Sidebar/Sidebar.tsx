@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SidebarItem from "../../components/UI/SidebarItem";
 import { sidebarToggleAction } from "../../store/sidebarToggle";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const sidebarToggleDispatch = useDispatch();
@@ -32,13 +32,13 @@ const Sidebar = () => {
               !isSidebarActive && "sidebar-notactive"
             }`}
           >
-            <a href="/newsfeed">
+            <Link to="/newsfeed">
               <img
                 src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/themes/socialv-theme/assets/images/logo-mini.svg"
                 alt="logo"
               />
               {isSidebarActive && <h2>Travellour</h2>}
-            </a>
+            </Link>
           </div>
         </div>
         <div className="sidebar-section__main">
@@ -61,17 +61,28 @@ const Sidebar = () => {
               <SidebarItem
                 innerText="Newsfeed"
                 iconClass="fa-solid fa-file-lines"
+                url="/newsfeed"
               />
-              <SidebarItem innerText="Members" iconClass="fa-solid fa-user" />
+              <SidebarItem
+                innerText="Members"
+                iconClass="fa-solid fa-user"
+                url="/newsfeed"
+              />
               <SidebarItem
                 innerText="Groups"
                 iconClass="fa-solid fa-user-group"
+                url="/newsfeed"
               />
               <SidebarItem
                 innerText="Events"
                 iconClass="fa-solid fa-person-hiking"
+                url="/newsfeed"
               />
-              <SidebarItem innerText="Memories" iconClass="fa-solid fa-image" />
+              <SidebarItem
+                innerText="Memories"
+                iconClass="fa-solid fa-image"
+                url="/newsfeed"
+              />
             </ul>
           </div>
           <div className="sidebar-section__forum">
@@ -80,6 +91,7 @@ const Sidebar = () => {
               <SidebarItem
                 innerText="All Forums"
                 iconClass="fa-solid fa-comments"
+                url="/newsfeed"
               />
             </ul>
           </div>
@@ -87,26 +99,10 @@ const Sidebar = () => {
         <div className="sidebar-section__footer">
           <div className="sidebar-section__settings">
             <ul className={isSidebarActive ? "list" : "list sidebar-notactive"}>
-              <li>
-                <a href="#">
-                <i className="fa-solid fa-lock"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fa-solid fa-bell"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fa-solid fa-gear"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fa-solid fa-user-group"></i>
-                </a>
-              </li>
+              <SidebarItem iconClass="fa-solid fa-lock" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-bell" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-gear" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-user-group" url="/newsfeed" />
             </ul>
           </div>
         </div>
