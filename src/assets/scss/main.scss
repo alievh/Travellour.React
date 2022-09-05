@@ -4,8 +4,14 @@
 @import './base/reset';
 @import './base/typography';
 @import './components/authPoster';
+@import './components/activeUsers';
+@import './components/activeUser';
+@import './components/friendRequests';
+@import './components/friendRequest';
 @import './layouts/sidebar';
 @import './layouts/navbar';
 @import './pages/login';
 @import './pages/register';
 @import './pages/newsfeed';
+@import './pages/profile';
+@import './pages/friends';

@@ -1,0 +1,30 @@
+.friend-request {
+  @include flex(none, none);
+  margin: 20px 0;
+
+  &__user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 18px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .user-details {
+    @include flex(center, none);
+    flex-direction: column;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    span {
+      font-size: 14px;
+      color: #6f7f92;
+    }
+  }
+}

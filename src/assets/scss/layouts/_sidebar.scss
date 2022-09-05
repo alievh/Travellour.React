@@ -19,6 +19,7 @@
     width: 36px;
     height: 36px;
     z-index: 5;
+    border-radius: 5px;
 
     i {
       transform: rotate(-45deg);
@@ -167,6 +168,10 @@
         &.sidebar-notactive {
           @include flex(center, center);
           flex-direction: column;
+
+          li {
+            margin: 0;
+          }
         }
 
         li {

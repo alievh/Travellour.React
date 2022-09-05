@@ -44,13 +44,13 @@ const Sidebar = () => {
         <div className="sidebar-section__main">
           <div className="sidebar-section__profile">
             <div className="profile-avatar">
-              <a href="#">
+              <Link to="/profile">
                 <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg" />
-              </a>
+              </Link>
             </div>
             {isSidebarActive && (
               <div className="profile-userinfo">
-                <a href="#">Marvin McKinney</a>
+                <Link to="/profile">Marvin McKinney</Link>
                 <p>@marvin</p>
               </div>
             )}
@@ -64,9 +64,9 @@ const Sidebar = () => {
                 url="/newsfeed"
               />
               <SidebarItem
-                innerText="Members"
+                innerText="Friends"
                 iconClass="fa-solid fa-user"
-                url="/newsfeed"
+                url="/friends"
               />
               <SidebarItem
                 innerText="Groups"

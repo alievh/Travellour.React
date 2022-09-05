@@ -1,0 +1,10 @@
+.friends-section {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-left: 300px;
+  padding-top: 90px;
+
+  &.sidebar-notactive {
+    padding-left: 45px;
+  }
+}

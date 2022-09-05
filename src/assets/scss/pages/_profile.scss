@@ -1,0 +1,102 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.profile-section {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-left: 265px;
+  padding-top: 90px;
+
+  &.sidebar-notactive {
+    padding-left: 50px;
+  }
+
+  &__background {
+    width: 100%;
+    height: 500px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .user {
+    @include flex(space-between, none);
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 32px;
+    position: relative;
+    margin-top: -50px;
+
+    &__statistics {
+      @include flex(center, center);
+
+      ul {
+        @include flex(none, none);
+        list-style: none;
+        margin: 0;
+
+        li {
+          padding: 10px 20px;
+          &:first-child {
+            border-right: 1px solid #f1f1f1;
+          }
+
+          span {
+            margin: 4px;
+          }
+        }
+      }
+    }
+
+    &__details {
+      @include flex(center, center);
+      flex-direction: column;
+
+      span {
+        color: #6f7f92;
+        font-size: 14px;
+      }
+    }
+
+    &__request {
+      @include flex(none, center);
+
+      button {
+        margin: 0 10px;
+
+        &:hover {
+          border-color: #fff;
+        }
+
+        &.message {
+          background-color: $primary;
+          color: #fff;
+
+          &:hover {
+            background-color: $primary-dark;
+          }
+        }
+      }
+    }
+
+    .user-avatar {
+      position: absolute;
+      top: -120px;
+      left: 44%;
+      width: 140px;
+      height: 140px;
+      background-color: #fff;
+      border: 4px solid #fff; 
+      border-radius: 5px;
+
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+    }
+  }
+}

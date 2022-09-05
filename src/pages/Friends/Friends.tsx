@@ -3,13 +3,11 @@ import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 
-const Newsfeed = () => {
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
-  );
+const Friends = () => {
+    const sidebarIsActive = useSelector((state:any) => state.sidebarToggle.isActive);
 
   return (
-    <div className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
+    <section className={`friends-section ${!sidebarIsActive && "sidebar-notactive"}`}>
       <div className="container">
         <div className="row">
           <div className="col-xl-8 col-sm-12">
@@ -178,8 +176,8 @@ const Newsfeed = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Newsfeed;
+export default Friends;
