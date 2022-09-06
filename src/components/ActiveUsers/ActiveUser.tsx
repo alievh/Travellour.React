@@ -1,7 +1,7 @@
 import React from "react";
 
 const ActiveUser: React.FC<{
-  userImg: string;
+  userUrl: string;
   userFirstName: string;
   userLastName: string;
 }> = (props) => {
@@ -9,7 +9,7 @@ const ActiveUser: React.FC<{
     <li className="active-user">
       <div className="user-avatar">
         <a href="#">
-          <img src={props.userImg} />
+          <img src={props.userUrl} />
         </a>
       </div>
       <div className="user-details">

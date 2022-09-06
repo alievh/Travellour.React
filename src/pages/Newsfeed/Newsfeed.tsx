@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
+import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 
 const Newsfeed = () => {
@@ -171,9 +172,7 @@ const Newsfeed = () => {
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
-              <div className="newsfeed-section__banner">
-                <img src={require("../../assets/images/banner.jpg")} />
-              </div>
+              <AddvertisingBanner />
             </section>
           </div>
         </div>

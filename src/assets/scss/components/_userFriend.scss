@@ -1,0 +1,60 @@
+@import "../abstracts/mixins";
+
+.user-friend {
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 32px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  @include flex(space-between, center);
+
+  &__info {
+    @include flex(none, center);
+  }
+
+  &__avatar {
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 15px;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__fullname {
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    span {
+      font-size: 14px;
+      color: #6f7f92;
+    }
+  }
+
+  &__request {
+
+    button {
+        margin-right: 15px;
+        padding: 2px 14px;
+        font-size: 14px;
+        color: #fff;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    a {
+
+        i {
+            font-size: 18px;
+        }
+    }
+  }
+}

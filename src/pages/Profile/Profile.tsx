@@ -3,6 +3,7 @@ import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
+import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 
 const Profile = () => {
   const sidebarIsActive = useSelector(
@@ -19,9 +20,6 @@ const Profile = () => {
       <div className="container">
         <div className="row">
           <div className="user">
-            <div className="user-avatar">
-              <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
-            </div>
             <div className="user__statistics">
               <ul>
                 <li>
@@ -35,6 +33,9 @@ const Profile = () => {
               </ul>
             </div>
             <div className="user__details">
+              <div className="user-avatar">
+                <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
+              </div>
               <h5>Marvin McKinney</h5>
               <span>@marvin</span>
             </div>
@@ -44,11 +45,13 @@ const Profile = () => {
                   type="submit"
                   innerText="Add Friend"
                   className="btn btn-primary"
+                  buttonIcon="fa-solid fa-user-plus"
                 />
                 <Button
                   type="submit"
                   innerText="Message"
                   className="btn message"
+                  buttonIcon="fa-solid fa-message"
                 />
               </form>
             </div>
@@ -57,9 +60,6 @@ const Profile = () => {
         <div className="row">
           <div className="col-xl-8 col-sm-12">
             <section className="newsfeed-section">
-              <div className="newsfeed-section__stories">
-                <div className="stories-add"></div>
-              </div>
               <div className="newsfeed-section__posts">
                 <div className="newsfeed-section__post">
                   <div className="post-owner">
@@ -178,9 +178,7 @@ const Profile = () => {
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
-              <div className="newsfeed-section__banner">
-                <img src={require("../../assets/images/banner.jpg")} />
-              </div>
+              <AddvertisingBanner />
             </section>
           </div>
         </div>

@@ -71,12 +71,12 @@ const Sidebar = () => {
               <SidebarItem
                 innerText="Groups"
                 iconClass="fa-solid fa-user-group"
-                url="/newsfeed"
+                url="/groups"
               />
               <SidebarItem
                 innerText="Events"
                 iconClass="fa-solid fa-person-hiking"
-                url="/newsfeed"
+                url="/events"
               />
               <SidebarItem
                 innerText="Memories"
@@ -101,7 +101,7 @@ const Sidebar = () => {
             <ul className={isSidebarActive ? "list" : "list sidebar-notactive"}>
               <SidebarItem iconClass="fa-solid fa-lock" url="/newsfeed" />
               <SidebarItem iconClass="fa-solid fa-bell" url="/newsfeed" />
-              <SidebarItem iconClass="fa-solid fa-gear" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-gear" url="/setting" />
               <SidebarItem iconClass="fa-solid fa-user-group" url="/newsfeed" />
             </ul>
           </div>

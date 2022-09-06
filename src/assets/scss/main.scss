@@ -8,6 +8,8 @@
 @import './components/activeUser';
 @import './components/friendRequests';
 @import './components/friendRequest';
+@import './components/advertisingBanner';
+@import './components/userFriend';
 @import './layouts/sidebar';
 @import './layouts/navbar';
 @import './pages/login';
@@ -15,3 +17,4 @@
 @import './pages/newsfeed';
 @import './pages/profile';
 @import './pages/friends';
+@import './pages/setting';

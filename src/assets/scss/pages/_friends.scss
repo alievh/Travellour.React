@@ -1,4 +1,7 @@
-.friends-section {
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.friends {
   width: 100%;
   background-color: #f8f9fa;
   padding-left: 300px;
@@ -6,5 +9,64 @@
 
   &.sidebar-notactive {
     padding-left: 45px;
+  }
+
+  &__search-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 32px;
+    margin: 32px 0;
+    border-radius: 5px;
+  }
+
+  &__search {
+    width: 100%;
+    position: relative;
+
+    input {
+      padding: 6px 12px;
+      width: 100%;
+      border: 1px solid #f1f1f1;
+      border-radius: 5px;
+
+      &:focus {
+        border-color: $primary;
+      }
+
+      &:focus-visible {
+        box-shadow: none;
+      }
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      background-color: $primary;
+      border-color: $primary;
+
+      &:hover {
+        background-color: $primary-dark;
+        border-color: $primary-dark;
+      }
+    }
+  }
+
+  &__container {
+    width: 100%;
+    background-color: #fff;
+    padding: 0 32px 32px 32px;
+    border-radius: 5px;
+  }
+
+  &__filter {
+    @include flex(space-between, none);
+    padding: 32px 0;
   }
 }

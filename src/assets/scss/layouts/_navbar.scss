@@ -56,8 +56,9 @@
 
       li {
         padding: 0 6px;
+        position: relative;
 
-        button {
+        .nav-button {
           width: 45px;
           height: 45px;
           border: none;
@@ -71,6 +72,64 @@
               background-color: #edf7ff;
               transition: 0.2s ease-out;
             }
+          }
+        }
+
+        .friend-dropdown {
+          position: absolute;
+          top: 67px;
+          left: -375px;
+          width: 400px;
+          background-color: #fff;
+          border-radius: 10px;
+
+          h5 {
+            padding: 16px 0;
+            margin: 0 32px;
+            border-bottom: 1px solid #f1f1f1;
+          }
+
+          p {
+            padding: 16px 32px 32px 32px;
+            color: #6f7f92;
+          }
+        }
+        .message-dropdown {
+          position: absolute;
+          top: 67px;
+          left: -325px;
+          width: 400px;
+          background-color: #fff;
+          border-radius: 10px;
+
+          h5 {
+            padding: 16px 0;
+            margin: 0 32px;
+            border-bottom: 1px solid #f1f1f1;
+          }
+
+          p {
+            padding: 16px 32px 32px 32px;
+            color: #6f7f92;
+          }
+        }
+        .notification-dropdown {
+          position: absolute;
+          top: 67px;
+          left: -275px;
+          width: 400px;
+          background-color: #fff;
+          border-radius: 10px;
+
+          h5 {
+            padding: 16px 0;
+            margin: 0 32px;
+            border-bottom: 1px solid #f1f1f1;
+          }
+
+          p {
+            padding: 16px 32px 32px 32px;
+            color: #6f7f92;
           }
         }
       }

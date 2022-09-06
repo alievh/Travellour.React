@@ -122,6 +122,75 @@ body {
   color: #6f7f92;
 }
 
+.advertising-banner {
+  margin: 32px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 300px;
+}
+
+.advertising-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-friend {
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 32px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-friend__info {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.user-friend__avatar {
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-friend__avatar img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.user-friend__fullname a {
+  text-decoration: none;
+  color: #000;
+}
+
+.user-friend__fullname span {
+  font-size: 14px;
+  color: #6f7f92;
+}
+
+.user-friend__request button {
+  margin-right: 15px;
+  padding: 2px 14px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.user-friend__request button:hover {
+  color: #fff;
+}
+
+.user-friend__request a i {
+  font-size: 18px;
+}
+
 .sidebar {
   height: 100vh;
   position: fixed;
@@ -411,9 +480,10 @@ body {
 
 .nav-bar__navigation ul li {
   padding: 0 6px;
+  position: relative;
 }
 
-.nav-bar__navigation ul li button {
+.nav-bar__navigation ul li .nav-button {
   width: 45px;
   height: 45px;
   border: none;
@@ -422,10 +492,70 @@ body {
   color: #6f7f92;
 }
 
-.nav-bar__navigation ul li button.switch-mode:hover {
+.nav-bar__navigation ul li .nav-button.switch-mode:hover {
   color: #4fb5ff;
   background-color: #edf7ff;
   transition: 0.2s ease-out;
+}
+
+.nav-bar__navigation ul li .friend-dropdown {
+  position: absolute;
+  top: 67px;
+  left: -375px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.nav-bar__navigation ul li .friend-dropdown h5 {
+  padding: 16px 0;
+  margin: 0 32px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.nav-bar__navigation ul li .friend-dropdown p {
+  padding: 16px 32px 32px 32px;
+  color: #6f7f92;
+}
+
+.nav-bar__navigation ul li .message-dropdown {
+  position: absolute;
+  top: 67px;
+  left: -325px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.nav-bar__navigation ul li .message-dropdown h5 {
+  padding: 16px 0;
+  margin: 0 32px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.nav-bar__navigation ul li .message-dropdown p {
+  padding: 16px 32px 32px 32px;
+  color: #6f7f92;
+}
+
+.nav-bar__navigation ul li .notification-dropdown {
+  position: absolute;
+  top: 67px;
+  left: -275px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.nav-bar__navigation ul li .notification-dropdown h5 {
+  padding: 16px 0;
+  margin: 0 32px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.nav-bar__navigation ul li .notification-dropdown p {
+  padding: 16px 32px 32px 32px;
+  color: #6f7f92;
 }
 
 .login-section {
@@ -828,20 +958,6 @@ body {
   margin: 0 5px;
 }
 
-.newsfeed-section__banner {
-  margin: 32px 0;
-  background-color: #fff;
-  border-radius: 5px;
-  overflow: hidden;
-  height: 300px;
-}
-
-.newsfeed-section__banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .profile-section {
   width: 100%;
   background-color: #f8f9fa;
@@ -907,6 +1023,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .profile-section .user__details span {
@@ -937,10 +1054,14 @@ body {
   background-color: #47a2e5;
 }
 
+.profile-section .user__request button i {
+  margin: 0 5px;
+}
+
 .profile-section .user .user-avatar {
   position: absolute;
-  top: -120px;
-  left: 44%;
+  top: -150px;
+  left: 10px;
   width: 140px;
   height: 140px;
   background-color: #fff;
@@ -953,14 +1074,160 @@ body {
   border-radius: 5px;
 }
 
-.friends-section {
+.friends {
   width: 100%;
   background-color: #f8f9fa;
   padding-left: 300px;
   padding-top: 90px;
 }
 
-.friends-section.sidebar-notactive {
+.friends.sidebar-notactive {
   padding-left: 45px;
+}
+
+.friends__search-section {
+  width: 100%;
+  background-color: #fff;
+  padding: 32px;
+  margin: 32px 0;
+  border-radius: 5px;
+}
+
+.friends__search {
+  width: 100%;
+  position: relative;
+}
+
+.friends__search input {
+  padding: 6px 12px;
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+}
+
+.friends__search input:focus {
+  border-color: #4fb5ff;
+}
+
+.friends__search input:focus-visible {
+  box-shadow: none;
+}
+
+.friends__search input::placeholder {
+  font-size: 14px;
+}
+
+.friends__search button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #4fb5ff;
+  border-color: #4fb5ff;
+}
+
+.friends__search button:hover {
+  background-color: #47a2e5;
+  border-color: #47a2e5;
+}
+
+.friends__container {
+  width: 100%;
+  background-color: #fff;
+  padding: 0 32px 32px 32px;
+  border-radius: 5px;
+}
+
+.friends__filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: none;
+  padding: 32px 0;
+}
+
+.setting-section {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-left: 300px;
+  padding-right: 20px;
+  padding-top: 90px;
+  padding-bottom: 20px;
+}
+
+.setting-section.sidebar-notactive {
+  padding-left: 40px;
+}
+
+.setting-section__user {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 32px;
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-section__user .user-info {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.setting-section__user .user-info .user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.setting-section__user .user-info .user-avatar img {
+  width: 100%;
+}
+
+.setting-section__user .user-info .user-fullname span {
+  font-size: 14px;
+  color: #6f7f92;
+}
+
+.setting-section__user .user-logout ul {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  list-style: none;
+}
+
+.setting-section__user .user-logout ul li {
+  margin: 0 10px;
+}
+
+.setting-section__user .user-logout ul li a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  color: #6f7f92;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.setting-section__personal-info {
+  width: 100%;
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 5px;
+}
+
+.setting-section__personal-info h4 {
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #f1f1f1;
 }
 /*# sourceMappingURL=main.css.map */

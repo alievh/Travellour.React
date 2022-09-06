@@ -8,27 +8,27 @@ const FriendRequests = () => {
       <div className="active-user">
         <ul>
           <FriendRequest
-            userImg="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
             userFirstName="Marvin"
             userLastName="McKinney"
             userName="marvin"
           />
           <FriendRequest
-            userImg="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
             userFirstName="Anar"
             userLastName="Balacayev"
             userName="anar"
           />
           <FriendRequest
-            userImg="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
             userFirstName="Huseyn"
             userLastName="Aliyev"
             userName="whose1n"
           />
           <FriendRequest
-            userImg="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
             userFirstName="Aysel"
-            userLastName="Abilov"
+            userLastName="Abilova"
             userName="aysel"
           />
         </ul>

@@ -1,0 +1,13 @@
+.advertising-banner {
+  margin: 32px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 300px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

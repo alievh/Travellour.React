@@ -1,7 +1,7 @@
 import React from "react";
 
 const FriendRequest: React.FC<{
-  userImg: string;
+  imageUrl: string;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -10,7 +10,7 @@ const FriendRequest: React.FC<{
     <li className="friend-request">
       <div className="friend-request__user-avatar">
         <a href="#">
-          <img src={props.userImg} />
+          <img src={props.imageUrl} />
         </a>
       </div>
       <div className="user-details">
