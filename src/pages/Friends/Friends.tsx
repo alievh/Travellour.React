@@ -30,7 +30,10 @@ const Friends = () => {
             <section>
               <div className="friends__container">
                 <div className="friends__filter">
-                  <p>My Friends</p>
+                  <ul>
+                    <li>My Friends</li>
+                    <li>Friend Requests</li>
+                  </ul>
                   <form>
                     <label>Show By:</label>
                     <select>

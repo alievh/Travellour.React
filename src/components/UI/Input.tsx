@@ -4,14 +4,14 @@ const Input: React.FC<{
   type: string;
   id: string;
   placeholder: string;
-  label: string;
+  label?: string;
   mainDivClass?: string;
 }> = (props) => {
   const mainDivClassName = "form-group " + props.mainDivClass;
 
   return (
     <div className={mainDivClassName}>
-      <label htmlFor={props.id}>{props.label}</label>
+      {props.label !== null && <label htmlFor={props.id}>{props.label}</label>}
       <input
         type={props.type}
         className="form-control"

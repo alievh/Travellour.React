@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Input from '../../components/UI/Input';
 
 const Setting = () => {
     const sidebarIsActive = useSelector((state:any) => state.sidebarToggle.isActive);
+
+    
 
   return (
     <section className={`setting-section ${!sidebarIsActive && "sidebar-notactive"}`}>
@@ -30,7 +33,12 @@ const Setting = () => {
                     <div className='setting-section__personal-info'>
                         <h4>Personal Information</h4>
                         <form>
-                            <input  />
+                            <Input type="text" id="firstname" placeholder="Firstname" />
+                            <Input type="text" id="lastname" placeholder="Lastname" />
+                            <select>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
                         </form>
                     </div>
                     <div className='account-section__account-setting'>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const sidebarIsActive = useSelector(
@@ -10,29 +11,58 @@ const Navbar = () => {
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
   const [notificationToggle, setNotificationToggle] = useState(false);
+  const [profileToggle, setProfileToggle] = useState(false);
 
   const friendRequestsToggleHandler = () => {
-    if (messageToggle === true || notificationToggle === true) {
+    if (
+      messageToggle === true ||
+      notificationToggle === true ||
+      profileToggle === true
+    ) {
       setMessageToggle(false);
       setNotificationToggle(false);
+      setProfileToggle(false);
     }
     setFriendRequestsToggle(!friendRequestsToggle);
   };
 
   const messageToggleHandler = () => {
-    if (friendRequestsToggle === true || notificationToggle === true) {
+    if (
+      friendRequestsToggle === true ||
+      notificationToggle === true ||
+      profileToggle === true
+    ) {
       setFriendRequestsToggle(false);
       setNotificationToggle(false);
+      setProfileToggle(false);
     }
     setMessageToggle(!messageToggle);
   };
 
   const notificationToggleHandler = () => {
-    if (messageToggle === true || friendRequestsToggle === true) {
+    if (
+      messageToggle === true ||
+      friendRequestsToggle === true ||
+      profileToggle === true
+    ) {
       setMessageToggle(false);
       setFriendRequestsToggle(false);
+      setProfileToggle(false);
     }
     setNotificationToggle(!notificationToggle);
+  };
+
+  const profileToggleHandler = () => {
+    if (
+      messageToggle === true ||
+      friendRequestsToggle === true ||
+      notificationToggle === true
+    ) {
+      setMessageToggle(false);
+      setFriendRequestsToggle(false);
+      setNotificationToggle(false);
+    }
+    setProfileToggle(!profileToggle);
   };
 
   return (
@@ -116,7 +146,39 @@ const Navbar = () => {
                     )}
                   </li>
                   <li>
-                    <a href="#">5</a>
+                    <div
+                      className="nav-bar__user-avatar"
+                      onClick={profileToggleHandler}
+                    >
+                      <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662526081-bpthumb.jpg" />
+                    </div>
+                    {profileToggle ? (
+                      <div className="profile-dropdown">
+                        <div className="profile-dropdown__body">
+                          <ul>
+                            <li>
+                              <Link to="/profile">
+                                <i className="fa-regular fa-user"></i>Profile
+                                Info
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/setting">
+                                <i className="fa-solid fa-gear"></i>Account
+                                Setting
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/" className="nav-logout">
+                                Log Out
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </li>
                 </ul>
               </div>

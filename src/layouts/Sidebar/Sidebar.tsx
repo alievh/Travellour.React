@@ -78,11 +78,6 @@ const Sidebar = () => {
                 iconClass="fa-solid fa-person-hiking"
                 url="/events"
               />
-              <SidebarItem
-                innerText="Memories"
-                iconClass="fa-solid fa-image"
-                url="/newsfeed"
-              />
             </ul>
           </div>
           <div className="sidebar-section__forum">
