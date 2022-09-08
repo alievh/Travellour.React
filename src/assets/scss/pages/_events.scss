@@ -3,7 +3,7 @@
 
 .events {
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: $global-bg-color;
   padding: 90px 0 40px 300px;
 
   &.sidebar-notactive {
@@ -13,13 +13,13 @@
   &-container {
     margin-top: 32px;
     padding: 0 32px 32px 32px;
-    background-color: #fff;
+    background-color: $white;
     border-radius: 5px;
 
     &__filter {
       @include flex(space-between, none);
-      color: #6f7f92;
-      border-bottom: 1px solid #f1f1f1;
+      color: $global-font-color;
+      border-bottom: 1px solid $global-border-color;
       padding: 24px 0;
       margin-bottom: 32px;
 
@@ -34,7 +34,5 @@
         }
       }
     }
-
-    
   }
 }

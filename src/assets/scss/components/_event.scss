@@ -1,7 +1,9 @@
+@import '../abstracts/variables';
+
 .events-container__event {
   padding: 0 12px;
   margin: 12px 0;
-  background-color: #f8f9fa;
+  background-color: $global-bg-color;
   @include flex(space-between, none);
 
   .event-image {
@@ -30,7 +32,7 @@
 
     .join-event-button {
       background-color: $primary;
-      color: #fff;
+      color: $white;
       border-color: $primary;
       padding: 8px 32px;
 

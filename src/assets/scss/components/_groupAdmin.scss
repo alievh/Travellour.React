@@ -1,0 +1,49 @@
+@import '../abstracts/variables';
+
+.group-admin {
+  margin: 32px 0;
+  background-color: $white;
+  padding: 32px;
+  border-radius: 5px;
+
+  h5 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $global-border-color;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .admin {
+    @include flex(none, none);
+    margin-top: 20px;
+
+    .admin-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 18px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .admin-details {
+      @include flex(center, none);
+      flex-direction: column;
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+
+      span {
+        font-size: 14px;
+        color: $global-font-color;
+      }
+    }
+  }
+}

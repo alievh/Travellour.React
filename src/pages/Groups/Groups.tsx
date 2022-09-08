@@ -38,19 +38,43 @@ const Groups = () => {
                         <li>My Groups</li>
                       </ul>
                     </div>
-                    <div className="filter-right">Create Event</div>
+                    <div className="filter-right">Create Group</div>
                   </div>
                   <GroupCard
                     groupImage={require("../../assets/images/event-hiking.jpg")}
-                    groupTitle="Hiking"
+                    groupTitle="Hiking Club"
                   />
                   <GroupCard
                     groupImage={require("../../assets/images/event-surfing.jpg")}
-                    groupTitle="Surfing"
+                    groupTitle="Surfing Club"
                   />
                   <GroupCard
                     groupImage={require("../../assets/images/event-camping.jpg")}
-                    groupTitle="Camping"
+                    groupTitle="Camping Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-hiking.jpg")}
+                    groupTitle="Hiking Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-surfing.jpg")}
+                    groupTitle="Surfing Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-camping.jpg")}
+                    groupTitle="Camping Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-hiking.jpg")}
+                    groupTitle="Hiking Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-surfing.jpg")}
+                    groupTitle="Surfing Club"
+                  />
+                  <GroupCard
+                    groupImage={require("../../assets/images/event-camping.jpg")}
+                    groupTitle="Camping Club"
                   />
                 </div>
               </div>

@@ -9,6 +9,7 @@ import Events from "./pages/Events/Events";
 import Groups from "./pages/Groups/Groups";
 import Setting from "./pages/Setting/Setting";
 import Forums from "./pages/Forums/Forums";
+import Group from "./pages/Group/Group";
 
 const App = () => {
   return (
@@ -16,10 +17,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-           <Route path="/newsfeed" element={<Newsfeed />} />
+            <Route path="/newsfeed" element={<Newsfeed />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/group" element={<Group />} />
             <Route path="/groups" element={<Groups />} />
             <Route path="/forums" element={<Forums />} />
             <Route path="/setting" element={<Setting />} />

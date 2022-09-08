@@ -1,10 +1,11 @@
 @import "../abstracts/mixins";
+@import '../abstracts/variables';
 
 .user-friend {
   width: 100%;
   padding: 24px;
   margin-bottom: 32px;
-  background-color: #f8f9fa;
+  background-color: $global-bg-color;
   border-radius: 5px;
   @include flex(space-between, center);
 
@@ -28,12 +29,12 @@
   &__fullname {
     a {
       text-decoration: none;
-      color: #000;
+      color: $black;
     }
 
     span {
       font-size: 14px;
-      color: #6f7f92;
+      color: $global-font-color;
     }
   }
 
@@ -43,10 +44,10 @@
         margin-right: 15px;
         padding: 2px 14px;
         font-size: 14px;
-        color: #fff;
+        color: $white;
 
         &:hover {
-            color: #fff;
+            color: $white;
         }
     }
 

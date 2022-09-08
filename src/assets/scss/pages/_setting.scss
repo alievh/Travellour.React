@@ -1,8 +1,9 @@
 @import "../abstracts/mixins";
+@import '../abstracts/variables';
 
 .setting-section {
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: $global-bg-color;
   padding-left: 300px;
   padding-right: 20px;
   padding-top: 90px;
@@ -14,7 +15,7 @@
 
   &__user {
     width: 100%;
-    background-color: #fff;
+    background-color: $white;
     border-radius: 5px;
     padding: 32px;
     margin: 16px 0;
@@ -38,7 +39,7 @@
       .user-fullname {
         span {
           font-size: 14px;
-          color: #6f7f92;
+          color: $global-font-color;
         }
       }
     }
@@ -54,9 +55,9 @@
             display: block;
             width: 60px;
             height: 60px;
-            background-color: #f8f9fa;
+            background-color: $global-bg-color;
             border-radius: 10px;
-            color: #6f7f92;
+            color: $global-font-color;
             font-size: 20px;
             @include flex(center, center);
             text-decoration: none;
@@ -68,14 +69,14 @@
 
   &__personal-info {
     width: 100%;
-    background-color: #fff;
+    background-color: $white;
     padding: 32px;
     border-radius: 5px;
 
     h4 {
       padding-bottom: 20px;
       margin-bottom: 32px;
-      border-bottom: 1px solid #f1f1f1;
+      border-bottom: 1px solid $global-border-color;
     }
   }
 }

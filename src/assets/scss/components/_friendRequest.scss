@@ -1,3 +1,5 @@
+@import '../abstracts/variables';
+
 .friend-request {
   @include flex(none, none);
   margin: 20px 0;
@@ -19,12 +21,12 @@
     flex-direction: column;
     a {
       text-decoration: none;
-      color: #000;
+      color: $black;
     }
 
     span {
       font-size: 14px;
-      color: #6f7f92;
+      color: $global-font-color;
     }
   }
 }

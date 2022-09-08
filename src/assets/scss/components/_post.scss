@@ -1,5 +1,7 @@
+@import '../abstracts/variables';
+
 .post {
-  background-color: #fff;
+  background-color: $white;
   border-radius: 5px;
   padding: 24px 24px 10px 24px;
   margin: 32px 0;
@@ -27,7 +29,7 @@
 
     a {
       text-decoration: none;
-      color: #000;
+      color: $black;
 
       p {
         margin-bottom: 0;
@@ -53,19 +55,19 @@
     .post-statistics {
       margin: 10px 0;
       padding-bottom: 5px;
-      border-bottom: 1px solid #f1f1f1;
+      border-bottom: 1px solid $global-border-color;
 
       span {
         margin: 0 5px;
         font-size: 14px;
-        color: #6f7f92;
+        color: $global-font-color;
       }
     }
 
     .post-activity {
       a {
         text-decoration: none;
-        color: #6f7f92;
+        color: $global-font-color;
         padding: 5px;
 
         i {
