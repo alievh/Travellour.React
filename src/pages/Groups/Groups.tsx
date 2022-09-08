@@ -1,8 +1,12 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Groups = () => {
+
+  const sidebarIsActive = useSelector((state:any) => state.sidebarToggle.isActive);
+
   return (
-    <div>Groups</div>
+    <section className={`groups ${!sidebarIsActive && "sidebar-notactive"}`}>
+    </section>
   )
 }
 

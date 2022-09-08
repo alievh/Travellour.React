@@ -60,7 +60,7 @@
     &__profile {
       padding: 16px 0 24px 0;
       border-bottom: 1px solid #f1f1f1;
-      @include flex(none, none);
+      @include flex(center, none);
       margin-bottom: 24px;
 
       .profile-avatar {

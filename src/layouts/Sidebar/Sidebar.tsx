@@ -86,7 +86,7 @@ const Sidebar = () => {
               <SidebarItem
                 innerText="All Forums"
                 iconClass="fa-solid fa-comments"
-                url="/newsfeed"
+                url="/forums"
               />
             </ul>
           </div>

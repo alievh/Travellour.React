@@ -1,8 +1,6 @@
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
-import FriendRequests from "../../components/FriendRequests/FriendRequests";
-import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
+import Event from "../../components/Event/Event";
 
 const Events = () => {
   const sidebarIsActive = useSelector(
@@ -37,66 +35,27 @@ const Events = () => {
                 <div className="filter-right">Create Event</div>
               </div>
               <div className="events-container__events">
-                <div className="events-container__event">
-                  <div className="col-lg-3 event-image">
-                      <img
-                        src={require("../../assets/images/event-hiking.jpg")}
-                      />
-                  </div>
-                  <div className="col-lg-6 event-content">
-                      <h4>Hiking</h4>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <Event
+                  eventImage={require("../../assets/images/event-hiking.jpg")}
+                  eventTitle="Hiking"
+                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?
-                      </p>
-                  </div>
-                  <div className="col-lg-3 event-request">
-                      <button type="button" className="btn join-event-button">
-                        Join Event
-                      </button>
-                  </div>
-                </div>
-                <div className="events-container__event">
-                  <div className="col-lg-3 event-image">
-                      <img
-                        src={require("../../assets/images/event-camping.jpg")}
-                      />
-                  </div>
-                  <div className="col-lg-6 event-content">
-                      <h4>Camping</h4>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        sed provident facilis dolor deleniti?"
+                />
+                <Event
+                  eventImage={require("../../assets/images/event-surfing.jpg")}
+                  eventTitle="Surfing"
+                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?
-                      </p>
-                  </div>
-                  <div className="col-lg-3 event-request">
-                      <button type="button" className="btn join-event-button">
-                        Join Event
-                      </button>
-                  </div>
-                </div>
-                <div className="events-container__event">
-                  <div className="col-lg-3 event-image">
-                      <img
-                        src={require("../../assets/images/event-surfing.jpg")}
-                      />
-                  </div>
-                  <div className="col-lg-6 event-content">
-                      <h4>Surfing</h4>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        sed provident facilis dolor deleniti?"
+                />
+                <Event
+                  eventImage={require("../../assets/images/event-camping.jpg")}
+                  eventTitle="Camping"
+                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?
-                      </p>
-                  </div>
-                  <div className="col-lg-3 event-request">
-                      <button type="button" className="btn join-event-button">
-                        Join Event
-                      </button>
-                  </div>
-                </div>
+                        sed provident facilis dolor deleniti?"
+                />
               </div>
             </div>
           </div>

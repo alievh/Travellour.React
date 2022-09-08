@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
+import Post from "../../components/Post/Post";
 
 const Profile = () => {
   const sidebarIsActive = useSelector(
@@ -61,116 +62,44 @@ const Profile = () => {
           <div className="col-xl-8 col-sm-12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                <div className="newsfeed-section__post">
-                  <div className="post-owner">
-                    <div className="owner-image">
-                      <a href="#">
-                        <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg" />
-                      </a>
-                    </div>
-                    <div className="owner-info">
-                      <a href="#">
-                        <p>Marvin McKinney</p>
-                      </a>
-                      <span>6 hours ago</span>
-                    </div>
-                  </div>
-                  <div className="post-content">
-                    <p>Hi Guys!</p>
-                    <img src={require("../../assets/images/auth-poster.jpg")} />
-                    <div className="post-statistics">
-                      <span>
-                        2<span>Likes</span>
-                      </span>
-                      <span>
-                        5<span>Comments</span>
-                      </span>
-                    </div>
-                    <div className="post-activity">
-                      <a href="#">
-                        <i className="fa-regular fa-heart"></i>
-                        <span>Like</span>
-                      </a>
-                      <a href="#">
-                        <i className="fa-regular fa-comment-dots"></i>
-                        <span>Comment</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="newsfeed-section__post">
-                  <div className="post-owner">
-                    <div className="owner-image">
-                      <a href="#">
-                        <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg" />
-                      </a>
-                    </div>
-                    <div className="owner-info">
-                      <a href="#">
-                        <p>Marvin McKinney</p>
-                      </a>
-                      <span>6 hours ago</span>
-                    </div>
-                  </div>
-                  <div className="post-content">
-                    <p>Hello from the other side!</p>
-                    <div className="post-statistics">
-                      <span>
-                        2<span>Likes</span>
-                      </span>
-                      <span>
-                        5<span>Comments</span>
-                      </span>
-                    </div>
-                    <div className="post-activity">
-                      <a href="#">
-                        <i className="fa-regular fa-heart"></i>
-                        <span>Like</span>
-                      </a>
-                      <a href="#">
-                        <i className="fa-regular fa-comment-dots"></i>
-                        <span>Comment</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="newsfeed-section__post">
-                  <div className="post-owner">
-                    <div className="owner-image">
-                      <a href="#">
-                        <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg" />
-                      </a>
-                    </div>
-                    <div className="owner-info">
-                      <a href="#">
-                        <p>Marvin McKinney</p>
-                      </a>
-                      <span>6 hours ago</span>
-                    </div>
-                  </div>
-                  <div className="post-content">
-                    <p>Hi Guys!</p>
-                    <img src={require("../../assets/images/auth-poster.jpg")} />
-                    <div className="post-statistics">
-                      <span>
-                        2<span>Likes</span>
-                      </span>
-                      <span>
-                        5<span>Comments</span>
-                      </span>
-                    </div>
-                    <div className="post-activity">
-                      <a href="#">
-                        <i className="fa-regular fa-heart"></i>
-                        <span>Like</span>
-                      </a>
-                      <a href="#">
-                        <i className="fa-regular fa-comment-dots"></i>
-                        <span>Comment</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <Post
+                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  userFirstname="Marvin"
+                  userLastname="McKinney"
+                  createdDate="6 hours"
+                  postContent="Hi Guys!"
+                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  likeCount="2"
+                  commentCount="4"
+                />
+                <Post
+                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  userFirstname="Marvin"
+                  userLastname="McKinney"
+                  createdDate="6 hours"
+                  postContent="Hello from the other side!"
+                  likeCount="2"
+                  commentCount="4"
+                />
+                <Post
+                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  userFirstname="Marvin"
+                  userLastname="McKinney"
+                  createdDate="6 hours"
+                  postContent="Hi Guys!"
+                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  likeCount="2"
+                  commentCount="4"
+                />
+                <Post
+                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  userFirstname="Marvin"
+                  userLastname="McKinney"
+                  createdDate="6 hours"
+                  postContent="Hello from the other side!"
+                  likeCount="2"
+                  commentCount="4"
+                />
               </div>
             </section>
           </div>
