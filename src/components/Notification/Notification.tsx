@@ -1,4 +1,5 @@
 import React from "react";
+import Col from "../Bootstrap/Col";
 import Button from "../UI/Button";
 
 const Notification: React.FC<{
@@ -8,25 +9,25 @@ const Notification: React.FC<{
 }> = (props) => {
   return (
     <div className="notification">
-      <div className="col-lg-2 d-flex justify-content-center">
+      <Col lg="2" className="d-flex justify-content-center">
         <div className="notification__avatar">
           <a href="#">
             <img src={props.userImage} />
           </a>
         </div>
-      </div>
-      <div className="col-lg-8">
+      </Col>
+      <Col lg="8">
         <div className="notification__message">
           <p>
             <a href="#">@{props.userUsername}</a> {props.notificationContent}
           </p>
         </div>
-      </div>
-      <div className="col-lg-2">
+      </Col>
+      <Col lg="2">
         <div className="notification__remove">
           <Button type="button" innerText="Remove" className="btn" />
         </div>
-      </div>
+      </Col>
     </div>
   );
 };

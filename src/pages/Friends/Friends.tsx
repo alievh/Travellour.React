@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
+import Col from "../../components/Bootstrap/Col";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
@@ -12,9 +15,9 @@ const Friends = () => {
 
   return (
     <section className={`friends ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+      <Container>
+        <Row>
+          <Col xl="8" sm="12">
             <section className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -71,16 +74,16 @@ const Friends = () => {
                 </div>
               </div>
             </section>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

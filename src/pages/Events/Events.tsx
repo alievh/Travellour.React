@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
 import Event from "../../components/Event/Event";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Events = () => {
   const sidebarIsActive = useSelector(
@@ -9,9 +12,9 @@ const Events = () => {
 
   return (
     <section className={`events ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-12 col-sm-12">
+      <Container>
+        <Row>
+          <Col xl="12" sm="12">
             <div className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -32,7 +35,9 @@ const Events = () => {
                     <li>Joined Events</li>
                   </ul>
                 </div>
-                <div className="filter-right"><a href="#">Create Event</a></div>
+                <div className="filter-right">
+                  <a href="#">Create Event</a>
+                </div>
               </div>
               <div className="events-container__events">
                 <Event
@@ -58,9 +63,9 @@ const Events = () => {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

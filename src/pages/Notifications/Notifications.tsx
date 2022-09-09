@@ -4,6 +4,9 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
 import Notification from "../../components/Notification/Notification";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Notifications = () => {
   const sidebarIsActive = useSelector(
@@ -12,9 +15,9 @@ const Notifications = () => {
 
   return (
     <div className={`notifications ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+      <Container>
+        <Row>
+          <Col xl="8" sm="12">
             <div className="notifications-container">
               <Notification
                 userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
@@ -42,16 +45,16 @@ const Notifications = () => {
                 notificationContent="added new photo"
               />
             </div>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

@@ -4,6 +4,9 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Button from "../../components/UI/Button";
 import GroupCard from "../../components/GroupCard/GroupCard";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Groups = () => {
   const sidebarIsActive = useSelector(
@@ -12,9 +15,9 @@ const Groups = () => {
 
   return (
     <section className={`groups ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+      <Container>
+        <Row>
+          <Col xl="8" sm="12">
             <section className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -28,7 +31,7 @@ const Groups = () => {
               </div>
             </section>
             <section className="groups-container">
-              <div className="container">
+              <Container>
                 <div className="row justify-content-center">
                   <div className="groups-container__filter">
                     <div className="filter-left">
@@ -79,18 +82,18 @@ const Groups = () => {
                     groupTitle="Camping Club"
                   />
                 </div>
-              </div>
+              </Container>
             </section>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Col from "../../components/Bootstrap/Col";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 
@@ -11,9 +14,9 @@ const Password = () => {
     <section
       className={`password-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
+      <Container>
+        <Row>
+          <Col lg="12">
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
@@ -48,9 +51,9 @@ const Password = () => {
                 <Button type="submit" className="btn btn-primary" innerText="Change Password" />
               </form>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
 import { Link } from "react-router-dom";
+import ContainerFluid from "../../components/Bootstrap/ContainerFluid";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Navbar = () => {
   const sidebarIsActive = useSelector(
@@ -67,9 +70,9 @@ const Navbar = () => {
 
   return (
     <nav className={`nav-bar ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-12">
+      <ContainerFluid>
+        <Row>
+          <Col lg="12">
             <div className="nav-bar__container">
               <div className="nav-bar__search">
                 <div className="form-outline">
@@ -183,9 +186,9 @@ const Navbar = () => {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </ContainerFluid>
     </nav>
   );
 };

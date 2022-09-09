@@ -1,13 +1,14 @@
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
+import Col from "../../components/Bootstrap/Col";
 
 const Register = () => {
   return (
     <main>
       <section className="register-section">
         <AuthPoster />
-        <div className="col-lg-6 col-sm-12">
+        <Col lg="6" sm="12">
           <div className="register-section__auth">
             <div className="auth-container">
               <div className="auth-container__title">
@@ -62,7 +63,7 @@ const Register = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Col>
       </section>
     </main>
   );

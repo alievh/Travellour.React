@@ -5,6 +5,9 @@ import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Post from "../../components/Post/Post";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Profile = () => {
   const sidebarIsActive = useSelector(
@@ -18,8 +21,8 @@ const Profile = () => {
       <div className="profile-section__background">
         <img src={require("../../assets/images/auth-poster.jpg")} />
       </div>
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row>
           <div className="user">
             <div className="user__statistics">
               <ul>
@@ -57,9 +60,9 @@ const Profile = () => {
               </form>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+        </Row>
+        <Row>
+          <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
                 <Post
@@ -102,16 +105,16 @@ const Profile = () => {
                 />
               </div>
             </section>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

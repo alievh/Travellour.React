@@ -2,8 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import Post from "../../components/Post/Post";
+import Col from "../../components/Bootstrap/Col";
 
 const Newsfeed = () => {
   const sidebarIsActive = useSelector(
@@ -12,9 +15,9 @@ const Newsfeed = () => {
 
   return (
     <div className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+      <Container>
+        <Row>
+          <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__stories">
                 <div className="stories-add"></div>
@@ -26,7 +29,7 @@ const Newsfeed = () => {
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require('../../assets/images/auth-poster.jpg')}
+                  postImage={require("../../assets/images/auth-poster.jpg")}
                   likeCount="2"
                   commentCount="4"
                 />
@@ -45,7 +48,7 @@ const Newsfeed = () => {
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require('../../assets/images/auth-poster.jpg')}
+                  postImage={require("../../assets/images/auth-poster.jpg")}
                   likeCount="2"
                   commentCount="4"
                 />
@@ -60,16 +63,16 @@ const Newsfeed = () => {
                 />
               </div>
             </section>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

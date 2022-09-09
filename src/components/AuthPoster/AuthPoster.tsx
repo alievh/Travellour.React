@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import Col from "../Bootstrap/Col";
 
 const AuthPoster = () => {
   return (
-    <div className='col-lg-6 auth-poster'>
-        <img src={require("../../assets/images/login-register.jpg")} />
-    </div>
-  )
-}
+    <Col className="auth-poster" lg="6">
+      <img src={require("../../assets/images/login-register.jpg")} />
+    </Col>
+  );
+};
 
 export default AuthPoster;

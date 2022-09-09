@@ -6,6 +6,9 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Post from "../../components/Post/Post";
 import GroupAdmin from "../../components/GroupAdmin/GroupAdmin";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Profile = () => {
   const sidebarIsActive = useSelector(
@@ -19,17 +22,17 @@ const Profile = () => {
       <div className="profile-section__background">
         <img src={require("../../assets/images/auth-poster.jpg")} />
       </div>
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row>
           <div className="group">
-            <div className="col-lg-2">
+            <Col lg="2">
               <div className="group__details">
                 <div className="group-avatar">
                   <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
                 </div>
               </div>
-            </div>
-            <div className="col-lg-6">
+            </Col>
+            <Col lg="6">
               <div className="group__description">
                 <h5>Wombo Comno</h5>
                 <p>
@@ -38,8 +41,8 @@ const Profile = () => {
                   deliberately crosses
                 </p>
               </div>
-            </div>
-            <div className="col-lg-2">
+            </Col>
+            <Col lg="2">
               <div className="group__statistics">
                 <ul>
                   <li>
@@ -52,8 +55,11 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div className="col-lg-2 d-flex justify-content-center align-items-center">
+            </Col>
+            <Col
+              lg="2"
+              className="d-flex justify-content-center align-items-center"
+            >
               <div className="group__request">
                 <form>
                   <Button
@@ -63,11 +69,11 @@ const Profile = () => {
                   />
                 </form>
               </div>
-            </div>
+            </Col>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xl-8 col-sm-12">
+        </Row>
+        <Row>
+          <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
                 <Post
@@ -110,8 +116,8 @@ const Profile = () => {
                 />
               </div>
             </section>
-          </div>
-          <div className="col-xl-4 col-sm-12">
+          </Col>
+          <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <GroupAdmin
                 adminImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/1/1656590103-bpfull.jpg"
@@ -122,9 +128,9 @@ const Profile = () => {
               <FriendRequests />
               <AddvertisingBanner />
             </section>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
+import Container from "../../components/Bootstrap/Container";
+import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 
 const Setting = () => {
   const sidebarIsActive = useSelector(
@@ -13,9 +16,9 @@ const Setting = () => {
     <section
       className={`setting-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
+      <Container>
+        <Row>
+          <Col lg="12">
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
@@ -45,7 +48,7 @@ const Setting = () => {
               <h4>Personal Information</h4>
               <form>
                 <div className="form-fullname">
-                  <div className="col-lg-5">
+                  <Col lg="5">
                     <Input
                       type="text"
                       id="firstname"
@@ -53,8 +56,8 @@ const Setting = () => {
                       label="Type Firstname"
                       mainDivClass="form-firstname"
                     />
-                  </div>
-                  <div className="col-lg-5">
+                  </Col>
+                  <Col lg="5">
                     <Input
                       type="text"
                       id="lastname"
@@ -62,18 +65,18 @@ const Setting = () => {
                       label="Type Lastname"
                       mainDivClass="form-lastname"
                     />
-                  </div>
+                  </Col>
                 </div>
 
                 <div className="form-username">
-                  <div className="col-lg-10">
+                  <Col lg="10">
                     <Input
                       type="text"
                       id="username"
                       placeholder="Username"
                       label="Type Username"
                     />
-                  </div>
+                  </Col>
                 </div>
                 <Button
                   type="submit"
@@ -83,9 +86,9 @@ const Setting = () => {
               </form>
             </div>
             <div className="account-section__account-setting"></div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };
