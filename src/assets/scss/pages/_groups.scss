@@ -32,6 +32,24 @@
           margin-right: 10px;
         }
       }
+
+      .filter-right {
+
+        a {
+          text-decoration: none;
+          background-color: #eaeff8;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: $primary;
+          transition: .4s ease-in;
+          
+          &:hover {
+            color: $white;
+            background-color: $primary;
+            transition: .5s ease-out;
+          }
+        }
+      }
     }
 
     .card {

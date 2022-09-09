@@ -94,10 +94,10 @@ const Sidebar = () => {
         <div className="sidebar-section__footer">
           <div className="sidebar-section__settings">
             <ul className={isSidebarActive ? "list" : "list sidebar-notactive"}>
-              <SidebarItem iconClass="fa-solid fa-lock" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-lock" url="/password" />
               <SidebarItem iconClass="fa-solid fa-bell" url="/newsfeed" />
               <SidebarItem iconClass="fa-solid fa-gear" url="/setting" />
-              <SidebarItem iconClass="fa-solid fa-user-group" url="/newsfeed" />
+              <SidebarItem iconClass="fa-solid fa-user-group" url="/groups" />
             </ul>
           </div>
         </div>

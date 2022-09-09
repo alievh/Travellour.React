@@ -32,7 +32,7 @@ const Events = () => {
                     <li>Joined Events</li>
                   </ul>
                 </div>
-                <div className="filter-right">Create Event</div>
+                <div className="filter-right"><a href="#">Create Event</a></div>
               </div>
               <div className="events-container__events">
                 <Event

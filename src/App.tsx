@@ -10,6 +10,7 @@ import Groups from "./pages/Groups/Groups";
 import Setting from "./pages/Setting/Setting";
 import Forums from "./pages/Forums/Forums";
 import Group from "./pages/Group/Group";
+import Password from "./pages/Password/Password";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/groups" element={<Groups />} />
             <Route path="/forums" element={<Forums />} />
             <Route path="/setting" element={<Setting />} />
+            <Route path="/password" element={<Password />} />
           </Route>
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -38,7 +38,9 @@ const Groups = () => {
                         <li>My Groups</li>
                       </ul>
                     </div>
-                    <div className="filter-right">Create Group</div>
+                    <div className="filter-right">
+                      <a href="#">Create Group</a>
+                    </div>
                   </div>
                   <GroupCard
                     groupImage={require("../../assets/images/event-hiking.jpg")}

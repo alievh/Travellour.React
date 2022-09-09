@@ -1412,6 +1412,13 @@ body {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  transition: .3s ease-in;
+}
+
+.setting-section__user .user-logout ul li a:hover {
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: .3s ease-out;
 }
 
 .setting-section__personal-info {
@@ -1425,6 +1432,127 @@ body {
   padding-bottom: 20px;
   margin-bottom: 32px;
   border-bottom: 1px solid #f1f1f1;
+}
+
+.password-section {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-left: 300px;
+  padding-right: 20px;
+  padding-top: 90px;
+  padding-bottom: 20px;
+}
+
+.password-section.sidebar-notactive {
+  padding-left: 40px;
+}
+
+.password-section__user {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 32px;
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-section__user .user-info {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.password-section__user .user-info .user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.password-section__user .user-info .user-avatar img {
+  width: 100%;
+}
+
+.password-section__user .user-info .user-fullname span {
+  font-size: 14px;
+  color: #6f7f92;
+}
+
+.password-section__user .user-logout ul {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  list-style: none;
+}
+
+.password-section__user .user-logout ul li {
+  margin: 0 10px;
+}
+
+.password-section__user .user-logout ul li a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  color: #6f7f92;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.password-section__user .user-logout ul li a:hover {
+  background-color: #4fb5ff;
+  color: #fff;
+}
+
+.password-section__user-input {
+  width: 100%;
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 5px;
+}
+
+.password-section__user-input h4 {
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.password-section__user-input .password-change {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 15px 0;
+}
+
+.password-section__user-input .password-change label {
+  font-size: 16px;
+  color: #6f7f92;
+  margin-bottom: 10px;
+}
+
+.password-section__user-input .password-change input:focus {
+  box-shadow: none;
+  border-color: #4fb5ff;
+}
+
+.password-section__user-input .password-change input::placeholder {
+  font-size: 14px;
+}
+
+.password-section__user-input button {
+  margin-top: 20px;
+  background-color: #4fb5ff;
+  border-color: #4fb5ff;
+}
+
+.password-section__user-input button:hover {
+  background-color: #47a2e5;
+  border-color: #47a2e5;
 }
 
 .events {
@@ -1467,6 +1595,21 @@ body {
   margin-right: 10px;
 }
 
+.events-container__filter .filter-right a {
+  text-decoration: none;
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: 0.4s ease-in;
+}
+
+.events-container__filter .filter-right a:hover {
+  color: #fff;
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
 .groups {
   width: 100%;
   background-color: #f8f9fa;
@@ -1504,6 +1647,21 @@ body {
 
 .groups-container__filter ul li {
   margin-right: 10px;
+}
+
+.groups-container__filter .filter-right a {
+  text-decoration: none;
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: .4s ease-in;
+}
+
+.groups-container__filter .filter-right a:hover {
+  color: #fff;
+  background-color: #4fb5ff;
+  transition: .5s ease-out;
 }
 
 .groups-container .card {
