@@ -4,6 +4,7 @@
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f8f9fa;
 }
 
 .auth-poster {
@@ -1124,7 +1125,6 @@ body {
 
 .newsfeed {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 300px;
   padding-top: 90px;
 }
@@ -1135,7 +1135,6 @@ body {
 
 .profile-section {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 265px;
   padding-top: 90px;
 }
@@ -1251,7 +1250,6 @@ body {
 
 .friends {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 300px;
   padding-top: 90px;
 }
@@ -1344,7 +1342,6 @@ body {
 
 .setting-section {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 300px;
   padding-right: 20px;
   padding-top: 90px;
@@ -1412,13 +1409,13 @@ body {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .setting-section__user .user-logout ul li a:hover {
   background-color: #4fb5ff;
   color: #fff;
-  transition: .3s ease-out;
+  transition: 0.3s ease-out;
 }
 
 .setting-section__personal-info {
@@ -1428,15 +1425,57 @@ body {
   border-radius: 5px;
 }
 
+.setting-section__personal-info .form-fullname {
+  display: flex;
+  justify-content: none;
+  align-items: none;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.setting-section__personal-info .form-fullname .form-firstname {
+  margin-right: 20px;
+}
+
+.setting-section__personal-info .form-username {
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.setting-section__personal-info label {
+  margin-bottom: 6px;
+  color: #6f7f92;
+}
+
+.setting-section__personal-info input:focus {
+  box-shadow: none;
+}
+
+.setting-section__personal-info input::placeholder {
+  font-size: 14px;
+}
+
 .setting-section__personal-info h4 {
   padding-bottom: 20px;
   margin-bottom: 32px;
   border-bottom: 1px solid #f1f1f1;
 }
 
+.setting-section__personal-info button {
+  background-color: #4fb5ff;
+  color: #fff;
+}
+
+.setting-section__personal-info button:hover {
+  background-color: #47a2e5;
+  color: #fff;
+  border-color: #47a2e5;
+}
+
 .password-section {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 300px;
   padding-right: 20px;
   padding-top: 90px;
@@ -1557,7 +1596,6 @@ body {
 
 .events {
   width: 100%;
-  background-color: #f8f9fa;
   padding: 90px 0 40px 300px;
 }
 
@@ -1612,7 +1650,6 @@ body {
 
 .groups {
   width: 100%;
-  background-color: #f8f9fa;
   padding: 90px 0 40px 300px;
 }
 
@@ -1700,7 +1737,6 @@ body {
 
 .group-section {
   width: 100%;
-  background-color: #f8f9fa;
   padding-left: 265px;
   padding-top: 90px;
 }
@@ -1832,7 +1868,6 @@ body {
 
 .forums {
   width: 100%;
-  background-color: #f8f9fa;
   padding: 90px 0 40px 300px;
 }
 
