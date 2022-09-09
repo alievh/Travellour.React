@@ -1,0 +1,51 @@
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+
+.notification {
+  @include flex(none, center);
+  border-bottom: 1px solid $global-border-color;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+
+  &__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__message {
+    p {
+      word-spacing: 4px;
+      color: $global-font-color;
+
+      a {
+        text-decoration: none;
+        color: $primary;
+
+        &:hover {
+          color: $primary-dark;
+        }
+      }
+    }
+  }
+
+  &__remove {
+    button {
+      background: rgba(241, 70, 70, 0.08627450980392157);
+      border-color: rgba(241, 70, 70, 0.08627450980392157);
+      color: $color-theme-danger;
+
+      &:hover {
+        color: $white;
+        background-color: $color-theme-danger;
+      }
+    }
+  }
+}

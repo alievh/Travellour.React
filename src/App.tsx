@@ -11,6 +11,7 @@ import Setting from "./pages/Setting/Setting";
 import Forums from "./pages/Forums/Forums";
 import Group from "./pages/Group/Group";
 import Password from "./pages/Password/Password";
+import Notifications from "./pages/Notifications/Notifications";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/forums" element={<Forums />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/password" element={<Password />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />

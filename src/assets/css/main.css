@@ -382,6 +382,53 @@ body {
   margin: 0 5px;
 }
 
+.notification {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.notification__avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.notification__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification__message p {
+  word-spacing: 4px;
+  color: #6f7f92;
+}
+
+.notification__message p a {
+  text-decoration: none;
+  color: #4fb5ff;
+}
+
+.notification__message p a:hover {
+  color: #47a2e5;
+}
+
+.notification__remove button {
+  background: rgba(241, 70, 70, 0.0862745);
+  border-color: rgba(241, 70, 70, 0.0862745);
+  color: #f14646;
+}
+
+.notification__remove button:hover {
+  color: #fff;
+  background-color: #f14646;
+}
+
 .sidebar {
   height: 100vh;
   position: fixed;
@@ -1873,5 +1920,23 @@ body {
 
 .forums.sidebar-notactive {
   padding-left: 45px;
+}
+
+.notifications {
+  width: 100%;
+  padding-left: 300px;
+  padding-top: 90px;
+}
+
+.notifications.sidebar-notactive {
+  padding-left: 45px;
+}
+
+.notifications .notifications-container {
+  width: 100%;
+  background-color: #fff;
+  margin: 32px 0;
+  padding: 32px 32px 32px 32px;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=main.css.map */
