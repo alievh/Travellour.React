@@ -4,6 +4,7 @@ import Event from "../../components/Event/Event";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
+import { Link } from "react-router-dom";
 
 const Events = () => {
   const sidebarIsActive = useSelector(
@@ -36,7 +37,7 @@ const Events = () => {
                   </ul>
                 </div>
                 <div className="filter-right">
-                  <a href="#">Create Event</a>
+                  <Link to="/events/create">Create Event</Link>
                 </div>
               </div>
               <div className="events-container__events">

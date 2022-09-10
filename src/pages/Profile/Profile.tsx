@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";

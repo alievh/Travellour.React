@@ -7,6 +7,7 @@ import GroupCard from "../../components/GroupCard/GroupCard";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
+import { Link } from "react-router-dom";
 
 const Groups = () => {
   const sidebarIsActive = useSelector(
@@ -42,7 +43,7 @@ const Groups = () => {
                       </ul>
                     </div>
                     <div className="filter-right">
-                      <a href="#">Create Group</a>
+                      <Link to="/groups/create">Create Group</Link>
                     </div>
                   </div>
                   <GroupCard

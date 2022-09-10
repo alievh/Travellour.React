@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Input from "../../components/UI/Input";
@@ -85,7 +84,6 @@ const Setting = () => {
                 />
               </form>
             </div>
-            <div className="account-section__account-setting"></div>
           </Col>
         </Row>
       </Container>

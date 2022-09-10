@@ -6,12 +6,14 @@ import Newsfeed from "./pages/Newsfeed/Newsfeed";
 import Profile from "./pages/Profile/Profile";
 import Friends from "./pages/Friends/Friends";
 import Events from "./pages/Events/Events";
+import EventCreate from "./pages/Events/EventCreate";
 import Groups from "./pages/Groups/Groups";
 import Setting from "./pages/Setting/Setting";
 import Forums from "./pages/Forums/Forums";
 import Group from "./pages/Group/Group";
 import Password from "./pages/Password/Password";
 import Notifications from "./pages/Notifications/Notifications";
+import GroupCreate from "./pages/Groups/GroupCreate";
 
 const App = () => {
   return (
@@ -23,8 +25,10 @@ const App = () => {
             <Route path="/friends" element={<Friends />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/create" element={<EventCreate />} />
             <Route path="/group" element={<Group />} />
             <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/create" element={<GroupCreate />} />
             <Route path="/forums" element={<Forums />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/password" element={<Password />} />

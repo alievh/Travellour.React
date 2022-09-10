@@ -1,0 +1,111 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.event-create {
+  width: 100%;
+  padding: 90px 0 40px 300px;
+
+  &.sidebar-notactive {
+    padding-left: 45px;
+  }
+
+  &-container {
+    margin-top: 32px;
+    padding: 0 32px 32px 32px;
+    background-color: $white;
+    border-radius: 5px;
+
+    &__filter {
+      @include flex(space-between, none);
+      color: $global-font-color;
+      border-bottom: 1px solid $global-border-color;
+      padding: 24px 0;
+      margin-bottom: 32px;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        @include flex(none, none);
+
+        li {
+          margin-right: 10px;
+        }
+      }
+
+      .filter-right {
+        a {
+          text-decoration: none;
+          background-color: #eaeff8;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: $primary;
+          transition: 0.4s ease-in;
+
+          &:hover {
+            color: $white;
+            background-color: $primary;
+            transition: 0.5s ease-out;
+          }
+        }
+      }
+    }
+    &__form {
+      .form-title {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $global-border-color;
+      }
+
+      .form-description {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $global-border-color;
+
+        label {
+          display: block;
+        }
+
+        textarea {
+          width: 100%;
+
+          &::placeholder {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .form-image {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $global-border-color;
+      }
+
+      label {
+        margin-bottom: 6px;
+        color: $global-font-color;
+      }
+
+      input {
+        &:focus {
+          box-shadow: none;
+        }
+
+        &::placeholder {
+          font-size: 14px;
+        }
+      }
+
+      button {
+        background-color: $primary;
+        color: $white;
+
+        &:hover {
+          background-color: $primary-dark;
+          color: $white;
+          border-color: $primary-dark;
+        }
+      }
+    }
+  }
+}

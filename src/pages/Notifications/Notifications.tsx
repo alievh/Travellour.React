@@ -2,7 +2,6 @@ import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useSelector } from "react-redux";
-import Button from "../../components/UI/Button";
 import Notification from "../../components/Notification/Notification";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";

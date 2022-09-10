@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Col from "../../components/Bootstrap/Col";
@@ -8,7 +7,9 @@ import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 
 const Password = () => {
-    const sidebarIsActive = useSelector((state:any) => state.sidebarToggle.isActive);
+  const sidebarIsActive = useSelector(
+    (state: any) => state.sidebarToggle.isActive
+  );
 
   return (
     <section
@@ -45,10 +46,32 @@ const Password = () => {
             <div className="password-section__user-input">
               <h4>Password Change</h4>
               <form>
-                <Input type="password" id="current-password" placeholder="Current Password" label="Type your current password" mainDivClass="password-change" />
-                <Input type="password" id="new-password" placeholder="New Password" label="Type your new password" mainDivClass="password-change" />
-                <Input type="password" id="again-new-password" placeholder="Retype password" label="Retype your new password" mainDivClass="password-change" />
-                <Button type="submit" className="btn btn-primary" innerText="Change Password" />
+                <Input
+                  type="password"
+                  id="current-password"
+                  placeholder="Current Password"
+                  label="Type your current password"
+                  mainDivClass="password-change"
+                />
+                <Input
+                  type="password"
+                  id="new-password"
+                  placeholder="New Password"
+                  label="Type your new password"
+                  mainDivClass="password-change"
+                />
+                <Input
+                  type="password"
+                  id="again-new-password"
+                  placeholder="Retype password"
+                  label="Retype your new password"
+                  mainDivClass="password-change"
+                />
+                <Button
+                  type="submit"
+                  className="btn btn-primary"
+                  innerText="Change Password"
+                />
               </form>
             </div>
           </Col>
