@@ -1,4 +1,5 @@
-@import '../abstracts/variables';
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
 
 .forums {
   width: 100%;
@@ -6,5 +7,22 @@
 
   &.sidebar-notactive {
     padding-left: 45px;
+  }
+
+  &-container {
+    margin-top: 32px;
+    padding: 0 32px 32px 32px;
+    background-color: $white;
+    border-radius: 5px;
+
+    &__title {
+      width: 100%;
+      border-bottom: 1px solid $global-border-color;
+      padding-top: 15px;
+    }
+
+    &__forums {
+      margin-top: 15px;
+    }
   }
 }

@@ -8,7 +8,7 @@ const Col: React.FC<{
   lg?: string;
   xl?: string;
 }> = (props) => {
-  let className = `${props.className} `;
+  let className = props.className !== undefined ? `${props.className} ` : '';
 
   className =
     props.sm !== undefined ? (className += `col-sm-${props.sm} `) : className;

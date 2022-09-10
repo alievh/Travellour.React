@@ -1,0 +1,31 @@
+.forum {
+  @include flex(none, center);
+  border-radius: 5px;
+  padding: 24px;
+  margin: 15px 0;
+  background-color: $global-bg-color;
+
+  &__title {
+    a {
+      color: $black;
+      transition: 0.3s ease-in;
+
+      &:hover {
+        color: $global-font-color;
+        transition: 0.3s ease-out;
+      }
+    }
+  }
+  &__statistics {
+    @include flex(center, center);
+    flex-direction: column;
+    border-left: 1px solid $global-border-color;
+    border-right: 1px solid $global-border-color;
+  }
+
+  &__users {
+    padding: 0 0 0 10px;
+    @include flex(none, center);
+    
+  }
+}
