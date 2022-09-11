@@ -461,19 +461,18 @@ body {
 .forum__users {
   padding: 0 0 0 10px;
   display: flex;
-  justify-content: none;
+  justify-content: space-between;
   align-items: center;
 }
 
-.forum-user {
+.forum__users .forum-user {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 5px;
 }
 
-.forum-user img {
+.forum__users .forum-user img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2204,6 +2203,108 @@ body {
 
 .forums-container__forums {
   margin-top: 15px;
+}
+
+.forum-create {
+  width: 100%;
+  padding: 90px 0 40px 300px;
+}
+
+.forum-create.sidebar-notactive {
+  padding-left: 45px;
+}
+
+.forum-create-container {
+  margin-top: 32px;
+  padding: 0 32px 32px 32px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.forum-create-container__filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: none;
+  color: #6f7f92;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 24px 0;
+  margin-bottom: 32px;
+}
+
+.forum-create-container__filter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: none;
+  align-items: none;
+}
+
+.forum-create-container__filter ul li {
+  margin-right: 10px;
+}
+
+.forum-create-container__filter .filter-right a {
+  text-decoration: none;
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: 0.4s ease-in;
+}
+
+.forum-create-container__filter .filter-right a:hover {
+  color: #fff;
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.forum-create-container__form .form-title {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.forum-create-container__form .form-description {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.forum-create-container__form .form-description label {
+  display: block;
+}
+
+.forum-create-container__form .form-description textarea {
+  width: 100%;
+}
+
+.forum-create-container__form .form-description textarea::placeholder {
+  font-size: 14px;
+}
+
+.forum-create-container__form label {
+  margin-bottom: 6px;
+  color: #6f7f92;
+}
+
+.forum-create-container__form input:focus {
+  box-shadow: none;
+}
+
+.forum-create-container__form input::placeholder {
+  font-size: 14px;
+}
+
+.forum-create-container__form button {
+  background-color: #4fb5ff;
+  color: #fff;
+}
+
+.forum-create-container__form button:hover {
+  background-color: #47a2e5;
+  color: #fff;
+  border-color: #47a2e5;
 }
 
 .notifications {

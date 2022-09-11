@@ -14,6 +14,7 @@ import Group from "./pages/Group/Group";
 import Password from "./pages/Password/Password";
 import Notifications from "./pages/Notifications/Notifications";
 import GroupCreate from "./pages/Groups/GroupCreate";
+import ForumCreate from "./pages/Forums/ForumCreate";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/groups" element={<Groups />} />
             <Route path="/groups/create" element={<GroupCreate />} />
             <Route path="/forums" element={<Forums />} />
+            <Route path="/forum/create" element={<ForumCreate />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/password" element={<Password />} />
             <Route path="/notifications" element={<Notifications />} />
