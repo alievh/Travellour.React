@@ -16,6 +16,7 @@ const Profile = () => {
   );
 
   return (
+    // Group Section - START
     <section
       className={`group-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
@@ -26,12 +27,15 @@ const Profile = () => {
         <Row>
           <div className="group">
             <Col lg="2">
+              {/* Group Avatar - START */}
               <div className="group__details">
                 <div className="group-avatar">
                   <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
                 </div>
               </div>
+              {/* Group Avatar - END */}
             </Col>
+            {/* Group Decription - START */}
             <Col lg="6">
               <div className="group__description">
                 <h5>Wombo Comno</h5>
@@ -42,6 +46,8 @@ const Profile = () => {
                 </p>
               </div>
             </Col>
+            {/* Group Decription - END */}
+            {/* Group Statistics - START */}
             <Col lg="2">
               <div className="group__statistics">
                 <ul>
@@ -56,6 +62,7 @@ const Profile = () => {
                 </ul>
               </div>
             </Col>
+            {/* Group Statistics - END */}
             <Col
               lg="2"
               className="d-flex justify-content-center align-items-center"
@@ -73,6 +80,7 @@ const Profile = () => {
           </div>
         </Row>
         <Row>
+          {/* Group Posts - START */}
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
@@ -116,7 +124,9 @@ const Profile = () => {
                 />
               </div>
             </section>
+            {/* Group Posts - END */}
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <GroupAdmin
@@ -129,9 +139,11 @@ const Profile = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Group Section - END
   );
 };
 

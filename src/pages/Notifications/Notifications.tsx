@@ -13,10 +13,14 @@ const Notifications = () => {
   );
 
   return (
-    <div className={`notifications ${!sidebarIsActive && "sidebar-notactive"}`}>
+    // Notifications Section - START
+    <section
+      className={`notifications ${!sidebarIsActive && "sidebar-notactive"}`}
+    >
       <Container>
         <Row>
           <Col xl="8" sm="12">
+            {/* Notifications - START */}
             <div className="notifications-container">
               <Notification
                 userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
@@ -44,7 +48,9 @@ const Notifications = () => {
                 notificationContent="added new photo"
               />
             </div>
+            {/* Notifications - END */}
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -52,9 +58,11 @@ const Notifications = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
-    </div>
+    </section>
+    // Notifications Section - END
   );
 };
 

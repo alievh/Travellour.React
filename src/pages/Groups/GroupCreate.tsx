@@ -14,6 +14,7 @@ const GroupCreate = () => {
   );
 
   return (
+    // Group Create Section - START
     <section
       className={`group-create ${!sidebarIsActive && "sidebar-notactive"}`}
     >
@@ -21,6 +22,7 @@ const GroupCreate = () => {
         <Row>
           <Col xl="8" sm="12">
             <div className="group-create-container">
+              {/* Group Create Filter - START */}
               <div className="group-create-container__filter">
                 <div className="filter-left">
                   <ul>
@@ -30,6 +32,8 @@ const GroupCreate = () => {
                   </ul>
                 </div>
               </div>
+              {/* Group Create Filter - END */}
+              {/* Group Create Form - START */}
               <div className="group-create-container__form">
                 <form>
                   <div className="form-title">
@@ -55,8 +59,10 @@ const GroupCreate = () => {
                   <Button type="submit" className="btn" innerText="Create" />
                 </form>
               </div>
+              {/* Group Create Form - END */}
             </div>
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -64,9 +70,11 @@ const GroupCreate = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Group Create Section - END
   );
 };
 

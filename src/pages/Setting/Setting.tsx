@@ -12,12 +12,14 @@ const Setting = () => {
   );
 
   return (
+    // Setting Section - START
     <section
       className={`setting-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <Container>
         <Row>
           <Col lg="12">
+            {/* User Information - START */}
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
@@ -43,8 +45,10 @@ const Setting = () => {
                 </ul>
               </div>
             </div>
+            {/* User Information - END */}
             <div className="setting-section__personal-info">
               <h4>Personal Information</h4>
+              {/* Setting Form - START */}
               <form>
                 <div className="form-fullname">
                   <Col lg="5">
@@ -83,11 +87,13 @@ const Setting = () => {
                   className="btn"
                 />
               </form>
+              {/* Setting Form - END */}
             </div>
           </Col>
         </Row>
       </Container>
     </section>
+    // Setting Section - END
   );
 };
 

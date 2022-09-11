@@ -15,6 +15,7 @@ const EventCreate = () => {
   );
 
   return (
+    // Event Create Section - START
     <section
       className={`event-create ${!sidebarIsActive && "sidebar-notactive"}`}
     >
@@ -22,6 +23,7 @@ const EventCreate = () => {
         <Row>
           <Col xl="8" sm="12">
             <div className="event-create-container">
+              {/* Event Create Filter - START */}
               <div className="event-create-container__filter">
                 <div className="filter-left">
                   <ul>
@@ -30,6 +32,8 @@ const EventCreate = () => {
                   </ul>
                 </div>
               </div>
+              {/* Event Create Filter - END */}
+              {/* Event Create Form -START */}
               <div className="event-create-container__form">
                 <form>
                   <div className="form-title">
@@ -54,9 +58,11 @@ const EventCreate = () => {
                   </div>
                   <Button type="submit" className="btn" innerText="Create" />
                 </form>
+                {/* Event Create Form - END */}
               </div>
             </div>
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -64,9 +70,11 @@ const EventCreate = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Event Create Section - END
   );
 };
 

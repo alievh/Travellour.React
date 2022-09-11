@@ -69,11 +69,13 @@ const Navbar = () => {
   };
 
   return (
+    // Navbar - START
     <nav className={`nav-bar ${!sidebarIsActive && "sidebar-notactive"}`}>
       <ContainerFluid>
         <Row>
           <Col lg="12">
             <div className="nav-bar__container">
+              {/* Navbar Search - START */}
               <div className="nav-bar__search">
                 <div className="form-outline">
                   <input
@@ -85,6 +87,8 @@ const Navbar = () => {
                   />
                 </div>
               </div>
+              {/* Navbar Search - END */}
+              {/* Navbar Navigation - START */}
               <div className="nav-bar__navigation">
                 <ul>
                   <li>
@@ -185,11 +189,13 @@ const Navbar = () => {
                   </li>
                 </ul>
               </div>
+              {/* Navbar Navigation - END */}
             </div>
           </Col>
         </Row>
       </ContainerFluid>
     </nav>
+    // Navbar - END
   );
 };
 

@@ -16,9 +16,25 @@
     border-radius: 5px;
 
     &__title {
+      @include flex(space-between,none);
       width: 100%;
       border-bottom: 1px solid $global-border-color;
-      padding-top: 15px;
+      padding: 15px 0;
+
+      a {
+        text-decoration: none;
+        background-color: #eaeff8;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: $primary;
+        transition: 0.3s ease-in;
+
+        &:hover {
+          color: $white;
+          background-color: $primary;
+          transition: 0.3s ease-out;
+        }
+      }
     }
 
     &__forums {

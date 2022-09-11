@@ -6,6 +6,7 @@ import Col from "../../components/Bootstrap/Col";
 const Login = () => {
   return (
     <main>
+      {/* Login Section - START */}
       <section className="login-section">
         <AuthPoster />
         <Col lg="6" sm="12">
@@ -18,6 +19,7 @@ const Login = () => {
                   world
                 </p>
               </div>
+              {/* Login Form - START */}
               <form className="auth-container__form">
                 <Input
                   label="Username"
@@ -47,6 +49,7 @@ const Login = () => {
                   innerText="Sign in"
                 />
               </form>
+              {/* Login Form - END */}
               <div className="register-link">
                 Don't Have An Account? <a href="/register">Sign Up</a>
               </div>
@@ -54,6 +57,7 @@ const Login = () => {
           </div>
         </Col>
       </section>
+      {/* Login Section - END */}
     </main>
   );
 };

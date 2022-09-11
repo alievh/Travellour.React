@@ -15,10 +15,12 @@ const Groups = () => {
   );
 
   return (
+    // Groups Section - START
     <section className={`groups ${!sidebarIsActive && "sidebar-notactive"}`}>
       <Container>
         <Row>
           <Col xl="8" sm="12">
+            {/* Groups Search - START */}
             <section className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -31,9 +33,11 @@ const Groups = () => {
                 </form>
               </div>
             </section>
+            {/* Groups Search - END */}
             <section className="groups-container">
               <Container>
                 <div className="row justify-content-center">
+                  {/* Groups Filter - START */}
                   <div className="groups-container__filter">
                     <div className="filter-left">
                       <ul>
@@ -46,6 +50,8 @@ const Groups = () => {
                       <Link to="/groups/create">Create Group</Link>
                     </div>
                   </div>
+                  {/* Groups Filter - END */}
+                  {/* Groups - START */}
                   <GroupCard
                     groupImage={require("../../assets/images/event-hiking.jpg")}
                     groupTitle="Hiking Club"
@@ -82,10 +88,12 @@ const Groups = () => {
                     groupImage={require("../../assets/images/event-camping.jpg")}
                     groupTitle="Camping Club"
                   />
+                  {/* Groups - END */}
                 </div>
               </Container>
             </section>
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -93,9 +101,11 @@ const Groups = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Groups Section - END
   );
 };
 

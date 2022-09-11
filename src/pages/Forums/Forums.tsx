@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import ForumCard from "../../components/Forum/ForumCard";
+import ForumCard from "../../components/ForumCard/ForumCard";
+import { Link } from "react-router-dom";
 
 const Forums = () => {
   const sidebarIsActive = useSelector(
@@ -10,6 +11,7 @@ const Forums = () => {
   );
 
   return (
+    // Forums Section - START
     <section className={`forums ${!sidebarIsActive && "sidebar-notactive"}`}>
       <div className="forums-container">
         <Container>
@@ -17,7 +19,9 @@ const Forums = () => {
             <Col xl="12">
               <div className="forums-container__title">
                 <h4>Forums</h4>
+                <Link to="/forum/create">Create Forum</Link>
               </div>
+              {/* Forums - START */}
               <div className="forums-container__forums">
                 <ForumCard
                   title="How can I play CSGO better"
@@ -56,11 +60,13 @@ const Forums = () => {
                   ]}
                 />
               </div>
+              {/* Forums - END */}
             </Col>
           </Row>
         </Container>
       </div>
     </section>
+    // Forums Section - END
   );
 };
 

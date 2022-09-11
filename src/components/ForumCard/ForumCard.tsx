@@ -1,5 +1,6 @@
 import React from "react";
 import Col from "../Bootstrap/Col";
+import ForumUser from "../ForumUser/ForumUser";
 
 const ForumCard: React.FC<{
   title: string;
@@ -21,11 +22,7 @@ const ForumCard: React.FC<{
       </Col>
       <Col xl="2">
         <div className="forum__users">
-          {props.userImages?.map((url) => (
-            <div className="forum-user">
-              <img src={url} />
-            </div>
-          ))}
+          {props.userImages?.map((url) => (<ForumUser userImages={url} />))}
         </div>
       </Col>
     </div>

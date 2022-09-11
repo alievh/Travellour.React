@@ -14,6 +14,7 @@ const Profile = () => {
   );
 
   return (
+    // Profile Section - START
     <section
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
@@ -22,6 +23,7 @@ const Profile = () => {
       </div>
       <Container>
         <Row>
+          {/* Profile - START */}
           <div className="user">
             <div className="user__statistics">
               <ul>
@@ -59,8 +61,10 @@ const Profile = () => {
               </form>
             </div>
           </div>
+          {/* Profile - END */}
         </Row>
         <Row>
+          {/* User Posts - START */}
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
@@ -105,6 +109,8 @@ const Profile = () => {
               </div>
             </section>
           </Col>
+          {/* User Posts - END */}
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -112,9 +118,11 @@ const Profile = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Profile Section - END
   );
 };
 

@@ -6,6 +6,7 @@ import Col from "../../components/Bootstrap/Col";
 const Register = () => {
   return (
     <main>
+      {/* Register Section - START */}
       <section className="register-section">
         <AuthPoster />
         <Col lg="6" sm="12">
@@ -18,6 +19,7 @@ const Register = () => {
                   world
                 </p>
               </div>
+              {/* Register Form - START */}
               <form className="auth-container__form">
                 <div className="d-flex">
                   <Input
@@ -58,6 +60,7 @@ const Register = () => {
                   innerText="Register"
                 />
               </form>
+              {/* Register Form - END */}
               <div className="login-link">
                 Already Have An Account? <a href="/">Login</a>
               </div>
@@ -65,6 +68,7 @@ const Register = () => {
           </div>
         </Col>
       </section>
+      {/* Register Section - END */}
     </main>
   );
 };

@@ -12,10 +12,12 @@ const Events = () => {
   );
 
   return (
+    // Events Section - START
     <section className={`events ${!sidebarIsActive && "sidebar-notactive"}`}>
       <Container>
         <Row>
           <Col xl="12" sm="12">
+            {/* Events Search - START */}
             <div className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -28,7 +30,9 @@ const Events = () => {
                 </form>
               </div>
             </div>
+            {/* Events Search - END */}
             <div className="events-container">
+              {/* Events Filter - START */}
               <div className="events-container__filter">
                 <div className="filter-left">
                   <ul>
@@ -40,6 +44,8 @@ const Events = () => {
                   <Link to="/events/create">Create Event</Link>
                 </div>
               </div>
+              {/* Events Filter - END */}
+              {/* Events - START */}
               <div className="events-container__events">
                 <Event
                   eventImage={require("../../assets/images/event-hiking.jpg")}
@@ -52,22 +58,24 @@ const Events = () => {
                   eventImage={require("../../assets/images/event-surfing.jpg")}
                   eventTitle="Surfing"
                   eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?"
+                  Ipsa, ad. Quam praesentium magni voluptate asperiores
+                  sed provident facilis dolor deleniti?"
                 />
                 <Event
                   eventImage={require("../../assets/images/event-camping.jpg")}
                   eventTitle="Camping"
                   eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?"
+                  Ipsa, ad. Quam praesentium magni voluptate asperiores
+                  sed provident facilis dolor deleniti?"
                 />
               </div>
+              {/* Events - END */}
             </div>
           </Col>
         </Row>
       </Container>
     </section>
+    // Events Section - END
   );
 };
 

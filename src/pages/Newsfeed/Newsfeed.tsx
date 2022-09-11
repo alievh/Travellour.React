@@ -14,14 +14,13 @@ const Newsfeed = () => {
   );
 
   return (
-    <div className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
+    // Newsfeed Section - START
+    <section className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
       <Container>
         <Row>
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
-              <div className="newsfeed-section__stories">
-                <div className="stories-add"></div>
-              </div>
+              {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
                 <Post
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
@@ -62,6 +61,7 @@ const Newsfeed = () => {
                   commentCount="4"
                 />
               </div>
+              {/* Newsfeed Posts - END */}
             </section>
           </Col>
           <Col xl="4" sm="12">
@@ -73,7 +73,8 @@ const Newsfeed = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+    </section>
+    // Newsfeed Section - END
   );
 };
 

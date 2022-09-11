@@ -14,6 +14,7 @@ const Sidebar = () => {
   };
 
   return (
+    // Sidebar - START
     <aside className="sidebar">
       <div className="sidebar__toggle" onClick={sideBarToggleHandler}>
         <span>
@@ -25,7 +26,9 @@ const Sidebar = () => {
           )}
         </span>
       </div>
+      {/* Sidebar Section - START */}
       <section className={`sidebar-section ${!isSidebarActive && "toggle"}`}>
+        {/* Sidebar Section Header - START */}
         <div className="sidebar-section__header">
           <div
             className={`sidebar-section__logo ${
@@ -41,6 +44,8 @@ const Sidebar = () => {
             </Link>
           </div>
         </div>
+        {/* Sidebar Section Header - END */}
+        {/* Sidebar Section Main - START */}
         <div className="sidebar-section__main">
           <div className="sidebar-section__profile">
             <div className="profile-avatar">
@@ -91,6 +96,8 @@ const Sidebar = () => {
             </ul>
           </div>
         </div>
+        {/* Sidebar Section Main - END */}
+        {/* Sidebar Section Footer - START */}
         <div className="sidebar-section__footer">
           <div className="sidebar-section__settings">
             <ul className={isSidebarActive ? "list" : "list sidebar-notactive"}>
@@ -101,8 +108,11 @@ const Sidebar = () => {
             </ul>
           </div>
         </div>
+        {/* Sidebar Section Footer - END */}
       </section>
+      {/* Sidebar Section - END */}
     </aside>
+    // Sidebar - END
   );
 };
 

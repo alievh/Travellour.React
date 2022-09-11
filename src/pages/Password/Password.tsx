@@ -12,12 +12,14 @@ const Password = () => {
   );
 
   return (
+    // Password Section - START
     <section
       className={`password-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <Container>
         <Row>
           <Col lg="12">
+            {/* User Information - START */}
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
@@ -43,6 +45,8 @@ const Password = () => {
                 </ul>
               </div>
             </div>
+            {/* User Information - END */}
+            {/* Password User Input - START */}
             <div className="password-section__user-input">
               <h4>Password Change</h4>
               <form>
@@ -74,10 +78,12 @@ const Password = () => {
                 />
               </form>
             </div>
+            {/* Password User Input - END */}
           </Col>
         </Row>
       </Container>
     </section>
+    // Password Section - END
   );
 };
 

@@ -14,10 +14,12 @@ const Friends = () => {
   );
 
   return (
+    // Friends - START
     <section className={`friends ${!sidebarIsActive && "sidebar-notactive"}`}>
       <Container>
         <Row>
           <Col xl="8" sm="12">
+            {/* Friends Search - START*/}
             <section className="friends__search-section">
               <div className="friends__search">
                 <form>
@@ -30,8 +32,10 @@ const Friends = () => {
                 </form>
               </div>
             </section>
+            {/* Friends Search - END*/}
             <section>
               <div className="friends__container">
+                {/* Friends Filter - START */}
                 <div className="friends__filter">
                   <ul>
                     <li>My Friends</li>
@@ -45,6 +49,8 @@ const Friends = () => {
                     </select>
                   </form>
                 </div>
+                {/* Friends Filter - END */}
+                {/* Friends - START */}
                 <div className="user-friends">
                   <UserFriend
                     firstName="Huseyn"
@@ -72,9 +78,11 @@ const Friends = () => {
                     imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/21/1656593693-bpfull.jpg"
                   />
                 </div>
+                {/* Friends - END */}
               </div>
             </section>
           </Col>
+          {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
               <ActiveUsers />
@@ -82,9 +90,11 @@ const Friends = () => {
               <AddvertisingBanner />
             </section>
           </Col>
+          {/* Right SideBar - END */}
         </Row>
       </Container>
     </section>
+    // Friends - END
   );
 };
 
