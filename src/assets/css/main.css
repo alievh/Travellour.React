@@ -251,6 +251,66 @@ body {
   color: #6f7f92;
 }
 
+.group-member {
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 32px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-member__info {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.group-member__avatar {
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.group-member__avatar img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.group-member__fullname a {
+  text-decoration: none;
+  color: #000;
+}
+
+.group-member__fullname span {
+  font-size: 14px;
+  color: #6f7f92;
+}
+
+.group-member__request button {
+  margin-right: 15px;
+  padding: 5px 30px;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(241, 70, 70, 0.0862745);
+  color: #f14646;
+  transition: .3s ease-in;
+}
+
+.group-member__request button:hover {
+  color: #fff;
+  background-color: #f14646;
+  transition: .3s ease-out;
+}
+
+.group-member__request a i {
+  font-size: 18px;
+}
+
 .events-container__event {
   padding: 0 12px;
   margin: 12px 0;
@@ -440,12 +500,12 @@ body {
 }
 
 .forum__title a {
-  color: #000;
+  color: #6f7f92;
   transition: 0.3s ease-in;
 }
 
 .forum__title a:hover {
-  color: #6f7f92;
+  color: #000;
   transition: 0.3s ease-out;
 }
 
@@ -456,6 +516,7 @@ body {
   flex-direction: column;
   border-left: 1px solid #f1f1f1;
   border-right: 1px solid #f1f1f1;
+  color: #6f7f92;
 }
 
 .forum__users {
@@ -2125,7 +2186,7 @@ body {
   transition: 0.5s ease-out;
 }
 
-.group-create-container__form .form-title {
+.group-create-container__form .form-name {
   padding-bottom: 15px;
   margin-bottom: 15px;
   border-bottom: 1px solid #f1f1f1;
@@ -2179,6 +2240,126 @@ body {
   border-color: #47a2e5;
 }
 
+.group-setting {
+  width: 100%;
+  padding: 90px 0 40px 300px;
+}
+
+.group-setting.sidebar-notactive {
+  padding-left: 45px;
+}
+
+.group-setting-container {
+  margin-top: 32px;
+  padding: 0 32px 32px 32px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.group-setting-container__title {
+  color: #000;
+  border-bottom: 1px solid #f1f1f1;
+  padding-top: 24px;
+  padding-bottom: 12px;
+  margin-bottom: 32px;
+}
+
+.group-setting-container__title ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: none;
+  align-items: none;
+}
+
+.group-setting-container__title ul li {
+  margin-right: 10px;
+}
+
+.group-setting-container__title .filter-right a {
+  text-decoration: none;
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: 0.4s ease-in;
+}
+
+.group-setting-container__title .filter-right a:hover {
+  color: #fff;
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.group-setting-container__form .form-name {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.group-setting-container__form .form-description {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.group-setting-container__form .form-description label {
+  display: block;
+}
+
+.group-setting-container__form .form-description textarea {
+  width: 100%;
+}
+
+.group-setting-container__form .form-description textarea::placeholder {
+  font-size: 14px;
+}
+
+.group-setting-container__form .form-image {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.group-setting-container__form label {
+  margin-bottom: 6px;
+  color: #6f7f92;
+}
+
+.group-setting-container__form input:focus {
+  box-shadow: none;
+}
+
+.group-setting-container__form input::placeholder {
+  font-size: 14px;
+}
+
+.group-setting-container__form button {
+  background-color: #4fb5ff;
+  color: #fff;
+}
+
+.group-setting-container__form button:hover {
+  background-color: #47a2e5;
+  color: #fff;
+  border-color: #47a2e5;
+}
+
+.group-setting .group-members__container {
+  width: 100%;
+  margin-top: 32px;
+  background-color: #fff;
+  padding: 0 32px 32px 32px;
+  border-radius: 5px;
+}
+
+.group-setting .group-members__container h4 {
+  padding: 24px 0 12px 0;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 24px;
+}
+
 .forums {
   width: 100%;
   padding: 90px 0 40px 300px;
@@ -2202,6 +2383,10 @@ body {
   width: 100%;
   border-bottom: 1px solid #f1f1f1;
   padding: 15px 0;
+}
+
+.forums-container__title h4 {
+  color: #000;
 }
 
 .forums-container__title a {

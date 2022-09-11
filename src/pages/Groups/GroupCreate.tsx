@@ -36,12 +36,12 @@ const GroupCreate = () => {
               {/* Group Create Form - START */}
               <div className="group-create-container__form">
                 <form>
-                  <div className="form-title">
+                  <div className="form-name">
                     <Input
-                      placeholder="Group Title"
-                      label="Type Group Title"
+                      placeholder="Group Name"
+                      label="Type Group Name"
                       type="text"
-                      id="group-title"
+                      id="group-name"
                     />
                   </div>
                   <div className="form-description">

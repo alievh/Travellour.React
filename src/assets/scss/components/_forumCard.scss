@@ -7,11 +7,11 @@
 
   &__title {
     a {
-      color: $black;
+      color: $global-font-color;
       transition: 0.3s ease-in;
 
       &:hover {
-        color: $global-font-color;
+        color: $black;
         transition: 0.3s ease-out;
       }
     }
@@ -21,6 +21,7 @@
     flex-direction: column;
     border-left: 1px solid $global-border-color;
     border-right: 1px solid $global-border-color;
+    color: $global-font-color;
   }
 
   &__users {

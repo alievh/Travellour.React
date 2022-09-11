@@ -23,7 +23,9 @@ const ForumCard: React.FC<{
       </Col>
       <Col xl="2">
         <div className="forum__users">
-          {props.userImages?.map((url) => (<ForumUser userImages={url} />))}
+          {props.userImages?.map((url) => (
+            <ForumUser userImages={url} />
+          ))}
         </div>
       </Col>
     </div>

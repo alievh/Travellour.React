@@ -1,7 +1,7 @@
 @import "../abstracts/mixins";
 @import "../abstracts/variables";
 
-.group-create {
+.group-setting {
   width: 100%;
   padding: 90px 0 40px 300px;
 
@@ -15,11 +15,11 @@
     background-color: $white;
     border-radius: 5px;
 
-    &__filter {
-      @include flex(space-between, none);
-      color: $global-font-color;
+    &__title {
+      color: $black;
       border-bottom: 1px solid $global-border-color;
-      padding: 24px 0;
+      padding-top: 24px;
+      padding-bottom: 12px;
       margin-bottom: 32px;
 
       ul {
@@ -106,6 +106,20 @@
           border-color: $primary-dark;
         }
       }
+    }
+  }
+
+  .group-members__container {
+    width: 100%;
+    margin-top: 32px;
+    background-color: $white;
+    padding: 0 32px 32px 32px;
+    border-radius: 5px;
+
+    h4 {
+        padding: 24px 0 12px 0;
+        border-bottom: 1px solid $global-border-color;
+        margin-bottom: 24px;
     }
   }
 }

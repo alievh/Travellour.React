@@ -14,7 +14,7 @@ const Friends = () => {
   );
 
   return (
-    // Friends - START
+    // Friends Section - START
     <section className={`friends ${!sidebarIsActive && "sidebar-notactive"}`}>
       <Container>
         <Row>
@@ -94,7 +94,7 @@ const Friends = () => {
         </Row>
       </Container>
     </section>
-    // Friends - END
+    // Friends Section - END
   );
 };
 

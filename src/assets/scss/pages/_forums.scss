@@ -21,6 +21,10 @@
       border-bottom: 1px solid $global-border-color;
       padding: 15px 0;
 
+      h4 {
+        color: $black;
+      }
+
       a {
         text-decoration: none;
         background-color: #eaeff8;
