@@ -19,7 +19,7 @@ const Profile = () => {
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img src={require("../../assets/images/auth-poster.jpg")} />
+        <img src={require("../../assets/images/auth-poster.jpg")} alt="Profile Background" />
       </div>
       <Container>
         <Row>
@@ -39,7 +39,7 @@ const Profile = () => {
             </div>
             <div className="user__details">
               <div className="user-avatar">
-                <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
+                <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" alt="User Avatar" />
               </div>
               <h5>Marvin McKinney</h5>
               <span>@marvin</span>

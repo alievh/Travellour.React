@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Post from "../../components/Post/Post";
@@ -21,7 +20,7 @@ const Profile = () => {
       className={`group-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img src={require("../../assets/images/auth-poster.jpg")} />
+        <img src={require("../../assets/images/auth-poster.jpg")} alt="Group Background" />
       </div>
       <Container>
         <Row>
@@ -30,7 +29,7 @@ const Profile = () => {
               {/* Group Avatar - START */}
               <div className="group__details">
                 <div className="group-avatar">
-                  <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" />
+                  <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" alt="Group Avatar" />
                 </div>
               </div>
               {/* Group Avatar - END */}

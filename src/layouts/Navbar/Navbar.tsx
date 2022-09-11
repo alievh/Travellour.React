@@ -157,7 +157,7 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662526081-bpthumb.jpg" />
+                      <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662526081-bpthumb.jpg" alt="User Avatar" />
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">

@@ -23,7 +23,7 @@ const Setting = () => {
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
-                  <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg" />
+                  <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg" alt="User Avatar" />
                 </div>
                 <div className="user-fullname">
                   <h5>Marvin McKinney</h5>

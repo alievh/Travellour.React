@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "../Bootstrap/Col";
 import ForumUser from "../ForumUser/ForumUser";
+import { Link } from "react-router-dom";
 
 const ForumCard: React.FC<{
   title: string;
@@ -11,7 +12,7 @@ const ForumCard: React.FC<{
     <div className="forum">
       <Col xl="8">
         <div className="forum__title">
-          <a href="#">{props.title}</a>
+          <Link to="/forum/detail">{props.title}</Link>
         </div>
       </Col>
       <Col xl="2">
