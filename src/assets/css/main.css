@@ -539,6 +539,55 @@ body {
   object-fit: cover;
 }
 
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  margin: 10px 0;
+  padding: 15px 15px;
+  border-radius: 5px;
+}
+
+.comment-user {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.comment-user__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.comment-user__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comment-user__content a {
+  text-decoration: none;
+  color: #000;
+}
+
+.comment-user__content p {
+  margin: 0;
+  color: #6f7f92;
+}
+
+.comment__like .like {
+  background-color: transparent;
+  border: none;
+}
+
+.comment__like .like i {
+  font-size: 22px;
+}
+
 .sidebar {
   height: 100vh;
   position: fixed;
@@ -2362,11 +2411,11 @@ body {
 
 .forums {
   width: 100%;
-  padding: 90px 0 40px 300px;
+  padding: 90px 45px 40px 300px;
 }
 
 .forums.sidebar-notactive {
-  padding-left: 45px;
+  padding-left: 120px;
 }
 
 .forums-container {
@@ -2523,6 +2572,64 @@ body {
   background-color: #47a2e5;
   color: #fff;
   border-color: #47a2e5;
+}
+
+.forum-detail {
+  width: 100%;
+  padding: 90px 40px 40px 300px;
+}
+
+.forum-detail.sidebar-notactive {
+  padding-left: 120px;
+}
+
+.forum-detail-container {
+  margin-top: 32px;
+  padding: 0 32px 32px 32px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.forum-detail-container__title {
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+  padding-top: 15px;
+}
+
+.forum-detail-container__title h4 {
+  color: #000;
+}
+
+.forum-detail-container__content {
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 15px 0;
+  margin: 15px 0;
+}
+
+.forum-detail-container__content p {
+  color: #6f7f92;
+}
+
+.forum-detail-container__input {
+  position: relative;
+}
+
+.forum-detail-container__input textarea {
+  width: 100%;
+}
+
+.forum-detail-container__input button {
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: .3s ease-in;
+}
+
+.forum-detail-container__input button:hover {
+  background-color: #47a2e5;
+  border-color: #47a2e5;
+  color: #fff;
+  transition: .3s ease-out;
 }
 
 .notifications {

@@ -1,0 +1,53 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.comment {
+  @include flex(space-between, center);
+  background-color: $global-bg-color;
+  margin: 10px 0;
+  padding: 15px 15px;
+  border-radius: 5px;
+
+  &-user {
+    @include flex(none, center);
+
+    &__avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__content {
+      a {
+        text-decoration: none;
+        color: $black;
+
+        
+      }
+
+      p {
+        margin: 0;
+        color: $global-font-color;
+      }
+    }
+  }
+
+  &__like {
+    .like {
+      background-color: transparent;
+      border: none;
+
+      i {
+        font-size: 22px;
+      }
+    }
+  }
+}

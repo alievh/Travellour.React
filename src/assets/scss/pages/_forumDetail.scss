@@ -1,0 +1,59 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.forum-detail {
+  width: 100%;
+  padding: 90px 40px 40px 300px;
+
+  &.sidebar-notactive {
+    padding-left: 120px;
+  }
+
+  &-container {
+    margin-top: 32px;
+    padding: 0 32px 32px 32px;
+    background-color: $white;
+    border-radius: 5px;
+
+    &__title {
+      width: 100%;
+      border-bottom: 1px solid $global-border-color;
+      padding-top: 15px;
+
+      h4 {
+        color: $black;
+      }
+    }
+
+    &__content {
+      width: 100%;
+      border-bottom: 1px solid $global-border-color;
+      padding: 15px 0;
+      margin: 15px 0;
+      p {
+        color: $global-font-color;
+      }
+    }
+
+    &__input {
+      position: relative;
+
+      textarea {
+        width: 100%;
+      }
+
+      button {
+        background-color: $primary;
+        color: $white;
+        transition: .3s ease-in;
+        
+        &:hover {
+          background-color: $primary-dark;
+          border-color: $primary-dark;
+          color: $white;
+          transition: .3s ease-out;
+        }
+      }
+    }
+  }
+}

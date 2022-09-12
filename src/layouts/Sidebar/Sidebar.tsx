@@ -50,7 +50,10 @@ const Sidebar = () => {
           <div className="sidebar-section__profile">
             <div className="profile-avatar">
               <Link to="/profile">
-                <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg" alt="User Avatar" />
+                <img
+                  src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  alt="User Avatar"
+                />
               </Link>
             </div>
             {isSidebarActive && (
@@ -72,6 +75,11 @@ const Sidebar = () => {
                 innerText="Friends"
                 iconClass="fa-solid fa-user"
                 url="/friends"
+              />
+              <SidebarItem
+                innerText="Messages"
+                iconClass="fa-solid fa-message"
+                url="/messages"
               />
               <SidebarItem
                 innerText="Groups"

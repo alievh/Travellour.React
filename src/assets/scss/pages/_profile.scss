@@ -21,7 +21,7 @@
     }
   }
 
-  .user {
+  .user { 
     @include flex(space-between, none);
     width: 100%;
     background-color: $white;
