@@ -1,4 +1,4 @@
-@import '../abstracts/variables';
+@import "../abstracts/variables";
 
 .post {
   background-color: $white;
@@ -12,9 +12,18 @@
     .owner-image {
       width: 60px;
       height: 60px;
-      margin: 0 12px;
+      margin-right: 8px;
       border-radius: 50%;
       overflow: hidden;
+
+      @media screen and (max-width: 720px) {
+        margin-right: 0;
+      }
+
+      @media screen and (max-width: 390px) {
+        width: 40px;
+        height: 40px;
+      }
 
       img {
         width: 100%;
@@ -31,8 +40,13 @@
       text-decoration: none;
       color: $black;
 
-      p {
-        margin-bottom: 0;
+      @media screen and (max-width: 390px) {
+        font-size: 14px;
+      }
+
+      
+      @media screen and (max-width: 350px) {
+        font-size: 12px;
       }
     }
 
@@ -45,11 +59,25 @@
     width: 100%;
     margin: 18px 0;
 
+    p {
+
+      @media screen and (max-width: 390px) {
+        font-size: 14px;
+      }
+    }
+
     img {
       width: 100%;
       height: 500px;
-
       object-fit: cover;
+
+      @media screen and (max-width: 720px) {
+        height: 250px;
+      }
+
+      @media screen and (max-width: 390px) {
+        height: 150px;
+      }
     }
 
     .post-statistics {
@@ -61,6 +89,10 @@
         margin: 0 5px;
         font-size: 14px;
         color: $global-font-color;
+
+        @media screen and (max-width: 390px) {
+          font-size: 12px;
+        }
       }
     }
 
@@ -72,6 +104,12 @@
 
         i {
           margin: 0 5px;
+        }
+
+        span {
+          @media screen and (max-width: 390px) {
+            display: none;
+          }
         }
       }
     }

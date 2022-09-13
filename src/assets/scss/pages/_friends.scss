@@ -6,8 +6,12 @@
   padding-left: 300px;
   padding-top: 90px;
 
+  @media screen and (max-width: 720px) {
+    padding-left: 70px;
+  }
+
   &.sidebar-notactive {
-    padding-left: 45px;
+    padding-left: 70px;
   }
 
   &__search-section {
@@ -62,11 +66,21 @@
     background-color: $white;
     padding: 0 32px 32px 32px;
     border-radius: 5px;
+
+    @media screen and (max-width: 850px) {
+      padding: 0 16px 32px 16px;
+    }
   }
 
   &__filter {
     @include flex(space-between, none);
-    padding: 32px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid $global-border-color;
+    margin-bottom: 32px;
+
+    @media screen and (max-width: 850px) {
+      flex-direction: column;
+    }
 
     ul {
       list-style: none;
@@ -74,19 +88,40 @@
       padding: 0;
       @include flex(none, none);
 
+      @media screen and (max-width: 850px) {
+        border-bottom: 1px solid $global-border-color;
+        padding-bottom: 16px;
+      }
+
       li {
         margin-right: 5px;
+        @include flex(none, center);
+
+        @media screen and (max-width: 850px) {
+          font-size: 14px;
+        }
       }
     }
 
     form {
+      @media screen and (max-width: 850px) {
+        margin-top: 15px;
+      }
 
       label {
         margin-right: 7px;
+
+        @media screen and (max-width: 850px) {
+          font-size: 14px;
+        }
       }
 
       select {
         padding: 5px 10px;
+
+        @media screen and (max-width: 850px) {
+          padding: 0;
+        }
       }
     }
   }

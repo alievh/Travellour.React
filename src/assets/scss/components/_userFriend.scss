@@ -1,5 +1,5 @@
 @import "../abstracts/mixins";
-@import '../abstracts/variables';
+@import "../abstracts/variables";
 
 .user-friend {
   width: 100%;
@@ -9,8 +9,20 @@
   border-radius: 5px;
   @include flex(space-between, center);
 
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    padding: 24px 8px;
+  }
+
   &__info {
     @include flex(none, center);
+
+    
+    @media screen and (max-width: 500px) {
+      border-bottom: 1px solid $global-border-color;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+    }
   }
 
   &__avatar {
@@ -19,6 +31,11 @@
     overflow: hidden;
     border-radius: 50%;
     margin-right: 15px;
+
+    @media screen and (max-width: 850px) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
 
     img {
       width: 100%;
@@ -30,32 +47,39 @@
     a {
       text-decoration: none;
       color: $black;
+
+      @media screen and (max-width: 850px) {
+        font-size: 15px;
+      }
     }
 
     span {
       font-size: 14px;
       color: $global-font-color;
+
+      @media screen and (max-width: 850px) {
+        font-size: 12px;
+      }
     }
   }
 
   &__request {
 
     button {
-        margin-right: 15px;
-        padding: 2px 14px;
-        font-size: 14px;
-        color: $white;
+      margin-right: 15px;
+      padding: 2px 14px;
+      font-size: 14px;
+      color: $white;
 
-        &:hover {
-            color: $white;
-        }
+      &:hover {
+        color: $white;
+      }
     }
 
     a {
-
-        i {
-            font-size: 18px;
-        }
+      i {
+        font-size: 18px;
+      }
     }
   }
 }

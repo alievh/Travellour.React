@@ -94,13 +94,6 @@ const Navbar = () => {
                   <li>
                     <Button
                       type="button"
-                      className="switch-mode nav-button"
-                      buttonIcon="fa-solid fa-sun"
-                    />
-                  </li>
-                  <li>
-                    <Button
-                      type="button"
                       className="nav-button"
                       buttonIcon="fa-solid fa-user-group"
                       onClick={friendRequestsToggleHandler}

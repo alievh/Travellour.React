@@ -9,8 +9,21 @@
   border-radius: 5px;
   @include flex(space-between, center);
 
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    padding: 24px 8px;
+  }
+
   &__info {
     @include flex(none, center);
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+
+      border-bottom: 1px solid $global-border-color;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+    }
   }
 
   &__avatar {
@@ -20,6 +33,11 @@
     border-radius: 50%;
     margin-right: 15px;
 
+    @media screen and (max-width: 850px) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
     img {
       width: 100%;
       object-fit: cover;
@@ -27,14 +45,26 @@
   }
 
   &__fullname {
+    @media screen and (max-width: 500px) {
+      text-align: center;
+    }
+    
     a {
       text-decoration: none;
       color: $black;
+
+      @media screen and (max-width: 850px) {
+        font-size: 15px;
+      }
     }
 
     span {
       font-size: 14px;
       color: $global-font-color;
+
+      @media screen and (max-width: 850px) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -46,13 +76,12 @@
       color: $white;
       background: rgba(241, 70, 70, 0.0862745);
       color: #f14646;
-      transition: .3s ease-in;
+      transition: 0.3s ease-in;
 
       &:hover {
         color: $white;
         background-color: #f14646;
-      transition: .3s ease-out;
-
+        transition: 0.3s ease-out;
       }
     }
 

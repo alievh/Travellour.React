@@ -6,6 +6,11 @@
   padding: 32px;
   border-radius: 5px;
 
+  
+  @media screen and (max-width: 390px) {
+    padding: 16px;
+   }
+
   h5 {
     padding-bottom: 20px;
     margin-bottom: 20px;

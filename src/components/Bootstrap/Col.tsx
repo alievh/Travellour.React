@@ -8,16 +8,16 @@ const Col: React.FC<{
   lg?: string;
   xl?: string;
 }> = (props) => {
-  let className = props.className !== undefined ? `${props.className} ` : '';
+  let className = props.className !== undefined ? `${props.className} ` : "";
 
   className =
-    props.sm !== undefined ? (className += `col-sm-${props.sm} `) : className;
-  className =
-    props.md !== undefined ? (className += `col-md-${props.md} `) : className;
+    props.xl !== undefined ? (className += `col-xl-${props.xl} `) : className;
   className =
     props.lg !== undefined ? (className += `col-lg-${props.lg} `) : className;
   className =
-    props.xl !== undefined ? (className += `col-xl-${props.xl} `) : className;
+    props.md !== undefined ? (className += `col-md-${props.md} `) : className;
+  className =
+    props.sm !== undefined ? (className += `col-sm-${props.sm} `) : className;
 
   return <div className={className}>{props.children}</div>;
 };

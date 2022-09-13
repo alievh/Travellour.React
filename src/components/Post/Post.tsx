@@ -20,20 +20,26 @@ const Post: React.FC<{
         </div>
         <div className="owner-info">
           <a href="#">
-            <p>{props.userFirstname} {props.userLastname}</p>
+            {props.userFirstname} {props.userLastname}
           </a>
           <span>{props.createdDate} ago</span>
         </div>
       </div>
       <div className="post-content">
         {props.postContent !== null ? <p>{props.postContent}</p> : ""}
-        {props.postImage !== undefined ? <img src={props.postImage} /> : <img src={props.postImage} className="d-none" />}
+        {props.postImage !== undefined ? (
+          <img src={props.postImage} />
+        ) : (
+          <img src={props.postImage} className="d-none" />
+        )}
         <div className="post-statistics">
           <span>
-            {props.likeCount}<span>Likes</span>
+            {props.likeCount}
+            <span>Likes</span>
           </span>
           <span>
-            {props.commentCount}<span>Comments</span>
+            {props.commentCount}
+            <span>Comments</span>
           </span>
         </div>
         <div className="post-activity">

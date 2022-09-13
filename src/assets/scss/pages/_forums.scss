@@ -3,10 +3,16 @@
 
 .forums {
   width: 100%;
-  padding: 90px 45px 40px 300px;
+  padding: 90px 10px 40px 300px;
+
+  
+  @media screen and (max-width: 720px) {
+    padding-left: 90px;
+  }
+
 
   &.sidebar-notactive {
-    padding-left: 120px;
+    padding-left: 90px;
   }
 
   &-container {
@@ -15,14 +21,28 @@
     background-color: $white;
     border-radius: 5px;
 
+    
+  @media screen and (max-width: 500px) {
+    padding: 12px 12px 32px 12px;
+  }
+
     &__title {
       @include flex(space-between,none);
       width: 100%;
       border-bottom: 1px solid $global-border-color;
       padding: 15px 0;
 
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+      }
+
       h4 {
         color: $black;
+        @media screen and (max-width: 500px) {
+          border-bottom: 1px solid $global-border-color;
+          padding-bottom: 12px;
+          margin-bottom: 12px;
+        }
       }
 
       a {

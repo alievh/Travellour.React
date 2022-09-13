@@ -15,7 +15,7 @@ const SidebarItem: React.FC<{
     <li>
       <Link to={props.url}>
         <i className={props.iconClass}></i>
-        {isSidebarActive && props.innerText}
+        {isSidebarActive && <span>{props.innerText}</span>}
       </Link>
     </li>
   );

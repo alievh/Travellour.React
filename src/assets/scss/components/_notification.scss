@@ -2,16 +2,21 @@
 @import '../abstracts/variables';
 
 .notification {
-  @include flex(none, center);
+  @include flex(space-between, center);
   border-bottom: 1px solid $global-border-color;
   padding-bottom: 12px;
   margin-bottom: 12px;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 
   &__avatar {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     overflow: hidden;
+
 
     img {
       width: 100%;
