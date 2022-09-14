@@ -15,7 +15,7 @@ const ForumDetail = () => {
     <section
       className={`forum-detail ${!sidebarIsActive && "sidebar-notactive"}`}
     >
-      <div className="forums-container">
+      <div className="forum-detail-container">
         <Container>
           <Row>
             <Col xl="12">

@@ -799,6 +799,12 @@ body {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 1100px) {
+  .comment {
+    padding: 15px 5px;
+  }
+}
+
 .comment-user {
   display: flex;
   justify-content: none;
@@ -811,6 +817,19 @@ body {
   border-radius: 50%;
   overflow: hidden;
   margin: 0 10px;
+}
+
+@media screen and (max-width: 1000px) {
+  .comment-user__avatar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .comment-user__avatar {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .comment-user__avatar img {
@@ -827,6 +846,14 @@ body {
 .comment-user__content p {
   margin: 0;
   color: #6f7f92;
+  text-align: left;
+  word-break: break-all;
+}
+
+@media screen and (max-width: 1220px) {
+  .comment-user__content p {
+    font-size: 14px;
+  }
 }
 
 .comment__like .like {
@@ -3406,17 +3433,17 @@ body {
 
 .forum-detail {
   width: 100%;
-  padding: 90px 40px 40px 300px;
+  padding: 90px 10px 40px 300px;
 }
 
 @media screen and (max-width: 720px) {
   .forum-detail {
-    padding-left: 120px;
+    padding-left: 80px;
   }
 }
 
 .forum-detail.sidebar-notactive {
-  padding-left: 120px;
+  padding-left: 70px;
 }
 
 .forum-detail-container {
@@ -3424,6 +3451,12 @@ body {
   padding: 0 32px 32px 32px;
   background-color: #fff;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 1140px) {
+  .forum-detail-container {
+    padding: 0 12px 32px 12px;
+  }
 }
 
 .forum-detail-container__title {
@@ -3458,14 +3491,14 @@ body {
 .forum-detail-container__input button {
   background-color: #4fb5ff;
   color: #fff;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .forum-detail-container__input button:hover {
   background-color: #47a2e5;
   border-color: #47a2e5;
   color: #fff;
-  transition: .3s ease-out;
+  transition: 0.3s ease-out;
 }
 
 .notifications {
