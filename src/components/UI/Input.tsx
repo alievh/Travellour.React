@@ -6,7 +6,8 @@ const Input: React.FC<{
   placeholder: string;
   label?: string;
   mainDivClass?: string;
-}> = (props) => {
+  ref?: any;
+}> = React.forwardRef((props, forRef?: any) => {
   const mainDivClassName = "form-group " + props.mainDivClass;
 
   return (
@@ -17,9 +18,10 @@ const Input: React.FC<{
         className="form-control"
         id={props.id}
         placeholder={props.placeholder}
+        ref={forRef}
       />
     </div>
   );
-};
+});
 
 export default Input;

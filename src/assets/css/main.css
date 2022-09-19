@@ -998,6 +998,13 @@ body {
 
 .sidebar .sidebar-section__main {
   transform: translate3d(0px, 0px, 0px);
+  height: 100vh;
+}
+
+@media screen and (max-height: 670px) {
+  .sidebar .sidebar-section__main {
+    overflow-y: scroll;
+  }
 }
 
 .sidebar .sidebar-section__main .menu-label {
@@ -1059,6 +1066,7 @@ body {
 .sidebar .sidebar-section__menu {
   margin-bottom: 24px;
   border-bottom: 1px solid #f1f1f1;
+  height: 100vh;
 }
 
 .sidebar .sidebar-section__footer {
@@ -1459,6 +1467,7 @@ body {
 
 @media screen and (max-width: 992px) {
   .login-section {
+    height: unset;
     overflow: scroll;
     background-color: #4fb5ff;
   }
@@ -1517,6 +1526,12 @@ body {
   text-align: center;
 }
 
+.login-section .auth-container h4 {
+  color: #6f7f92;
+  border-bottom: 3px solid #f1f1f1;
+  margin-bottom: 14px;
+}
+
 .login-section .auth-container__title {
   margin: 2rem 0;
   display: flex;
@@ -1560,10 +1575,6 @@ body {
   .login-section .auth-container .form-group input::placeholder {
     font-size: 12px;
   }
-}
-
-.login-section .auth-container label {
-  padding: 0 0 2px 0;
 }
 
 .login-section .auth-container button {
@@ -1618,19 +1629,8 @@ body {
 @media screen and (max-width: 992px) {
   .register-section {
     overflow: scroll;
+    height: unset;
     background-color: #4fb5ff;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .register-section p {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .register-section p {
-    display: none;
   }
 }
 
@@ -1648,8 +1648,14 @@ body {
 }
 
 .register-section .auth-container {
-  padding: 2rem 3rem;
+  padding: 1rem 3rem;
   background-color: #fff;
+}
+
+@media screen and (max-width: 992px) {
+  .register-section .auth-container {
+    overflow: scroll;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -1659,43 +1665,45 @@ body {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container {
     padding: 2rem 1rem;
   }
 }
 
-.register-section .auth-container p {
-  text-align: center;
+.register-section .auth-container h4 {
+  color: #6f7f92;
+  border-bottom: 3px solid #f1f1f1;
+  margin-bottom: 14px;
 }
 
 .register-section .auth-container__title {
-  margin: 2rem 0;
   display: flex;
   justify-content: none;
   align-items: center;
   flex-direction: column;
 }
 
-@media screen and (max-width: 448px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container__title {
     margin: 0 1rem;
   }
 }
 
 .register-section .auth-container .form-group input {
-  padding: 0.7rem 2rem;
+  padding: 0.6rem 1.5rem;
   margin-bottom: 14px;
   background-color: #f8f9fa;
   border-color: #ddd;
   border-radius: 0;
+  border-radius: 5px;
 }
 
 .register-section .auth-container .form-group input:focus {
   box-shadow: none;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container .form-group input {
     padding: 0.3rem 1.1rem;
   }
@@ -1705,10 +1713,11 @@ body {
   .register-section .auth-container .form-group input label {
     font-size: 14px;
     padding: 0.4rem 1.4rem;
+    color: #6f7f92;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container .form-group input::placeholder {
     font-size: 12px;
   }
@@ -1721,7 +1730,7 @@ body {
 .register-section .auth-container button {
   width: 100%;
   padding: 0.6rem 0;
-  margin: 2rem 0;
+  margin: 1.2rem 0;
   text-transform: uppercase;
   background-color: #4fb5ff;
   border-color: #4fb5ff;
@@ -1732,7 +1741,7 @@ body {
   border-color: #47a2e5;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container button {
     font-size: 12px;
     padding: 0.3rem 0;
@@ -1749,16 +1758,21 @@ body {
   font-size: 18px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container .login-link a {
     font-size: 12px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .register-section .auth-container .login-link {
     font-size: 12px;
   }
+}
+
+.register-section .auth-container__gender label {
+  margin: 0 8px;
+  color: #6f7f92;
 }
 
 .newsfeed {

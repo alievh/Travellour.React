@@ -1,9 +1,53 @@
+import { useState, useRef } from "react";
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import Col from "../../components/Bootstrap/Col";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/Auth/AuthSlice";
 
 const Login = () => {
+  const userName = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  async function loginHandler(event: React.FormEvent) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const user = {
+      userName: userName.current?.value,
+      password: password.current?.value,
+    };
+
+    const response = await fetch(
+      "https://localhost:7065/api/Authentication/login",
+      {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => {
+      setIsLoading(false);
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    dispatch(login(response));
+    navigate("/newsfeed");
+  }
+
   return (
     <main>
       {/* Login Section - START */}
@@ -18,20 +62,24 @@ const Login = () => {
                   Welcome to Travellour, a platform to connect with the social
                   world
                 </p>
+                {isLoading && <p>Loading...</p>}
+                {error !== null ? <p>{error}</p> : ""}
               </div>
               {/* Login Form - START */}
-              <form className="auth-container__form">
+              <form onSubmit={loginHandler} className="auth-container__form">
                 <Input
                   label="Username"
                   id="username"
                   placeholder="Enter username"
                   type="text"
+                  ref={userName}
                 />
                 <Input
                   label="Password"
                   id="password"
                   placeholder="Enter password"
                   type="password"
+                  ref={password}
                 />
                 <div className="form-check">
                   <input
@@ -51,7 +99,7 @@ const Login = () => {
               </form>
               {/* Login Form - END */}
               <div className="register-link">
-                Don't Have An Account? <a href="/register">Sign Up</a>
+                Don't Have An Account? <Link to="/register">Sign Up</Link>
               </div>
             </div>
           </div>

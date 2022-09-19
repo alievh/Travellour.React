@@ -9,6 +9,8 @@ const Sidebar = () => {
     (state: any) => state.sidebarToggle.isActive
   );
 
+  const userData = useSelector((state: any) => state.AuthReducer.user);
+
   const sideBarToggleHandler = () => {
     sidebarToggleDispatch(sidebarToggleAction.toggleSidebar());
   };
@@ -58,8 +60,10 @@ const Sidebar = () => {
             </div>
             {isSidebarActive && (
               <div className="profile-userinfo">
-                <Link to="/profile">Marvin McKinney</Link>
-                <p>@marvin</p>
+                <Link to="/profile">
+                  {userData.firstname} {userData.lastname}
+                </Link>
+                <p>@{userData.username}</p>
               </div>
             )}
           </div>
@@ -92,16 +96,16 @@ const Sidebar = () => {
                 url="/events"
               />
             </ul>
-          </div>
-          <div className="sidebar-section__forum">
-            {isSidebarActive && <div className="menu-label">Forum</div>}
-            <ul>
-              <SidebarItem
-                innerText="All Forums"
-                iconClass="fa-solid fa-comments"
-                url="/forums"
-              />
-            </ul>
+            <div className="sidebar-section__forum">
+              {isSidebarActive && <div className="menu-label">Forum</div>}
+              <ul>
+                <SidebarItem
+                  innerText="All Forums"
+                  iconClass="fa-solid fa-comments"
+                  url="/forums"
+                />
+              </ul>
+            </div>
           </div>
         </div>
         {/* Sidebar Section Main - END */}
