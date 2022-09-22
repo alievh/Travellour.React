@@ -5,6 +5,7 @@ import Button from "../../components/UI/Button";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Register = () => {
   const firstName = useRef<HTMLInputElement>(null);
@@ -33,7 +34,7 @@ const Register = () => {
     
     setLoading(true);
     const response = await fetch(
-      "https://localhost:7065/api/authentication/register",
+      `${baseUrl}/authenticate/register`,
       {
         method: "POST",
         body: JSON.stringify(user),

@@ -7,10 +7,13 @@ export const UserDataSlice = createSlice({
   },
   reducers: {
     getUserData: (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload;
     },
+    clearUserData: (state) => {
+      state.user = null;
+    }
   }
 });
 
-export const getUserData = UserDataSlice.actions;
+export const { getUserData, clearUserData } = UserDataSlice.actions;
 export default UserDataSlice.reducer;

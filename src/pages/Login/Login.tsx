@@ -5,7 +5,8 @@ import Input from "../../components/UI/Input";
 import Col from "../../components/Bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/Auth/AuthSlice";
+import { getUserData } from "../../store/User/UserData";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -24,16 +25,14 @@ const Login = () => {
       password: password.current?.value,
     };
 
-    const response = await fetch(
-      "https://localhost:7065/api/Authentication/login",
-      {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((res) => {
+    const loggedUser = await fetch(`${baseUrl}/authenticate/login`, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        'Accept': 'application/json, text/plain',
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+    }).then((res) => {
       setIsLoading(false);
       if (res.ok) {
         return res.json();
@@ -44,7 +43,25 @@ const Login = () => {
       }
     });
 
-    dispatch(login(response));
+    localStorage.setItem('user', JSON.stringify(loggedUser.user));
+    setIsLoading(true);
+    const userData = await fetch(`${baseUrl}/user/${JSON.parse(localStorage.getItem('user') || '{}').id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      setIsLoading(false);
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+    dispatch(getUserData(userData));
+
     navigate("/newsfeed");
   }
 

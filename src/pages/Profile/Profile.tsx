@@ -13,6 +13,8 @@ const Profile = () => {
     (state: any) => state.sidebarToggle.isActive
   );
 
+  const userData = useSelector((state: any) => state.UserData.user);
+
   return (
     // Profile Section - START
     <section
@@ -39,10 +41,10 @@ const Profile = () => {
             </div>
             <div className="user__details">
               <div className="user-avatar">
-                <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" alt="User Avatar" />
+                <img src={`https://localhost:7101/img/${userData.profileImage}`} alt="User Avatar" />
               </div>
-              <h5>Marvin McKinney</h5>
-              <span>@marvin</span>
+              <h5>{userData.firstname} {userData.lastname}</h5>
+              <span>@{userData.username}</span>
             </div>
             <div className="user__request">
               <form>

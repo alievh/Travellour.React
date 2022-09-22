@@ -9,11 +9,12 @@ const Sidebar = () => {
     (state: any) => state.sidebarToggle.isActive
   );
 
-  const userData = useSelector((state: any) => state.AuthReducer.user);
+  const userData = useSelector((state: any) => state.UserData.user);
 
   const sideBarToggleHandler = () => {
     sidebarToggleDispatch(sidebarToggleAction.toggleSidebar());
   };
+  
 
   return (
     // Sidebar - START
@@ -53,7 +54,7 @@ const Sidebar = () => {
             <div className="profile-avatar">
               <Link to="/profile">
                 <img
-                  src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
+                  src={`https://localhost:7101/img/${userData.profileImage}`}
                   alt="User Avatar"
                 />
               </Link>

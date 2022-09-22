@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import Button from "../../components/UI/Button";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Button from "../../components/UI/Button";
 import ContainerFluid from "../../components/Bootstrap/ContainerFluid";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
+import { logout } from "../../store/Auth/AuthSlice";
+import { useNavigate } from "react-router-dom";
+import { clearUserData } from "../../store/User/UserData";
 
 const Navbar = () => {
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
+  const userData = useSelector((state: any) => state.UserData.user);
+
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
   const [notificationToggle, setNotificationToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const friendRequestsToggleHandler = () => {
     if (
@@ -67,6 +76,12 @@ const Navbar = () => {
     }
     setProfileToggle(!profileToggle);
   };
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(clearUserData());
+    navigate("/");
+  }
 
   return (
     // Navbar - START
@@ -150,7 +165,7 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662526081-bpthumb.jpg" alt="User Avatar" />
+                      <img src={`https://localhost:7101/img/${userData.profileImage}`} alt="User Avatar" />
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">
@@ -169,9 +184,7 @@ const Navbar = () => {
                               </Link>
                             </li>
                             <li>
-                              <Link to="/" className="nav-logout">
-                                Log Out
-                              </Link>
+                              <Button className="btn nav-logout" innerText="Log Out" type="button" onClick={logoutHandler} />
                             </li>
                           </ul>
                         </div>
