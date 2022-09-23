@@ -43,12 +43,15 @@ const Login = () => {
       }
     });
 
+    console.log(loggedUser.token)
+
     localStorage.setItem('user', JSON.stringify(loggedUser.user));
     setIsLoading(true);
     const userData = await fetch(`${baseUrl}/user/${JSON.parse(localStorage.getItem('user') || '{}').id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${loggedUser.token}`,
       },
     }).then((res) => {
       setIsLoading(false);
