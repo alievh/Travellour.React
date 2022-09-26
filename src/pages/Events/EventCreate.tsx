@@ -1,13 +1,12 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
+import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 
 const EventCreate = () => {
   const sidebarIsActive = useSelector(
@@ -65,8 +64,8 @@ const EventCreate = () => {
           {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
-              <ActiveUsers />
               <FriendRequests />
+              <FriendSuggestions />
               <AddvertisingBanner />
             </section>
           </Col>

@@ -1,12 +1,12 @@
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Post from "../../components/Post/Post";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
+import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 
 const Profile = () => {
   const sidebarIsActive = useSelector(
@@ -21,7 +21,16 @@ const Profile = () => {
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img src={require("../../assets/images/auth-poster.jpg")} alt="Profile Background" />
+        <img
+          src={require("../../assets/images/auth-poster.jpg")}
+          alt="Profile Background"
+        />
+        <form>
+          <label className="backgroundphoto-label">
+            <input type="file" accept="image/*" />
+            <i className="fa-solid fa-camera"></i>
+          </label>
+        </form>
       </div>
       <Container>
         <Row>
@@ -41,10 +50,21 @@ const Profile = () => {
             </div>
             <div className="user__details">
               <div className="user-avatar">
-                <img src={`https://localhost:7101/img/${userData.profileImage}`} alt="User Avatar" />
+                <img
+                  src={`https://localhost:7101/img/${userData.profileImage}`}
+                  alt="User Avatar"
+                />
+                <form>
+                  <label className="profilphoto-label">
+                    <input type="file" accept="image/*" />
+                    <i className="fa-solid fa-camera"></i>
+                  </label>
+                </form>
               </div>
-              <h5>{userData.firstname} {userData.lastname}</h5>
-              <span>@{userData.username}</span>
+              <h5>
+                {userData.firstname} {userData.lastname}
+              </h5>
+              <span>@{userData.userName}</span>
             </div>
             <div className="user__request">
               <form>
@@ -115,8 +135,8 @@ const Profile = () => {
           {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
-              <ActiveUsers />
               <FriendRequests />
+              <FriendSuggestions />
               <AddvertisingBanner />
             </section>
           </Col>

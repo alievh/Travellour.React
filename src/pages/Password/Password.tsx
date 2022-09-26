@@ -1,17 +1,31 @@
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "../../components/Bootstrap/Col";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
+import { logout } from "../../store/Auth/AuthSlice";
+import { clearUserData } from "../../store/User/UserData";
+
 
 const Password = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
   const userData = useSelector((state: any) => state.UserData.user);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(clearUserData());
+    localStorage.removeItem("user")
+    navigate("/");
+  }
 
   return (
     // Password Section - START
@@ -40,9 +54,7 @@ const Password = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/">
-                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                    </Link>
+                    <Button type="button" buttonIcon="fa-solid fa-arrow-right-from-bracket" onClick={logoutHandler} className="btn" />
                   </li>
                 </ul>
               </div>

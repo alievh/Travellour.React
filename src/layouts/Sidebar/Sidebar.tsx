@@ -4,17 +4,17 @@ import { sidebarToggleAction } from "../../store/sidebarToggle";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const sidebarToggleDispatch = useDispatch();
+  const dispatch = useDispatch();
   const isSidebarActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
-  const userData = useSelector((state: any) => state.UserData.user);
-
+  
   const sideBarToggleHandler = () => {
-    sidebarToggleDispatch(sidebarToggleAction.toggleSidebar());
+    dispatch(sidebarToggleAction.toggleSidebar());
   };
   
+  const userData = useSelector((state: any) => state.UserData.user);
 
   return (
     // Sidebar - START
@@ -64,7 +64,7 @@ const Sidebar = () => {
                 <Link to="/profile">
                   {userData.firstname} {userData.lastname}
                 </Link>
-                <p>@{userData.username}</p>
+                <p>@{userData.userName}</p>
               </div>
             )}
           </div>

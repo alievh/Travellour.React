@@ -1,17 +1,97 @@
-import React from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import Post from "../../components/Post/Post";
 import Col from "../../components/Bootstrap/Col";
+import Button from "../../components/UI/Button";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 
 const Newsfeed = () => {
+  const [userPosts, setUserPosts]: any = useState([]);
+  const [fileUpload, setFileUpload] = useState([]);
+  const [postContent, setPostContent] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
+  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
+  console.log(userToken);
+
+  const postContentHandler = (event: any) => {
+    console.log(event.target.value);
+    setPostContent(event.target.value);
+  };
+
+  const fileUploadHandler = (event: any) => {
+    console.log(event.target.files);
+    setFileUpload(event.target.files);
+  };
+
+  const postCreateHandler = async (event: any) => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (let i = 0; i < fileUpload.length; i++) {
+      formData.append("imageFile", fileUpload[i]);
+    }
+
+    const post = {
+      Content: postContent,
+      Images: formData,
+    };
+
+    console.log(post);
+
+    const response = await fetch(`${baseUrl}/post/postcreate`, {
+      method: "POST",
+      body: JSON.stringify(post),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      setLoading(false);
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  };
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const getPosts = useCallback(async () => {
+    const posts = await fetch(`${baseUrl}/post/postgetall`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    }).then((res) => {
+      setLoading(false);
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUserPosts(posts);
+  }, []);
+
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
+
+  console.log(userPosts);
 
   return (
     // Newsfeed Section - START
@@ -20,54 +100,58 @@ const Newsfeed = () => {
         <Row>
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
+              {/* Post Create - START */}
+              <div className="newsfeed-section__post-create">
+                <form onSubmit={postCreateHandler}>
+                  <textarea onChange={postContentHandler}></textarea>
+                  <div className="post-create__bottom">
+                    <label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={fileUploadHandler}
+                      />
+                      <i className="fa-solid fa-image"></i>
+                      Upload Photo
+                    </label>
+                    <Button type="submit" className="btn" innerText="Share" />
+                  </div>
+                </form>
+              </div>
+              {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
-                <Post
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
+                {userPosts.map((p: any) => (
+                  p.images.length > 0 ? 
+                  <Post
+                    userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                    userFirstname={p.user.firstname}
+                    userLastname={p.user.lastname}
+                    createdDate="6 hours"
+                    postContent={p.content}
+                    postImage={require("../../assets/images/auth-poster.jpg")}
+                    likeCount={p.likes.length}
+                    commentCount={p.comments.length}
+                  /> : 
+                  <Post
+                    userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                    userFirstname={p.user.firstname}
+                    userLastname={p.user.lastname}
+                    createdDate="6 hours"
+                    postContent={p.content}
+                    likeCount={p.likes.length}
+                    commentCount={p.comments.length}
+                  />
+                ))}
               </div>
               {/* Newsfeed Posts - END */}
             </section>
           </Col>
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
-              <ActiveUsers />
               <FriendRequests />
+              <FriendSuggestions />
               <AddvertisingBanner />
             </section>
           </Col>

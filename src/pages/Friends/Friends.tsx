@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Col from "../../components/Bootstrap/Col";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
+import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
 
@@ -85,8 +85,8 @@ const Friends = () => {
           {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
-              <ActiveUsers />
               <FriendRequests />
+              <FriendSuggestions />
               <AddvertisingBanner />
             </section>
           </Col>

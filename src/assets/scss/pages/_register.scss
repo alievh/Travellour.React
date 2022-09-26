@@ -7,7 +7,6 @@
   display: flex;
 
   @media screen and (max-width: 992px) {
-    overflow: scroll;
     height: unset;
     background-color: $primary;
   }
@@ -26,11 +25,6 @@
   .auth-container {
     padding: 1rem 3rem;
     background-color: $white;
-
-
-    @media screen and (max-width: 992px) {
-      overflow: scroll;
-    }
 
     @media screen and (max-width: 992px) {
       padding: 2rem 4rem;
@@ -73,8 +67,18 @@
           padding: 0.3rem 1.1rem;
         }
 
+        @media screen and (max-height: 720px) {
+          padding: 0.3rem 1.1rem;
+        }
+
         label {
           @media screen and (max-width: 992px) {
+            font-size: 14px;
+            padding: 0.4rem 1.4rem;
+            color: $global-font-color;
+          }
+
+          @media screen and (max-height: 720px) {
             font-size: 14px;
             padding: 0.4rem 1.4rem;
             color: $global-font-color;
@@ -83,6 +87,10 @@
 
         &::placeholder {
           @media screen and (max-width: 520px) {
+            font-size: 12px;
+          }
+
+          @media screen and (max-height: 720px) {
             font-size: 12px;
           }
         }
@@ -107,6 +115,11 @@
       }
 
       @media screen and (max-width: 520px) {
+        font-size: 12px;
+        padding: 0.3rem 0;
+      }
+
+      @media screen and (max-height: 720px) {
         font-size: 12px;
         padding: 0.3rem 0;
       }

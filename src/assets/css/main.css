@@ -23,7 +23,7 @@ body {
   object-fit: cover;
 }
 
-.active-users {
+.friend-suggestions {
   margin: 32px 0;
   background-color: #fff;
   padding: 32px;
@@ -31,29 +31,29 @@ body {
 }
 
 @media screen and (max-width: 390px) {
-  .active-users {
+  .friend-suggestions {
     padding: 16px;
   }
 }
 
-.active-users h5 {
+.friend-suggestions h5 {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #f1f1f1;
 }
 
-.active-users ul {
+.friend-suggestions ul {
   padding: 0;
 }
 
-.active-user {
+.friend-suggestion {
   display: flex;
   justify-content: none;
   align-items: none;
   margin: 20px 0;
 }
 
-.active-user .user-avatar {
+.friend-suggestion .user-avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -62,35 +62,35 @@ body {
 }
 
 @media screen and (max-width: 390px) {
-  .active-user .user-avatar {
+  .friend-suggestion .user-avatar {
     width: 40px;
     height: 40px;
   }
 }
 
-.active-user .user-avatar img {
+.friend-suggestion .user-avatar img {
   width: 100%;
 }
 
-.active-user .user-details {
+.friend-suggestion .user-details {
   display: flex;
   justify-content: center;
   align-items: none;
   flex-direction: column;
 }
 
-.active-user .user-details a {
+.friend-suggestion .user-details a {
   text-decoration: none;
   color: #000;
 }
 
 @media screen and (max-width: 390px) {
-  .active-user .user-details a {
+  .friend-suggestion .user-details a {
     font-size: 11px;
   }
 }
 
-.active-user .user-details span {
+.friend-suggestion .user-details span {
   font-size: 14px;
   color: #6f7f92;
 }
@@ -1469,12 +1469,12 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 992px) {
   .login-section {
-    height: unset;
-    overflow: scroll;
     background-color: #4fb5ff;
   }
 }
@@ -1597,10 +1597,11 @@ body {
   border-color: #47a2e5;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .login-section .auth-container button {
     font-size: 12px;
     padding: 0.3rem 0;
+    margin: 5px 0;
   }
 }
 
@@ -1634,7 +1635,6 @@ body {
 
 @media screen and (max-width: 992px) {
   .register-section {
-    overflow: scroll;
     height: unset;
     background-color: #4fb5ff;
   }
@@ -1656,12 +1656,6 @@ body {
 .register-section .auth-container {
   padding: 1rem 3rem;
   background-color: #fff;
-}
-
-@media screen and (max-width: 992px) {
-  .register-section .auth-container {
-    overflow: scroll;
-  }
 }
 
 @media screen and (max-width: 992px) {
@@ -1715,6 +1709,12 @@ body {
   }
 }
 
+@media screen and (max-height: 720px) {
+  .register-section .auth-container .form-group input {
+    padding: 0.3rem 1.1rem;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .register-section .auth-container .form-group input label {
     font-size: 14px;
@@ -1723,7 +1723,21 @@ body {
   }
 }
 
+@media screen and (max-height: 720px) {
+  .register-section .auth-container .form-group input label {
+    font-size: 14px;
+    padding: 0.4rem 1.4rem;
+    color: #6f7f92;
+  }
+}
+
 @media screen and (max-width: 520px) {
+  .register-section .auth-container .form-group input::placeholder {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-height: 720px) {
   .register-section .auth-container .form-group input::placeholder {
     font-size: 12px;
   }
@@ -1748,6 +1762,13 @@ body {
 }
 
 @media screen and (max-width: 520px) {
+  .register-section .auth-container button {
+    font-size: 12px;
+    padding: 0.3rem 0;
+  }
+}
+
+@media screen and (max-height: 720px) {
   .register-section .auth-container button {
     font-size: 12px;
     padding: 0.3rem 0;
@@ -1797,6 +1818,68 @@ body {
   padding-left: 80px;
 }
 
+.newsfeed-section__post-create {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 24px 24px 10px 24px;
+  margin: 32px 0;
+}
+
+.newsfeed-section__post-create form textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #6f7f92;
+  resize: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+.newsfeed-section__post-create form textarea:focus-visible {
+  outline: none;
+}
+
+.newsfeed-section__post-create form textarea:focus {
+  border: 1px solid #f1f1f1;
+}
+
+.newsfeed-section__post-create form .post-create__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newsfeed-section__post-create form .post-create__bottom label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 5px;
+}
+
+.newsfeed-section__post-create form .post-create__bottom label i {
+  margin-right: 8px;
+  font-size: 18px;
+  color: #4fb5ff;
+}
+
+.newsfeed-section__post-create form .post-create__bottom label input {
+  display: none;
+}
+
+.newsfeed-section__post-create form .post-create__bottom button {
+  background-color: #4fb5ff;
+  border-color: #4fb5ff;
+  color: #fff;
+}
+
+.newsfeed-section__post-create form .post-create__bottom button:hover {
+  background-color: #47a2e5;
+  border-color: #47a2e5;
+}
+
 .profile-section {
   width: 100%;
   padding-left: 265px;
@@ -1814,8 +1897,46 @@ body {
 }
 
 .profile-section__background {
+  position: relative;
   width: 100%;
   height: 500px;
+}
+
+.profile-section__background form {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.profile-section__background form .backgroundphoto-label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 5px;
+  transition: 0.5s ease-in;
+}
+
+.profile-section__background form .backgroundphoto-label:hover {
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.profile-section__background form .backgroundphoto-label:hover i {
+  color: #fff;
+}
+
+.profile-section__background form .backgroundphoto-label i {
+  margin-right: 8px;
+  font-size: 18px;
+  margin-right: 0;
+  color: #4fb5ff;
+}
+
+.profile-section__background form .backgroundphoto-label input {
+  display: none;
 }
 
 @media screen and (max-width: 720px) {
@@ -1949,7 +2070,9 @@ body {
 
 .profile-section .user .user-avatar img {
   width: 100%;
+  height: 100%;
   border-radius: 5px;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 1032px) {
@@ -1959,6 +2082,46 @@ body {
     width: 120px;
     height: 120px;
   }
+}
+
+.profile-section .user .user-avatar form {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+.profile-section .user .user-avatar form .profilphoto-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 50%;
+  transition: 0.5s ease-in;
+}
+
+.profile-section .user .user-avatar form .profilphoto-label:hover {
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.profile-section .user .user-avatar form .profilphoto-label:hover i {
+  color: #fff;
+}
+
+.profile-section .user .user-avatar form .profilphoto-label i {
+  margin-right: 8px;
+  font-size: 18px;
+  margin-right: 0;
+  color: #4fb5ff;
+}
+
+.profile-section .user .user-avatar form .profilphoto-label input {
+  display: none;
 }
 
 .friends {
@@ -2239,6 +2402,35 @@ body {
   transition: 0.3s ease-out;
 }
 
+.setting-section__user .user-logout ul li button {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  color: #6f7f92;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+@media screen and (max-width: 860px) {
+  .setting-section__user .user-logout ul li button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.setting-section__user .user-logout ul li button:hover {
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: 0.3s ease-out;
+  border-color: #4fb5ff;
+}
+
 .setting-section__personal-info {
   width: 100%;
   background-color: #fff;
@@ -2390,6 +2582,35 @@ body {
 .password-section__user .user-logout ul li a:hover {
   background-color: #4fb5ff;
   color: #fff;
+}
+
+.password-section__user .user-logout ul li button {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  color: #6f7f92;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+@media screen and (max-width: 860px) {
+  .password-section__user .user-logout ul li button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.password-section__user .user-logout ul li button:hover {
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: 0.3s ease-out;
+  border-color: #4fb5ff;
 }
 
 .password-section__user-input {

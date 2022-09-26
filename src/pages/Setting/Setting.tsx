@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
 import Container from "../../components/Bootstrap/Container";
@@ -7,19 +7,26 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { useRef, useState } from "react";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { logout } from "../../store/Auth/AuthSlice";
+import { clearUserData } from "../../store/User/UserData";
 
 const Setting = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const firstName = useRef<HTMLInputElement>(null);
   const lastName = useRef<HTMLInputElement>(null);
   const userName = useRef<HTMLInputElement>(null);
 
-  const [errorMessage, setErrorMessage] = useState();
+  const [error, setError] = useState();
 
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
   const userData = useSelector((state: any) => state.UserData.user);
+
+  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
 
   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,8 +37,6 @@ const Setting = () => {
       userName: userName.current?.value
     }
 
-    console.log(changeInformation)
-
     const response = await fetch(
       `${baseUrl}/user/userupdate`,
       {
@@ -39,6 +44,7 @@ const Setting = () => {
         body: JSON.stringify(changeInformation),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${userToken}`,
         },
       }
     ).then((res) => {
@@ -46,10 +52,17 @@ const Setting = () => {
         return res.json();
       } else {
         return res.json().then((data) => {
-          setErrorMessage(data.error.message.toString());
+          setError(data.error.message.toString());
         });
       }
     });
+  }
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(clearUserData());
+    localStorage.removeItem("user")
+    navigate("/");
   }
 
   return (
@@ -84,9 +97,7 @@ const Setting = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/">
-                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                    </Link>
+                    <Button type="button" buttonIcon="fa-solid fa-arrow-right-from-bracket" onClick={logoutHandler} className="btn" />
                   </li>
                 </ul>
               </div>

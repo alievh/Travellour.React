@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { login } from "../../store/Auth/AuthSlice";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -29,8 +30,8 @@ const Login = () => {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
-        'Accept': 'application/json, text/plain',
-        'Content-Type': 'application/json;charset=UTF-8',
+        "Accept": "application/json, text/plain",
+        "Content-Type": "application/json;charset=UTF-8",
       },
     }).then((res) => {
       setIsLoading(false);
@@ -43,18 +44,23 @@ const Login = () => {
       }
     });
 
-    console.log(loggedUser.token)
+    dispatch(login(loggedUser));
 
-    localStorage.setItem('user', JSON.stringify(loggedUser.user));
+    localStorage.setItem("user", JSON.stringify(loggedUser.user));
     setIsLoading(true);
-    const userData = await fetch(`${baseUrl}/user/${JSON.parse(localStorage.getItem('user') || '{}').id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${loggedUser.token}`,
-      },
-    }).then((res) => {
-      setIsLoading(false);
+
+    const userData = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${loggedUser.token}`,
+        },
+      }
+    ).then((res) => {
       if (res.ok) {
         return res.json();
       } else {

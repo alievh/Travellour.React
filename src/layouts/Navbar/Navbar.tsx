@@ -80,6 +80,7 @@ const Navbar = () => {
   const logoutHandler = () => {
     dispatch(logout());
     dispatch(clearUserData());
+    localStorage.removeItem("user")
     navigate("/");
   }
 

@@ -12,4 +12,69 @@
   &.sidebar-notactive {
     padding-left: 80px;
   }
+
+  &-section {
+    &__post-create {
+      background-color: $white;
+      border-radius: 5px;
+      padding: 24px 24px 10px 24px;
+      margin: 32px 0;
+
+      form {
+
+        textarea {
+          width: 100%;
+          height: 100px;
+          border: 1px solid $global-font-color;
+          resize: none;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          padding: 5px 10px;
+
+          &:focus-visible {
+            outline: none;
+          }
+
+          &:focus {
+            border: 1px solid $global-border-color;
+          }
+        }
+
+        .post-create__bottom {
+          @include flex(space-between, center);
+
+          label {
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #eaeff8;
+            border-color: #eaeff8;
+            color: $primary;
+            border-radius: 5px;
+
+            i {
+              margin-right: 8px;
+              font-size: 18px;
+              color: $primary;
+            }
+
+            input {
+              display: none;
+            }
+          }
+
+          button {
+            background-color: $primary;
+            border-color: $primary;
+            color: $white;
+
+            &:hover {
+              background-color: $primary-dark;
+              border-color: $primary-dark;
+            }
+          }
+        }
+      }
+    }
+  }
 }
