@@ -7,14 +7,12 @@ const FriendSuggestions = () => {
   const [friendSuggestion, setFriendSuggestion] = useState([]);
   const [error, setError] = useState();
 
-  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
-
   const friendSuggestions = useCallback(async () => {
     const suggestions = await fetch(`${baseUrl}/user/friendsuggestion`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
       },
     }).then((res) => {
       if (res.ok) {
@@ -33,14 +31,12 @@ const FriendSuggestions = () => {
     friendSuggestions();
   }, [friendSuggestions]);
 
-  console.log(friendSuggestion);
-
   return (
     <div className="friend-suggestions">
       <h5>Friend Suggestions</h5>
       <div>
         <ul>
-          {friendSuggestion.map((f : any) => (
+          {friendSuggestion.map((f: any) => (
             <FriendSuggestion
               userUrl={`https://localhost:7101/img/${f.profileImage.imageUrl}`}
               userFirstName={f.firstname}

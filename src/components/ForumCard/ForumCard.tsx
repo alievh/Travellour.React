@@ -1,5 +1,4 @@
 import React from "react";
-import Col from "../Bootstrap/Col";
 import ForumUser from "../ForumUser/ForumUser";
 import { Link } from "react-router-dom";
 

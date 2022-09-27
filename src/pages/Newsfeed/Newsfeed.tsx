@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Container from "../../components/Bootstrap/Container";
@@ -12,43 +12,32 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 
 const Newsfeed = () => {
   const [userPosts, setUserPosts]: any = useState([]);
-  const [fileUpload, setFileUpload] = useState([]);
-  const [postContent, setPostContent] = useState();
+  const [fileUpload, setFileUpload] = useState("");
+  const [postContent, setPostContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
-  console.log(userToken);
-
   const postContentHandler = (event: any) => {
-    console.log(event.target.value);
     setPostContent(event.target.value);
   };
 
   const fileUploadHandler = (event: any) => {
-    console.log(event.target.files);
     setFileUpload(event.target.files);
   };
 
   const postCreateHandler = async (event: any) => {
     event.preventDefault();
+    console.log(fileUpload);
     const formData = new FormData();
-    for (let i = 0; i < fileUpload.length; i++) {
-      formData.append("imageFile", fileUpload[i]);
-    }
-
-    const post = {
-      Content: postContent,
-      Images: formData,
-    };
-
-    console.log(post);
+    formData.append("imagefiles", fileUpload);
+    formData.append("content", postContent);
 
     const response = await fetch(`${baseUrl}/post/postcreate`, {
       method: "POST",
-      body: JSON.stringify(post),
+      body: formData,
       headers: {
-        "Content-Type": "application/json",
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+        'Accept': '*/*',
       },
     }).then((res) => {
       setLoading(false);
@@ -71,7 +60,7 @@ const Newsfeed = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
       },
     }).then((res) => {
       setLoading(false);

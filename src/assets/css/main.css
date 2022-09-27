@@ -23,6 +23,81 @@ body {
   object-fit: cover;
 }
 
+.friend-suggestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.friend-suggestion .friend-information {
+  display: flex;
+  justify-content: none;
+  align-items: none;
+}
+
+.friend-suggestion .friend-information .user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 18px;
+}
+
+@media screen and (max-width: 390px) {
+  .friend-suggestion .friend-information .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.friend-suggestion .friend-information .user-avatar img {
+  width: 100%;
+}
+
+.friend-suggestion .friend-information .user-details {
+  display: flex;
+  justify-content: center;
+  align-items: none;
+  flex-direction: column;
+}
+
+.friend-suggestion .friend-information .user-details a {
+  text-decoration: none;
+  color: #000;
+}
+
+@media screen and (max-width: 390px) {
+  .friend-suggestion .friend-information .user-details a {
+    font-size: 11px;
+  }
+}
+
+.friend-suggestion .friend-information .user-details span {
+  font-size: 14px;
+  color: #6f7f92;
+}
+
+.friend-suggestion .friend-add button {
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  transition: 0.3s ease-in;
+}
+
+.friend-suggestion .friend-add button:hover {
+  background-color: #4fb5ff;
+  border-color: #4fb5ff;
+  transition: 0.3s ease-out;
+}
+
+.friend-suggestion .friend-add button:hover i {
+  color: #eaeff8;
+}
+
+.friend-suggestion .friend-add button i {
+  color: #4fb5ff;
+}
+
 .friend-suggestions {
   margin: 32px 0;
   background-color: #fff;
@@ -44,55 +119,6 @@ body {
 
 .friend-suggestions ul {
   padding: 0;
-}
-
-.friend-suggestion {
-  display: flex;
-  justify-content: none;
-  align-items: none;
-  margin: 20px 0;
-}
-
-.friend-suggestion .user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 18px;
-}
-
-@media screen and (max-width: 390px) {
-  .friend-suggestion .user-avatar {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-.friend-suggestion .user-avatar img {
-  width: 100%;
-}
-
-.friend-suggestion .user-details {
-  display: flex;
-  justify-content: center;
-  align-items: none;
-  flex-direction: column;
-}
-
-.friend-suggestion .user-details a {
-  text-decoration: none;
-  color: #000;
-}
-
-@media screen and (max-width: 390px) {
-  .friend-suggestion .user-details a {
-    font-size: 11px;
-  }
-}
-
-.friend-suggestion .user-details span {
-  font-size: 14px;
-  color: #6f7f92;
 }
 
 .friend-requests {
@@ -1552,6 +1578,15 @@ body {
   }
 }
 
+.login-section .auth-container__title .loading {
+  width: 100%;
+  padding: 5px 30px;
+  margin-bottom: 0;
+  background-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 5px;
+}
+
 .login-section .auth-container .form-group input {
   padding: 0.7rem 2rem;
   margin-bottom: 14px;
@@ -1688,6 +1723,15 @@ body {
   .register-section .auth-container__title {
     margin: 0 1rem;
   }
+}
+
+.register-section .auth-container__title .loading {
+  width: 100%;
+  padding: 5px 30px;
+  margin-bottom: 0;
+  background-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 5px;
 }
 
 .register-section .auth-container .form-group input {

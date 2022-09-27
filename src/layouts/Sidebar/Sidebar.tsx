@@ -1,21 +1,59 @@
+import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SidebarItem from "../../components/UI/SidebarItem";
 import { sidebarToggleAction } from "../../store/sidebarToggle";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Sidebar = () => {
+  const [error, setError] = useState();
+  const [ user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    userName: "",
+    profileImage: ""
+  });
   const dispatch = useDispatch();
+
   const isSidebarActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+  
+  const userData = useCallback( async () => {
+    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id)
+    const userInformation = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUser(userInformation);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
 
   
   const sideBarToggleHandler = () => {
     dispatch(sidebarToggleAction.toggleSidebar());
   };
   
-  const userData = useSelector((state: any) => state.UserData.user);
-
   return (
     // Sidebar - START
     <aside className="sidebar">
@@ -54,7 +92,7 @@ const Sidebar = () => {
             <div className="profile-avatar">
               <Link to="/profile">
                 <img
-                  src={`https://localhost:7101/img/${userData.profileImage}`}
+                  src={`https://localhost:7101/img/${user.profileImage}`}
                   alt="User Avatar"
                 />
               </Link>
@@ -62,9 +100,9 @@ const Sidebar = () => {
             {isSidebarActive && (
               <div className="profile-userinfo">
                 <Link to="/profile">
-                  {userData.firstname} {userData.lastname}
+                  {user.firstname} {user.lastname}
                 </Link>
-                <p>@{userData.userName}</p>
+                <p>@{user.userName}</p>
               </div>
             )}
           </div>

@@ -67,7 +67,7 @@ const Register = () => {
             <div className="auth-container">
               <div className="auth-container__title">
                 <h4>Travellour</h4>
-                {loading && <p>Loading...</p>}
+                {loading && <p className="loading">Loading...</p>}
                 {errorMessage !== null ? <p>{errorMessage}</p> : ""}
               </div>
               {/* Register Form - START */}

@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Col from "../../components/Bootstrap/Col";
 import Container from "../../components/Bootstrap/Container";
@@ -8,24 +8,61 @@ import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import { logout } from "../../store/Auth/AuthSlice";
 import { clearUserData } from "../../store/User/UserData";
-
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Password = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    userName: "",
+    profileImage: "",
+  });
 
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
-  const userData = useSelector((state: any) => state.UserData.user);
+  const userData = useCallback(async () => {
+    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
+    const userInformation = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUser(userInformation);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
     dispatch(clearUserData());
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     navigate("/");
-  }
+  };
 
   return (
     // Password Section - START
@@ -39,10 +76,15 @@ const Password = () => {
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
-                  <img src={`https://localhost:7101/img/${userData.profileImage}`} alt="User Avatar" />
+                  <img
+                    src={`https://localhost:7101/img/${user.profileImage}`}
+                    alt="User Avatar"
+                  />
                 </div>
                 <div className="user-fullname">
-                  <h5>{userData.firstname} {userData.lastname}</h5>
+                  <h5>
+                    {user.firstname} {user.lastname}
+                  </h5>
                   <span>Member since 2022</span>
                 </div>
               </div>
@@ -54,7 +96,12 @@ const Password = () => {
                     </Link>
                   </li>
                   <li>
-                    <Button type="button" buttonIcon="fa-solid fa-arrow-right-from-bracket" onClick={logoutHandler} className="btn" />
+                    <Button
+                      type="button"
+                      buttonIcon="fa-solid fa-arrow-right-from-bracket"
+                      onClick={logoutHandler}
+                      className="btn"
+                    />
                   </li>
                 </ul>
               </div>

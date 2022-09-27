@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
@@ -13,6 +14,13 @@ import { clearUserData } from "../../store/User/UserData";
 const Setting = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    userName: "",
+    profileImage: "",
+  });
+
 
   const firstName = useRef<HTMLInputElement>(null);
   const lastName = useRef<HTMLInputElement>(null);
@@ -23,10 +31,6 @@ const Setting = () => {
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
-
-  const userData = useSelector((state: any) => state.UserData.user);
-
-  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
 
   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -44,7 +48,7 @@ const Setting = () => {
         body: JSON.stringify(changeInformation),
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${userToken}`,
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
         },
       }
     ).then((res) => {
@@ -57,6 +61,38 @@ const Setting = () => {
       }
     });
   }
+
+  const userData = useCallback(async () => {
+    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
+    const userInformation = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUser(userInformation);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -78,13 +114,13 @@ const Setting = () => {
               <div className="user-info">
                 <div className="user-avatar">
                   <img
-                    src={`https://localhost:7101/img/${userData.profileImage}`}
+                    src={`https://localhost:7101/img/${user.profileImage}`}
                     alt="User Avatar"
                   />
                 </div>
                 <div className="user-fullname">
                   <h5>
-                    {userData.firstname} {userData.lastname}
+                    {user.firstname} {user.lastname}
                   </h5>
                   <span>Member since 2022</span>
                 </div>

@@ -1,4 +1,5 @@
 import Button from "../../components/UI/Button";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -7,13 +8,113 @@ import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const [error, setError] = useState();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    userName: "",
+    profileImage: "",
+    coverImage: "",
+  });
+  const navigate = useNavigate();
+
+  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
+
+  const profilePhotoHandler = (event: any) => {
+    profilePhotoChangeHandler(event.target.files[0]);
+  };
+
+  const coverPhotoHandler = (event: any) => {
+    coverPhotoChangeHandler(event.target.files[0]);
+  };
+
+  const userData = useCallback(async () => {
+    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
+    const userInformation = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUser(userInformation);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
+
+  const profilePhotoChangeHandler = async (photo: any) => {
+    const formData = new FormData();
+    formData.append("imagefile", photo);
+
+    const response = await fetch(`${baseUrl}/user/changeprofilephoto`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        Accept: "*/*",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data?.error?.message?.toString());
+        });
+      }
+    });
+
+    navigate("/profile");
+  };
+
+  const coverPhotoChangeHandler = async (photo: any) => {
+    const formData = new FormData();
+    formData.append("imagefile", photo);
+
+    const response = await fetch(`${baseUrl}/user/changecoverphoto`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        Accept: "*/*",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data?.error?.message?.toString());
+        });
+      }
+    });
+
+    navigate("/profile");
+  };
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
-
-  const userData = useSelector((state: any) => state.UserData.user);
 
   return (
     // Profile Section - START
@@ -22,12 +123,17 @@ const Profile = () => {
     >
       <div className="profile-section__background">
         <img
-          src={require("../../assets/images/auth-poster.jpg")}
+          src={`https://localhost:7101/img/${user.coverImage}`}
           alt="Profile Background"
         />
         <form>
           <label className="backgroundphoto-label">
-            <input type="file" accept="image/*" />
+            <input
+              type="file"
+              accept="image/*"
+              name="imagefile"
+              onChange={coverPhotoHandler}
+            />
             <i className="fa-solid fa-camera"></i>
           </label>
         </form>
@@ -51,20 +157,25 @@ const Profile = () => {
             <div className="user__details">
               <div className="user-avatar">
                 <img
-                  src={`https://localhost:7101/img/${userData.profileImage}`}
+                  src={`https://localhost:7101/img/${user.profileImage}`}
                   alt="User Avatar"
                 />
                 <form>
                   <label className="profilphoto-label">
-                    <input type="file" accept="image/*" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="imagefile"
+                      onChange={profilePhotoHandler}
+                    />
                     <i className="fa-solid fa-camera"></i>
                   </label>
                 </form>
               </div>
               <h5>
-                {userData.firstname} {userData.lastname}
+                {user.firstname} {user.lastname}
               </h5>
-              <span>@{userData.userName}</span>
+              <span>@{user.userName}</span>
             </div>
             <div className="user__request">
               <form>

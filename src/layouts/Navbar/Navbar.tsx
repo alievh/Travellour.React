@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,13 +9,20 @@ import Col from "../../components/Bootstrap/Col";
 import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { clearUserData } from "../../store/User/UserData";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Navbar = () => {
+  const [ error, setError ] = useState();
+  const [ user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    userName: "",
+    profileImage: ""
+  });
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
-
-  const userData = useSelector((state: any) => state.UserData.user);
 
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
@@ -76,6 +83,35 @@ const Navbar = () => {
     }
     setProfileToggle(!profileToggle);
   };
+
+  const userData = useCallback( async () => {
+    const userInformation = await fetch(
+      `${baseUrl}/user/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setUser(userInformation);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -166,7 +202,7 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      <img src={`https://localhost:7101/img/${userData.profileImage}`} alt="User Avatar" />
+                      <img src={`https://localhost:7101/img/${user.profileImage}`} alt="User Avatar" />
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">

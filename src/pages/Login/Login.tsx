@@ -46,12 +46,12 @@ const Login = () => {
 
     dispatch(login(loggedUser));
 
-    localStorage.setItem("user", JSON.stringify(loggedUser.user));
+    localStorage.setItem("user", JSON.stringify(loggedUser));
     setIsLoading(true);
 
     const userData = await fetch(
       `${baseUrl}/user/${
-        JSON.parse(localStorage.getItem("user") || "{}").id
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
       }`,
       {
         method: "GET",
@@ -88,7 +88,7 @@ const Login = () => {
                   Welcome to Travellour, a platform to connect with the social
                   world
                 </p>
-                {isLoading && <p>Loading...</p>}
+                {isLoading && <p className="loading">Please wait...</p>}
                 {error !== null ? <p>{error}</p> : ""}
               </div>
               {/* Login Form - START */}
