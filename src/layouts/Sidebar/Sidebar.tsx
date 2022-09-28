@@ -20,7 +20,6 @@ const Sidebar = () => {
   );
   
   const userData = useCallback( async () => {
-    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id)
     const userInformation = await fetch(
       `${baseUrl}/user/${
         JSON.parse(localStorage.getItem("user") || "{}").user.id

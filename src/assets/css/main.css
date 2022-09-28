@@ -562,13 +562,19 @@ body {
   margin: 32px 0;
 }
 
-.post .post-owner {
+.post .post-owner-information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post .post-owner-information .post-owner {
   display: flex;
   justify-content: none;
   align-items: none;
 }
 
-.post .post-owner .owner-image {
+.post .post-owner-information .post-owner .owner-image {
   width: 60px;
   height: 60px;
   margin-right: 8px;
@@ -577,23 +583,23 @@ body {
 }
 
 @media screen and (max-width: 720px) {
-  .post .post-owner .owner-image {
+  .post .post-owner-information .post-owner .owner-image {
     margin-right: 0;
   }
 }
 
 @media screen and (max-width: 390px) {
-  .post .post-owner .owner-image {
+  .post .post-owner-information .post-owner .owner-image {
     width: 40px;
     height: 40px;
   }
 }
 
-.post .post-owner .owner-image img {
+.post .post-owner-information .post-owner .owner-image img {
   width: 100%;
 }
 
-.post .owner-info {
+.post .post-owner-information .post-owner .owner-info {
   display: flex;
   justify-content: center;
   align-items: none;
@@ -601,25 +607,38 @@ body {
   padding: 0 12px;
 }
 
-.post .owner-info a {
+.post .post-owner-information .post-owner .owner-info a {
   text-decoration: none;
   color: #000;
 }
 
 @media screen and (max-width: 390px) {
-  .post .owner-info a {
+  .post .post-owner-information .post-owner .owner-info a {
     font-size: 14px;
   }
 }
 
 @media screen and (max-width: 350px) {
-  .post .owner-info a {
+  .post .post-owner-information .post-owner .owner-info a {
     font-size: 12px;
   }
 }
 
-.post .owner-info span {
+.post .post-owner-information .post-owner .owner-info span {
   font-size: 12px;
+}
+
+.post .post-owner-information .post-delete button {
+  background: rgba(241, 70, 70, 0.0862745);
+  border-color: rgba(241, 70, 70, 0.0862745);
+  color: #f14646;
+  transition: .3s ease-in;
+}
+
+.post .post-owner-information .post-delete button:hover {
+  transition: .3s ease-out;
+  background-color: #f14646;
+  color: #fff;
 }
 
 .post .post-content {
@@ -976,7 +995,7 @@ body {
   padding: 16px 0 24px 0;
   border-bottom: 1px solid #f1f1f1;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: none;
   margin-bottom: 24px;
 }

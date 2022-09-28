@@ -6,52 +6,71 @@
   padding: 24px 24px 10px 24px;
   margin: 32px 0;
 
-  .post-owner {
-    @include flex(none, none);
+  .post-owner-information {
+    @include flex(space-between, center);
 
-    .owner-image {
-      width: 60px;
-      height: 60px;
-      margin-right: 8px;
-      border-radius: 50%;
-      overflow: hidden;
-
-      @media screen and (max-width: 720px) {
-        margin-right: 0;
+    .post-owner {
+      @include flex(none, none);
+  
+      .owner-image {
+        width: 60px;
+        height: 60px;
+        margin-right: 8px;
+        border-radius: 50%;
+        overflow: hidden;
+  
+        @media screen and (max-width: 720px) {
+          margin-right: 0;
+        }
+  
+        @media screen and (max-width: 390px) {
+          width: 40px;
+          height: 40px;
+        }
+  
+        img {
+          width: 100%;
+        }
       }
-
-      @media screen and (max-width: 390px) {
-        width: 40px;
-        height: 40px;
-      }
-
-      img {
-        width: 100%;
+  
+      .owner-info {
+        @include flex(center, none);
+        flex-direction: column;
+        padding: 0 12px;
+  
+        a {
+          text-decoration: none;
+          color: $black;
+  
+          @media screen and (max-width: 390px) {
+            font-size: 14px;
+          }
+  
+          @media screen and (max-width: 350px) {
+            font-size: 12px;
+          }
+        }
+  
+        span {
+          font-size: 12px;
+        }
       }
     }
-  }
 
-  .owner-info {
-    @include flex(center, none);
-    flex-direction: column;
-    padding: 0 12px;
+    .post-delete {
 
-    a {
-      text-decoration: none;
-      color: $black;
+      button {
+        background: rgba(241, 70, 70, 0.0862745);
+        border-color: rgba(241, 70, 70, 0.0862745);
+        color: #f14646;
+        transition: .3s ease-in;
 
-      @media screen and (max-width: 390px) {
-        font-size: 14px;
+        &:hover {
+          transition: .3s ease-out;
+          background-color: #f14646;
+          color: $white;
+        }
       }
-
-      
-      @media screen and (max-width: 350px) {
-        font-size: 12px;
-      }
-    }
-
-    span {
-      font-size: 12px;
     }
   }
 
@@ -60,7 +79,6 @@
     margin: 18px 0;
 
     p {
-
       @media screen and (max-width: 390px) {
         font-size: 14px;
       }

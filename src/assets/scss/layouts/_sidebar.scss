@@ -75,7 +75,7 @@
     &__profile {
       padding: 16px 0 24px 0;
       border-bottom: 1px solid $global-border-color;
-      @include flex(center, none);
+      @include flex(left, none);
       margin-bottom: 24px;
 
       .profile-avatar {

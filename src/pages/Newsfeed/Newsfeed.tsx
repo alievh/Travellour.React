@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback, FormEvent } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Container from "../../components/Bootstrap/Container";
@@ -26,18 +26,20 @@ const Newsfeed = () => {
   };
 
   const postCreateHandler = async (event: any) => {
-    event.preventDefault();
-    console.log(fileUpload);
     const formData = new FormData();
-    formData.append("imagefiles", fileUpload);
+    for (let i = 0; i < fileUpload.length; i++) {
+      formData.append("imagefiles", fileUpload[i]);
+    }
     formData.append("content", postContent);
 
     const response = await fetch(`${baseUrl}/post/postcreate`, {
       method: "POST",
       body: formData,
       headers: {
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
-        'Accept': '*/*',
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        Accept: "*/*",
       },
     }).then((res) => {
       setLoading(false);
@@ -60,7 +62,9 @@ const Newsfeed = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
       },
     }).then((res) => {
       setLoading(false);
@@ -80,8 +84,6 @@ const Newsfeed = () => {
     getPosts();
   }, [getPosts]);
 
-  console.log(userPosts);
-
   return (
     // Newsfeed Section - START
     <section className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
@@ -98,6 +100,7 @@ const Newsfeed = () => {
                       <input
                         type="file"
                         accept="image/*"
+                        name="imagefiles"
                         multiple
                         onChange={fileUploadHandler}
                       />
@@ -111,28 +114,32 @@ const Newsfeed = () => {
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
-                {userPosts.map((p: any) => (
-                  p.images.length > 0 ? 
-                  <Post
-                    userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                    userFirstname={p.user.firstname}
-                    userLastname={p.user.lastname}
-                    createdDate="6 hours"
-                    postContent={p.content}
-                    postImage={require("../../assets/images/auth-poster.jpg")}
-                    likeCount={p.likes.length}
-                    commentCount={p.comments.length}
-                  /> : 
-                  <Post
-                    userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                    userFirstname={p.user.firstname}
-                    userLastname={p.user.lastname}
-                    createdDate="6 hours"
-                    postContent={p.content}
-                    likeCount={p.likes.length}
-                    commentCount={p.comments.length}
-                  />
-                ))}
+                {userPosts.map((p: any) =>
+                  p.images !== null ? (
+                    <Post
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      postImages={p.imageUrls}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  ) : (
+                    <Post
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  )
+                )}
               </div>
               {/* Newsfeed Posts - END */}
             </section>

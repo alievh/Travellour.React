@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -20,7 +19,10 @@ const Profile = () => {
       className={`group-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img src={require("../../assets/images/auth-poster.jpg")} alt="Group Background" />
+        <img
+          src={require("../../assets/images/auth-poster.jpg")}
+          alt="Group Background"
+        />
       </div>
       <Container>
         <Row>
@@ -29,7 +31,10 @@ const Profile = () => {
               {/* Group Avatar - START */}
               <div className="group__details">
                 <div className="group-avatar">
-                  <img src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg" alt="Group Avatar" />
+                  <img
+                    src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg"
+                    alt="Group Avatar"
+                  />
                 </div>
               </div>
               {/* Group Avatar - END */}
@@ -84,16 +89,18 @@ const Profile = () => {
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  postImages={undefined}
                   likeCount="2"
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
@@ -103,16 +110,18 @@ const Profile = () => {
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  postImages={undefined}
                   likeCount="2"
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"

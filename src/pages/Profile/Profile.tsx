@@ -202,16 +202,18 @@ const Profile = () => {
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  postImages={undefined}
                   likeCount="2"
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
@@ -221,16 +223,18 @@ const Profile = () => {
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
                   createdDate="6 hours"
                   postContent="Hi Guys!"
-                  postImage={require("../../assets/images/auth-poster.jpg")}
+                  postImages={undefined}
                   likeCount="2"
                   commentCount="4"
                 />
                 <Post
+                  userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
                   userLastname="McKinney"
