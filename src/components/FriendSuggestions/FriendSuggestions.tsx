@@ -38,7 +38,8 @@ const FriendSuggestions = () => {
         <ul>
           {friendSuggestion.map((f: any) => (
             <FriendSuggestion
-              userUrl={`https://localhost:7101/img/${f.profileImage.imageUrl}`}
+              id={f.id}
+              userUrl={f.profileImage.imageUrl}
               userFirstName={f.firstname}
               userLastName={f.lastname}
               userName={f.userName}

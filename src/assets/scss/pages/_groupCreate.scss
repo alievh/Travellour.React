@@ -31,23 +31,19 @@
         flex-direction: column;
       }
 
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        @include flex(none, none);
+      a {
+        background-color: #eaeff8;
+        border-color: #eaeff8;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        color: $primary;
+        transition: .3s ease-in;
 
-        @media screen and (max-width: 500px) {
-          @include flex(none, center);
-          flex-direction: column;
-        }
-
-        li {
-          margin-right: 10px;
-
-          @media screen and (max-width: 500px) {
-            padding: 2px 0;
-          }
+        &:hover {
+          transition: .3s ease-out;
+          background-color: $primary;
+          color: $white;
         }
       }
     }

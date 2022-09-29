@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../UI/Button";
 
 const FriendSuggestion: React.FC<{
+  id: string;
   userUrl: string;
   userFirstName: string;
   userLastName: string;
@@ -12,7 +13,7 @@ const FriendSuggestion: React.FC<{
       <div className="friend-information">
         <div className="user-avatar">
           <a href="#">
-            <img src={props.userUrl} />
+            <img src={`https://localhost:7101/img/${props.userUrl}`} />
           </a>
         </div>
         <div className="user-details">

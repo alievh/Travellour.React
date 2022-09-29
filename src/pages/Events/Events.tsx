@@ -1,3 +1,4 @@
+import { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
 import Event from "../../components/Event/Event";
@@ -5,11 +6,45 @@ import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Events = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const getEvents = useCallback(async () => {
+    setLoading(true);
+    const response = await fetch(`${baseUrl}/event/eventgetall`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        setLoading(false);
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setEvents(response);
+    console.log(response);
+  }, []);
+
+  useEffect(() => {
+    getEvents();
+  }, [getEvents]);
 
   return (
     // Events Section - START
@@ -47,27 +82,14 @@ const Events = () => {
               {/* Events Filter - END */}
               {/* Events - START */}
               <div className="events-container__events">
-                <Event
-                  eventImage={require("../../assets/images/event-hiking.jpg")}
-                  eventTitle="Hiking"
-                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ipsa, ad. Quam praesentium magni voluptate asperiores
-                        sed provident facilis dolor deleniti?"
-                />
-                <Event
-                  eventImage={require("../../assets/images/event-surfing.jpg")}
-                  eventTitle="Surfing"
-                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ipsa, ad. Quam praesentium magni voluptate asperiores
-                  sed provident facilis dolor deleniti?"
-                />
-                <Event
-                  eventImage={require("../../assets/images/event-camping.jpg")}
-                  eventTitle="Camping"
-                  eventContent="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ipsa, ad. Quam praesentium magni voluptate asperiores
-                  sed provident facilis dolor deleniti?"
-                />
+                {loading && <p>Loading...</p>}
+                {events.map((e: any) => (
+                  <Event
+                    eventContent={e.eventDescription}
+                    eventTitle={e.eventTitle}
+                    eventImages={e.imageUrls}
+                  />
+                ))}
               </div>
               {/* Events - END */}
             </div>

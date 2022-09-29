@@ -1,9 +1,10 @@
 import React from "react";
 import Col from "../Bootstrap/Col";
 import Row from "../Bootstrap/Row";
+import Slider from "../Slider/Slider";
 
 const Event: React.FC<{
-  eventImage: string;
+  eventImages: string[];
   eventTitle: string;
   eventContent: string;
 }> = (props) => {
@@ -11,7 +12,11 @@ const Event: React.FC<{
     <div className="events-container__event">
       <Row>
         <Col lg="3" className="event-image">
-          <img src={props.eventImage} />
+        {props.eventImages.length > 1 ? (
+            <Slider images={props.eventImages} />
+          ) : (
+            <img src={`https://localhost:7101/img/${props.eventImages[0]}`} />
+          )}
         </Col>
         <Col lg="6" className="event-content">
           <h4>{props.eventTitle}</h4>

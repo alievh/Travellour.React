@@ -1,3 +1,4 @@
+import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -8,11 +9,44 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Groups = () => {
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const getGroups = useCallback(async () => {
+    setLoading(true);
+    const response = await fetch(`${baseUrl}/group/groupgetall`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        setLoading(false);
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    setGroups(response);
+  }, []);
+
+  useEffect(() => {
+    getGroups();
+  }, [getGroups]);
 
   return (
     // Groups Section - START
@@ -52,42 +86,13 @@ const Groups = () => {
                   </div>
                   {/* Groups Filter - END */}
                   {/* Groups - START */}
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-hiking.jpg")}
-                    groupTitle="Hiking Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-surfing.jpg")}
-                    groupTitle="Surfing Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-camping.jpg")}
-                    groupTitle="Camping Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-hiking.jpg")}
-                    groupTitle="Hiking Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-surfing.jpg")}
-                    groupTitle="Surfing Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-camping.jpg")}
-                    groupTitle="Camping Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-hiking.jpg")}
-                    groupTitle="Hiking Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-surfing.jpg")}
-                    groupTitle="Surfing Club"
-                  />
-                  <GroupCard
-                    groupImage={require("../../assets/images/event-camping.jpg")}
-                    groupTitle="Camping Club"
-                  />
+                  {loading && <p>Loading...</p>}
+                  {groups.map((g: any) => (
+                    <GroupCard
+                      groupTitle={g.groupName}
+                      groupImage={g.groupImage}
+                    />
+                  ))}
                   {/* Groups - END */}
                 </div>
               </Container>

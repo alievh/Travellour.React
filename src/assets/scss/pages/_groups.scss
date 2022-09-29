@@ -1,5 +1,5 @@
-@import '../abstracts/mixins';
-@import '../abstracts/variables';
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
 
 .groups {
   width: 100%;
@@ -17,6 +17,15 @@
     background-color: $white;
     padding: 0 32px 32px 32px;
     border-radius: 5px;
+
+    p {
+      background-color: #eaeff8;
+      padding: 5px 0;
+      border-radius: 5px;
+      color: $primary;
+      width: 100%;
+      text-align: center;
+    }
 
     &__filter {
       @include flex(space-between, none);
@@ -60,7 +69,6 @@
       }
 
       .filter-right {
-
         @media screen and (max-width: 500px) {
           text-align: center;
         }
@@ -71,16 +79,16 @@
           padding: 5px 10px;
           border-radius: 5px;
           color: $primary;
-          transition: .4s ease-in;
+          transition: 0.4s ease-in;
 
           @media screen and (max-width: 500px) {
             font-size: 14px;
           }
-          
+
           &:hover {
             color: $white;
             background-color: $primary;
-            transition: .5s ease-out;
+            transition: 0.5s ease-out;
           }
         }
       }
@@ -103,7 +111,6 @@
       }
 
       &-body {
-
         h5 {
           text-align: center;
           @media screen and (max-width: 500px) {
@@ -119,16 +126,16 @@
           color: $primary;
           font-weight: 600;
           font-size: 18px;
-          transition: .3s ease-in;
+          transition: 0.3s ease-in;
 
           @media screen and (max-width: 500px) {
             font-size: 14px;
           }
-          
+
           &:hover {
             background-color: $primary;
             color: $white;
-            transition: .5s ease-out;
+            transition: 0.5s ease-out;
           }
         }
       }

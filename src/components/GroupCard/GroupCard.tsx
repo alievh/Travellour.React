@@ -5,7 +5,7 @@ const GroupCard: React.FC<{ groupImage: string, groupTitle: string }> = (props) 
     <div className="card" style={{ width: "20rem" }}>
       <img
         className="card-img-top"
-        src={props.groupImage}
+        src={`https://localhost:7101/img/${props.groupImage}`}
         alt="Card image cap"
       />
       <div className="card-body">

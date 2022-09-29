@@ -89,5 +89,17 @@
         }
       }
     }
+
+    &__events {
+      
+      p {
+        background-color: #eaeff8;
+        padding: 5px 0;
+        border-radius: 5px;
+        color: $primary;
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 }

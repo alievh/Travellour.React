@@ -26,6 +26,7 @@ const Newsfeed = () => {
   };
 
   const postCreateHandler = async (event: any) => {
+    event.preventDefault();
     const formData = new FormData();
     for (let i = 0; i < fileUpload.length; i++) {
       formData.append("imagefiles", fileUpload[i]);
@@ -42,7 +43,6 @@ const Newsfeed = () => {
         Accept: "*/*",
       },
     }).then((res) => {
-      setLoading(false);
       if (res.ok) {
         return res.json();
       } else {
@@ -58,6 +58,7 @@ const Newsfeed = () => {
   );
 
   const getPosts = useCallback(async () => {
+    setLoading(true);
     const posts = await fetch(`${baseUrl}/post/postgetall`, {
       method: "GET",
       headers: {
@@ -67,8 +68,8 @@ const Newsfeed = () => {
         }`,
       },
     }).then((res) => {
-      setLoading(false);
       if (res.ok) {
+        setLoading(false);
         return res.json();
       } else {
         return res.json().then((data) => {
@@ -114,6 +115,7 @@ const Newsfeed = () => {
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
+                {loading && <p>Loading...</p>}
                 {userPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post

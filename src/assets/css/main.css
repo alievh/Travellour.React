@@ -1881,6 +1881,15 @@ body {
   padding-left: 80px;
 }
 
+.newsfeed-section__posts p {
+  background-color: #eaeff8;
+  padding: 5px 0;
+  border-radius: 5px;
+  color: #4fb5ff;
+  width: 100%;
+  text-align: center;
+}
+
 .newsfeed-section__post-create {
   background-color: #fff;
   border-radius: 5px;
@@ -2833,6 +2842,15 @@ body {
   transition: 0.5s ease-out;
 }
 
+.events-container__events p {
+  background-color: #eaeff8;
+  padding: 5px 0;
+  border-radius: 5px;
+  color: #4fb5ff;
+  width: 100%;
+  text-align: center;
+}
+
 .event-create {
   width: 100%;
   padding: 90px 0 40px 300px;
@@ -3152,6 +3170,15 @@ body {
   border-radius: 5px;
 }
 
+.groups-container p {
+  background-color: #eaeff8;
+  padding: 5px 0;
+  border-radius: 5px;
+  color: #4fb5ff;
+  width: 100%;
+  text-align: center;
+}
+
 .groups-container__filter {
   display: flex;
   justify-content: space-between;
@@ -3222,7 +3249,7 @@ body {
   padding: 5px 10px;
   border-radius: 5px;
   color: #4fb5ff;
-  transition: .4s ease-in;
+  transition: 0.4s ease-in;
 }
 
 @media screen and (max-width: 500px) {
@@ -3234,7 +3261,7 @@ body {
 .groups-container__filter .filter-right a:hover {
   color: #fff;
   background-color: #4fb5ff;
-  transition: .5s ease-out;
+  transition: 0.5s ease-out;
 }
 
 .groups-container .card {
@@ -3274,7 +3301,7 @@ body {
   color: #4fb5ff;
   font-weight: 600;
   font-size: 18px;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 }
 
 @media screen and (max-width: 500px) {
@@ -3286,7 +3313,7 @@ body {
 .groups-container .card-body a:hover {
   background-color: #4fb5ff;
   color: #fff;
-  transition: .5s ease-out;
+  transition: 0.5s ease-out;
 }
 
 .group-create {
@@ -3330,32 +3357,20 @@ body {
   }
 }
 
-.group-create-container__filter ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: none;
-  align-items: none;
+.group-create-container__filter a {
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: .3s ease-in;
 }
 
-@media screen and (max-width: 500px) {
-  .group-create-container__filter ul {
-    display: flex;
-    justify-content: none;
-    align-items: center;
-    flex-direction: column;
-  }
-}
-
-.group-create-container__filter ul li {
-  margin-right: 10px;
-}
-
-@media screen and (max-width: 500px) {
-  .group-create-container__filter ul li {
-    padding: 2px 0;
-  }
+.group-create-container__filter a:hover {
+  transition: .3s ease-out;
+  background-color: #4fb5ff;
+  color: #fff;
 }
 
 .group-create-container__form .form-name {

@@ -14,6 +14,17 @@
   }
 
   &-section {
+    &__posts {
+      p {
+        background-color: #eaeff8;
+        padding: 5px 0;
+        border-radius: 5px;
+        color: $primary;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     &__post-create {
       background-color: $white;
       border-radius: 5px;
@@ -21,7 +32,6 @@
       margin: 32px 0;
 
       form {
-
         textarea {
           width: 100%;
           height: 100px;
