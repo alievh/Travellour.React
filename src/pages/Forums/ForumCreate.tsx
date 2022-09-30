@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
@@ -9,11 +9,52 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const ForumCreate = () => {
+  const [forumTitle, setForumTitle] = useState("");
+  const [forumContent, setForumContent] = useState("");
+  const [error, setError] = useState();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const forumTitleHandler = (event: any) => {
+    setForumTitle(event.target.value);
+  }
+
+  const forumContentHandler = (event: any) => {
+    setForumContent(event.target.value);
+  }
+
+  const forumCreateHandler = async () => {
+    const forumCreate = {
+      forumTitle,
+      forumContent
+    }
+
+    console.log(forumCreate)
+
+    const response = await fetch(`${baseUrl}/forum/forumcreate`, {
+      method: "POST",
+      body: JSON.stringify(forumCreate),
+      headers: {
+        "Authorization": `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  };
 
   return (
     // Forum Create Section - START
@@ -37,13 +78,14 @@ const ForumCreate = () => {
               {/* Forum Create Filter - END */}
               {/* Forum Create Form - START */}
               <div className="forum-create-container__form">
-                <form>
+                <form onSubmit={forumCreateHandler}>
                   <div className="form-title">
                     <Input
                       placeholder="Forum Title"
                       label="Type Forum Title"
                       type="text"
                       id="forum-title"
+                      onChange={forumTitleHandler}
                     />
                   </div>
                   <div className="form-description">
@@ -51,6 +93,7 @@ const ForumCreate = () => {
                     <textarea
                       rows={5}
                       placeholder="Forum Description"
+                      onChange={forumContentHandler}
                     ></textarea>
                   </div>
                   <Button type="submit" className="btn" innerText="Create" />

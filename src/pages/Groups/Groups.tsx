@@ -81,14 +81,15 @@ const Groups = () => {
                       </ul>
                     </div>
                     <div className="filter-right">
-                      <Link to="/groups/create">Create Group</Link>
+                      <Link to="/groups/create" className="group-create">Create Group</Link>
                     </div>
                   </div>
                   {/* Groups Filter - END */}
                   {/* Groups - START */}
-                  {loading && <p>Loading...</p>}
+                  {loading && <p className="loading">Loading...</p>}
                   {groups.map((g: any) => (
                     <GroupCard
+                      groupId={g.id}
                       groupTitle={g.groupName}
                       groupImage={g.groupImage}
                     />

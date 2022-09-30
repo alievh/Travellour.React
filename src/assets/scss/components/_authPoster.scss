@@ -1,6 +1,7 @@
 @import '../abstracts/variables';
 
 .auth-poster {
+    height: 100%;
     background-color: $primary;
 
     @media screen and (max-width: 992px) {

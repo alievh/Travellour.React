@@ -115,7 +115,7 @@ const Newsfeed = () => {
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
-                {loading && <p>Loading...</p>}
+                {loading && <p className="loading">Loading...</p>}
                 {userPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post

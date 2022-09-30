@@ -1,14 +1,55 @@
+import { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import Comment from "../../components/Comment/Comment";
 import Button from "../../components/UI/Button";
+import { useParams } from "react-router-dom";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const ForumDetail = () => {
+  const [forumData, setForumData] = useState({
+    forumTitle: "",
+    forumContent: "",
+  });
+  const [error, setError] = useState();
+
+  const { id } = useParams();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const forumDetailData = useCallback(async () => {
+    const forumInfo = await fetch(
+      `${baseUrl}/forum/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    console.log(forumInfo);
+    setForumData(forumInfo);
+  }, []);
+
+  useEffect(() => {
+    forumDetailData();
+  }, [forumDetailData]);
 
   return (
     // Forums Section - START
@@ -20,24 +61,11 @@ const ForumDetail = () => {
           <Row>
             <Col xl="12">
               <div className="forum-detail-container__title">
-                <h4>How can I play CSGO better?</h4>
+                <h4>{forumData.forumTitle}</h4>
               </div>
               <div className="forum-detail-container__content">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Repudiandae ratione harum voluptate! Laborum tenetur
-                  reiciendis magni et soluta magnam placeat debitis ducimus nam
-                  mollitia vero quos, nesciunt nemo itaque? Perferendis ab
-                  maiores obcaecati ea earum consectetur, et maxime amet
-                  accusantium ducimus! Esse explicabo, illum alias perferendis
-                  culpa aliquid. Quos minus aliquid optio autem aut fugiat,
-                  alias incidunt cum iste mollitia commodi ipsam possimus
-                  exercitationem culpa in debitis perspiciatis explicabo nostrum
-                  blanditiis? Porro enim voluptatum tempore inventore iste!
-                  Voluptate, odio! Doloremque, deserunt quisquam adipisci
-                  repellat facilis saepe accusamus cupiditate excepturi dolorum
-                  aliquam voluptates laboriosam. Sequi ullam molestias rerum
-                  itaque. Sapiente, architecto!
+                  {forumData.forumContent}
                 </p>
               </div>
               <div className="forum-detial-container__comments">

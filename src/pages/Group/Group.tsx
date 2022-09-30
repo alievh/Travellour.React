@@ -1,3 +1,4 @@
+import { useCallback, useState, useEffect } from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -7,11 +8,53 @@ import GroupAdmin from "../../components/GroupAdmin/GroupAdmin";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
+import { useParams } from "react-router-dom";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
-const Profile = () => {
+const Group = () => {
+  const [groupData, setGroupData] = useState(
+    {
+      groupName: "",
+      groupDescription: "",
+      groupImage: "",
+    }
+  );
+  const [error, setError] = useState();
+  let { id } = useParams();
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const groupDetailData = useCallback(async () => {
+    const groupInfo = await fetch(
+      `${baseUrl}/group/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    console.log(groupInfo);
+    setGroupData(groupInfo);
+  }, []);
+
+  useEffect(() => {
+    groupDetailData();
+  }, [groupDetailData]);
 
   return (
     // Group Section - START
@@ -32,7 +75,7 @@ const Profile = () => {
               <div className="group__details">
                 <div className="group-avatar">
                   <img
-                    src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1662179897-bpfull.jpg"
+                    src={`https://localhost:7101/img/${groupData.groupImage}`}
                     alt="Group Avatar"
                   />
                 </div>
@@ -42,17 +85,15 @@ const Profile = () => {
             {/* Group Decription - START */}
             <Col lg="6">
               <div className="group__description">
-                <h5>Wombo Comno</h5>
+                <h5>{groupData.groupName}</h5>
                 <p>
-                  Revolves around Frank, an American tourist visiting Italy to
-                  mend a broken heart. Elise is an extraordinary woman who
-                  deliberately crosses
+                  {groupData.groupDescription}
                 </p>
               </div>
             </Col>
             {/* Group Decription - END */}
             {/* Group Statistics - START */}
-            <Col lg="2">
+            <Col lg="2" className="d-flex">
               <div className="group__statistics">
                 <ul>
                   <li>
@@ -155,4 +196,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Group;

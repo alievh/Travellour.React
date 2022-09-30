@@ -82,7 +82,7 @@ const Events = () => {
               {/* Events Filter - END */}
               {/* Events - START */}
               <div className="events-container__events">
-                {loading && <p>Loading...</p>}
+                {loading && <p className="loading">Loading...</p>}
                 {events.map((e: any) => (
                   <Event
                     eventContent={e.eventDescription}

@@ -5,11 +5,9 @@
   width: 100%;
   padding: 90px 10px 40px 300px;
 
-  
   @media screen and (max-width: 720px) {
     padding-left: 90px;
   }
-
 
   &.sidebar-notactive {
     padding-left: 90px;
@@ -21,13 +19,12 @@
     background-color: $white;
     border-radius: 5px;
 
-    
-  @media screen and (max-width: 500px) {
-    padding: 12px 12px 32px 12px;
-  }
+    @media screen and (max-width: 500px) {
+      padding: 12px 12px 32px 12px;
+    }
 
     &__title {
-      @include flex(space-between,none);
+      @include flex(space-between, none);
       width: 100%;
       border-bottom: 1px solid $global-border-color;
       padding: 15px 0;
@@ -63,6 +60,14 @@
 
     &__forums {
       margin-top: 15px;
+      .loading {
+        background-color: #eaeff8;
+        padding: 5px 0;
+        border-radius: 5px;
+        color: $primary;
+        width: 100%;
+        text-align: center;
+      }
     }
   }
 }

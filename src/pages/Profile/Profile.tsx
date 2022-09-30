@@ -22,7 +22,6 @@ const Profile = () => {
   });
   const navigate = useNavigate();
 
-  const userToken = useSelector((state: any) => state.AuthReducer.accessToken);
 
   const profilePhotoHandler = (event: any) => {
     profilePhotoChangeHandler(event.target.files[0]);
@@ -72,7 +71,7 @@ const Profile = () => {
       method: "POST",
       body: formData,
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
         Accept: "*/*",
       },
     }).then((res) => {
@@ -96,7 +95,7 @@ const Profile = () => {
       method: "POST",
       body: formData,
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
         Accept: "*/*",
       },
     }).then((res) => {

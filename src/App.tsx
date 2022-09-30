@@ -29,12 +29,12 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/create" element={<EventCreate />} />
-            <Route path="/group" element={<Group />} />
+            <Route path="/group/:id" element={<Group />} />
             <Route path="/groups" element={<Groups />} />
             <Route path="/groups/create" element={<GroupCreate />} />
             <Route path="/group/setting" element={<GroupSetting />} />
             <Route path="/forums" element={<Forums />} />
-            <Route path="/forum/detail" element={<ForumDetail />} />
+            <Route path="/forum/:id" element={<ForumDetail />} />
             <Route path="/forum/create" element={<ForumCreate />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/password" element={<Password />} />
