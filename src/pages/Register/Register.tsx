@@ -16,7 +16,7 @@ const Register = () => {
   const confirmPassword = useRef<HTMLInputElement>(null);
   const birthday = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   async function addUserHandler(event: React.FormEvent) {
@@ -49,7 +49,7 @@ const Register = () => {
         return res.json();
       } else {
         return res.json().then((data) => {
-          setErrorMessage(data.error.message.toString());
+          setError(data.error.message.toString());
         });
       }
     });
@@ -68,7 +68,7 @@ const Register = () => {
               <div className="auth-container__title">
                 <h4>Travellour</h4>
                 {loading && <p className="loading">Loading...</p>}
-                {errorMessage !== null ? <p>{errorMessage}</p> : ""}
+                {error !== null ? <p>{error}</p> : ""}
               </div>
               {/* Register Form - START */}
               <form onSubmit={addUserHandler} className="auth-container__form">

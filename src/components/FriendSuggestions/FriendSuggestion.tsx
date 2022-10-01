@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../UI/Button";
+import { Link } from "react-router-dom";
 
 const FriendSuggestion: React.FC<{
   id: string;
@@ -12,16 +13,16 @@ const FriendSuggestion: React.FC<{
     <li className="friend-suggestion">
       <div className="friend-information">
         <div className="user-avatar">
-          <a href="#">
+          <Link to={`/user/${props.id}`}>
             <img src={`https://localhost:7101/img/${props.userUrl}`} />
-          </a>
+          </Link>
         </div>
         <div className="user-details">
-          <a href="#">
+          <Link to={`/user/${props.id}`}>
             <h6>
               {props.userFirstName} {props.userLastName}
             </h6>
-          </a>
+          </Link>
           <span>@{props.userName}</span>
         </div>
       </div>

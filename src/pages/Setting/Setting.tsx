@@ -21,7 +21,6 @@ const Setting = () => {
     profileImage: "",
   });
 
-
   const firstName = useRef<HTMLInputElement>(null);
   const lastName = useRef<HTMLInputElement>(null);
   const userName = useRef<HTMLInputElement>(null);
@@ -38,21 +37,21 @@ const Setting = () => {
     const changeInformation = {
       firstName: firstName.current?.value,
       lastName: lastName.current?.value,
-      userName: userName.current?.value
-    }
+      userName: userName.current?.value,
+    };
 
-    const response = await fetch(
-      `${baseUrl}/user/userupdate`,
-      {
-        method: "POST",
-        body: JSON.stringify(changeInformation),
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
-        },
-      }
-    ).then((res) => {
+    const response = await fetch(`${baseUrl}/user/userupdate`, {
+      method: "POST",
+      body: JSON.stringify(changeInformation),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
       if (res.ok) {
+        logoutHandler();
         return res.json();
       } else {
         return res.json().then((data) => {
@@ -60,7 +59,7 @@ const Setting = () => {
         });
       }
     });
-  }
+  };
 
   const userData = useCallback(async () => {
     console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
@@ -97,9 +96,9 @@ const Setting = () => {
   const logoutHandler = () => {
     dispatch(logout());
     dispatch(clearUserData());
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     navigate("/");
-  }
+  };
 
   return (
     // Setting Section - START
@@ -133,7 +132,12 @@ const Setting = () => {
                     </Link>
                   </li>
                   <li>
-                    <Button type="button" buttonIcon="fa-solid fa-arrow-right-from-bracket" onClick={logoutHandler} className="btn" />
+                    <Button
+                      type="button"
+                      buttonIcon="fa-solid fa-arrow-right-from-bracket"
+                      onClick={logoutHandler}
+                      className="btn"
+                    />
                   </li>
                 </ul>
               </div>

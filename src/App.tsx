@@ -17,6 +17,7 @@ import GroupCreate from "./pages/Groups/GroupCreate";
 import GroupSetting from "./pages/Group/GroupSetting";
 import ForumCreate from "./pages/Forums/ForumCreate";
 import ForumDetail from "./pages/Forums/ForumDetail";
+import User from "./pages/User/User";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/setting" element={<Setting />} />
             <Route path="/password" element={<Password />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/user/:id" element={<User />} />
           </Route>
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />

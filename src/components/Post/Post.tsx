@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "../Slider/Slider";
 import Button from "../UI/Button";
+import { Link } from "react-router-dom";
 
 const Post: React.FC<{
   userId: string;
@@ -18,14 +19,23 @@ const Post: React.FC<{
       <div className="post-owner-information">
         <div className="post-owner">
           <div className="owner-image">
-            <a href="#">
-              <img src={props.userImage} />
-            </a>
+            {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+            props.userId ? (
+              <Link to={`/user/${props.userId}`}>
+                <img src={props.userImage} />
+              </Link>
+            ) : (
+              <Link to="/profile">
+                <img src={props.userImage} />
+              </Link>
+            )}
           </div>
           <div className="owner-info">
-            <a href="#">
+            {JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId ? <Link to={`/user/${props.userId}`}>
               {props.userFirstname} {props.userLastname}
-            </a>
+            </Link> : <Link to="/profile">
+              {props.userFirstname} {props.userLastname}
+            </Link>}
             <span>{props.createdDate} ago</span>
           </div>
         </div>

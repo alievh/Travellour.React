@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, FormEvent, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Col from "../../components/Bootstrap/Col";
@@ -11,19 +11,56 @@ import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Password = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const oldPassword = useRef<HTMLInputElement>(null);
+  const newPassword = useRef<HTMLInputElement>(null);
+  const newPasswordAgain = useRef<HTMLInputElement>(null);
+
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
     userName: "",
     profileImage: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+
+  const changePassword = async (event: FormEvent) => {
+    event.preventDefault();
+
+    const passwordData = {
+      oldPassword: oldPassword.current?.value,
+      newPassword: newPassword.current?.value,
+      newPasswordAgain: newPasswordAgain.current?.value,
+    };
+
+    setLoading(true);
+    const response = await fetch(`${baseUrl}/user/changepassword`, {
+      method: "POST",
+      body: JSON.stringify(passwordData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      setLoading(false);
+      if (res.ok) {
+        logoutHandler();
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  };
 
   const userData = useCallback(async () => {
     console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
@@ -110,13 +147,14 @@ const Password = () => {
             {/* Password User Input - START */}
             <div className="password-section__user-input">
               <h4>Password Change</h4>
-              <form>
+              <form onSubmit={changePassword}>
                 <Input
                   type="password"
                   id="current-password"
                   placeholder="Current Password"
                   label="Type your current password"
                   mainDivClass="password-change"
+                  ref={oldPassword}
                 />
                 <Input
                   type="password"
@@ -124,6 +162,7 @@ const Password = () => {
                   placeholder="New Password"
                   label="Type your new password"
                   mainDivClass="password-change"
+                  ref={newPassword}
                 />
                 <Input
                   type="password"
@@ -131,6 +170,7 @@ const Password = () => {
                   placeholder="Retype password"
                   label="Retype your new password"
                   mainDivClass="password-change"
+                  ref={newPasswordAgain}
                 />
                 <Button
                   type="submit"
