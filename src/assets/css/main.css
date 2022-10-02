@@ -689,20 +689,42 @@ body {
   }
 }
 
-.post .post-content .post-activity a {
-  text-decoration: none;
-  color: #6f7f92;
-  padding: 5px;
+.post .post-content .post-activity {
+  display: flex;
+  justify-content: none;
+  align-items: none;
 }
 
-.post .post-content .post-activity a i {
+.post .post-content .post-activity button {
+  border: none;
+  background-color: transparent;
+  color: #6f7f92;
+  padding: 5px;
+  margin: 0;
+}
+
+.post .post-content .post-activity button i {
   margin: 0 5px;
 }
 
-@media screen and (max-width: 390px) {
-  .post .post-content .post-activity a span {
-    display: none;
-  }
+.post .post-content .post-input {
+  margin: 10px 0;
+}
+
+.post .post-content .post-input form {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+
+.post .post-content .post-input form button {
+  background-color: #4fb5ff;
+  color: #fff;
+}
+
+.post .post-content .post-input form button:hover {
+  background-color: #47a2e5;
+  border-color: #47a2e5;
 }
 
 .notification {

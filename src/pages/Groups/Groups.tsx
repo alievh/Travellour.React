@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -9,44 +9,22 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
+import { GetGroups } from "../../store/Group/GroupSlice";
+import { useDispatch } from "react-redux";
 
 const Groups = () => {
-  const [groups, setGroups] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const dispatch = useDispatch();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
-  const getGroups = useCallback(async () => {
-    setLoading(true);
-    const response = await fetch(`${baseUrl}/group/groupgetall`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        setLoading(false);
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setGroups(response);
-  }, []);
+  const groups = useSelector((state: any) => state.GroupSlice);
 
   useEffect(() => {
-    getGroups();
-  }, [getGroups]);
+    GetGroups(dispatch);
+  }, []);
 
   return (
     // Groups Section - START
@@ -86,8 +64,8 @@ const Groups = () => {
                   </div>
                   {/* Groups Filter - END */}
                   {/* Groups - START */}
-                  {loading && <p className="loading">Loading...</p>}
-                  {groups.map((g: any) => (
+                  {groups.loading && <p className="loading">Loading...</p>}
+                  {groups.groups.map((g: any) => (
                     <GroupCard
                       groupId={g.id}
                       groupTitle={g.groupName}

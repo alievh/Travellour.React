@@ -10,31 +10,55 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
 
 const User = () => {
   const [error, setError] = useState();
+  const [userPosts, setUserPosts] = useState([]);
   const [user, setUser] = useState({
     coverImage: "",
     profileImage: "",
     userName: "",
     lastname: "",
-    firstname: ""
+    firstname: "",
+    postCount: 0,
+    friendCount: 0,
   });
   const { id } = useParams();
 
-  const userData = useCallback(async () => {
-    const userInfo = await fetch(
-      `${baseUrl}/user/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
+  const userPost = useCallback(async () => {
+    const postInfo = await fetch(`${baseUrl}/post/userpost/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
       }
-    ).then((res) => {
+    });
+
+    console.log(postInfo);
+    setUserPosts(postInfo);
+  }, []);
+
+  const userData = useCallback(async () => {
+    const userInfo = await fetch(`${baseUrl}/user/userprofile/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
       if (res.ok) {
         return res.json();
       } else {
@@ -49,11 +73,12 @@ const User = () => {
   }, []);
 
   useEffect(() => {
+    userPost();
     userData();
-  }, [userData]);
+  }, [userData, userPost]);
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   return (
@@ -74,11 +99,11 @@ const User = () => {
             <div className="user__statistics">
               <ul>
                 <li>
-                  <span>12</span>
+                  <span>{user.postCount}</span>
                   <span>Post</span>
                 </li>
                 <li>
-                  <span>77</span>
+                  <span>{user.friendCount}</span>
                   <span>Friends</span>
                 </li>
               </ul>
@@ -119,48 +144,34 @@ const User = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
+                {userPosts.map((p: any) =>
+                  p.images !== null ? (
+                    <Post
+                      postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      postImages={p.imageUrls}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  ) : (
+                    <Post
+                      postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  )
+                )}
               </div>
             </section>
           </Col>

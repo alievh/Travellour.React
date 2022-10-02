@@ -9,6 +9,7 @@ import Input from "../../components/UI/Input";
 import { logout } from "../../store/Auth/AuthSlice";
 import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
 
 const Password = () => {
   const oldPassword = useRef<HTMLInputElement>(null);
@@ -26,8 +27,8 @@ const Password = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   const changePassword = async (event: FormEvent) => {

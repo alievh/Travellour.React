@@ -8,10 +8,11 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import GroupMember from "../../components/GroupMember/GroupMember";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
+import { RootState } from "../../store";
 
 const GroupSetting = () => {
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   return (

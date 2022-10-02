@@ -10,35 +10,31 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
 
 const Group = () => {
-  const [groupData, setGroupData] = useState(
-    {
-      groupName: "",
-      groupDescription: "",
-      groupImage: "",
-    }
-  );
+  const [groupData, setGroupData] = useState({
+    groupName: "",
+    groupDescription: "",
+    groupImage: "",
+  });
   const [error, setError] = useState();
   let { id } = useParams();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   const groupDetailData = useCallback(async () => {
-    const groupInfo = await fetch(
-      `${baseUrl}/group/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
+    const groupInfo = await fetch(`${baseUrl}/group/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
       if (res.ok) {
         return res.json();
       } else {
@@ -86,9 +82,7 @@ const Group = () => {
             <Col lg="6">
               <div className="group__description">
                 <h5>{groupData.groupName}</h5>
-                <p>
-                  {groupData.groupDescription}
-                </p>
+                <p>{groupData.groupDescription}</p>
               </div>
             </Col>
             {/* Group Decription - END */}
@@ -130,6 +124,7 @@ const Group = () => {
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
                 <Post
+                  postId="123"
                   userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
@@ -141,6 +136,7 @@ const Group = () => {
                   commentCount="4"
                 />
                 <Post
+                  postId="123"
                   userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
@@ -151,6 +147,7 @@ const Group = () => {
                   commentCount="4"
                 />
                 <Post
+                  postId="123"
                   userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"
@@ -162,6 +159,7 @@ const Group = () => {
                   commentCount="4"
                 />
                 <Post
+                  postId="123"
                   userId="123"
                   userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                   userFirstname="Marvin"

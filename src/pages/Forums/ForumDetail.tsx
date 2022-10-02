@@ -7,6 +7,7 @@ import Comment from "../../components/Comment/Comment";
 import Button from "../../components/UI/Button";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
 
 const ForumDetail = () => {
   const [forumData, setForumData] = useState({
@@ -17,8 +18,8 @@ const ForumDetail = () => {
 
   const { id } = useParams();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   const forumDetailData = useCallback(async () => {

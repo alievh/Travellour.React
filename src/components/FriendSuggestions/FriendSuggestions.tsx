@@ -1,7 +1,6 @@
 import FriendSuggestion from "./FriendSuggestion";
 import { useCallback, useState, useEffect } from "react";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { useSelector } from "react-redux";
 
 const FriendSuggestions = () => {
   const [friendSuggestion, setFriendSuggestion] = useState([]);
@@ -39,7 +38,7 @@ const FriendSuggestions = () => {
           {friendSuggestion.map((f: any) => (
             <FriendSuggestion
               id={f.id}
-              userUrl={f.profileImage.imageUrl}
+              imageUrl={f.imageUrl}
               userFirstName={f.firstname}
               userLastName={f.lastname}
               userName={f.userName}

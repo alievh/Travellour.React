@@ -4,6 +4,7 @@ import SidebarItem from "../../components/UI/SidebarItem";
 import { sidebarToggleAction } from "../../store/sidebarToggle";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
 
 const Sidebar = () => {
   const [error, setError] = useState();
@@ -15,8 +16,8 @@ const Sidebar = () => {
   });
   const dispatch = useDispatch();
 
-  const isSidebarActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const isSidebarActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
   
   const userData = useCallback( async () => {

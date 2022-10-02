@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { logout } from "../../store/Auth/AuthSlice";
 import { clearUserData } from "../../store/User/UserData";
+import { RootState } from "../../store";
 
 const Setting = () => {
   const dispatch = useDispatch();
@@ -27,8 +28,8 @@ const Setting = () => {
 
   const [error, setError] = useState();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   const submitHandler = async (event: React.FormEvent) => {
@@ -39,6 +40,7 @@ const Setting = () => {
       lastName: lastName.current?.value,
       userName: userName.current?.value,
     };
+    
 
     const response = await fetch(`${baseUrl}/user/userupdate`, {
       method: "POST",

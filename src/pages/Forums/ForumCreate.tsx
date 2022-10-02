@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
@@ -7,53 +7,40 @@ import Button from "../../components/UI/Button";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
+import { CreateForum } from "../../store/Forum/ForumSlice";
 
 const ForumCreate = () => {
+  const navigate = useNavigate();
   const [forumTitle, setForumTitle] = useState("");
   const [forumContent, setForumContent] = useState("");
-  const [error, setError] = useState();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
-  const forumTitleHandler = (event: any) => {
+  const forumTitleHandler = (
+    event: FormEvent & { target: HTMLInputElement }
+  ) => {
     setForumTitle(event.target.value);
-  }
+  };
 
-  const forumContentHandler = (event: any) => {
+  const forumContentHandler = (
+    event: FormEvent & { target: HTMLTextAreaElement }
+  ) => {
     setForumContent(event.target.value);
-  }
+  };
 
   const forumCreateHandler = async () => {
     const forumCreate = {
       forumTitle,
-      forumContent
-    }
+      forumContent,
+    };
 
-    console.log(forumCreate)
-
-    const response = await fetch(`${baseUrl}/forum/forumcreate`, {
-      method: "POST",
-      body: JSON.stringify(forumCreate),
-      headers: {
-        "Authorization": `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+    CreateForum(forumCreate);
+    navigate("/forums");
   };
 
   return (

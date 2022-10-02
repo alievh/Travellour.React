@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "../Slider/Slider";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
+import Input from "../UI/Input";
+import Col from "../Bootstrap/Col";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { DeletePost } from "../../store/Post/PostSlice";
 
 const Post: React.FC<{
+  postId: string;
   userId: string;
   userImage: string;
   userFirstname: string;
@@ -14,6 +19,16 @@ const Post: React.FC<{
   likeCount: string;
   commentCount: string;
 }> = (props) => {
+  const [commentIsActive, setCommentIsActive] = useState(false);
+
+  const commentActiveHandler = () => {
+    setCommentIsActive(!commentIsActive);
+  };
+
+  const postDeleteHandler = async () => {
+    DeletePost(props.postId)
+  };
+
   return (
     <div className="post">
       <div className="post-owner-information">
@@ -31,11 +46,16 @@ const Post: React.FC<{
             )}
           </div>
           <div className="owner-info">
-            {JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId ? <Link to={`/user/${props.userId}`}>
-              {props.userFirstname} {props.userLastname}
-            </Link> : <Link to="/profile">
-              {props.userFirstname} {props.userLastname}
-            </Link>}
+            {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+            props.userId ? (
+              <Link to={`/user/${props.userId}`}>
+                {props.userFirstname} {props.userLastname}
+              </Link>
+            ) : (
+              <Link to="/profile">
+                {props.userFirstname} {props.userLastname}
+              </Link>
+            )}
             <span>{props.createdDate} ago</span>
           </div>
         </div>
@@ -46,6 +66,7 @@ const Post: React.FC<{
               type="button"
               className="btn"
               buttonIcon="fa-solid fa-trash"
+              onClick={postDeleteHandler}
             />
           </div>
         ) : (
@@ -74,15 +95,42 @@ const Post: React.FC<{
           </span>
         </div>
         <div className="post-activity">
-          <a href="#">
-            <i className="fa-regular fa-heart"></i>
-            <span>Like</span>
-          </a>
-          <a href="#">
-            <i className="fa-regular fa-comment-dots"></i>
-            <span>Comment</span>
-          </a>
+          <Button
+            type="button"
+            innerText="Like"
+            buttonIcon="fa-regular fa-heart"
+            className="comment"
+          />
+          <Button
+            type="button"
+            innerText="Comment"
+            buttonIcon="fa-regular fa-comment-dots"
+            className="comment"
+            onClick={commentActiveHandler}
+          />
         </div>
+        <div className="post-comments"></div>
+        {commentIsActive && (
+          <div className="post-input">
+            <form>
+              <Col lg="10" sm="10">
+                <Input
+                  type="text"
+                  id="post-comment-input"
+                  placeholder="Type..."
+                  mainDivClass="d-flex align-items-center"
+                />
+              </Col>
+              <Col
+                lg="2"
+                sm="2"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <Button type="submit" className="btn" innerText="Share" />
+              </Col>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

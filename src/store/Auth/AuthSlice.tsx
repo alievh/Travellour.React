@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../Fetch/FetchConfiguration";
 
 export const AuthSlice = createSlice({
   name: "auth",
@@ -17,8 +18,8 @@ export const AuthSlice = createSlice({
       state.user = null;
       state.accessToken = null;
       state.isAuthenticated = false;
-    }
-  }
+    },
+  },
 });
 
 export const { login, logout } = AuthSlice.actions;

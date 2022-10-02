@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { ChangeEvent, ChangeEventHandler, MouseEventHandler, RefObject } from "react";
 
 const Input: React.FC<{
   type: string;
@@ -8,10 +8,10 @@ const Input: React.FC<{
   mainDivClass?: string;
   name?: string;
   ref?: any;
-  onChange? : any;
+  onChange? : ChangeEventHandler;
 }> = React.forwardRef((props, forRef?: any) => {
   const mainDivClassName = "form-group " + props.mainDivClass;
-
+  
   return (
     <div className={mainDivClassName}>
       {props.label !== null && <label htmlFor={props.id}>{props.label}</label>}

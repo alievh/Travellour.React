@@ -1,11 +1,11 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 const Button: React.FC<{
   type?: "submit" | "reset" | "button";
   className: string;
   buttonIcon?: string;
   innerText?: string;
-  onClick?: any;
+  onClick?: MouseEventHandler;
 }> = (props) => {
   return (
     <button

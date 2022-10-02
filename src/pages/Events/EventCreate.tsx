@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -8,23 +8,27 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
+import { CreateEvent } from "../../store/Event/EventSlice";
+import { useNavigate } from "react-router-dom";
 
 const EventCreate = () => {
+  const navigate = useNavigate();
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventImages, setEventImages] = useState("");
-  const [error, setError] = useState();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
-  const eventNameHandler = (event: any) => {
+  const eventNameHandler = (
+    event: FormEvent & { target: HTMLInputElement }
+  ) => {
     setEventName(event.target.value);
   };
 
-  const eventDescriptionHandler = (event: any) => {
+  const eventDescriptionHandler = (event: FormEvent & {target: HTMLTextAreaElement}) => {
     setEventDescription(event.target.value);
   };
 
@@ -32,7 +36,7 @@ const EventCreate = () => {
     setEventImages(event.target.files);
   };
 
-  const eventCreateHandler = async (event: any) => {
+  const eventCreateHandler = async () => {
     const formData = new FormData();
     formData.append("eventtitle", eventName);
     formData.append("eventdescription", eventDescription);
@@ -40,24 +44,8 @@ const EventCreate = () => {
       formData.append("imagefiles", eventImages[i]);
     }
 
-    const response = await fetch(`${baseUrl}/event/eventcreate`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        Accept: "*/*",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+    CreateEvent(formData);
+    navigate("/events");
   };
 
   return (
@@ -93,7 +81,10 @@ const EventCreate = () => {
                   </div>
                   <div className="form-description">
                     <label>Type Event Description</label>
-                    <textarea placeholder="Event Description" onChange={eventDescriptionHandler}></textarea>
+                    <textarea
+                      placeholder="Event Description"
+                      onChange={eventDescriptionHandler}
+                    ></textarea>
                   </div>
                   <div className="form-image">
                     <Input

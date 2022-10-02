@@ -115,18 +115,34 @@
     }
 
     .post-activity {
-      a {
-        text-decoration: none;
+      @include flex(none, none);
+
+      button {
+        border: none;
+        background-color: transparent;
         color: $global-font-color;
         padding: 5px;
+        margin: 0;
 
         i {
           margin: 0 5px;
         }
+      }
+    }
 
-        span {
-          @media screen and (max-width: 390px) {
-            display: none;
+    .post-input {
+      margin: 10px 0;
+
+      form {
+      @include flex(none, center);
+
+        button {
+          background-color: $primary;
+          color: $white;
+
+          &:hover {
+            background-color: $primary-dark;
+            border-color: $primary-dark;
           }
         }
       }

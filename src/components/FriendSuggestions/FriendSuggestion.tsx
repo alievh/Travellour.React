@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const FriendSuggestion: React.FC<{
   id: string;
-  userUrl: string;
+  imageUrl: string;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -14,7 +14,7 @@ const FriendSuggestion: React.FC<{
       <div className="friend-information">
         <div className="user-avatar">
           <Link to={`/user/${props.id}`}>
-            <img src={`https://localhost:7101/img/${props.userUrl}`} />
+            <img src={`https://localhost:7101/img/${props.imageUrl}`} />
           </Link>
         </div>
         <div className="user-details">

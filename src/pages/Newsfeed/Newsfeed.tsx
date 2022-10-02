@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Container from "../../components/Bootstrap/Container";
@@ -7,17 +7,19 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import Post from "../../components/Post/Post";
 import Col from "../../components/Bootstrap/Col";
 import Button from "../../components/UI/Button";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
+import { RootState } from "../../store";
+import { CreatePost, GetPosts } from "../../store/Post/PostSlice";
+import { useDispatch } from "react-redux";
 
 const Newsfeed = () => {
-  const [userPosts, setUserPosts]: any = useState([]);
+  const dispatch = useDispatch();
   const [fileUpload, setFileUpload] = useState("");
   const [postContent, setPostContent] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
 
-  const postContentHandler = (event: any) => {
+  const postContentHandler = (
+    event: FormEvent & { target: HTMLTextAreaElement }
+  ) => {
     setPostContent(event.target.value);
   };
 
@@ -25,65 +27,25 @@ const Newsfeed = () => {
     setFileUpload(event.target.files);
   };
 
-  const postCreateHandler = async (event: any) => {
-    event.preventDefault();
+  const postCreateHandler = async () => {
     const formData = new FormData();
     for (let i = 0; i < fileUpload.length; i++) {
       formData.append("imagefiles", fileUpload[i]);
     }
     formData.append("content", postContent);
 
-    const response = await fetch(`${baseUrl}/post/postcreate`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        Accept: "*/*",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+    CreatePost(formData);
   };
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
-  const getPosts = useCallback(async () => {
-    setLoading(true);
-    const posts = await fetch(`${baseUrl}/post/postgetall`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        setLoading(false);
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUserPosts(posts);
-  }, []);
+  const posts = useSelector((state: any) => state.PostSlice);
 
   useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    GetPosts(dispatch);
+  }, []);
 
   return (
     // Newsfeed Section - START
@@ -115,10 +77,11 @@ const Newsfeed = () => {
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
-                {loading && <p className="loading">Loading...</p>}
-                {userPosts.map((p: any) =>
+                {posts.loading && <p className="loading">Loading...</p>}
+                {posts.posts.map((p: any) =>
                   p.images !== null ? (
                     <Post
+                      postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}
@@ -131,6 +94,7 @@ const Newsfeed = () => {
                     />
                   ) : (
                     <Post
+                      postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}

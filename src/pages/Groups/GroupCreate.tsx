@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -8,24 +8,30 @@ import Button from "../../components/UI/Button";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { RootState } from "../../store";
+import { CreateGroup } from "../../store/Group/GroupSlice";
 
 const GroupCreate = () => {
+  const navigate = useNavigate();
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
   const [groupImage, setGroupImage] = useState("");
-  const [error, setError] = useState();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
-  const groupNameHandler = (event: any) => {
+  const groupNameHandler = (
+    event: FormEvent & { target: HTMLInputElement }
+  ) => {
     setGroupName(event.target.value);
   };
 
-  const groupDescriptionHandler = (event: any) => {
+  const groupDescriptionHandler = (
+    event: FormEvent & { target: HTMLTextAreaElement }
+  ) => {
     setGroupDescription(event.target.value);
   };
 
@@ -33,30 +39,14 @@ const GroupCreate = () => {
     setGroupImage(event.target.files[0]);
   };
 
-  const groupCreateHandler = async (event: any) => {
+  const groupCreateHandler = async () => {
     const formData = new FormData();
     formData.append("groupname", groupName);
     formData.append("groupdescription", groupDescription);
     formData.append("imagefile", groupImage);
 
-    const response = await fetch(`${baseUrl}/group/groupcreate`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        Accept: "*/*",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+    CreateGroup(formData);
+    navigate("/groups");
   };
 
   return (

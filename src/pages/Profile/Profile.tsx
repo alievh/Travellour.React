@@ -13,12 +13,15 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [error, setError] = useState();
+  const [userPosts, setUserPosts] = useState([]);
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
     userName: "",
     profileImage: "",
     coverImage: "",
+    friendCount: 0,
+    postCount: 0,
   });
   const navigate = useNavigate();
 
@@ -31,10 +34,36 @@ const Profile = () => {
     coverPhotoChangeHandler(event.target.files[0]);
   };
 
+  const userPost = useCallback(async () => {
+    const postInfo = await fetch(
+      `${baseUrl}/post/userpost/${JSON.parse(localStorage.getItem("user") || "{}").user.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    console.log(postInfo);
+    setUserPosts(postInfo);
+  }, []);
+
   const userData = useCallback(async () => {
     console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
     const userInformation = await fetch(
-      `${baseUrl}/user/${
+      `${baseUrl}/user/userprofile/${
         JSON.parse(localStorage.getItem("user") || "{}").user.id
       }`,
       {
@@ -61,7 +90,8 @@ const Profile = () => {
 
   useEffect(() => {
     userData();
-  }, []);
+    userPost();
+  }, [userData, userPost]);
 
   const profilePhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
@@ -144,11 +174,11 @@ const Profile = () => {
             <div className="user__statistics">
               <ul>
                 <li>
-                  <span>12</span>
+                  <span>{user.postCount}</span>
                   <span>Post</span>
                 </li>
                 <li>
-                  <span>77</span>
+                  <span>{user.friendCount}</span>
                   <span>Friends</span>
                 </li>
               </ul>
@@ -200,48 +230,34 @@ const Profile = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
+                {userPosts.map((p: any) =>
+                  p.images !== null ? (
+                    <Post
+                      postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      postImages={p.imageUrls}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  ) : (
+                    <Post
+                    postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      likeCount={p.likes.length}
+                      commentCount={p.comments.length}
+                    />
+                  )
+                )}
               </div>
             </section>
           </Col>

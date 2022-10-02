@@ -7,10 +7,11 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
+import { RootState } from "../../store";
 
 const Friends = () => {
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
+  const sidebarIsActive = useSelector<RootState, boolean>(
+    (state) => state.sidebarToggle.isActive
   );
 
   return (
