@@ -1,52 +1,28 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
-import Col from "../../components/Bootstrap/Col";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
+import Col from "../../components/Bootstrap/Col";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
 import { RootState } from "../../store";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { GetAllFriend } from "../../store/Friend/FriendSlice";
 
 const Friends = () => {
-  const [allFriends, setAllFriends] = useState([]);
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
-  const getAllFriends = useCallback(async () => {
-    setLoading(true);
-    const response = await fetch(`${baseUrl}/friend/getallfriend`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        setLoading(false);
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    console.log(response);
-    setAllFriends(response);
-  }, []);
+  const allFriends = useSelector((state: any) => state.FriendSlice);
 
   useEffect(() => {
-    getAllFriends();
+    GetAllFriend(dispatch);
   }, []);
 
   return (
@@ -88,7 +64,14 @@ const Friends = () => {
                 {/* Friends Filter - END */}
                 {/* Friends - START */}
                 <div className="user-friends">
-                  {allFriends.map((f:any) => <UserFriend firstName={f.firstname} lastName={f.lastname} imageUrl={f.profileImage} />)}
+                  {allFriends.friends.map((f: any) => (
+                    <UserFriend
+                      userId={f.id}
+                      firstName={f.firstname}
+                      lastName={f.lastname}
+                      imageUrl={f.profileImage}
+                    />
+                  ))}
                 </div>
                 {/* Friends - END */}
               </div>

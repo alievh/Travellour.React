@@ -11,6 +11,7 @@ import ForumDetailSlice from "./Forum/ForumDetailSlice";
 import GroupDetailSlice from "./Group/GroupDetailSlice";
 import ProfileSlice from "./User/ProfileSlice";
 import FriendRequestSlice from "./Friend/FriendRequestSlice";
+import FriendSlice from "./Friend/FriendSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,7 +25,8 @@ const store = configureStore({
     GroupDetailSlice: GroupDetailSlice,
     PostSlice: PostSlice,
     ProfileSlice: ProfileSlice,
-    FriendRequestSlice: FriendRequestSlice
+    FriendRequestSlice: FriendRequestSlice,
+    FriendSlice: FriendSlice
   },
 });
 

@@ -24,6 +24,7 @@ const User = () => {
     firstname: "",
     postCount: 0,
     friendCount: 0,
+    status: 4,
   });
   const { id } = useParams();
 
@@ -101,7 +102,7 @@ const User = () => {
         <Row>
           {/* User - START */}
           <div className="user">
-            <div className="user__statistics">
+            <div className="user__statistics col-lg-2">
               <ul>
                 <li>
                   <span>{user.postCount}</span>
@@ -113,7 +114,7 @@ const User = () => {
                 </li>
               </ul>
             </div>
-            <div className="user__details">
+            <div className="user__details col-lg-6">
               <div className="user-avatar">
                 <img
                   src={`https://localhost:7101/img/${user.profileImage}`}
@@ -125,15 +126,15 @@ const User = () => {
               </h5>
               <span>@{user.userName}</span>
             </div>
-            <div className="user__request">
+            <div className="user__request col-lg-4">
               <form>
-                <Button
+                {user.status === 4 ? <Button
                   type="submit"
                   innerText="Add Friend"
                   className="btn btn-primary"
                   buttonIcon="fa-solid fa-user-plus"
                   onClick={friendAddHandler}
-                />
+                /> : ""}
                 <Button
                   type="submit"
                   innerText="Message"

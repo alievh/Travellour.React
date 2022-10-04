@@ -65,6 +65,46 @@ export async function GetFriendRequests(dispatch: any) {
   dispatch(setFriendRequests(response));
 }
 
+export async function AcceptFriendRequest(id: string | undefined) {
+  const response = await fetch(`${baseUrl}/friend/acceptfriend/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+}
+
+export async function RejectFriendRequest(id: string | undefined) {
+  const response = await fetch(`${baseUrl}/friend/rejectfriend/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+}
+
 export const { setFriendRequests, setLoading, setError } =
   FriendRequestSlice.actions;
 export default FriendRequestSlice.reducer;

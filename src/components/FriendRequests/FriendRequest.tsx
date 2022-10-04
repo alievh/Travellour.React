@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../UI/Button";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import {
+  AcceptFriendRequest,
+  GetFriendRequests,
+  RejectFriendRequest,
+} from "../../store/Friend/FriendRequestSlice";
+import { useDispatch } from "react-redux";
 
 const FriendRequest: React.FC<{
   userId: string;
@@ -9,46 +14,14 @@ const FriendRequest: React.FC<{
   userLastName: string;
   userName: string;
 }> = (props) => {
-  const [error, setError] = useState();
+  const dispatch = useDispatch();
 
-  const acceptFriendHandler = async () => {
-    const response = await fetch(`${baseUrl}/friend/acceptfriend/${props.userId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+  const acceptFriendHandler = () => {
+    AcceptFriendRequest(props.userId);
   };
 
-  const rejectFriendHandler = async () => {
-    const response = await fetch(`${baseUrl}/friend/rejectfriend/${props.userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+  const rejectFriendHandler = () => {
+    RejectFriendRequest(props.userId);
   };
 
   return (

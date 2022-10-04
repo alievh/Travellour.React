@@ -13,7 +13,7 @@ const Event: React.FC<{
 
   return (
     <div className="events-container__event">
-      <Row>
+      <Row className="justify-content-between">
         <Col lg="3" className="event-image">
           {props.eventImages.length > 1 ? (
             <Slider images={props.eventImages} />

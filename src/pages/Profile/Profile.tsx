@@ -114,7 +114,7 @@ const Profile = () => {
         <Row>
           {/* Profile - START */}
           <div className="user">
-            <div className="user__statistics">
+            <div className="user__statistics col-lg-2">
               <ul>
                 <li>
                   <span>{profileData.profile.postCount}</span>
@@ -128,7 +128,7 @@ const Profile = () => {
                 </li>
               </ul>
             </div>
-            <div className="user__details">
+            <div className="user__details col-lg-6">
               <div className="user-avatar">
                 <img
                   src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
@@ -151,7 +151,7 @@ const Profile = () => {
               </h5>
               <span>@{profileData.profile.userName}</span>
             </div>
-            <div className="user__request">
+            <div className="user__request col-lg-4">
               <form>
                 <Button
                   type="submit"

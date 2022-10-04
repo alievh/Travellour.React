@@ -35,6 +35,7 @@ const Newsfeed = () => {
     formData.append("content", postContent);
 
     CreatePost(formData);
+    GetPosts(dispatch);
   };
 
   const sidebarIsActive = useSelector<RootState, boolean>(

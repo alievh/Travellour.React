@@ -4,7 +4,6 @@
   padding: 0 12px;
   margin: 12px 0;
   background-color: $global-bg-color;
-  @include flex(space-between, none);
 
   @media screen and (max-width: 1200px) {
     padding-bottom: 18px;

@@ -1,25 +1,52 @@
-import React from "react";
-
+import React, { useState } from "react";
 import Button from "../UI/Button";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { Link } from "react-router-dom";
 
 const UserFriend: React.FC<{
+  userId: string;
   imageUrl: string;
   firstName: string;
   lastName: string;
 }> = (props) => {
+  const [error, setError] = useState();
+
+  const removeFriendHandler = async () => {
+    const response = await fetch(
+      `${baseUrl}/friend/deletefriend/${props.userId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  };
+
   return (
     <div className="user-friend">
       <div className="user-friend__info">
         <div className="user-friend__avatar">
-          <a href="#">
+          <Link to={`/user/${props.userId}`}>
             <img src={`https://localhost:7101/img/${props.imageUrl}`} />
-          </a>
+          </Link>
         </div>
         <div className="user-friend__fullname">
           <h5>
-            <a href="#">
+            <Link to={`/user/${props.userId}`}>
               {props.firstName} {props.lastName}
-            </a>
+            </Link>
           </h5>
           <span>Active</span>
         </div>
@@ -29,6 +56,7 @@ const UserFriend: React.FC<{
           type="submit"
           className="btn btn-warning"
           innerText="Unfriend"
+          onClick={removeFriendHandler}
         />
         <a href="#">
           <i className="fa-regular fa-envelope"></i>

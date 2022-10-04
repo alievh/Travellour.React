@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import FriendRequest from "./FriendRequest";
-import { GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
+import { FriendRequestSlice, GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
@@ -11,14 +11,26 @@ const FriendRequests = () => {
 
   useEffect(() => {
     GetFriendRequests(dispatch);
-  }, []);
+  }, [FriendRequestSlice]);
 
   return (
     <div className="friend-requests">
       <h5>Friends Requests</h5>
       <div className="active-user">
         <ul>
-          {friendRequests.friendRequests.map((f:any) => <FriendRequest userId={f.id} userFirstName={f.firstname} userLastName={f.lastname} userName={f.userName} imageUrl={f.profileImage} />)}
+          {friendRequests.friendRequests.length > 0 ? (
+            friendRequests.friendRequests.map((f: any) => (
+              <FriendRequest
+                userId={f.id}
+                userFirstName={f.firstname}
+                userLastName={f.lastname}
+                userName={f.userName}
+                imageUrl={f.profileImage}
+              />
+            ))
+          ) : (
+            <p>You don't have any friend request!</p>
+          )}
         </ul>
       </div>
     </div>
