@@ -1,35 +1,24 @@
+import { useState, useEffect } from "react";
 import FriendRequest from "./FriendRequest";
+import { GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const FriendRequests = () => {
+  const dispatch = useDispatch();
+
+  const friendRequests = useSelector((state: any) => state.FriendRequestSlice);
+
+  useEffect(() => {
+    GetFriendRequests(dispatch);
+  }, []);
+
   return (
     <div className="friend-requests">
       <h5>Friends Requests</h5>
       <div className="active-user">
         <ul>
-          <FriendRequest
-            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-            userFirstName="Marvin"
-            userLastName="McKinney"
-            userName="marvin"
-          />
-          <FriendRequest
-            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-            userFirstName="Anar"
-            userLastName="Balacayev"
-            userName="anar"
-          />
-          <FriendRequest
-            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-            userFirstName="Huseyn"
-            userLastName="Aliyev"
-            userName="whose1n"
-          />
-          <FriendRequest
-            imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-            userFirstName="Aysel"
-            userLastName="Abilova"
-            userName="aysel"
-          />
+          {friendRequests.friendRequests.map((f:any) => <FriendRequest userId={f.id} userFirstName={f.firstname} userLastName={f.lastname} userName={f.userName} imageUrl={f.profileImage} />)}
         </ul>
       </div>
     </div>

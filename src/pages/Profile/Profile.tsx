@@ -10,21 +10,19 @@ import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  CoverPhotoChanger,
+  GetProfile,
+  ProfilePhotoChanger,
+} from "../../store/User/ProfileSlice";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [error, setError] = useState();
   const [userPosts, setUserPosts] = useState([]);
-  const [user, setUser] = useState({
-    firstname: "",
-    lastname: "",
-    userName: "",
-    profileImage: "",
-    coverImage: "",
-    friendCount: 0,
-    postCount: 0,
-  });
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const profilePhotoHandler = (event: any) => {
     profilePhotoChangeHandler(event.target.files[0]);
@@ -36,7 +34,9 @@ const Profile = () => {
 
   const userPost = useCallback(async () => {
     const postInfo = await fetch(
-      `${baseUrl}/post/userpost/${JSON.parse(localStorage.getItem("user") || "{}").user.id}`,
+      `${baseUrl}/post/userpost/${
+        JSON.parse(localStorage.getItem("user") || "{}").user.id
+      }`,
       {
         method: "GET",
         headers: {
@@ -60,59 +60,16 @@ const Profile = () => {
     setUserPosts(postInfo);
   }, []);
 
-  const userData = useCallback(async () => {
-    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
-    const userInformation = await fetch(
-      `${baseUrl}/user/userprofile/${
-        JSON.parse(localStorage.getItem("user") || "{}").user.id
-      }`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUser(userInformation);
-  }, []);
-
   useEffect(() => {
-    userData();
+    GetProfile(dispatch);
     userPost();
-  }, [userData, userPost]);
+  }, [userPost]);
 
   const profilePhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    const response = await fetch(`${baseUrl}/user/changeprofilephoto`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
-        Accept: "*/*",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data?.error?.message?.toString());
-        });
-      }
-    });
+    ProfilePhotoChanger(formData);
 
     navigate("/profile");
   };
@@ -121,22 +78,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    const response = await fetch(`${baseUrl}/user/changecoverphoto`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
-        Accept: "*/*",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data?.error?.message?.toString());
-        });
-      }
-    });
+    CoverPhotoChanger(formData);
 
     navigate("/profile");
   };
@@ -144,6 +86,7 @@ const Profile = () => {
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
+  const profileData = useSelector((state: any) => state.ProfileSlice);
 
   return (
     // Profile Section - START
@@ -152,7 +95,7 @@ const Profile = () => {
     >
       <div className="profile-section__background">
         <img
-          src={`https://localhost:7101/img/${user.coverImage}`}
+          src={`https://localhost:7101/img/${profileData.profile.coverImage}`}
           alt="Profile Background"
         />
         <form>
@@ -174,19 +117,21 @@ const Profile = () => {
             <div className="user__statistics">
               <ul>
                 <li>
-                  <span>{user.postCount}</span>
+                  <span>{profileData.profile.postCount}</span>
                   <span>Post</span>
                 </li>
                 <li>
-                  <span>{user.friendCount}</span>
-                  <span>Friends</span>
+                  <Link to="/friends">
+                    <span>{profileData.profile.friendCount}</span>
+                    <span>Friends</span>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="user__details">
               <div className="user-avatar">
                 <img
-                  src={`https://localhost:7101/img/${user.profileImage}`}
+                  src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
                   alt="User Avatar"
                 />
                 <form>
@@ -202,9 +147,9 @@ const Profile = () => {
                 </form>
               </div>
               <h5>
-                {user.firstname} {user.lastname}
+                {profileData.profile.firstname} {profileData.profile.lastname}
               </h5>
-              <span>@{user.userName}</span>
+              <span>@{profileData.profile.userName}</span>
             </div>
             <div className="user__request">
               <form>
@@ -246,7 +191,7 @@ const Profile = () => {
                     />
                   ) : (
                     <Post
-                    postId={p.id}
+                      postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}

@@ -11,6 +11,7 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
+import { SendFriendRequest } from "../../store/Friend/FriendRequestSlice";
 
 const User = () => {
   const [error, setError] = useState();
@@ -81,6 +82,10 @@ const User = () => {
     (state) => state.sidebarToggle.isActive
   );
 
+  const friendAddHandler = () => {
+    SendFriendRequest(id);
+  }
+
   return (
     // User Section - START
     <section
@@ -127,6 +132,7 @@ const User = () => {
                   innerText="Add Friend"
                   className="btn btn-primary"
                   buttonIcon="fa-solid fa-user-plus"
+                  onClick={friendAddHandler}
                 />
                 <Button
                   type="submit"

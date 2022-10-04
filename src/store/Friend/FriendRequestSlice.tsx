@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
 
-export const ForumSlice = createSlice({
-  name: "forums",
+export const FriendRequestSlice = createSlice({
+  name: "friendRequest",
   initialState: {
-    forums: [],
+    friendRequests: [],
     loading: false,
     error: null,
   },
   reducers: {
-    setForums: (state, action) => {
-      state.forums = action.payload;
+    setFriendRequests: (state, action) => {
+      state.friendRequests = action.payload;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -21,9 +21,29 @@ export const ForumSlice = createSlice({
   },
 });
 
-export async function GetForums(dispatch: any) {
+export async function SendFriendRequest(id: string | undefined) {
+  const response = await fetch(`${baseUrl}/friend/addfriend/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+}
+
+export async function GetFriendRequests(dispatch: any) {
   dispatch(setLoading(true));
-  const response = await fetch(`${baseUrl}/forum/forumgetall`, {
+  const response = await fetch(`${baseUrl}/friend/friendrequests`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -42,29 +62,9 @@ export async function GetForums(dispatch: any) {
     }
   });
 
-  dispatch(setForums(response));
+  dispatch(setFriendRequests(response));
 }
 
-export async function CreateForum(forumCreate: any) {
-  await fetch(`${baseUrl}/forum/forumcreate`, {
-    method: "POST",
-    body: JSON.stringify(forumCreate),
-    headers: {
-      Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem("user") || "{}").token
-      }`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return res.json().then((data) => {
-        setError(data.error.message.toString());
-      });
-    }
-  });
-}
-
-export const { setForums, setLoading, setError } = ForumSlice.actions;
-export default ForumSlice.reducer;
+export const { setFriendRequests, setLoading, setError } =
+  FriendRequestSlice.actions;
+export default FriendRequestSlice.reducer;

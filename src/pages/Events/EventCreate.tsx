@@ -93,6 +93,7 @@ const EventCreate = () => {
                       id="event-image"
                       placeholder="Choose Image"
                       onChange={eventImagesHandler}
+                      multiple
                     />
                   </div>
                   <Button type="submit" className="btn" innerText="Create" />

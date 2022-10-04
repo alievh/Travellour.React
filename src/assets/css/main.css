@@ -146,10 +146,17 @@ body {
 }
 
 .friend-request {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.friend-request__info {
   display: flex;
   justify-content: none;
-  align-items: none;
-  margin: 20px 0;
+  align-items: center;
 }
 
 .friend-request__user-avatar {
@@ -169,6 +176,37 @@ body {
 
 .friend-request__user-avatar img {
   width: 100%;
+}
+
+.friend-request__action button {
+  margin-right: 5px;
+}
+
+.friend-request__action button.accept-friend {
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  transition: .3s ease-in;
+}
+
+.friend-request__action button.accept-friend:hover {
+  color: #fff;
+  background-color: #4fb5ff;
+  border-color: #4fb5ff;
+}
+
+.friend-request__action button.reject-friend {
+  background: rgba(241, 70, 70, 0.0862745);
+  border-color: rgba(241, 70, 70, 0.0862745);
+  color: #f14646;
+  transition: .3s ease-in;
+}
+
+.friend-request__action button.reject-friend:hover {
+  color: #fff;
+  background-color: #f14646;
+  border-color: #f14646;
+  transition: .3s ease-out;
 }
 
 .friend-request .user-details {
@@ -1368,6 +1406,11 @@ body {
   }
 }
 
+.nav-bar__navigation ul li .friend-dropdown .friend-requests {
+  margin: 0;
+  padding: 0 8px;
+}
+
 .nav-bar__navigation ul li .friend-dropdown h5 {
   padding: 16px 0;
   margin: 0 32px;
@@ -2085,6 +2128,17 @@ body {
 
 .profile-section .user__statistics ul li:first-child {
   border-right: 1px solid #f1f1f1;
+}
+
+.profile-section .user__statistics ul li a {
+  text-decoration: none;
+  color: #000;
+  transition: .1s ease-in;
+}
+
+.profile-section .user__statistics ul li a:hover {
+  border-bottom: 2px solid #000;
+  transition: .1s ease-out;
 }
 
 .profile-section .user__statistics ul li span {

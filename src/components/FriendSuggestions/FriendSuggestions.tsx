@@ -7,7 +7,7 @@ const FriendSuggestions = () => {
   const [error, setError] = useState();
 
   const friendSuggestions = useCallback(async () => {
-    const suggestions = await fetch(`${baseUrl}/user/friendsuggestion`, {
+    const suggestions = await fetch(`${baseUrl}/friend/friendsuggestion`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

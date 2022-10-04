@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
 
 export const GroupSlice = createSlice({
-  name: "groups",
+  name: "groupDetail",
   initialState: {
-    groups: [],
+    group: [],
     loading: false,
     error: null,
   },
   reducers: {
-    setGroups: (state, action) => {
-      state.groups = action.payload;
+    setGroup: (state, action) => {
+      state.group = action.payload;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -21,9 +21,9 @@ export const GroupSlice = createSlice({
   },
 });
 
-export async function GetGroups(dispatch: any) {
+export async function GetGroupDetail(dispatch: any, id: string | undefined) {
   dispatch(setLoading(true));
-  const response = await fetch(`${baseUrl}/group/groupgetall`, {
+  const response = await fetch(`${baseUrl}/group/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -32,8 +32,8 @@ export async function GetGroups(dispatch: any) {
       }`,
     },
   }).then((res) => {
+    dispatch(setLoading(false));
     if (res.ok) {
-      dispatch(setLoading(false));
       return res.json();
     } else {
       return res.json().then((data) => {
@@ -42,29 +42,8 @@ export async function GetGroups(dispatch: any) {
     }
   });
 
-  dispatch(setGroups(response));
+  dispatch(setGroup(response));
 }
 
-export async function CreateGroup(formData: any) {
-  await fetch(`${baseUrl}/group/groupcreate`, {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem("user") || "{}").token
-      }`,
-      Accept: "*/*",
-    },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return res.json().then((data) => {
-        setError(data.error.message.toString());
-      });
-    }
-  });
-}
-
-export const { setGroups, setLoading, setError } = GroupSlice.actions;
+export const { setGroup, setLoading, setError } = GroupSlice.actions;
 export default GroupSlice.reducer;

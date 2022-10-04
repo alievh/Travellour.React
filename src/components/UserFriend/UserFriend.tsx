@@ -12,7 +12,7 @@ const UserFriend: React.FC<{
       <div className="user-friend__info">
         <div className="user-friend__avatar">
           <a href="#">
-            <img src={props.imageUrl} />
+            <img src={`https://localhost:7101/img/${props.imageUrl}`} />
           </a>
         </div>
         <div className="user-friend__fullname">

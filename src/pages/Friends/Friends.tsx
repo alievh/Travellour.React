@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Col from "../../components/Bootstrap/Col";
@@ -8,11 +9,45 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
 import { RootState } from "../../store";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Friends = () => {
+  const [allFriends, setAllFriends] = useState([]);
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
+
+  const getAllFriends = useCallback(async () => {
+    setLoading(true);
+    const response = await fetch(`${baseUrl}/friend/getallfriend`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        setLoading(false);
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    console.log(response);
+    setAllFriends(response);
+  }, []);
+
+  useEffect(() => {
+    getAllFriends();
+  }, []);
 
   return (
     // Friends Section - START
@@ -53,31 +88,7 @@ const Friends = () => {
                 {/* Friends Filter - END */}
                 {/* Friends - START */}
                 <div className="user-friends">
-                  <UserFriend
-                    firstName="Huseyn"
-                    lastName="Quliyev"
-                    imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                  />
-                  <UserFriend
-                    firstName="Anar"
-                    lastName="Balacayev"
-                    imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                  />
-                  <UserFriend
-                    firstName="Aysel"
-                    lastName="Abilov"
-                    imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/21/1656593693-bpfull.jpg"
-                  />
-                  <UserFriend
-                    firstName="Anar"
-                    lastName="Balacayev"
-                    imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                  />
-                  <UserFriend
-                    firstName="Aysel"
-                    lastName="Abilov"
-                    imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/21/1656593693-bpfull.jpg"
-                  />
+                  {allFriends.map((f:any) => <UserFriend firstName={f.firstname} lastName={f.lastname} imageUrl={f.profileImage} />)}
                 </div>
                 {/* Friends - END */}
               </div>

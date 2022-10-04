@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
 
 export const PostSlice = createSlice({
-  name: "events",
+  name: "posts",
   initialState: {
     posts: [],
     loading: false,

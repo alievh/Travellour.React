@@ -8,6 +8,7 @@ const Input: React.FC<{
   mainDivClass?: string;
   name?: string;
   ref?: any;
+  multiple?: any;
   onChange? : ChangeEventHandler;
 }> = React.forwardRef((props, forRef?: any) => {
   const mainDivClassName = "form-group " + props.mainDivClass;
@@ -23,6 +24,7 @@ const Input: React.FC<{
         ref={forRef}
         onChange={props.onChange}
         name={props.name}
+        multiple
       />
     </div>
   );

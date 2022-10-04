@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useEffect } from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -9,48 +9,23 @@ import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
+import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
+import { useDispatch } from "react-redux";
 
 const Group = () => {
-  const [groupData, setGroupData] = useState({
-    groupName: "",
-    groupDescription: "",
-    groupImage: "",
-  });
-  const [error, setError] = useState();
-  let { id } = useParams();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
-  const groupDetailData = useCallback(async () => {
-    const groupInfo = await fetch(`${baseUrl}/group/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    console.log(groupInfo);
-    setGroupData(groupInfo);
-  }, []);
+  const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
   useEffect(() => {
-    groupDetailData();
-  }, [groupDetailData]);
+    GetGroupDetail(dispatch, id);
+  }, []);
 
   return (
     // Group Section - START
@@ -71,7 +46,7 @@ const Group = () => {
               <div className="group__details">
                 <div className="group-avatar">
                   <img
-                    src={`https://localhost:7101/img/${groupData.groupImage}`}
+                    src={`https://localhost:7101/img/${groupDetail.group.groupImage}`}
                     alt="Group Avatar"
                   />
                 </div>
@@ -81,8 +56,8 @@ const Group = () => {
             {/* Group Decription - START */}
             <Col lg="6">
               <div className="group__description">
-                <h5>{groupData.groupName}</h5>
-                <p>{groupData.groupDescription}</p>
+                <h5>{groupDetail.group.groupName}</h5>
+                <p>{groupDetail.group.groupDescription}</p>
               </div>
             </Col>
             {/* Group Decription - END */}

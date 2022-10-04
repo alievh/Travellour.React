@@ -96,6 +96,17 @@
             border-right: 1px solid $global-border-color;
           }
 
+          a {
+            text-decoration: none;
+            color: $black;
+            transition: .1s ease-in;
+
+            &:hover {
+              border-bottom: 2px solid $black;
+              transition: .1s ease-out;
+            }
+          }
+
           span {
             margin: 4px;
           }
@@ -183,7 +194,7 @@
         right: -20px;
 
         .profilphoto-label {
-          @include flex(center,center);
+          @include flex(center, center);
           width: 35px;
           height: 35px;
           cursor: pointer;

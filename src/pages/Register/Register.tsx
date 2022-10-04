@@ -31,21 +31,18 @@ const Register = () => {
       confirmPassword: confirmPassword.current?.value,
       birthday: birthday.current?.value,
     };
-    
+
     setLoading(true);
-    const response = await fetch(
-      `${baseUrl}/authenticate/register`,
-      {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((res) => {
+    const response = await fetch(`${baseUrl}/authenticate/register`, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       setLoading(false);
       if (res.ok) {
-        navigate('/');
+        navigate("/");
         return res.json();
       } else {
         return res.json().then((data) => {
@@ -54,8 +51,6 @@ const Register = () => {
       }
     });
   }
-
-  
 
   return (
     <main>

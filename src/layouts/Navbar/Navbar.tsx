@@ -10,14 +10,16 @@ import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
+import FriendRequests from "../../components/FriendRequests/FriendRequests";
 
 const Navbar = () => {
-  const [ error, setError ] = useState();
-  const [ user, setUser] = useState({
+  const [error, setError] = useState();
+  const [user, setUser] = useState({
     firstname: "",
     lastname: "",
     userName: "",
-    profileImage: ""
+    profileImage: "",
   });
 
   const sidebarIsActive = useSelector(
@@ -84,7 +86,7 @@ const Navbar = () => {
     setProfileToggle(!profileToggle);
   };
 
-  const userData = useCallback( async () => {
+  const userData = useCallback(async () => {
     const userInformation = await fetch(
       `${baseUrl}/user/${
         JSON.parse(localStorage.getItem("user") || "{}").user.id
@@ -93,7 +95,9 @@ const Navbar = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
         },
       }
     ).then((res) => {
@@ -116,9 +120,9 @@ const Navbar = () => {
   const logoutHandler = () => {
     dispatch(logout());
     dispatch(clearUserData());
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     navigate("/");
-  }
+  };
 
   return (
     // Navbar - START
@@ -152,9 +156,8 @@ const Navbar = () => {
                     />
                     {friendRequestsToggle ? (
                       <div className="friend-dropdown">
-                        <h5>Friend Requests</h5>
                         <div className="friend-dropdown__body">
-                          <p>You have no pending friends requests.</p>
+                          <FriendRequests />
                         </div>
                       </div>
                     ) : (
@@ -202,7 +205,10 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      <img src={`https://localhost:7101/img/${user.profileImage}`} alt="User Avatar" />
+                      <img
+                        src={`https://localhost:7101/img/${user.profileImage}`}
+                        alt="User Avatar"
+                      />
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">
@@ -221,7 +227,12 @@ const Navbar = () => {
                               </Link>
                             </li>
                             <li>
-                              <Button className="btn nav-logout" innerText="Log Out" type="button" onClick={logoutHandler} />
+                              <Button
+                                className="btn nav-logout"
+                                innerText="Log Out"
+                                type="button"
+                                onClick={logoutHandler}
+                              />
                             </li>
                           </ul>
                         </div>

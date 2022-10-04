@@ -8,49 +8,22 @@ import Button from "../../components/UI/Button";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
+import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
+import { useDispatch } from "react-redux";
 
 const ForumDetail = () => {
-  const [forumData, setForumData] = useState({
-    forumTitle: "",
-    forumContent: "",
-  });
-  const [error, setError] = useState();
-
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
-  const forumDetailData = useCallback(async () => {
-    const forumInfo = await fetch(
-      `${baseUrl}/forum/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    console.log(forumInfo);
-    setForumData(forumInfo);
-  }, []);
+  const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
 
   useEffect(() => {
-    forumDetailData();
-  }, [forumDetailData]);
+    GetForumDetail(dispatch, id);
+  }, []);
 
   return (
     // Forums Section - START
@@ -62,11 +35,11 @@ const ForumDetail = () => {
           <Row>
             <Col xl="12">
               <div className="forum-detail-container__title">
-                <h4>{forumData.forumTitle}</h4>
+                <h4>{forumDetail.forum.forumTitle}</h4>
               </div>
               <div className="forum-detail-container__content">
                 <p>
-                  {forumData.forumContent}
+                  {forumDetail.forum.forumContent}
                 </p>
               </div>
               <div className="forum-detial-container__comments">
