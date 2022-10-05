@@ -138,7 +138,7 @@ body {
 .friend-requests h5 {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #f8f9fa;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .friend-requests ul {
@@ -736,6 +736,10 @@ body {
   color: #6f7f92;
   padding: 5px;
   margin: 0;
+}
+
+.post .post-content .post-activity button.liked {
+  color: red;
 }
 
 .post .post-content .post-activity button i {

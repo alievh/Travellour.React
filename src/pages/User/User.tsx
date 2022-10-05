@@ -162,8 +162,10 @@ const User = () => {
                       createdDate="6 hours"
                       postContent={p.content}
                       postImages={p.imageUrls}
-                      likeCount={p.likes.length}
-                      commentCount={p.comments.length}
+                      likeCount={p.likeCount}
+                      commentCount={p.commentCount}
+                      likes={p.likes}
+                      comments={p.comment}
                     />
                   ) : (
                     <Post
@@ -174,8 +176,10 @@ const User = () => {
                       userLastname={p.user.lastname}
                       createdDate="6 hours"
                       postContent={p.content}
-                      likeCount={p.likes.length}
-                      commentCount={p.comments.length}
+                      likeCount={p.likeCount}
+                      commentCount={p.commentCount}
+                      likes={p.likes}
+                      comments={p.comment}
                     />
                   )
                 )}

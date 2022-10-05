@@ -4,7 +4,7 @@ import { baseUrl } from "../Fetch/FetchConfiguration";
 export const GroupSlice = createSlice({
   name: "groupDetail",
   initialState: {
-    group: [],
+    group: {},
     loading: false,
     error: null,
   },
@@ -23,7 +23,7 @@ export const GroupSlice = createSlice({
 
 export async function GetGroupDetail(dispatch: any, id: string | undefined) {
   dispatch(setLoading(true));
-  const response = await fetch(`${baseUrl}/group/${id}`, {
+  const response = await fetch(`${baseUrl}/group/groupprofile/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

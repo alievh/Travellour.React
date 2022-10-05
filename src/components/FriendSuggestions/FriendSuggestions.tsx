@@ -38,7 +38,7 @@ const FriendSuggestions = () => {
       <h5>Friend Suggestions</h5>
       <div>
         <ul>
-          {friendSuggestion.map((f: any) => (
+          {friendSuggestion.length > 0 ? friendSuggestion.map((f: any) => (
             <FriendSuggestion
               id={f.id}
               imageUrl={f.imageUrl}
@@ -46,7 +46,7 @@ const FriendSuggestions = () => {
               userLastName={f.lastname}
               userName={f.userName}
             />
-          ))}
+          )) : <p>You don't have any friend suggestion!</p>}
         </ul>
       </div>
     </div>

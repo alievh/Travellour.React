@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -12,10 +12,38 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
 import { useDispatch } from "react-redux";
+import { GetPosts, CreatePost } from "../../store/Post/PostSlice";
+import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 
 const Group = () => {
+  const [groupPosts, setGroupPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+  const [postContent, setPostContent] = useState("");
+  const [fileUpload, setFileUpload] = useState("");
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const postCreateHandler = () => {
+    const formData = new FormData();
+    for (let i = 0; i < fileUpload.length; i++) {
+      formData.append("imagefiles", fileUpload[i]);
+    }
+    formData.append("content", postContent);
+    if (id !== undefined) {
+      formData.append("groupId", id);
+    }
+
+    CreatePost(formData);
+  };
+
+  const postContentHandler = (event: any) => {
+    setPostContent(event.target.value);
+  };
+
+  const fileUploadHandler = (event: any) => {
+    setFileUpload(event.target.files);
+  };
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
@@ -23,8 +51,34 @@ const Group = () => {
 
   const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
+  const getGroupPosts = async () => {
+    setLoading(true);
+    const response = await fetch(`${baseUrl}/group/Grouppostgetall/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        setLoading(false);
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    console.log(response);
+    setGroupPosts(response);
+  };
+
   useEffect(() => {
     GetGroupDetail(dispatch, id);
+    getGroupPosts();
   }, []);
 
   return (
@@ -66,11 +120,11 @@ const Group = () => {
               <div className="group__statistics">
                 <ul>
                   <li>
-                    <span>12</span>
+                    <span>{groupDetail.group.postCount}</span>
                     <span>Post</span>
                   </li>
                   <li>
-                    <span>77</span>
+                    <span>{groupDetail.group.memberCount}</span>
                     <span>Members</span>
                   </li>
                 </ul>
@@ -97,53 +151,59 @@ const Group = () => {
           {/* Group Posts - START */}
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
+              <div className="newsfeed-section__post-create">
+                <form onSubmit={postCreateHandler}>
+                  <textarea onChange={postContentHandler}></textarea>
+                  <div className="post-create__bottom">
+                    <label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="imagefiles"
+                        multiple
+                        onChange={fileUploadHandler}
+                      />
+                      <i className="fa-solid fa-image"></i>
+                      Upload Photo
+                    </label>
+                    <Button type="submit" className="btn" innerText="Share" />
+                  </div>
+                </form>
+              </div>
               <div className="newsfeed-section__posts">
-                <Post
-                  postId="123"
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  postId="123"
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  postId="123"
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hi Guys!"
-                  postImages={undefined}
-                  likeCount="2"
-                  commentCount="4"
-                />
-                <Post
-                  postId="123"
-                  userId="123"
-                  userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                  userFirstname="Marvin"
-                  userLastname="McKinney"
-                  createdDate="6 hours"
-                  postContent="Hello from the other side!"
-                  likeCount="2"
-                  commentCount="4"
-                />
+                {loading && <p className="loading">Loading...</p>}
+                {groupPosts.map((p: any) =>
+                  p.images !== null ? (
+                    <Post
+                      postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      postImages={p.imageUrls}
+                      likeCount={p.likeCount}
+                      commentCount={p.commentCount}
+                      likes={p.likes}
+                      comments={p.comment}
+                    />
+                  ) : (
+                    <Post
+                      postId={p.id}
+                      userId={p.user.id}
+                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                      userFirstname={p.user.firstname}
+                      userLastname={p.user.lastname}
+                      createdDate="6 hours"
+                      postContent={p.content}
+                      likeCount={p.likeCount}
+                      commentCount={p.commentCount}
+                      likes={p.likes}
+                      comments={p.comment}
+                    />
+                  )
+                )}
               </div>
             </section>
             {/* Group Posts - END */}
@@ -151,12 +211,19 @@ const Group = () => {
           {/* Right SideBar - START */}
           <Col xl="4" sm="12">
             <section className="newsfeed-section">
-              <GroupAdmin
-                adminImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/1/1656590103-bpfull.jpg"
-                adminFirstName="Anar"
-                adminLastName="Balayan"
-                adminUserName="anaryan"
-              />
+              {groupDetail.group.groupAdmin !== undefined ? (
+                <GroupAdmin
+                  adminId={groupDetail.group.groupAdmin.id}
+                  adminImage={
+                    groupDetail.group.groupAdmin.profileImage.imageUrl
+                  }
+                  adminFirstName={groupDetail.group.groupAdmin.firstname}
+                  adminLastName={groupDetail.group.groupAdmin.lastname}
+                  adminUserName={groupDetail.group.groupAdmin.userName}
+                />
+              ) : (
+                ""
+              )}
               <FriendRequests />
               <AddvertisingBanner />
             </section>

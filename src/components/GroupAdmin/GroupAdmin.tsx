@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GroupAdmin: React.FC<{
+  adminId: string;
   adminImage: string;
   adminFirstName: string;
   adminLastName: string;
@@ -11,16 +13,32 @@ const GroupAdmin: React.FC<{
       <h5>Group Admin</h5>
       <div className="admin">
         <div className="admin-avatar">
-          <a href="#">
-            <img src={props.adminImage} />
-          </a>
+          {JSON.parse(localStorage.getItem("user") || "{}").user.id ===
+          props.adminId ? (
+            <Link to="/profile">
+              <img src={`https://localhost:7101/img/${props.adminImage}`} />
+            </Link>
+          ) : (
+            <Link to={`/user/${props.adminId}`}>
+              <img src={`https://localhost:7101/img/${props.adminImage}`} />
+            </Link>
+          )}
         </div>
         <div className="admin-details">
-          <a href="#">
-            <h6>
-              {props.adminFirstName} {props.adminLastName}
-            </h6>
-          </a>
+          {JSON.parse(localStorage.getItem("user") || "{}").user.id ===
+          props.adminId ? (
+            <Link to="/profile">
+              <h6>
+                {props.adminFirstName} {props.adminLastName}
+              </h6>
+            </Link>
+          ) : (
+            <Link to={`/user/${props.adminId}`}>
+              <h6>
+                {props.adminFirstName} {props.adminLastName}
+              </h6>
+            </Link>
+          )}
           <span>@{props.adminUserName}</span>
         </div>
       </div>

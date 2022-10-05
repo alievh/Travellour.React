@@ -124,10 +124,17 @@
         padding: 5px;
         margin: 0;
 
+        &.liked {
+          color: red;
+        }
+
         i {
           margin: 0 5px;
         }
       }
+
+      
+      
     }
 
     .post-input {

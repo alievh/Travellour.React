@@ -18,15 +18,58 @@ const Post: React.FC<{
   postImages?: string[];
   likeCount: string;
   commentCount: string;
+  likes: Array<any>;
+  comments: Array<any>;
 }> = (props) => {
   const [commentIsActive, setCommentIsActive] = useState(false);
+  const [error, setError] = useState();
+
+  const addLikeHandler = async () => {
+    const response = await fetch(`${baseUrl}/post/likeadd/${props.postId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  };
+
+  const deleteLikeHandler = async () => {
+    const response = await fetch(`${baseUrl}/post/likedelete/${props.postId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+  }
 
   const commentActiveHandler = () => {
     setCommentIsActive(!commentIsActive);
   };
 
   const postDeleteHandler = async () => {
-    DeletePost(props.postId)
+    DeletePost(props.postId);
   };
 
   return (
@@ -95,12 +138,27 @@ const Post: React.FC<{
           </span>
         </div>
         <div className="post-activity">
-          <Button
-            type="button"
-            innerText="Like"
-            buttonIcon="fa-regular fa-heart"
-            className="comment"
-          />
+          {props.likes.some(
+            (n) =>
+              n.userId ===
+              JSON.parse(localStorage.getItem("user") || "{}").user.id
+          ) ? (
+            <Button
+              type="button"
+              innerText="Like"
+              buttonIcon="fa-solid fa-heart"
+              className="like  liked"
+              onClick={deleteLikeHandler}
+            />
+          ) : (
+            <Button
+              type="button"
+              innerText="Like"
+              buttonIcon="fa-regular fa-heart"
+              className="like"
+              onClick={addLikeHandler}
+            />
+          )}
           <Button
             type="button"
             innerText="Comment"
