@@ -1,44 +1,24 @@
 import FriendSuggestion from "./FriendSuggestion";
-import { useCallback, useState, useEffect } from "react";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { GetFriendSuggestions } from "../../store/Friend/FriendSuggestionSlice";
+import { useDispatch } from "react-redux";
 
 const FriendSuggestions = () => {
-  const [friendSuggestion, setFriendSuggestion] = useState([]);
-  const [error, setError] = useState();
+  const dispatch = useDispatch();
 
-  const friendSuggestions = useCallback(async () => {
-    const suggestions = await fetch(`${baseUrl}/friend/friendsuggestion`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    console.log(suggestions);
-    setFriendSuggestion(suggestions);
-  }, []);
+  const friendSuggestions = useSelector((state: any) => state.FriendSuggestionSlice);
 
   useEffect(() => {
-    friendSuggestions();
-  }, [friendSuggestions]);
+    GetFriendSuggestions(dispatch);
+  }, []);
 
   return (
     <div className="friend-suggestions">
       <h5>Friend Suggestions</h5>
       <div>
         <ul>
-          {friendSuggestion.length > 0 ? friendSuggestion.map((f: any) => (
+          {friendSuggestions.friendSuggestions.length > 0 ? friendSuggestions.friendSuggestions.map((f: any) => (
             <FriendSuggestion
               id={f.id}
               imageUrl={f.imageUrl}

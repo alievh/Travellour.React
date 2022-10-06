@@ -34,7 +34,7 @@ const Group = () => {
       formData.append("groupId", id);
     }
 
-    CreatePost(formData);
+    CreatePost(dispatch, formData);
   };
 
   const postContentHandler = (event: any) => {
@@ -186,7 +186,7 @@ const Group = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   ) : (
                     <Post
@@ -200,7 +200,7 @@ const Group = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   )
                 )}

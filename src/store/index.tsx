@@ -12,6 +12,7 @@ import GroupDetailSlice from "./Group/GroupDetailSlice";
 import ProfileSlice from "./User/ProfileSlice";
 import FriendRequestSlice from "./Friend/FriendRequestSlice";
 import FriendSlice from "./Friend/FriendSlice";
+import FriendSuggestionSlice from "./Friend/FriendSuggestionSlice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
     PostSlice: PostSlice,
     ProfileSlice: ProfileSlice,
     FriendRequestSlice: FriendRequestSlice,
+    FriendSuggestionSlice: FriendSuggestionSlice,
     FriendSlice: FriendSlice
   },
 });

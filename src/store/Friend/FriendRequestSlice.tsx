@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
+import { GetAllFriend } from "./FriendSlice";
 
 export const FriendRequestSlice = createSlice({
   name: "friendRequest",
@@ -21,25 +22,7 @@ export const FriendRequestSlice = createSlice({
   },
 });
 
-export async function SendFriendRequest(id: string | undefined) {
-  const response = await fetch(`${baseUrl}/friend/addfriend/${id}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem("user") || "{}").token
-      }`,
-    },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return res.json().then((data) => {
-        setError(data.error.message.toString());
-      });
-    }
-  });
-}
+
 
 export async function GetFriendRequests(dispatch: any) {
   dispatch(setLoading(true));
@@ -65,7 +48,10 @@ export async function GetFriendRequests(dispatch: any) {
   dispatch(setFriendRequests(response));
 }
 
-export async function AcceptFriendRequest(id: string | undefined) {
+export async function AcceptFriendRequest(
+  dispatch: any,
+  id: string | undefined
+) {
   const response = await fetch(`${baseUrl}/friend/acceptfriend/${id}`, {
     method: "POST",
     headers: {
@@ -83,9 +69,15 @@ export async function AcceptFriendRequest(id: string | undefined) {
       });
     }
   });
+
+  GetFriendRequests(dispatch);
+  GetAllFriend(dispatch);
 }
 
-export async function RejectFriendRequest(id: string | undefined) {
+export async function RejectFriendRequest(
+  dispatch: any,
+  id: string | undefined
+) {
   const response = await fetch(`${baseUrl}/friend/rejectfriend/${id}`, {
     method: "PUT",
     headers: {
@@ -103,6 +95,8 @@ export async function RejectFriendRequest(id: string | undefined) {
       });
     }
   });
+
+  GetFriendRequests(dispatch);
 }
 
 export const { setFriendRequests, setLoading, setError } =

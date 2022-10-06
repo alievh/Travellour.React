@@ -2,10 +2,10 @@ import React from "react";
 import Button from "../UI/Button";
 import {
   AcceptFriendRequest,
-  GetFriendRequests,
   RejectFriendRequest,
 } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
+import { GetAllFriend } from "../../store/Friend/FriendSlice";
 
 const FriendRequest: React.FC<{
   userId: string;
@@ -17,11 +17,12 @@ const FriendRequest: React.FC<{
   const dispatch = useDispatch();
 
   const acceptFriendHandler = () => {
-    AcceptFriendRequest(props.userId);
+    AcceptFriendRequest(dispatch, props.userId);
+    
   };
 
   const rejectFriendHandler = () => {
-    RejectFriendRequest(props.userId);
+    RejectFriendRequest(dispatch, props.userId);
   };
 
   return (

@@ -11,9 +11,11 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
-import { SendFriendRequest } from "../../store/Friend/FriendRequestSlice";
+import { useDispatch } from "react-redux";
+import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
 
 const User = () => {
+  const dispatch = useDispatch();
   const [error, setError] = useState();
   const [userPosts, setUserPosts] = useState([]);
   const [user, setUser] = useState({
@@ -84,7 +86,7 @@ const User = () => {
   );
 
   const friendAddHandler = () => {
-    SendFriendRequest(id);
+    SendFriendRequest(dispatch, id);
   }
 
   return (
@@ -165,7 +167,7 @@ const User = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   ) : (
                     <Post
@@ -179,7 +181,7 @@ const User = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   )
                 )}

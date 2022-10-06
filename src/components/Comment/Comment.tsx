@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../UI/Button";
 
 const Comment: React.FC<{
+  userId: string;
   userImage: string;
   userFirstname: string;
   userLastname: string;
@@ -12,7 +13,11 @@ const Comment: React.FC<{
       <div className="comment-user">
         <div className="comment-user__avatar">
           <a href="#">
-            <img src={props.userImage} alt="User Avatar" />
+            <img
+              src={`https://localhost:7101/img/${props.userImage}`}
+              className="comment-user__avatar-img"
+              alt="User Avatar"
+            />
           </a>
         </div>
         <div className="comment-user__content">
@@ -22,12 +27,15 @@ const Comment: React.FC<{
           <p>{props.commentContent}</p>
         </div>
       </div>
-      <div className="comment__like">
-        <Button
-          type="button"
-          className="like"
-          buttonIcon="fa-regular fa-thumbs-up"
-        />
+      <div className="comment__remove">
+        {props.userId ===
+          JSON.parse(localStorage.getItem("user") || "{}").user.id && (
+          <Button
+            type="button"
+            className="btn remove"
+            buttonIcon="fa-solid fa-trash"
+          />
+        )}
       </div>
     </div>
   );

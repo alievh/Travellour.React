@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import Input from "../UI/Input";
 import Col from "../Bootstrap/Col";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { DeletePost } from "../../store/Post/PostSlice";
+import { DeletePost, GetPosts } from "../../store/Post/PostSlice";
+import { useDispatch } from "react-redux";
+import Comment from "../Comment/Comment";
 
 const Post: React.FC<{
   postId: string;
@@ -21,7 +23,9 @@ const Post: React.FC<{
   likes: Array<any>;
   comments: Array<any>;
 }> = (props) => {
+  const dispatch = useDispatch();
   const [commentIsActive, setCommentIsActive] = useState(false);
+  const [commentContent, setCommentContent] = useState();
   const [error, setError] = useState();
 
   const addLikeHandler = async () => {
@@ -42,6 +46,8 @@ const Post: React.FC<{
         });
       }
     });
+
+    GetPosts(dispatch);
   };
 
   const deleteLikeHandler = async () => {
@@ -62,14 +68,49 @@ const Post: React.FC<{
         });
       }
     });
-  }
+
+    GetPosts(dispatch);
+  };
+
+  const commentContentHandler = (event: any) => {
+    setCommentContent(event.target.value);
+  };
+
+  const addCommentHandler = async (event: any) => {
+    event.preventDefault();
+    const comment = {
+      postId: props.postId,
+      content: commentContent,
+    };
+
+    const response = await fetch(`${baseUrl}/post/commentadd`, {
+      method: "POST",
+      body: JSON.stringify(comment),
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    GetPosts(dispatch);
+  };
 
   const commentActiveHandler = () => {
     setCommentIsActive(!commentIsActive);
   };
 
   const postDeleteHandler = async () => {
-    DeletePost(props.postId);
+    DeletePost(dispatch, props.postId);
   };
 
   return (
@@ -122,7 +163,7 @@ const Post: React.FC<{
           props.postImages.length > 1 ? (
             <Slider images={props.postImages} />
           ) : (
-            <img src={`https://localhost:7101/img/${props.postImages[0]}`} />
+            <img src={`https://localhost:7101/img/${props.postImages[0]}`} alt="post-image" className="post-image" />
           )
         ) : (
           ""
@@ -167,22 +208,34 @@ const Post: React.FC<{
             onClick={commentActiveHandler}
           />
         </div>
-        <div className="post-comments"></div>
+        <div className="post-comments">
+          {props.comments !== undefined &&
+            props.comments.map((c) => (
+              <Comment
+                userId={c.user.id}
+                userImage={c.user.profileImage.imageUrl}
+                userFirstname={c.user.firstname}
+                userLastname={c.user.lastname}
+                commentContent={c.content}
+              />
+            ))}
+        </div>
         {commentIsActive && (
           <div className="post-input">
-            <form>
+            <form onSubmit={addCommentHandler}>
               <Col lg="10" sm="10">
                 <Input
                   type="text"
                   id="post-comment-input"
                   placeholder="Type..."
                   mainDivClass="d-flex align-items-center"
+                  onChange={commentContentHandler}
                 />
               </Col>
               <Col
                 lg="2"
                 sm="2"
-                className="d-flex justify-content-center align-items-center"
+                className="d-flex justify-content-end align-items-center"
               >
                 <Button type="submit" className="btn" innerText="Share" />
               </Col>

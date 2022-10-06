@@ -27,15 +27,15 @@ const Newsfeed = () => {
     setFileUpload(event.target.files);
   };
 
-  const postCreateHandler = async () => {
+  const postCreateHandler = async (event: any) => {
+    event.preventDefault();
     const formData = new FormData();
     for (let i = 0; i < fileUpload.length; i++) {
       formData.append("imagefiles", fileUpload[i]);
     }
     formData.append("content", postContent);
 
-    CreatePost(formData);
-    GetPosts(dispatch);
+    CreatePost(dispatch, formData);
   };
 
   const sidebarIsActive = useSelector<RootState, boolean>(
@@ -44,6 +44,7 @@ const Newsfeed = () => {
 
   const posts = useSelector((state: any) => state.PostSlice);
 
+  console.log(posts);
   useEffect(() => {
     GetPosts(dispatch);
   }, []);
@@ -93,7 +94,7 @@ const Newsfeed = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   ) : (
                     <Post
@@ -107,7 +108,7 @@ const Newsfeed = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   )
                 )}

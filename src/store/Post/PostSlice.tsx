@@ -45,7 +45,7 @@ export async function GetPosts(dispatch: any) {
   dispatch(setPosts(response));
 }
 
-export async function CreatePost(formData: any) {
+export async function CreatePost(dispatch: any, formData: any) {
   await fetch(`${baseUrl}/post/postcreate`, {
     method: "POST",
     body: formData,
@@ -64,9 +64,11 @@ export async function CreatePost(formData: any) {
       });
     }
   });
+
+  GetPosts(dispatch);
 }
 
-export async function DeletePost(id: string) {
+export async function DeletePost(dispatch:any, id: string) {
   await fetch(`${baseUrl}/post/delete/${id}`, {
     method: "PUT",
     headers: {
@@ -84,6 +86,8 @@ export async function DeletePost(id: string) {
       });
     }
   });
+
+  GetPosts(dispatch);
 }
 
 export const { setPosts, setLoading, setError } = PostSlice.actions;

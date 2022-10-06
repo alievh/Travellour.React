@@ -50,7 +50,7 @@ export async function GetProfile(dispatch: any) {
   dispatch(setProfile(response));
 }
 
-export async function ProfilePhotoChanger(formData: any) {
+export async function ProfilePhotoChanger(dispatch:any, formData: any) {
   const response = await fetch(`${baseUrl}/user/changeprofilephoto`, {
     method: "POST",
     body: formData,
@@ -69,9 +69,11 @@ export async function ProfilePhotoChanger(formData: any) {
       });
     }
   });
+
+  GetProfile(dispatch);
 }
 
-export async function CoverPhotoChanger(formData: any) {
+export async function CoverPhotoChanger(dispatch: any, formData: any) {
   const response = await fetch(`${baseUrl}/user/changecoverphoto`, {
     method: "POST",
     body: formData,
@@ -90,6 +92,8 @@ export async function CoverPhotoChanger(formData: any) {
       });
     }
   });
+
+  GetProfile(dispatch);
 }
 
 export const { setProfile, setLoading, setError } = ProfileSlice.actions;

@@ -38,25 +38,26 @@ const ForumDetail = () => {
                 <h4>{forumDetail.forum.forumTitle}</h4>
               </div>
               <div className="forum-detail-container__content">
-                <p>
-                  {forumDetail.forum.forumContent}
-                </p>
+                <p>{forumDetail.forum.forumContent}</p>
               </div>
               <div className="forum-detial-container__comments">
                 <div className="forum-comments">
                   <Comment
+                    userId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"
                     commentContent="dslkalkdsjblaksfdlbkahdflkbhlakdfhbhalkdfhlblaldhfbhalhdflblahdflhbhadlhflbhaldfb"
                   />
                   <Comment
+                    userId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"
                     commentContent="dslkalkdsjblaksfdlbkahdflkbhlakdfhbhalkdfhlblaldhfbhalhdflblahdflhbhadlhflbhaldfb"
                   />
                   <Comment
+                    userId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"

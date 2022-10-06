@@ -69,7 +69,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    ProfilePhotoChanger(formData);
+    ProfilePhotoChanger(dispatch, formData);
 
     navigate("/profile");
   };
@@ -78,7 +78,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    CoverPhotoChanger(formData);
+    CoverPhotoChanger(dispatch, formData);
 
     navigate("/profile");
   };
@@ -189,7 +189,7 @@ const Profile = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   ) : (
                     <Post
@@ -203,7 +203,7 @@ const Profile = () => {
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}
                       likes={p.likes}
-                      comments={p.comment}
+                      comments={p.comments}
                     />
                   )
                 )}

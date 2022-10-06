@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "../UI/Button";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { Link } from "react-router-dom";
+import { GetAllFriend } from "../../store/Friend/FriendSlice";
+import { useDispatch } from "react-redux";
 
 const UserFriend: React.FC<{
   userId: string;
@@ -9,6 +11,7 @@ const UserFriend: React.FC<{
   firstName: string;
   lastName: string;
 }> = (props) => {
+  const dispatch = useDispatch();
   const [error, setError] = useState();
 
   const removeFriendHandler = async () => {
@@ -32,6 +35,8 @@ const UserFriend: React.FC<{
         });
       }
     });
+
+    GetAllFriend(dispatch);
   };
 
   return (
