@@ -44,6 +44,7 @@ const ForumDetail = () => {
                 <div className="forum-comments">
                   <Comment
                     userId="123"
+                    commentId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"
@@ -51,6 +52,7 @@ const ForumDetail = () => {
                   />
                   <Comment
                     userId="123"
+                    commentId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"
@@ -58,6 +60,7 @@ const ForumDetail = () => {
                   />
                   <Comment
                     userId="123"
+                    commentId="123"
                     userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
                     userFirstname="Huseyn"
                     userLastname="Aliyev"

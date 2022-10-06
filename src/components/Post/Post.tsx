@@ -212,6 +212,7 @@ const Post: React.FC<{
           {props.comments !== undefined &&
             props.comments.map((c) => (
               <Comment
+              commentId={c.id}
                 userId={c.user.id}
                 userImage={c.user.profileImage.imageUrl}
                 userFirstname={c.user.firstname}
