@@ -11,8 +11,10 @@ import { Link, useNavigate } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
 import { CreateForum } from "../../store/Forum/ForumSlice";
+import { useDispatch } from "react-redux";
 
 const ForumCreate = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [forumTitle, setForumTitle] = useState("");
   const [forumContent, setForumContent] = useState("");
@@ -39,7 +41,7 @@ const ForumCreate = () => {
       forumContent,
     };
 
-    CreateForum(forumCreate);
+    CreateForum(dispatch, forumCreate);
     navigate("/forums");
   };
 

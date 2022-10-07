@@ -12,6 +12,8 @@ import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { useDispatch } from "react-redux";
 
 const ForumDetail = () => {
+  const [commentContent, setCommentContent] = useState();
+  const [error, setError] = useState();
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -19,8 +21,42 @@ const ForumDetail = () => {
     (state) => state.sidebarToggle.isActive
   );
 
+  const commentContentHandler = (event: any) => {
+    setCommentContent(event.target.value);
+  };
+
+  const addCommentHandler = async (event: any) => {
+    event.preventDefault();
+    const comment = {
+      forumId: id,
+      content: commentContent,
+    };
+
+    const response = await fetch(`${baseUrl}/forum/commentadd`, {
+      method: "POST",
+      body: JSON.stringify(comment),
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    GetForumDetail(dispatch, id);
+  };
+
   const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
 
+  console.log(forumDetail);
   useEffect(() => {
     GetForumDetail(dispatch, id);
   }, []);
@@ -42,35 +78,26 @@ const ForumDetail = () => {
               </div>
               <div className="forum-detial-container__comments">
                 <div className="forum-comments">
-                  <Comment
-                    userId="123"
-                    commentId="123"
-                    userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                    userFirstname="Huseyn"
-                    userLastname="Aliyev"
-                    commentContent="dslkalkdsjblaksfdlbkahdflkbhlakdfhbhalkdfhlblaldhfbhalhdflblahdflhbhadlhflbhaldfb"
-                  />
-                  <Comment
-                    userId="123"
-                    commentId="123"
-                    userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                    userFirstname="Huseyn"
-                    userLastname="Aliyev"
-                    commentContent="dslkalkdsjblaksfdlbkahdflkbhlakdfhbhalkdfhlblaldhfbhalhdflblahdflhbhadlhflbhaldfb"
-                  />
-                  <Comment
-                    userId="123"
-                    commentId="123"
-                    userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/29/1661833790-bpthumb.jpg"
-                    userFirstname="Huseyn"
-                    userLastname="Aliyev"
-                    commentContent="dslkalkdsjblaksfdlbkahdflkbhlakdfhbhalkdfhlblaldhfbhalhdflblahdflhbhadlhflbhaldfb"
-                  />
+                  {forumDetail.forum.comments !== undefined &&
+                    forumDetail.forum.comments.map((c: any) => (
+                      <Comment
+                        commentId={c.id}
+                        userId={c.user.id}
+                        userImage={c.user.profileImage.imageUrl}
+                        userFirstname={c.user.firstname}
+                        userLastname={c.user.lastname}
+                        commentContent={c.content}
+                        forumId={id}
+                      />
+                    ))}
                 </div>
               </div>
               <div className="forum-detail-container__input">
-                <form>
-                  <textarea rows={5}></textarea>
+                <form onSubmit={addCommentHandler}>
+                  <textarea
+                    rows={5}
+                    onChange={commentContentHandler}
+                  ></textarea>
                   <Button className="btn" innerText="Send" />
                 </form>
               </div>

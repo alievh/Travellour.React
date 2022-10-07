@@ -45,7 +45,7 @@ export async function GetForums(dispatch: any) {
   dispatch(setForums(response));
 }
 
-export async function CreateForum(forumCreate: any) {
+export async function CreateForum(dispatch: any, forumCreate: any) {
   await fetch(`${baseUrl}/forum/forumcreate`, {
     method: "POST",
     body: JSON.stringify(forumCreate),
@@ -64,6 +64,8 @@ export async function CreateForum(forumCreate: any) {
       });
     }
   });
+
+  GetForums(dispatch);
 }
 
 export const { setForums, setLoading, setError } = ForumSlice.actions;

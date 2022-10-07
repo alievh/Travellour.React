@@ -53,7 +53,7 @@ export async function GetProfile(dispatch: any) {
 export async function ProfilePhotoChanger(dispatch:any, formData: any) {
   const response = await fetch(`${baseUrl}/user/changeprofilephoto`, {
     method: "POST",
-    body: formData,
+     body: formData,
     headers: {
       Authorization: `Bearer ${
         JSON.parse(localStorage.getItem("user") || "{}").token

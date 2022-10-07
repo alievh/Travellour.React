@@ -51,6 +51,28 @@ const Group = () => {
 
   const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
+  const joinGroupHandler = async () => {
+    await fetch(`${baseUrl}/group/groupjoin/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          setError(data.error.message.toString());
+        });
+      }
+    });
+
+    GetGroupDetail(dispatch, id);
+  };
+
   const getGroupPosts = async () => {
     setLoading(true);
     const response = await fetch(`${baseUrl}/group/Grouppostgetall/${id}`, {
@@ -141,6 +163,7 @@ const Group = () => {
                     type="submit"
                     innerText="Join Group"
                     className="btn btn-primary"
+                    onClick={joinGroupHandler}
                   />
                 </form>
               </div>

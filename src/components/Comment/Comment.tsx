@@ -3,6 +3,8 @@ import Button from "../UI/Button";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { GetPosts } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
+import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
+import { Link } from "react-router-dom";
 
 const Comment: React.FC<{
   commentId: string;
@@ -11,6 +13,7 @@ const Comment: React.FC<{
   userFirstname: string;
   userLastname: string;
   commentContent: string;
+  forumId?: string;
 }> = (props) => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
@@ -35,24 +38,35 @@ const Comment: React.FC<{
     });
 
     GetPosts(dispatch);
+    GetForumDetail(dispatch, props.forumId);
   };
 
   return (
     <div className="comment">
       <div className="comment-user">
         <div className="comment-user__avatar">
-          <a href="#">
-            <img
-              src={`https://localhost:7101/img/${props.userImage}`}
-              className="comment-user__avatar-img"
-              alt="User Avatar"
-            />
-          </a>
+          {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+          props.userId ? (
+            <Link to={`/user/${props.userId}`}>
+              <img src={`https://localhost:7101/img/${props.userImage}`} className="comment-user__avatar-img" />
+            </Link>
+          ) : (
+            <Link to="/profile">
+              <img src={`https://localhost:7101/img/${props.userImage}`} className="comment-user__avatar-img" />
+            </Link>
+          )}
         </div>
         <div className="comment-user__content">
-          <a href="#">
-            {props.userFirstname} {props.userLastname}
-          </a>
+        {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+            props.userId ? (
+              <Link to={`/user/${props.userId}`}>
+                {props.userFirstname} {props.userLastname}
+              </Link>
+            ) : (
+              <Link to="/profile">
+                {props.userFirstname} {props.userLastname}
+              </Link>
+            )}
           <p>{props.commentContent}</p>
         </div>
       </div>
