@@ -5,6 +5,7 @@ import {
   RejectFriendRequest,
 } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const FriendRequest: React.FC<{
   userId: string;
@@ -17,7 +18,6 @@ const FriendRequest: React.FC<{
 
   const acceptFriendHandler = () => {
     AcceptFriendRequest(dispatch, props.userId);
-    
   };
 
   const rejectFriendHandler = () => {
@@ -28,16 +28,16 @@ const FriendRequest: React.FC<{
     <li className="friend-request">
       <div className="friend-request__info">
         <div className="friend-request__user-avatar">
-          <a href="#">
+          <Link to={`/user/${props.userId}`}>
             <img src={`https://localhost:7101/img/${props.imageUrl}`} />
-          </a>
+          </Link>
         </div>
         <div className="user-details">
-          <a href="#">
+          <Link to={`/user/${props.userId}`}>
             <h6>
               {props.userFirstName} {props.userLastName}
             </h6>
-          </a>
+          </Link>
           <span>@{props.userName}</span>
         </div>
       </div>

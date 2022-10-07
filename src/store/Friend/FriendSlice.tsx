@@ -67,5 +67,26 @@ export async function RemoveFriend(dispatch: any, id: string | undefined) {
   GetAllFriend(dispatch);
 }
 
+export async function CancelFriendRequest(dispatch: any, id: string | undefined) {
+  await fetch(`${baseUrl}/friend/friendrequestcancel/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+
+}
+
 export const { setFriends, setLoading, setError } = FriendSlice.actions;
 export default FriendSlice.reducer;

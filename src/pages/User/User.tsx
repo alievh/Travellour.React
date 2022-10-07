@@ -13,6 +13,14 @@ import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 import { useDispatch } from "react-redux";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
+import {
+  AcceptFriendRequest,
+  RejectFriendRequest,
+} from "../../store/Friend/FriendRequestSlice";
+import {
+  CancelFriendRequest,
+  RemoveFriend,
+} from "../../store/Friend/FriendSlice";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -87,7 +95,24 @@ const User = () => {
 
   const friendAddHandler = () => {
     SendFriendRequest(dispatch, id);
-  }
+  };
+
+  const cancelRequestHandler = () => {
+    CancelFriendRequest(dispatch, id);
+    userData();
+  };
+
+  const unfriendHandler = () => {
+    RemoveFriend(dispatch, id);
+  };
+
+  const rejectRequestHandler = () => {
+    RejectFriendRequest(dispatch, id);
+  };
+
+  const acceptRequestHandler = () => {
+    AcceptFriendRequest(dispatch, id);
+  };
 
   return (
     // User Section - START
@@ -130,13 +155,50 @@ const User = () => {
             </div>
             <div className="user__request col-lg-4">
               <form>
-                {user.status === 4 ? <Button
-                  type="submit"
-                  innerText="Add Friend"
-                  className="btn btn-primary"
-                  buttonIcon="fa-solid fa-user-plus"
-                  onClick={friendAddHandler}
-                /> : ""}
+                {user.status === 4 ? (
+                  <Button
+                    type="submit"
+                    innerText="Add Friend"
+                    className="btn btn-primary"
+                    buttonIcon="fa-solid fa-user-plus"
+                    onClick={friendAddHandler}
+                  />
+                ) : user.status === 0 ? (
+                  <Button
+                    type="submit"
+                    innerText="Cancel"
+                    className="btn btn-primary"
+                    buttonIcon="fa-solid fa-user-slash"
+                    onClick={cancelRequestHandler}
+                  />
+                ) : user.status === 2 ? (
+                  <>
+                    <Button
+                      type="submit"
+                      innerText="Accept"
+                      className="btn btn-success"
+                      buttonIcon="fa-solid fa-user-plus"
+                      onClick={acceptRequestHandler}
+                    />
+                    <Button
+                      type="submit"
+                      innerText="Reject"
+                      className="btn btn-danger"
+                      buttonIcon="fa-solid fa-ban"
+                      onClick={rejectRequestHandler}
+                    />
+                  </>
+                ) : user.status === 1 ? (
+                  <Button
+                    type="submit"
+                    innerText="Unfriend"
+                    className="btn btn-warning"
+                    buttonIcon="fa-solid fa-user-minus"
+                    onClick={unfriendHandler}
+                  />
+                ) : (
+                  ""
+                )}
                 <Button
                   type="submit"
                   innerText="Message"
