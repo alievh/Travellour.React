@@ -41,7 +41,7 @@ const Password = () => {
     };
 
     setLoading(true);
-    const response = await fetch(`${baseUrl}/user/changepassword`, {
+    await fetch(`${baseUrl}/user/changepassword`, {
       method: "POST",
       body: JSON.stringify(passwordData),
       headers: {

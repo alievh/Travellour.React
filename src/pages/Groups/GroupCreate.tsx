@@ -1,4 +1,4 @@
-import { useState, useRef, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -9,7 +9,6 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 import { CreateGroup } from "../../store/Group/GroupSlice";
 

@@ -22,8 +22,6 @@ export const FriendRequestSlice = createSlice({
   },
 });
 
-
-
 export async function GetFriendRequests(dispatch: any) {
   dispatch(setLoading(true));
   const response = await fetch(`${baseUrl}/friend/friendrequests`, {
@@ -52,7 +50,7 @@ export async function AcceptFriendRequest(
   dispatch: any,
   id: string | undefined
 ) {
-  const response = await fetch(`${baseUrl}/friend/acceptfriend/${id}`, {
+  await fetch(`${baseUrl}/friend/acceptfriend/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +76,7 @@ export async function RejectFriendRequest(
   dispatch: any,
   id: string | undefined
 ) {
-  const response = await fetch(`${baseUrl}/friend/rejectfriend/${id}`, {
+  await fetch(`${baseUrl}/friend/rejectfriend/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -12,8 +12,9 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
 import { useDispatch } from "react-redux";
-import { GetPosts, CreatePost } from "../../store/Post/PostSlice";
+import { CreatePost } from "../../store/Post/PostSlice";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { JoinGroup } from "../../store/Group/GroupSlice";
 
 const Group = () => {
   const [groupPosts, setGroupPosts] = useState([]);
@@ -52,25 +53,7 @@ const Group = () => {
   const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
   const joinGroupHandler = async () => {
-    await fetch(`${baseUrl}/group/groupjoin/${id}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetGroupDetail(dispatch, id);
+    JoinGroup(dispatch, id)
   };
 
   const getGroupPosts = async () => {
@@ -94,7 +77,6 @@ const Group = () => {
       }
     });
 
-    console.log(response);
     setGroupPosts(response);
   };
 

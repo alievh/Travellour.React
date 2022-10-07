@@ -11,7 +11,7 @@ const FriendRequests = () => {
 
   useEffect(() => {
     GetFriendRequests(dispatch);
-  }, [FriendRequestSlice]);
+  }, []);
 
   return (
     <div className="friend-requests">

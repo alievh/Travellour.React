@@ -23,7 +23,7 @@ export const FriendSuggestionsSlice = createSlice({
 });
 
 export async function SendFriendRequest(dispatch: any, id: string | undefined) {
-  const response = await fetch(`${baseUrl}/friend/addfriend/${id}`, {
+  await fetch(`${baseUrl}/friend/addfriend/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

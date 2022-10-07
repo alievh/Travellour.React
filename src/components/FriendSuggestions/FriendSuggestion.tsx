@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
 import { useDispatch } from "react-redux";
 
@@ -23,7 +22,7 @@ const FriendSuggestion: React.FC<{
       <div className="friend-information">
         <div className="user-avatar">
           <Link to={`/user/${props.id}`}>
-            <img src={`https://localhost:7101/img/${props.imageUrl}`} />
+            <img src={`https://localhost:7101/img/${props.imageUrl}`} alt="UserProfileImage" />
           </Link>
         </div>
         <div className="user-details">

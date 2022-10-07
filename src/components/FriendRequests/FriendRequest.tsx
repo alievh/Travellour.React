@@ -5,7 +5,6 @@ import {
   RejectFriendRequest,
 } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
-import { GetAllFriend } from "../../store/Friend/FriendSlice";
 
 const FriendRequest: React.FC<{
   userId: string;

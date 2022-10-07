@@ -5,6 +5,7 @@ import { GetPosts } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
 import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { Link } from "react-router-dom";
+import { DeleteComment } from "../../store/Post/PostActionSlice";
 
 const Comment: React.FC<{
   commentId: string;
@@ -16,29 +17,9 @@ const Comment: React.FC<{
   forumId?: string;
 }> = (props) => {
   const dispatch = useDispatch();
-  const [error, setError] = useState();
 
   const deleteCommentHandler = async () => {
-    await fetch(`${baseUrl}/post/commentdelete/${props.commentId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetPosts(dispatch);
-    GetForumDetail(dispatch, props.forumId);
+    DeleteComment(dispatch, props.commentId, props.forumId);
   };
 
   return (
@@ -48,25 +29,33 @@ const Comment: React.FC<{
           {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
           props.userId ? (
             <Link to={`/user/${props.userId}`}>
-              <img src={`https://localhost:7101/img/${props.userImage}`} className="comment-user__avatar-img" />
+              <img
+                src={`https://localhost:7101/img/${props.userImage}`}
+                className="comment-user__avatar-img"
+                alt="UserImage"
+              />
             </Link>
           ) : (
             <Link to="/profile">
-              <img src={`https://localhost:7101/img/${props.userImage}`} className="comment-user__avatar-img" />
+              <img
+                src={`https://localhost:7101/img/${props.userImage}`}
+                className="comment-user__avatar-img"
+                alt="UserImage"
+              />
             </Link>
           )}
         </div>
         <div className="comment-user__content">
-        {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
-            props.userId ? (
-              <Link to={`/user/${props.userId}`}>
-                {props.userFirstname} {props.userLastname}
-              </Link>
-            ) : (
-              <Link to="/profile">
-                {props.userFirstname} {props.userLastname}
-              </Link>
-            )}
+          {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+          props.userId ? (
+            <Link to={`/user/${props.userId}`}>
+              {props.userFirstname} {props.userLastname}
+            </Link>
+          ) : (
+            <Link to="/profile">
+              {props.userFirstname} {props.userLastname}
+            </Link>
+          )}
           <p>{props.commentContent}</p>
         </div>
       </div>

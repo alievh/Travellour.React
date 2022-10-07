@@ -4,10 +4,14 @@ import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import Input from "../UI/Input";
 import Col from "../Bootstrap/Col";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { DeletePost, GetPosts } from "../../store/Post/PostSlice";
+import { DeletePost } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
 import Comment from "../Comment/Comment";
+import {
+  AddComment,
+  AddLike,
+  DeleteLike,
+} from "../../store/Post/PostActionSlice";
 
 const Post: React.FC<{
   postId: string;
@@ -26,50 +30,13 @@ const Post: React.FC<{
   const dispatch = useDispatch();
   const [commentIsActive, setCommentIsActive] = useState(false);
   const [commentContent, setCommentContent] = useState();
-  const [error, setError] = useState();
 
   const addLikeHandler = async () => {
-    const response = await fetch(`${baseUrl}/post/likeadd/${props.postId}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetPosts(dispatch);
+    AddLike(dispatch, props.postId);
   };
 
   const deleteLikeHandler = async () => {
-    const response = await fetch(`${baseUrl}/post/likedelete/${props.postId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetPosts(dispatch);
+    DeleteLike(dispatch, props.postId);
   };
 
   const commentContentHandler = (event: any) => {
@@ -83,26 +50,7 @@ const Post: React.FC<{
       content: commentContent,
     };
 
-    const response = await fetch(`${baseUrl}/post/commentadd`, {
-      method: "POST",
-      body: JSON.stringify(comment),
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetPosts(dispatch);
+    AddComment(dispatch, comment);
   };
 
   const commentActiveHandler = () => {
@@ -121,11 +69,11 @@ const Post: React.FC<{
             {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
             props.userId ? (
               <Link to={`/user/${props.userId}`}>
-                <img src={props.userImage} />
+                <img src={props.userImage} alt="PostImage" />
               </Link>
             ) : (
               <Link to="/profile">
-                <img src={props.userImage} />
+                <img src={props.userImage} alt="PostImage" />
               </Link>
             )}
           </div>
@@ -163,7 +111,11 @@ const Post: React.FC<{
           props.postImages.length > 1 ? (
             <Slider images={props.postImages} />
           ) : (
-            <img src={`https://localhost:7101/img/${props.postImages[0]}`} alt="post-image" className="post-image" />
+            <img
+              src={`https://localhost:7101/img/${props.postImages[0]}`}
+              alt="post-image"
+              className="post-image"
+            />
           )
         ) : (
           ""
@@ -212,7 +164,7 @@ const Post: React.FC<{
           {props.comments !== undefined &&
             props.comments.map((c) => (
               <Comment
-              commentId={c.id}
+                commentId={c.id}
                 userId={c.user.id}
                 userImage={c.user.profileImage.imageUrl}
                 userFirstname={c.user.firstname}

@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -10,6 +10,7 @@ import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { useDispatch } from "react-redux";
+import { AddComment } from "../../store/Post/PostActionSlice";
 
 const ForumDetail = () => {
   const [commentContent, setCommentContent] = useState();
@@ -32,31 +33,11 @@ const ForumDetail = () => {
       content: commentContent,
     };
 
-    const response = await fetch(`${baseUrl}/forum/commentadd`, {
-      method: "POST",
-      body: JSON.stringify(comment),
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    GetForumDetail(dispatch, id);
+    AddComment(dispatch, comment);
   };
 
   const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
 
-  console.log(forumDetail);
   useEffect(() => {
     GetForumDetail(dispatch, id);
   }, []);

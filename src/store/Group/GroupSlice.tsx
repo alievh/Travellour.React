@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
+import { GetGroupDetail } from "./GroupDetailSlice";
 
 export const GroupSlice = createSlice({
   name: "groups",
@@ -64,6 +65,32 @@ export async function CreateGroup(formData: any) {
       });
     }
   });
+}
+
+export async function JoinGroup(
+  dispatch: any,
+  id: string | undefined,
+) {
+  await fetch(`${baseUrl}/group/groupjoin/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+
+    GetGroupDetail(dispatch, id);
+    GetGroups(dispatch);
 }
 
 export const { setGroups, setLoading, setError } = GroupSlice.actions;

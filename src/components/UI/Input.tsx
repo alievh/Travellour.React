@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, MouseEventHandler, RefObject } from "react";
+import React, { ChangeEventHandler } from "react";
 
 const Input: React.FC<{
   type: string;

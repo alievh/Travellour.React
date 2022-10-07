@@ -10,7 +10,6 @@ import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 
 const Navbar = () => {

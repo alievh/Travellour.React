@@ -18,7 +18,7 @@ const Event: React.FC<{
           {props.eventImages.length > 1 ? (
             <Slider images={props.eventImages} />
           ) : (
-            <img src={`https://localhost:7101/img/${props.eventImages[0]}`} />
+            <img src={`https://localhost:7101/img/${props.eventImages[0]}`} alt="EventImage" />
           )}
         </Col>
         <Col lg="6" className="event-content">

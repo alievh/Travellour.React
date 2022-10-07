@@ -16,11 +16,11 @@ const GroupAdmin: React.FC<{
           {JSON.parse(localStorage.getItem("user") || "{}").user.id ===
           props.adminId ? (
             <Link to="/profile">
-              <img src={`https://localhost:7101/img/${props.adminImage}`} />
+              <img src={`https://localhost:7101/img/${props.adminImage}`} alt="AdminImage" />
             </Link>
           ) : (
             <Link to={`/user/${props.adminId}`}>
-              <img src={`https://localhost:7101/img/${props.adminImage}`} />
+              <img src={`https://localhost:7101/img/${props.adminImage}`} alt="AdminImage" />
             </Link>
           )}
         </div>

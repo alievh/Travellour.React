@@ -51,7 +51,7 @@ export async function GetProfile(dispatch: any) {
 }
 
 export async function ProfilePhotoChanger(dispatch:any, formData: any) {
-  const response = await fetch(`${baseUrl}/user/changeprofilephoto`, {
+  await fetch(`${baseUrl}/user/changeprofilephoto`, {
     method: "POST",
      body: formData,
     headers: {
@@ -74,7 +74,7 @@ export async function ProfilePhotoChanger(dispatch:any, formData: any) {
 }
 
 export async function CoverPhotoChanger(dispatch: any, formData: any) {
-  const response = await fetch(`${baseUrl}/user/changecoverphoto`, {
+  await fetch(`${baseUrl}/user/changecoverphoto`, {
     method: "POST",
     body: formData,
     headers: {
