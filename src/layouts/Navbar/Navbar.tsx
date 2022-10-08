@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
+import { HubConnectionBuilder } from "@microsoft/signalr";
+import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const Navbar = () => {
   const [error, setError] = useState();
@@ -117,9 +119,31 @@ const Navbar = () => {
   }, []);
 
   const logoutHandler = () => {
-    dispatch(logout());
-    dispatch(clearUserData());
-    localStorage.removeItem("user");
+    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
+    const connection = new HubConnectionBuilder()
+      .withUrl("https://localhost:7101/onlinehub")
+      .build();
+
+    connection
+      .start()
+      .then(() =>
+        connection
+          .invoke(
+            "IsOffline",
+            JSON.parse(localStorage.getItem("user") || "{}").user.id
+          )
+          .catch((error) => console.log(error))
+      )
+      .then(() =>
+        connection.on("activeUser", (id) => {
+          dispatch(logout());
+
+          dispatch(clearUserData());
+          localStorage.removeItem("user");
+          AddOnlineUser(dispatch, id);
+        })
+      );
+
     navigate("/");
   };
 

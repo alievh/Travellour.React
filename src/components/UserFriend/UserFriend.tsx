@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import { RemoveFriend } from "../../store/Friend/FriendSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserFriend: React.FC<{
   userId: string;
@@ -16,10 +16,19 @@ const UserFriend: React.FC<{
     RemoveFriend(dispatch, props.userId);
   };
 
+  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
+
   return (
     <div className="user-friend">
       <div className="user-friend__info">
         <div className="user-friend__avatar">
+          {onlineUsers.isOnline !== undefined
+            ? onlineUsers.isOnline.map((u: any) => {
+                if (u === props.userId) {
+                  return <span></span>;
+                }
+              })
+            : ""}
           <Link to={`/user/${props.userId}`}>
             <img
               src={`https://localhost:7101/img/${props.imageUrl}`}

@@ -13,10 +13,6 @@ const FriendSuggestion: React.FC<{
 }> = (props) => {
   const dispatch = useDispatch();
 
-  const isActive = useSelector((state: any) => state.OnlineUserSlice);
-
-  console.log(isActive);
-
   const friendAddHandler = async () => {
     SendFriendRequest(dispatch, props.id);
   };
@@ -34,7 +30,6 @@ const FriendSuggestion: React.FC<{
             <h6>
               {props.userFirstName} {props.userLastName}
             </h6>
-            {isActive.isOnline && <p>active</p>}
           </Link>
           <span>@{props.userName}</span>
         </div>

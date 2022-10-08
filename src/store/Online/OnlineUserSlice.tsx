@@ -13,7 +13,6 @@ export const OnlineUserSlice = createSlice({
 });
 
 export function AddOnlineUser(dispatch: any, id: string | undefined) {
-  console.log(id);
   dispatch(setIsOnline(id));
 }
 

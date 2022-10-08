@@ -17,7 +17,6 @@
   &__info {
     @include flex(none, center);
 
-    
     @media screen and (max-width: 500px) {
       border-bottom: 1px solid $global-border-color;
       margin-bottom: 12px;
@@ -26,10 +25,10 @@
   }
 
   &__avatar {
+    position: relative;
     width: 5rem;
     height: 5rem;
     overflow: hidden;
-    border-radius: 50%;
     margin-right: 15px;
 
     @media screen and (max-width: 850px) {
@@ -40,6 +39,21 @@
     img {
       width: 100%;
       object-fit: cover;
+    border-radius: 50%;
+
+    }
+
+    span {
+      display: block;
+      position: absolute;
+      right: 3px;
+      top: 5px;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: #32CD30;
+      z-index: 10;
+      margin: 0;
     }
   }
 
@@ -64,7 +78,6 @@
   }
 
   &__request {
-
     button {
       margin-right: 15px;
       padding: 2px 14px;

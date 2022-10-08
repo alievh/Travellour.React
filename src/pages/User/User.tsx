@@ -80,7 +80,7 @@ const User = () => {
       }
     });
 
-    console.log(userInfo);
+
     setUser(userInfo);
   }, []);
 
@@ -157,8 +157,8 @@ const User = () => {
               {onlineUsers.isOnline !== undefined
                 ? onlineUsers.isOnline.map((u: any) => {
                     if (u === id) {
-                      return <p>Online</p>;
-                    }
+                      return <p className="online-user">Online</p>;
+                    } 
                   })
                 : ""}
             </div>
