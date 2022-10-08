@@ -13,6 +13,8 @@ import ProfileSlice from "./User/ProfileSlice";
 import FriendRequestSlice from "./Friend/FriendRequestSlice";
 import FriendSlice from "./Friend/FriendSlice";
 import FriendSuggestionSlice from "./Friend/FriendSuggestionSlice";
+import PostActionSlice from "./Post/PostActionSlice";
+import OnlineUserSlice from "./Online/OnlineUserSlice";
 
 const store = configureStore({
   reducer: {
@@ -25,10 +27,12 @@ const store = configureStore({
     GroupSlice: GroupSlice,
     GroupDetailSlice: GroupDetailSlice,
     PostSlice: PostSlice,
+    PostActionSlice: PostActionSlice,
     ProfileSlice: ProfileSlice,
     FriendRequestSlice: FriendRequestSlice,
     FriendSuggestionSlice: FriendSuggestionSlice,
-    FriendSlice: FriendSlice
+    FriendSlice: FriendSlice,
+    OnlineUserSlice: OnlineUserSlice,
   },
 });
 

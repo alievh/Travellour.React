@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const FriendSuggestion: React.FC<{
   id: string;
@@ -12,6 +12,10 @@ const FriendSuggestion: React.FC<{
   userName: string;
 }> = (props) => {
   const dispatch = useDispatch();
+
+  const isActive = useSelector((state: any) => state.OnlineUserSlice);
+
+  console.log(isActive);
 
   const friendAddHandler = async () => {
     SendFriendRequest(dispatch, props.id);
@@ -30,6 +34,7 @@ const FriendSuggestion: React.FC<{
             <h6>
               {props.userFirstName} {props.userLastName}
             </h6>
+            {isActive.isOnline && <p>active</p>}
           </Link>
           <span>@{props.userName}</span>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { getUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { login } from "../../store/Auth/AuthSlice";
+import { HubConnectionBuilder } from "@microsoft/signalr";
+import { AddOnlineUser, setIsOnline } from "../../store/Online/OnlineUserSlice";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -30,7 +32,7 @@ const Login = () => {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
-        "Accept": "application/json, text/plain",
+        Accept: "application/json, text/plain",
         "Content-Type": "application/json;charset=UTF-8",
       },
     }).then((res) => {
@@ -57,7 +59,7 @@ const Login = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${loggedUser.token}`,
+          Authorization: `Bearer ${loggedUser.token}`,
         },
       }
     ).then((res) => {
@@ -73,6 +75,12 @@ const Login = () => {
 
     navigate("/newsfeed");
   }
+
+  useEffect(() => {
+    const connection = new HubConnectionBuilder()
+      .withUrl("https://localhost:7101/onlinehub")
+      .build();
+  }, []);
 
   return (
     <main>

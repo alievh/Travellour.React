@@ -5,22 +5,23 @@ import { sidebarToggleAction } from "../../store/sidebarToggle";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Sidebar = () => {
   const [error, setError] = useState();
-  const [ user, setUser] = useState({
+  const [user, setUser] = useState({
     firstname: "",
     lastname: "",
     userName: "",
-    profileImage: ""
+    profileImage: "",
   });
   const dispatch = useDispatch();
 
   const isSidebarActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
-  
-  const userData = useCallback( async () => {
+
+  const userData = useCallback(async () => {
     const userInformation = await fetch(
       `${baseUrl}/user/${
         JSON.parse(localStorage.getItem("user") || "{}").user.id
@@ -29,7 +30,9 @@ const Sidebar = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user") || "{}").token}`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user") || "{}").token
+          }`,
         },
       }
     ).then((res) => {
@@ -47,13 +50,14 @@ const Sidebar = () => {
 
   useEffect(() => {
     userData();
+
+    
   }, []);
 
-  
   const sideBarToggleHandler = () => {
     dispatch(sidebarToggleAction.toggleSidebar());
   };
-  
+
   return (
     // Sidebar - START
     <aside className="sidebar">

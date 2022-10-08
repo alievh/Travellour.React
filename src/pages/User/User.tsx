@@ -114,6 +114,8 @@ const User = () => {
     AcceptFriendRequest(dispatch, id);
   };
 
+  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
+
   return (
     // User Section - START
     <section
@@ -152,6 +154,13 @@ const User = () => {
                 {user.firstname} {user.lastname}
               </h5>
               <span>@{user.userName}</span>
+              {onlineUsers.isOnline !== undefined
+                ? onlineUsers.isOnline.map((u: any) => {
+                    if (u === id) {
+                      return <p>Online</p>;
+                    }
+                  })
+                : ""}
             </div>
             <div className="user__request col-lg-4">
               <form>

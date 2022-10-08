@@ -9,6 +9,7 @@ const FriendSuggestions = () => {
 
   const friendSuggestions = useSelector((state: any) => state.FriendSuggestionSlice);
 
+
   useEffect(() => {
     GetFriendSuggestions(dispatch);
   }, []);

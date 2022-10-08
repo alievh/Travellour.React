@@ -83,6 +83,8 @@ const Profile = () => {
     navigate("/profile");
   };
 
+
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
@@ -150,6 +152,7 @@ const Profile = () => {
                 {profileData.profile.firstname} {profileData.profile.lastname}
               </h5>
               <span>@{profileData.profile.userName}</span>
+              
             </div>
             <div className="user__request col-lg-4">
               <form>
