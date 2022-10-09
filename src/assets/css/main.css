@@ -796,6 +796,10 @@ body {
   margin-bottom: 12px;
 }
 
+.notification.unchecked {
+  background-color: #6f7f92;
+}
+
 @media screen and (max-width: 500px) {
   .notification {
     flex-direction: column;
@@ -1510,6 +1514,22 @@ body {
 .nav-bar__navigation ul li .notification-dropdown p {
   padding: 16px 32px 32px 32px;
   color: #6f7f92;
+}
+
+.nav-bar__navigation ul li .notification-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  top: 2px;
+  right: 5px;
+  position: absolute;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #fff;
 }
 
 .nav-bar__navigation ul li .profile-dropdown {

@@ -12,6 +12,7 @@ import {
   AddLike,
   DeleteLike,
 } from "../../store/Post/PostActionSlice";
+import { CreateNotification } from "../../store/Notification/NotificationSlice";
 
 const Post: React.FC<{
   postId: string;
@@ -33,6 +34,14 @@ const Post: React.FC<{
 
   const addLikeHandler = async () => {
     AddLike(dispatch, props.postId);
+
+    const notification = {
+      message: "liked your post",
+      receiverId: props.userId,
+      postId: props.postId
+    }
+
+    CreateNotification(notification);
   };
 
   const deleteLikeHandler = async () => {

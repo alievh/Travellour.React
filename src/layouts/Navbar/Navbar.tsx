@@ -21,6 +21,7 @@ const Navbar = () => {
     lastname: "",
     userName: "",
     profileImage: "",
+    notificationCount: 0,
   });
 
   const sidebarIsActive = useSelector(
@@ -126,20 +127,20 @@ const Navbar = () => {
 
     connection
       .start()
-      .then(() =>
+      .then(() => {
         connection
           .invoke(
             "IsOffline",
             JSON.parse(localStorage.getItem("user") || "{}").user.id
           )
-          .catch((error) => console.log(error))
-      )
+          .catch((error) => console.log(error));
+
+        dispatch(logout());
+        dispatch(clearUserData());
+        localStorage.removeItem("user");
+      })
       .then(() =>
         connection.on("activeUser", (id) => {
-          dispatch(logout());
-
-          dispatch(clearUserData());
-          localStorage.removeItem("user");
           AddOnlineUser(dispatch, id);
         })
       );
@@ -212,6 +213,13 @@ const Navbar = () => {
                       buttonIcon="fa-solid fa-bell"
                       onClick={notificationToggleHandler}
                     />
+                    {user.notificationCount > 0 ? (
+                      <span className="notification-count">
+                        {user.notificationCount}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                     {notificationToggle ? (
                       <div className="notification-dropdown">
                         <h5>Notifications</h5>

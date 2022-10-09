@@ -184,6 +184,20 @@
           }
         }
 
+        .notification-count {
+          @include flex(center, center);
+          font-size: 12px;
+          font-weight: 600;
+          top: 2px;
+          right: 5px;
+          position: absolute;
+          background-color: red;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          color: $white;
+        }
+
         .profile-dropdown {
           position: absolute;
           top: 75px;

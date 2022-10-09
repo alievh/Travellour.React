@@ -7,6 +7,10 @@
   padding-bottom: 12px;
   margin-bottom: 12px;
 
+  &.unchecked {
+    background-color: $global-font-color;
+  }
+
   @media screen and (max-width: 500px) {
     flex-direction: column;
   }

@@ -18,6 +18,7 @@ import GroupSetting from "./pages/Group/GroupSetting";
 import ForumCreate from "./pages/Forums/ForumCreate";
 import ForumDetail from "./pages/Forums/ForumDetail";
 import User from "./pages/User/User";
+import SinglePost from "./pages/SinglePost/SinglePost";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/newsfeed" element={<Newsfeed />} />
+            <Route path="/post/:id" element={<SinglePost />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/events" element={<Events />} />

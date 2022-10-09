@@ -7,11 +7,27 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
+import { useEffect } from "react";
+import {
+  GetNotifications,
+  SetNotificationsChecked,
+} from "../../store/Notification/NotificationSlice";
+import { useDispatch } from "react-redux";
 
 const Notifications = () => {
+  const dispatch = useDispatch();
+
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
+
+  const notifications = useSelector((state: any) => state.NotificationSlice);
+  console.log(notifications);
+
+  useEffect(() => {
+    GetNotifications(dispatch);
+    SetNotificationsChecked();
+  }, []);
 
   return (
     // Notifications Section - START
@@ -23,31 +39,18 @@ const Notifications = () => {
           <Col xl="8" sm="12">
             {/* Notifications - START */}
             <div className="notifications-container">
-              <Notification
-                userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                userUsername="marvin"
-                notificationContent="added new photo"
-              />
-              <Notification
-                userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                userUsername="anar"
-                notificationContent="added new photo"
-              />
-              <Notification
-                userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                userUsername="rafet"
-                notificationContent="added new photo"
-              />
-              <Notification
-                userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                userUsername="huseyn"
-                notificationContent="added new photo"
-              />
-              <Notification
-                userImage="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                userUsername="marvin"
-                notificationContent="added new photo"
-              />
+              {notifications.notifications.length > 0
+                ? notifications.notifications.map((n: any) => (
+                    <Notification
+                      userId={n.sender.id}
+                      userImage={n.sender.profileImage.imageUrl}
+                      userUsername={n.sender.userName}
+                      notificationContent={n.message}
+                      notificationStatus={n.notificationStatus}
+                      postId={n.post.id}
+                    />
+                  ))
+                : ""}
             </div>
             {/* Notifications - END */}
           </Col>
