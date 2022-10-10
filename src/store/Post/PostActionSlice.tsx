@@ -67,7 +67,7 @@ export async function DeleteLike(dispatch: any, id: string | undefined) {
   GetPosts(dispatch);
 }
 
-export async function AddComment(dispatch: any, comment: any) {
+export async function AddComment(dispatch: any, comment: any, id? : string | undefined) {
   await fetch(`${baseUrl}/post/commentadd`, {
     method: "POST",
     body: JSON.stringify(comment),
@@ -87,7 +87,12 @@ export async function AddComment(dispatch: any, comment: any) {
     }
   });
 
-  GetPosts(dispatch);
+  if(id === undefined) {
+    GetPosts(dispatch);
+
+  }else if(id !== undefined) {
+    GetForumDetail(dispatch, id);
+  }
 }
 
 export async function DeleteComment(
@@ -112,8 +117,6 @@ export async function DeleteComment(
       });
     }
   });
-
-  console.log(forumId);
 
   if (forumId !== undefined) {
     GetForumDetail(dispatch, forumId);

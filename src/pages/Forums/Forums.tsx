@@ -36,7 +36,14 @@ const Forums = () => {
               {/* Forums - START */}
               <div className="forums-container__forums">
                 {forums.loading && <p className="loading">Loading...</p>}
-                {forums.forums.map((f:any) => <ForumCard id={f.id} title={f.forumTitle} commentCount={f.commentCount} />)}
+                {forums.forums.map((f: any) => (
+                  <ForumCard
+                    key={f.id}
+                    id={f.id}
+                    title={f.forumTitle}
+                    commentCount={f.commentCount}
+                  />
+                ))}
               </div>
               {/* Forums - END */}
             </Col>

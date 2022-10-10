@@ -57,7 +57,6 @@ const User = () => {
       }
     });
 
-    console.log(postInfo);
     setUserPosts(postInfo);
   }, []);
 
@@ -79,7 +78,6 @@ const User = () => {
         });
       }
     });
-
 
     setUser(userInfo);
   }, []);
@@ -122,10 +120,14 @@ const User = () => {
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img
-          src={`https://localhost:7101/img/${user.coverImage}`}
-          alt="Profile Background"
-        />
+        {user.coverImage === "" ? (
+          ""
+        ) : (
+          <img
+            src={`https://localhost:7101/img/${user.coverImage}`}
+            alt="Profile Background"
+          />
+        )}
       </div>
       <Container>
         <Row>
@@ -145,10 +147,14 @@ const User = () => {
             </div>
             <div className="user__details col-lg-6">
               <div className="user-avatar">
-                <img
-                  src={`https://localhost:7101/img/${user.profileImage}`}
-                  alt="User Avatar"
-                />
+                {user.profileImage === "" ? (
+                  ""
+                ) : (
+                  <img
+                    src={`https://localhost:7101/img/${user.profileImage}`}
+                    alt="User Avatar"
+                  />
+                )}
               </div>
               <h5>
                 {user.firstname} {user.lastname}
@@ -158,7 +164,7 @@ const User = () => {
                 ? onlineUsers.isOnline.map((u: any) => {
                     if (u === id) {
                       return <p className="online-user">Online</p>;
-                    } 
+                    }
                   })
                 : ""}
             </div>
@@ -227,6 +233,7 @@ const User = () => {
                 {userPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
@@ -242,6 +249,7 @@ const User = () => {
                     />
                   ) : (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}

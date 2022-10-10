@@ -21,6 +21,7 @@ const FriendSuggestions = () => {
         <ul>
           {friendSuggestions.friendSuggestions.length > 0 ? friendSuggestions.friendSuggestions.map((f: any) => (
             <FriendSuggestion
+              key={f.id}
               id={f.id}
               imageUrl={f.imageUrl}
               userFirstName={f.firstname}

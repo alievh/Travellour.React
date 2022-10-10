@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 
 import sidebarToggleSlice from "./sidebarToggle";
 import AuthSlice from "./Auth/AuthSlice";
@@ -38,6 +39,7 @@ const store = configureStore({
     OnlineUserSlice: OnlineUserSlice,
     NotificationSlice: NotificationSlice,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(thunk),
 });
 
 export default store;

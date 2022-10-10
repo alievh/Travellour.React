@@ -56,7 +56,6 @@ const Profile = () => {
       }
     });
 
-    console.log(postInfo);
     setUserPosts(postInfo);
   }, []);
 
@@ -83,8 +82,6 @@ const Profile = () => {
     navigate("/profile");
   };
 
-
-
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
@@ -96,10 +93,14 @@ const Profile = () => {
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        <img
-          src={`https://localhost:7101/img/${profileData.profile.coverImage}`}
-          alt="Profile Background"
-        />
+        {JSON.stringify(profileData.profile) === "{}" ? (
+          ""
+        ) : (
+          <img
+            src={`https://localhost:7101/img/${profileData.profile.coverImage}`}
+            alt="Profile Background"
+          />
+        )}
         <form>
           <label className="backgroundphoto-label">
             <input
@@ -132,10 +133,14 @@ const Profile = () => {
             </div>
             <div className="user__details col-lg-6">
               <div className="user-avatar">
-                <img
-                  src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
-                  alt="User Avatar"
-                />
+                {JSON.stringify(profileData.profile) === "{}" ? (
+                  ""
+                ) : (
+                  <img
+                    src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
+                    alt="User Avatar"
+                  />
+                )}
                 <form>
                   <label className="profilphoto-label">
                     <input
@@ -152,7 +157,6 @@ const Profile = () => {
                 {profileData.profile.firstname} {profileData.profile.lastname}
               </h5>
               <span>@{profileData.profile.userName}</span>
-              
             </div>
             <div className="user__request col-lg-4">
               <form>
@@ -181,6 +185,7 @@ const Profile = () => {
                 {userPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
@@ -196,6 +201,7 @@ const Profile = () => {
                     />
                   ) : (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}

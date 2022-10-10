@@ -17,7 +17,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
   const [notificationToggle, setNotificationToggle] = useState(false);
@@ -112,7 +111,6 @@ const Navbar = () => {
   );
 
   const user = useSelector((state: any) => state.UserDataSlice);
-  console.log(user);
 
   return (
     // Navbar - START
@@ -179,13 +177,17 @@ const Navbar = () => {
                       buttonIcon="fa-solid fa-bell"
                       onClick={notificationToggleHandler}
                     />
-                    {JSON.stringify(user.userData) !== "{}" ? user.userData.notificationCount > 0 ? (
-                      <span className="notification-count">
-                        {user.userData.notificationCount}
-                      </span>
+                    {JSON.stringify(user.userData) !== "{}" ? (
+                      user.userData.notificationCount > 0 ? (
+                        <span className="notification-count">
+                          {user.userData.notificationCount}
+                        </span>
+                      ) : (
+                        ""
+                      )
                     ) : (
                       ""
-                    ) : ""}
+                    )}
                     {notificationToggle ? (
                       <div className="notification-dropdown">
                         <h5>Notifications</h5>
@@ -202,10 +204,14 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      <img
-                        src={`https://localhost:7101/img/${user.userData.profileImage}`}
-                        alt="User Avatar"
-                      />
+                      {JSON.stringify(user.userData) === "{}" ? (
+                        ""
+                      ) : (
+                        <img
+                          src={`https://localhost:7101/img/${user.userData.profileImage}`}
+                          alt="User Avatar"
+                        />
+                      )}
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">

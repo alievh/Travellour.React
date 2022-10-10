@@ -21,6 +21,7 @@ const FriendRequests = () => {
           {friendRequests.friendRequests.length > 0 ? (
             friendRequests.friendRequests.map((f: any) => (
               <FriendRequest
+                key={f.id}
                 userId={f.id}
                 userFirstName={f.firstname}
                 userLastName={f.lastname}

@@ -27,8 +27,6 @@ const SinglePost = () => {
   const post = useSelector((state: any) => state.SinglePostSlice.post);
   console.log(post);
 
-  
-
   return (
     // Newsfeed Section - START
     <section className={`newsfeed ${!sidebarIsActive && "sidebar-notactive"}`}>
@@ -39,38 +37,42 @@ const SinglePost = () => {
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
                 {post.loading && <p className="loading">Loading...</p>}
-                {JSON.stringify(post) !== "{}" ? 
-                post.images !== null ? (
-                  <Post
-                    postId={post.id}
-                    userId={post.user.id}
-                    userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
-                    userFirstname={post.user.firstname}
-                    userLastname={post.user.lastname}
-                    createdDate="6 hours"
-                    postContent={post.content}
-                    postImages={post.imageUrls}
-                    likeCount={post.likeCount}
-                    commentCount={post.commentCount}
-                    likes={post.likes}
-                    comments={post.comments}
-                  />
+                {JSON.stringify(post) !== "{}" ? (
+                  post.images !== null ? (
+                    <Post
+                      key={post.id}
+                      postId={post.id}
+                      userId={post.user.id}
+                      userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
+                      userFirstname={post.user.firstname}
+                      userLastname={post.user.lastname}
+                      createdDate="6 hours"
+                      postContent={post.content}
+                      postImages={post.imageUrls}
+                      likeCount={post.likeCount}
+                      commentCount={post.commentCount}
+                      likes={post.likes}
+                      comments={post.comments}
+                    />
+                  ) : (
+                    <Post
+                      key={post.id}
+                      postId={post.id}
+                      userId={post.user.id}
+                      userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
+                      userFirstname={post.user.firstname}
+                      userLastname={post.user.lastname}
+                      createdDate="6 hours"
+                      postContent={post.content}
+                      likeCount={post.likeCount}
+                      commentCount={post.commentCount}
+                      likes={post.likes}
+                      comments={post.comments}
+                    />
+                  )
                 ) : (
-                  <Post
-                    postId={post.id}
-                    userId={post.user.id}
-                    userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
-                    userFirstname={post.user.firstname}
-                    userLastname={post.user.lastname}
-                    createdDate="6 hours"
-                    postContent={post.content}
-                    likeCount={post.likeCount}
-                    commentCount={post.commentCount}
-                    likes={post.likes}
-                    comments={post.comments}
-                  />
-                ) 
-                : ""}
+                  ""
+                )}
               </div>
               {/* Newsfeed Posts - END */}
             </section>

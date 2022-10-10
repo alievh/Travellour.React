@@ -20,7 +20,6 @@ const Notifications = () => {
   );
 
   const notifications = useSelector((state: any) => state.NotificationSlice);
-  console.log(notifications);
 
   useEffect(() => {
     GetNotifications(dispatch);
@@ -37,28 +36,36 @@ const Notifications = () => {
           <Col xl="8" sm="12">
             {/* Notifications - START */}
             <div className="notifications-container">
-              {notifications.notifications.length > 0
-                ? notifications.notifications.map((n: any) =>
-                    n.post !== null ? (
-                      <Notification
-                        userId={n.sender.id}
-                        userImage={n.sender.profileImage.imageUrl}
-                        userUsername={n.sender.userName}
-                        notificationContent={n.message}
-                        notificationStatus={n.notificationStatus}
-                        postId={n.post.id}
-                      />
-                    ) : (
-                      <Notification
-                        userId={n.sender.id}
-                        userImage={n.sender.profileImage.imageUrl}
-                        userUsername={n.sender.userName}
-                        notificationContent={n.message}
-                        notificationStatus={n.notificationStatus}
-                      />
-                    )
+              {notifications.notifications.length > 0 ? (
+                notifications.notifications.map((n: any) =>
+                  n.post !== null ? (
+                    <Notification
+                      key={n.id}
+                      notificationId={n.id}
+                      userId={n.sender.id}
+                      userImage={n.sender.profileImage.imageUrl}
+                      userUsername={n.sender.userName}
+                      notificationContent={n.message}
+                      notificationStatus={n.notificationStatus}
+                      postId={n.post.id}
+                    />
+                  ) : (
+                    <Notification
+                      key={n.id}
+                      notificationId={n.id}
+                      userId={n.sender.id}
+                      userImage={n.sender.profileImage.imageUrl}
+                      userUsername={n.sender.userName}
+                      notificationContent={n.message}
+                      notificationStatus={n.notificationStatus}
+                    />
                   )
-                : ""}
+                )
+              ) : (
+                <p className="notification-null">
+                  You don't have any notification
+                </p>
+              )}
             </div>
             {/* Notifications - END */}
           </Col>

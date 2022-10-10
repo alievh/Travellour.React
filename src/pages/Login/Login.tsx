@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { login } from "../../store/Auth/AuthSlice";
 import { HubConnectionBuilder } from "@microsoft/signalr";
+import { GetUserData } from "../../store/User/UserData";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -49,26 +50,7 @@ const Login = () => {
     localStorage.setItem("user", JSON.stringify(loggedUser));
     setIsLoading(true);
 
-    const userData = await fetch(
-      `${baseUrl}/user/${
-        JSON.parse(localStorage.getItem("user") || "{}").user.id
-      }`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${loggedUser.token}`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+    GetUserData(dispatch);
 
     navigate("/newsfeed");
   }

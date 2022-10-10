@@ -39,7 +39,6 @@ const Setting = () => {
       lastName: lastName.current?.value,
       userName: userName.current?.value,
     };
-    
 
     const response = await fetch(`${baseUrl}/user/userupdate`, {
       method: "POST",
@@ -63,7 +62,6 @@ const Setting = () => {
   };
 
   const userData = useCallback(async () => {
-    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
     const userInformation = await fetch(
       `${baseUrl}/user/${
         JSON.parse(localStorage.getItem("user") || "{}").user.id
@@ -112,10 +110,14 @@ const Setting = () => {
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
-                  <img
-                    src={`https://localhost:7101/img/${user.profileImage}`}
-                    alt="User Avatar"
-                  />
+                  {user.profileImage === "" ? (
+                    ""
+                  ) : (
+                    <img
+                      src={`https://localhost:7101/img/${user.profileImage}`}
+                      alt="User Avatar"
+                    />
+                  )}
                 </div>
                 <div className="user-fullname">
                   <h5>

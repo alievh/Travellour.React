@@ -62,6 +62,7 @@ const Events = () => {
                 {events.loading && <p className="loading">Loading...</p>}
                 {events.events.map((e: any) => (
                   <Event
+                    key={e.id}
                     eventId={e.id}
                     eventContent={e.eventDescription}
                     eventTitle={e.eventTitle}

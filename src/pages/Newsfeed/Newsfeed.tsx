@@ -38,6 +38,8 @@ const Newsfeed = () => {
     formData.append("content", postContent);
 
     CreatePost(dispatch, formData);
+
+    setPostContent("");
   };
 
   const sidebarIsActive = useSelector<RootState, boolean>(
@@ -46,7 +48,6 @@ const Newsfeed = () => {
 
   const posts = useSelector((state: any) => state.PostSlice);
 
-  console.log(posts);
   useEffect(() => {
     GetPosts(dispatch);
     const connection = new HubConnectionBuilder()
@@ -57,11 +58,14 @@ const Newsfeed = () => {
       .start()
       .then(() =>
         connection
-          .invoke("IsOnline", JSON.parse(localStorage.getItem("user") || "{}").user.id)
+          .invoke(
+            "IsOnline",
+            JSON.parse(localStorage.getItem("user") || "{}").user.id
+          )
           .catch((error) => console.log(error))
       )
       .then(() =>
-        connection.on("activeUser", id => {
+        connection.on("activeUser", (id) => {
           AddOnlineUser(dispatch, id);
         })
       );
@@ -77,7 +81,10 @@ const Newsfeed = () => {
               {/* Post Create - START */}
               <div className="newsfeed-section__post-create">
                 <form onSubmit={postCreateHandler}>
-                  <textarea onChange={postContentHandler}></textarea>
+                  <textarea
+                    onChange={postContentHandler}
+                    value={postContent}
+                  ></textarea>
                   <div className="post-create__bottom">
                     <label>
                       <input
@@ -97,10 +104,11 @@ const Newsfeed = () => {
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
-                {posts.loading && <p className="loading">Loading...</p>}
+                {/* {posts.loading && <p className="loading">Loading...</p>} */}
                 {posts.posts.map((p: any) =>
                   p.images !== null ? (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
@@ -116,6 +124,7 @@ const Newsfeed = () => {
                     />
                   ) : (
                     <Post
+                      key={p.id}
                       postId={p.id}
                       userId={p.user.id}
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}

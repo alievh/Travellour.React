@@ -6,6 +6,7 @@ import { setUserData } from "../../store/User/UserData";
 import { useDispatch } from "react-redux";
 
 const Notification: React.FC<{
+  notificationId: string;
   userId: string;
   userImage: string;
   userUsername: string;
@@ -16,7 +17,7 @@ const Notification: React.FC<{
   const dispatch = useDispatch();
 
   const setCheckedNotificationHandler = () => {
-    SetNotificationsChecked();
+    SetNotificationsChecked(props.notificationId);
     setUserData(dispatch);
   };
 

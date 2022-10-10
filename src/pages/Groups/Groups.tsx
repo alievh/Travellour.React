@@ -67,6 +67,7 @@ const Groups = () => {
                   {groups.loading && <p className="loading">Loading...</p>}
                   {groups.groups.map((g: any) => (
                     <GroupCard
+                      key={g.id}
                       groupId={g.id}
                       groupTitle={g.groupName}
                       groupImage={g.groupImage}

@@ -66,8 +66,8 @@ export async function CreateNotification(notification: any) {
   });
 }
 
-export async function SetNotificationsChecked() {
-  await fetch(`${baseUrl}/notification/notificationchangestatus`, {
+export async function SetNotificationsChecked(id: string | undefined) {
+  await fetch(`${baseUrl}/notification/notificationchangestatus/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

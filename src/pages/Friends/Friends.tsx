@@ -66,6 +66,7 @@ const Friends = () => {
                 <div className="user-friends">
                   {allFriends.friends.map((f: any) => (
                     <UserFriend
+                      key={f.id}
                       userId={f.id}
                       firstName={f.firstname}
                       lastName={f.lastname}

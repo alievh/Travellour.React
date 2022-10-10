@@ -42,7 +42,6 @@ export async function GetEvents(dispatch: any) {
     }
   });
   dispatch(setEvents(response));
-  console.log(response);
 }
 
 export async function CreateEvent(formData: any) {

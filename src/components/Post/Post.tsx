@@ -14,9 +14,7 @@ import {
 } from "../../store/Post/PostActionSlice";
 import {
   CreateNotification,
-  GetNotifications,
 } from "../../store/Notification/NotificationSlice";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Post: React.FC<{
   postId: string;
@@ -34,7 +32,7 @@ const Post: React.FC<{
 }> = (props) => {
   const dispatch = useDispatch();
   const [commentIsActive, setCommentIsActive] = useState(false);
-  const [commentContent, setCommentContent] = useState();
+  const [commentContent, setCommentContent] = useState("");
 
   const addLikeHandler = async () => {
     AddLike(dispatch, props.postId);
@@ -80,6 +78,8 @@ const Post: React.FC<{
 
       CreateNotification(notification);
     }
+
+    setCommentContent("");
   };
 
   const commentActiveHandler = () => {
@@ -193,6 +193,7 @@ const Post: React.FC<{
           {props.comments.length > 0 &&
             props.comments.map((c) => (
               <Comment
+                key={c.id}
                 commentId={c.id}
                 userId={c.user.id}
                 userImage={c.user.profileImage.imageUrl}
@@ -212,6 +213,7 @@ const Post: React.FC<{
                   placeholder="Type..."
                   mainDivClass="d-flex align-items-center"
                   onChange={commentContentHandler}
+                  value={commentContent}
                 />
               </Col>
               <Col

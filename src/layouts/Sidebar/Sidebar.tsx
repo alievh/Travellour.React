@@ -1,57 +1,22 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SidebarItem from "../../components/UI/SidebarItem";
 import { sidebarToggleAction } from "../../store/sidebarToggle";
 import { Link } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
-import { HubConnectionBuilder } from "@microsoft/signalr";
+import { GetUserData } from "../../store/User/UserData";
 
 const Sidebar = () => {
-  const [error, setError] = useState();
-  const [user, setUser] = useState({
-    firstname: "",
-    lastname: "",
-    userName: "",
-    profileImage: "",
-  });
   const dispatch = useDispatch();
 
   const isSidebarActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
-  const userData = useCallback(async () => {
-    const userInformation = await fetch(
-      `${baseUrl}/user/${
-        JSON.parse(localStorage.getItem("user") || "{}").user.id
-      }`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUser(userInformation);
-  }, []);
+  const user = useSelector((state: any) => state.UserDataSlice);
 
   useEffect(() => {
-    userData();
-
-    
+    GetUserData(dispatch);
   }, []);
 
   const sideBarToggleHandler = () => {
@@ -94,19 +59,23 @@ const Sidebar = () => {
         <div className="sidebar-section__main">
           <div className="sidebar-section__profile">
             <div className="profile-avatar">
-              <Link to="/profile">
-                <img
-                  src={`https://localhost:7101/img/${user.profileImage}`}
-                  alt="User Avatar"
-                />
-              </Link>
+              {user.userData.profileImage === undefined ? (
+                ""
+              ) : (
+                <Link to="/profile">
+                  <img
+                    src={`https://localhost:7101/img/${user.userData.profileImage}`}
+                    alt="User Avatar"
+                  />
+                </Link>
+              )}
             </div>
             {isSidebarActive && (
               <div className="profile-userinfo">
                 <Link to="/profile">
-                  {user.firstname} {user.lastname}
+                  {user.userData.firstname} {user.userData.lastname}
                 </Link>
-                <p>@{user.userName}</p>
+                <p>@{user.userData.userName}</p>
               </div>
             )}
           </div>

@@ -6,15 +6,13 @@ import Col from "../../components/Bootstrap/Col";
 import Comment from "../../components/Comment/Comment";
 import Button from "../../components/UI/Button";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { useDispatch } from "react-redux";
 import { AddComment } from "../../store/Post/PostActionSlice";
 
 const ForumDetail = () => {
-  const [commentContent, setCommentContent] = useState();
-  const [error, setError] = useState();
+  const [commentContent, setCommentContent] = useState("");
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -33,7 +31,8 @@ const ForumDetail = () => {
       content: commentContent,
     };
 
-    AddComment(dispatch, comment);
+    AddComment(dispatch, comment, id);
+    setCommentContent("");
   };
 
   const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
@@ -62,6 +61,7 @@ const ForumDetail = () => {
                   {forumDetail.forum.comments !== undefined &&
                     forumDetail.forum.comments.map((c: any) => (
                       <Comment
+                        key={c.id}
                         commentId={c.id}
                         userId={c.user.id}
                         userImage={c.user.profileImage.imageUrl}
@@ -77,6 +77,7 @@ const ForumDetail = () => {
                 <form onSubmit={addCommentHandler}>
                   <textarea
                     rows={5}
+                    value={commentContent}
                     onChange={commentContentHandler}
                   ></textarea>
                   <Button className="btn" innerText="Send" />
