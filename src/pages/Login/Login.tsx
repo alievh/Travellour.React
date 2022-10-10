@@ -5,11 +5,9 @@ import Input from "../../components/UI/Input";
 import Col from "../../components/Bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { login } from "../../store/Auth/AuthSlice";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { AddOnlineUser, setIsOnline } from "../../store/Online/OnlineUserSlice";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -71,7 +69,6 @@ const Login = () => {
         });
       }
     });
-    dispatch(getUserData(userData));
 
     navigate("/newsfeed");
   }

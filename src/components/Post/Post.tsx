@@ -12,7 +12,11 @@ import {
   AddLike,
   DeleteLike,
 } from "../../store/Post/PostActionSlice";
-import { CreateNotification } from "../../store/Notification/NotificationSlice";
+import {
+  CreateNotification,
+  GetNotifications,
+} from "../../store/Notification/NotificationSlice";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Post: React.FC<{
   postId: string;
@@ -35,13 +39,17 @@ const Post: React.FC<{
   const addLikeHandler = async () => {
     AddLike(dispatch, props.postId);
 
-    const notification = {
-      message: "liked your post",
-      receiverId: props.userId,
-      postId: props.postId
-    }
+    if (
+      JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
+    ) {
+      const notification = {
+        message: "liked your",
+        receiverId: props.userId,
+        postId: props.postId,
+      };
 
-    CreateNotification(notification);
+      CreateNotification(notification);
+    }
   };
 
   const deleteLikeHandler = async () => {
@@ -60,6 +68,18 @@ const Post: React.FC<{
     };
 
     AddComment(dispatch, comment);
+
+    if (
+      JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
+    ) {
+      const notification = {
+        message: "commented to your",
+        receiverId: props.userId,
+        postId: props.postId,
+      };
+
+      CreateNotification(notification);
+    }
   };
 
   const commentActiveHandler = () => {
@@ -170,7 +190,7 @@ const Post: React.FC<{
           />
         </div>
         <div className="post-comments">
-          {props.comments !== undefined &&
+          {props.comments.length > 0 &&
             props.comments.map((c) => (
               <Comment
                 commentId={c.id}

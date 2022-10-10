@@ -9,7 +9,6 @@ import Col from "../../components/Bootstrap/Col";
 import { useRef, useState } from "react";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { logout } from "../../store/Auth/AuthSlice";
-import { clearUserData } from "../../store/User/UserData";
 import { RootState } from "../../store";
 
 const Setting = () => {
@@ -97,7 +96,6 @@ const Setting = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    dispatch(clearUserData());
     localStorage.removeItem("user");
     navigate("/");
   };

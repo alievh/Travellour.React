@@ -789,15 +789,16 @@ body {
 
 .notification {
   display: flex;
-  justify-content: space-between;
+  justify-content: none;
   align-items: center;
-  border-bottom: 1px solid #f1f1f1;
-  padding-bottom: 12px;
+  padding: 10px 0;
   margin-bottom: 12px;
+  border: 1px solid #eaeff8;
+  border-radius: 5px;
 }
 
 .notification.unchecked {
-  background-color: #6f7f92;
+  background-color: #eaeff8;
 }
 
 @media screen and (max-width: 500px) {
@@ -819,18 +820,37 @@ body {
   object-fit: cover;
 }
 
+@media screen and (max-width: 992px) {
+  .notification__avatar {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .notification__avatar {
+    margin-bottom: 10px;
+  }
+}
+
 .notification__message p {
   word-spacing: 4px;
   color: #6f7f92;
+  margin: 0;
 }
 
 .notification__message p a {
-  text-decoration: none;
+  text-decoration: underline;
   color: #4fb5ff;
 }
 
 .notification__message p a:hover {
   color: #47a2e5;
+}
+
+.notification__message-username {
+  background-color: #eaeff8;
+  padding: 4px 4px;
+  border-radius: 5px;
 }
 
 .notification__remove button {
@@ -1212,6 +1232,12 @@ body {
   bottom: 0;
   left: 0;
   padding: 16px 16px;
+}
+
+@media screen and (max-width: 1220px) {
+  .sidebar .sidebar-section__footer {
+    padding: 16px 8px;
+  }
 }
 
 @media screen and (max-width: 720px) {

@@ -7,7 +7,6 @@ import Row from "../../components/Bootstrap/Row";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import { logout } from "../../store/Auth/AuthSlice";
-import { clearUserData } from "../../store/User/UserData";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 
@@ -97,7 +96,6 @@ const Password = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    dispatch(clearUserData());
     localStorage.removeItem("user");
     navigate("/");
   };

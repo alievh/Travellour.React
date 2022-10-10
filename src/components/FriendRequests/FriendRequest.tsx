@@ -6,6 +6,8 @@ import {
 } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { CreateNotification, GetNotifications } from "../../store/Notification/NotificationSlice";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const FriendRequest: React.FC<{
   userId: string;
@@ -18,6 +20,13 @@ const FriendRequest: React.FC<{
 
   const acceptFriendHandler = () => {
     AcceptFriendRequest(dispatch, props.userId);
+
+    const notification = {
+      message: "accepted your friend request",
+      receiverId: props.userId,
+    };
+
+    CreateNotification(notification);
   };
 
   const rejectFriendHandler = () => {

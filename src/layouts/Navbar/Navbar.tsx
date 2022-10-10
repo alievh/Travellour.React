@@ -8,33 +8,20 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
-import { clearUserData } from "../../store/User/UserData";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import { GetUserData } from "../../store/User/UserData";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const Navbar = () => {
-  const [error, setError] = useState();
-  const [user, setUser] = useState({
-    firstname: "",
-    lastname: "",
-    userName: "",
-    profileImage: "",
-    notificationCount: 0,
-  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const sidebarIsActive = useSelector(
-    (state: any) => state.sidebarToggle.isActive
-  );
 
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
   const [notificationToggle, setNotificationToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const friendRequestsToggleHandler = () => {
     if (
@@ -88,35 +75,8 @@ const Navbar = () => {
     setProfileToggle(!profileToggle);
   };
 
-  const userData = useCallback(async () => {
-    const userInformation = await fetch(
-      `${baseUrl}/user/${
-        JSON.parse(localStorage.getItem("user") || "{}").user.id
-      }`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUser(userInformation);
-  }, []);
-
   useEffect(() => {
-    userData();
+    GetUserData(dispatch);
   }, []);
 
   const logoutHandler = () => {
@@ -136,7 +96,6 @@ const Navbar = () => {
           .catch((error) => console.log(error));
 
         dispatch(logout());
-        dispatch(clearUserData());
         localStorage.removeItem("user");
       })
       .then(() =>
@@ -147,6 +106,13 @@ const Navbar = () => {
 
     navigate("/");
   };
+
+  const sidebarIsActive = useSelector(
+    (state: any) => state.sidebarToggle.isActive
+  );
+
+  const user = useSelector((state: any) => state.UserDataSlice);
+  console.log(user);
 
   return (
     // Navbar - START
@@ -213,13 +179,13 @@ const Navbar = () => {
                       buttonIcon="fa-solid fa-bell"
                       onClick={notificationToggleHandler}
                     />
-                    {user.notificationCount > 0 ? (
+                    {JSON.stringify(user.userData) !== "{}" ? user.userData.notificationCount > 0 ? (
                       <span className="notification-count">
-                        {user.notificationCount}
+                        {user.userData.notificationCount}
                       </span>
                     ) : (
                       ""
-                    )}
+                    ) : ""}
                     {notificationToggle ? (
                       <div className="notification-dropdown">
                         <h5>Notifications</h5>
@@ -237,7 +203,7 @@ const Navbar = () => {
                       onClick={profileToggleHandler}
                     >
                       <img
-                        src={`https://localhost:7101/img/${user.profileImage}`}
+                        src={`https://localhost:7101/img/${user.userData.profileImage}`}
                         alt="User Avatar"
                       />
                     </div>

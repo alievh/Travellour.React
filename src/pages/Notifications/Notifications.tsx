@@ -8,11 +8,9 @@ import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
 import { useEffect } from "react";
-import {
-  GetNotifications,
-  SetNotificationsChecked,
-} from "../../store/Notification/NotificationSlice";
+import { GetNotifications } from "../../store/Notification/NotificationSlice";
 import { useDispatch } from "react-redux";
+import { GetUserData } from "../../store/User/UserData";
 
 const Notifications = () => {
   const dispatch = useDispatch();
@@ -26,7 +24,7 @@ const Notifications = () => {
 
   useEffect(() => {
     GetNotifications(dispatch);
-    SetNotificationsChecked();
+    GetUserData(dispatch);
   }, []);
 
   return (
@@ -40,16 +38,26 @@ const Notifications = () => {
             {/* Notifications - START */}
             <div className="notifications-container">
               {notifications.notifications.length > 0
-                ? notifications.notifications.map((n: any) => (
-                    <Notification
-                      userId={n.sender.id}
-                      userImage={n.sender.profileImage.imageUrl}
-                      userUsername={n.sender.userName}
-                      notificationContent={n.message}
-                      notificationStatus={n.notificationStatus}
-                      postId={n.post.id}
-                    />
-                  ))
+                ? notifications.notifications.map((n: any) =>
+                    n.post !== null ? (
+                      <Notification
+                        userId={n.sender.id}
+                        userImage={n.sender.profileImage.imageUrl}
+                        userUsername={n.sender.userName}
+                        notificationContent={n.message}
+                        notificationStatus={n.notificationStatus}
+                        postId={n.post.id}
+                      />
+                    ) : (
+                      <Notification
+                        userId={n.sender.id}
+                        userImage={n.sender.profileImage.imageUrl}
+                        userUsername={n.sender.userName}
+                        notificationContent={n.message}
+                        notificationStatus={n.notificationStatus}
+                      />
+                    )
+                  )
                 : ""}
             </div>
             {/* Notifications - END */}

@@ -19,13 +19,15 @@ const SinglePost = () => {
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
-  
-  const post = useSelector((state: any) => state.SinglePostSlice);
-  console.log(post);
 
   useEffect(() => {
     GetSinglePost(dispatch, id);
   }, []);
+
+  const post = useSelector((state: any) => state.SinglePostSlice.post);
+  console.log(post);
+
+  
 
   return (
     // Newsfeed Section - START
@@ -37,36 +39,38 @@ const SinglePost = () => {
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">
                 {post.loading && <p className="loading">Loading...</p>}
-                {/* {post.post.images !== null ? (
+                {JSON.stringify(post) !== "{}" ? 
+                post.images !== null ? (
                   <Post
-                    postId={post.post.id}
-                    userId={post.post.user.id}
-                    userImage={`https://localhost:7101/img/${post.post.user.profileImage.imageUrl}`}
-                    userFirstname={post.post.user.firstname}
-                    userLastname={post.post.user.lastname}
+                    postId={post.id}
+                    userId={post.user.id}
+                    userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
+                    userFirstname={post.user.firstname}
+                    userLastname={post.user.lastname}
                     createdDate="6 hours"
-                    postContent={post.post.content}
-                    postImages={post.post.imageUrls}
-                    likeCount={post.post.likeCount}
-                    commentCount={post.post.commentCount}
-                    likes={post.post.likes}
-                    comments={post.post.comments}
+                    postContent={post.content}
+                    postImages={post.imageUrls}
+                    likeCount={post.likeCount}
+                    commentCount={post.commentCount}
+                    likes={post.likes}
+                    comments={post.comments}
                   />
                 ) : (
                   <Post
-                    postId={post.post.id}
-                    userId={post.post.user.id}
-                    userImage={`https://localhost:7101/img/${post.post.user.profileImage.imageUrl}`}
-                    userFirstname={post.post.user.firstname}
-                    userLastname={post.post.user.lastname}
+                    postId={post.id}
+                    userId={post.user.id}
+                    userImage={`https://localhost:7101/img/${post.user.profileImage.imageUrl}`}
+                    userFirstname={post.user.firstname}
+                    userLastname={post.user.lastname}
                     createdDate="6 hours"
-                    postContent={post.post.content}
-                    likeCount={post.post.likeCount}
-                    commentCount={post.post.commentCount}
-                    likes={post.post.likes}
-                    comments={post.post.comments}
+                    postContent={post.content}
+                    likeCount={post.likeCount}
+                    commentCount={post.commentCount}
+                    likes={post.likes}
+                    comments={post.comments}
                   />
-                )} */}
+                ) 
+                : ""}
               </div>
               {/* Newsfeed Posts - END */}
             </section>

@@ -189,6 +189,10 @@
       left: 0;
       padding: 16px 16px;
 
+      @media screen and (max-width: 1220px) {
+        padding: 16px 8px;
+      }
+
       @media screen and (max-width: 720px) {
         padding: 16px 6px;
       }

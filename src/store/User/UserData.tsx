@@ -1,19 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../Fetch/FetchConfiguration";
 
 export const UserDataSlice = createSlice({
   name: "userData",
   initialState: {
-    user: null,
+    userData: {},
+    loading: false,
+    error: null,
   },
   reducers: {
-    getUserData: (state, action) => {
-      state.user = action.payload;
+    setUserData: (state, action) => {
+      state.userData = action.payload;
     },
-    clearUserData: (state) => {
-      state.user = null;
-    }
-  }
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+  },
 });
 
-export const { getUserData, clearUserData } = UserDataSlice.actions;
+export async function GetUserData(dispatch: any) {
+  dispatch(setLoading(true));
+  const response = await fetch(
+    `${baseUrl}/user/${
+      JSON.parse(localStorage.getItem("user") || "{}").user.id
+    }`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user") || "{}").token
+        }`,
+      },
+    }
+  ).then((res) => {
+    if (res.ok) {
+      dispatch(setLoading(false));
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        dispatch(setError(data.error.message.toString()));
+      });
+    }
+  });
+
+  dispatch(setUserData(response));
+}
+
+export const { setUserData, setLoading, setError } = UserDataSlice.actions;
 export default UserDataSlice.reducer;

@@ -22,7 +22,7 @@ const store = configureStore({
   reducer: {
     sidebarToggle: sidebarToggleSlice,
     AuthReducer: AuthSlice,
-    UserData: UserDataSlice,
+    UserDataSlice: UserDataSlice,
     EventSlice: EventSlice,
     ForumSlice: ForumSlice,
     ForumDetailSlice: ForumDetailSlice,
