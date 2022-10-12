@@ -11,12 +11,13 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
 import { CreateGroup } from "../../store/Group/GroupSlice";
+import { useDispatch } from "react-redux";
 
 const GroupCreate = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
-  const [groupImage, setGroupImage] = useState("");
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
@@ -34,17 +35,13 @@ const GroupCreate = () => {
     setGroupDescription(event.target.value);
   };
 
-  const groupImageHandler = (event: any) => {
-    setGroupImage(event.target.files[0]);
-  };
-
   const groupCreateHandler = async () => {
-    const formData = new FormData();
-    formData.append("groupname", groupName);
-    formData.append("groupdescription", groupDescription);
-    formData.append("imagefile", groupImage);
+    const groupCreate = {
+      groupName: groupName,
+      groupDescription: groupDescription
+    }
 
-    CreateGroup(formData);
+    CreateGroup(dispatch, groupCreate);
     navigate("/groups");
   };
 
@@ -84,16 +81,6 @@ const GroupCreate = () => {
                       name="groupdescription"
                       onChange={groupDescriptionHandler}
                     ></textarea>
-                  </div>
-                  <div className="form-image">
-                    <Input
-                      type="file"
-                      label="Upload Group Image"
-                      id="group-image"
-                      placeholder="Choose Image"
-                      name="imagefile"
-                      onChange={groupImageHandler}
-                    />
                   </div>
                   <Button type="submit" className="btn" innerText="Create" />
                 </form>

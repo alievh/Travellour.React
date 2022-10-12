@@ -15,8 +15,51 @@
   }
 
   &__background {
+    position: relative;
     width: 100%;
     height: 500px;
+
+    form {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      .backgroundphoto-label {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #eaeff8;
+        border-color: #eaeff8;
+        color: $primary;
+        border-radius: 5px;
+        transition: 0.5s ease-in;
+
+        &:hover {
+          background-color: $primary;
+
+          transition: 0.5s ease-out;
+
+          i {
+            color: $white;
+          }
+        }
+
+        i {
+          margin-right: 8px;
+          font-size: 18px;
+          margin-right: 0;
+          color: $primary;
+        }
+
+        input {
+          display: none;
+        }
+      }
+    }
+
+    @media screen and (max-width: 720px) {
+      height: 300px;
+    }
 
     img {
       width: 100%;
@@ -126,6 +169,14 @@
           margin: 0 5px;
         }
       }
+
+      a {
+        margin: 0 10px;
+
+        i {
+          margin: 0 5px;
+        }
+      }
     }
 
     .group-avatar {
@@ -152,13 +203,49 @@
         left: -50px;
       }
 
-      
-
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 5px;
+      }
+
+      form {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+
+        .profilphoto-label {
+          @include flex(center, center);
+          width: 35px;
+          height: 35px;
+          cursor: pointer;
+          background-color: #eaeff8;
+          border-color: #eaeff8;
+          color: $primary;
+          border-radius: 50%;
+          transition: 0.5s ease-in;
+
+          &:hover {
+            background-color: $primary;
+            transition: 0.5s ease-out;
+
+            i {
+              color: $white;
+            }
+          }
+
+          i {
+            margin-right: 8px;
+            font-size: 18px;
+            margin-right: 0;
+            color: $primary;
+          }
+
+          input {
+            display: none;
+          }
+        }
       }
     }
   }

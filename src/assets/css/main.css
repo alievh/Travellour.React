@@ -2244,8 +2244,16 @@ body {
 
 .profile-section .user__request {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+  .profile-section .user__request {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 1032px) {
@@ -2291,6 +2299,14 @@ body {
   margin: 0 5px;
 }
 
+.profile-section .user__request a {
+  margin: 0 10px;
+}
+
+.profile-section .user__request a i {
+  margin: 0 5px;
+}
+
 .profile-section .user .user-avatar {
   position: absolute;
   top: -150px;
@@ -2315,6 +2331,24 @@ body {
     top: -170px;
     width: 120px;
     height: 120px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .profile-section .user .user-avatar {
+    left: 35%;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .profile-section .user .user-avatar {
+    left: 30%;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .profile-section .user .user-avatar {
+    left: 25%;
   }
 }
 
@@ -2424,7 +2458,7 @@ body {
 .friends__container {
   width: 100%;
   background-color: #fff;
-  padding: 0 32px 32px 32px;
+  padding: 32px;
   border-radius: 5px;
 }
 
@@ -3144,8 +3178,52 @@ body {
 }
 
 .group-section__background {
+  position: relative;
   width: 100%;
   height: 500px;
+}
+
+.group-section__background form {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.group-section__background form .backgroundphoto-label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 5px;
+  transition: 0.5s ease-in;
+}
+
+.group-section__background form .backgroundphoto-label:hover {
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.group-section__background form .backgroundphoto-label:hover i {
+  color: #fff;
+}
+
+.group-section__background form .backgroundphoto-label i {
+  margin-right: 8px;
+  font-size: 18px;
+  margin-right: 0;
+  color: #4fb5ff;
+}
+
+.group-section__background form .backgroundphoto-label input {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  .group-section__background {
+    height: 300px;
+  }
 }
 
 .group-section__background img {
@@ -3275,6 +3353,14 @@ body {
   margin: 0 5px;
 }
 
+.group-section .group__request a {
+  margin: 0 10px;
+}
+
+.group-section .group__request a i {
+  margin: 0 5px;
+}
+
 .group-section .group .group-avatar {
   position: absolute;
   top: -80px;
@@ -3311,6 +3397,46 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+
+.group-section .group .group-avatar form {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+.group-section .group .group-avatar form .profilphoto-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  border-radius: 50%;
+  transition: 0.5s ease-in;
+}
+
+.group-section .group .group-avatar form .profilphoto-label:hover {
+  background-color: #4fb5ff;
+  transition: 0.5s ease-out;
+}
+
+.group-section .group .group-avatar form .profilphoto-label:hover i {
+  color: #fff;
+}
+
+.group-section .group .group-avatar form .profilphoto-label i {
+  margin-right: 8px;
+  font-size: 18px;
+  margin-right: 0;
+  color: #4fb5ff;
+}
+
+.group-section .group .group-avatar form .profilphoto-label input {
+  display: none;
 }
 
 .groups {
@@ -3401,6 +3527,12 @@ body {
   }
 }
 
+.groups-container__filter .filter-left button {
+  background-color: transparent;
+  border: none;
+  color: #6f7f92;
+}
+
 @media screen and (max-width: 500px) {
   .groups-container__filter .filter-right {
     text-align: center;
@@ -3472,7 +3604,35 @@ body {
   }
 }
 
-.groups-container .card-body button {
+.groups-container .card-body .setting-button {
+  margin: 12px 0;
+  width: 100%;
+  background-color: #eaeff8;
+  border-color: #eaeff8;
+  color: #4fb5ff;
+  font-weight: 600;
+  font-size: 18px;
+  transition: 0.3s ease-in;
+}
+
+.groups-container .card-body .setting-button i {
+  margin: 0 5px;
+}
+
+@media screen and (max-width: 500px) {
+  .groups-container .card-body .setting-button {
+    font-size: 14px;
+  }
+}
+
+.groups-container .card-body .setting-button:hover {
+  text-decoration: none;
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: 0.5s ease-out;
+}
+
+.groups-container .card-body .join-group {
   margin: 12px 0;
   width: 100%;
   background-color: #eaeff8;
@@ -3484,13 +3644,36 @@ body {
 }
 
 @media screen and (max-width: 500px) {
-  .groups-container .card-body button {
+  .groups-container .card-body .join-group {
     font-size: 14px;
   }
 }
 
-.groups-container .card-body button:hover {
+.groups-container .card-body .join-group:hover {
   background-color: #4fb5ff;
+  color: #fff;
+  transition: 0.5s ease-out;
+}
+
+.groups-container .card-body .leave-group {
+  margin: 12px 0;
+  width: 100%;
+  background: rgba(241, 70, 70, 0.0862745);
+  border-color: rgba(241, 70, 70, 0.0862745);
+  color: #f14646;
+  font-weight: 600;
+  font-size: 18px;
+  transition: 0.3s ease-in;
+}
+
+@media screen and (max-width: 500px) {
+  .groups-container .card-body .leave-group {
+    font-size: 14px;
+  }
+}
+
+.groups-container .card-body .leave-group:hover {
+  background-color: #f14646;
   color: #fff;
   transition: 0.5s ease-out;
 }

@@ -1,4 +1,3 @@
-import Button from "../../components/UI/Button";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -9,7 +8,6 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   CoverPhotoChanger,
@@ -21,7 +19,6 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const [error, setError] = useState();
   const [userPosts, setUserPosts] = useState([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const profilePhotoHandler = (event: any) => {
@@ -69,8 +66,6 @@ const Profile = () => {
     formData.append("imagefile", photo);
 
     ProfilePhotoChanger(dispatch, formData);
-
-    navigate("/profile");
   };
 
   const coverPhotoChangeHandler = async (photo: any) => {
@@ -78,8 +73,6 @@ const Profile = () => {
     formData.append("imagefile", photo);
 
     CoverPhotoChanger(dispatch, formData);
-
-    navigate("/profile");
   };
 
   const sidebarIsActive = useSelector(
@@ -160,18 +153,9 @@ const Profile = () => {
             </div>
             <div className="user__request col-lg-4">
               <form>
-                <Button
-                  type="submit"
-                  innerText="Add Friend"
-                  className="btn btn-primary"
-                  buttonIcon="fa-solid fa-user-plus"
-                />
-                <Button
-                  type="submit"
-                  innerText="Message"
-                  className="btn message"
-                  buttonIcon="fa-solid fa-message"
-                />
+                <Link to="/setting" className="btn btn-primary">
+                <i className="fa-solid fa-gear"></i> Setting
+                </Link>
               </form>
             </div>
           </div>

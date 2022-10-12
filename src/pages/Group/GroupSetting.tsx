@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -9,11 +10,48 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import GroupMember from "../../components/GroupMember/GroupMember";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
+import { useParams } from "react-router-dom";
+import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
+import { useDispatch } from "react-redux";
+import { ChangeGroup } from "../../store/Group/GroupSlice";
 
 const GroupSetting = () => {
+  const [groupName, setGroupName] = useState("");
+  const [groupDescription, setGroupDescription] = useState("");
+
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
+
+  const groupTitleHandler = (event: any) => {
+    setGroupName(event.target.value);
+  };
+
+  const groupDescriptionHandler = (event: any) => {
+    setGroupDescription(event.target.value);
+  };
+
+  const changeGroupInfoHandler = () => {
+    const groupUpdate = {
+      id: id,
+      groupName: groupName,
+      groupDescription: groupDescription,
+    };
+
+    ChangeGroup(dispatch, groupUpdate);
+    setGroupName("");
+    setGroupDescription("");
+  };
+
+  const group = useSelector((state: any) => state.GroupDetailSlice);
+  console.log(group);
+
+  useEffect(() => {
+    GetGroupDetail(dispatch, id);
+  }, []);
 
   return (
     // Group Setting Section - START
@@ -31,26 +69,24 @@ const GroupSetting = () => {
               {/* Group Setting Filter - END */}
               {/* Group Setting Form - START */}
               <div className="group-setting-container__form">
-                <form>
+                <form onSubmit={changeGroupInfoHandler}>
                   <div className="form-name">
                     <Input
                       placeholder="Group Name"
                       label="Change Group Name"
                       type="text"
                       id="group-name"
+                      value={groupName}
+                      onChange={groupTitleHandler}
                     />
                   </div>
                   <div className="form-description">
                     <label>Change Group Description</label>
-                    <textarea placeholder="Group Description"></textarea>
-                  </div>
-                  <div className="form-image">
-                    <Input
-                      type="file"
-                      label="Change Group Image"
-                      id="group-image"
-                      placeholder="Choose Image"
-                    />
+                    <textarea
+                      placeholder="Group Description"
+                      onChange={groupDescriptionHandler}
+                      value={groupDescription}
+                    ></textarea>
                   </div>
                   <Button
                     type="submit"
@@ -69,31 +105,17 @@ const GroupSetting = () => {
               {/* Friends Filter - END */}
               {/* Friends - START */}
               <div className="group-members">
-                <GroupMember
-                  firstName="Huseyn"
-                  lastName="Quliyev"
-                  imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                />
-                <GroupMember
-                  firstName="Anar"
-                  lastName="Balacayev"
-                  imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                />
-                <GroupMember
-                  firstName="Aysel"
-                  lastName="Abilov"
-                  imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/21/1656593693-bpfull.jpg"
-                />
-                <GroupMember
-                  firstName="Anar"
-                  lastName="Balacayev"
-                  imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/33/1656654204-bpfull.jpg"
-                />
-                <GroupMember
-                  firstName="Aysel"
-                  lastName="Abilov"
-                  imageUrl="https://wordpress.iqonic.design/product/wp/socialv/wp-content/uploads/avatars/21/1656593693-bpfull.jpg"
-                />
+                {JSON.stringify(group.group) !== "{}"
+                  ? group.group.groupMembers.map((gm: any) => (
+                      <GroupMember
+                        groupId={id}
+                        userId={gm.id}
+                        firstName={gm.firstname}
+                        lastName={gm.lastname}
+                        userName={gm.userName}
+                      />
+                    ))
+                  : ""}
               </div>
               {/* Friends - END */}
             </div>

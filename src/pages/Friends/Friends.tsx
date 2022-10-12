@@ -47,21 +47,6 @@ const Friends = () => {
             {/* Friends Search - END*/}
             <section>
               <div className="friends__container">
-                {/* Friends Filter - START */}
-                <div className="friends__filter">
-                  <ul>
-                    <li>My Friends</li>
-                    <li>Friend Requests</li>
-                  </ul>
-                  <form>
-                    <label>Show By:</label>
-                    <select>
-                      <option>Active</option>
-                      <option>Alphabetical</option>
-                    </select>
-                  </form>
-                </div>
-                {/* Friends Filter - END */}
                 {/* Friends - START */}
                 <div className="user-friends">
                   {allFriends.friends.map((f: any) => (

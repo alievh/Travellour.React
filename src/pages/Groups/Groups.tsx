@@ -10,7 +10,7 @@ import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
-import { GetGroups } from "../../store/Group/GroupSlice";
+import { GetGroups, GetMyGroups } from "../../store/Group/GroupSlice";
 import { useDispatch } from "react-redux";
 
 const Groups = () => {
@@ -21,6 +21,14 @@ const Groups = () => {
   );
 
   const groups = useSelector((state: any) => state.GroupSlice);
+
+  const myGroupHandler = () => {
+    GetMyGroups(dispatch);
+  };
+
+  const allGroupHandler = () => {
+    GetGroups(dispatch);
+  };
 
   useEffect(() => {
     GetGroups(dispatch);
@@ -53,13 +61,28 @@ const Groups = () => {
                   <div className="groups-container__filter">
                     <div className="filter-left">
                       <ul>
-                        <li>All Groups</li>
-                        <li>Joined Groups</li>
-                        <li>My Groups</li>
+                        <li>
+                          <Button
+                            type="button"
+                            innerText="All Groups"
+                            className="all-groups"
+                            onClick={allGroupHandler}
+                          />
+                        </li>
+                        <li>
+                          <Button
+                            type="button"
+                            innerText="My Groups"
+                            className="my-groups"
+                            onClick={myGroupHandler}
+                          />
+                        </li>
                       </ul>
                     </div>
                     <div className="filter-right">
-                      <Link to="/groups/create" className="group-create">Create Group</Link>
+                      <Link to="/groups/create" className="group-create">
+                        Create Group
+                      </Link>
                     </div>
                   </div>
                   {/* Groups Filter - END */}
@@ -68,9 +91,11 @@ const Groups = () => {
                   {groups.groups.map((g: any) => (
                     <GroupCard
                       key={g.id}
+                      groupAdminId={g.groupAdminId}
                       groupId={g.id}
                       groupTitle={g.groupName}
-                      groupImage={g.groupImage}
+                      groupImage={g.profileImage}
+                      groupMembers={g.groupMembers}
                     />
                   ))}
                   {/* Groups - END */}

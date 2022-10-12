@@ -45,5 +45,61 @@ export async function GetGroupDetail(dispatch: any, id: string | undefined) {
   dispatch(setGroup(response));
 }
 
+export async function GroupProfilePhotoChanger(
+  dispatch: any,
+  formData: any,
+  id: string | undefined
+) {
+  console.log(formData.get("imagefile"));
+
+  await fetch(`${baseUrl}/group/changegroupphoto/${id}`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      Accept: "*/*",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data?.error?.message?.toString());
+      });
+    }
+  });
+
+  GetGroupDetail(dispatch, id);
+}
+
+export async function GroupCoverPhotoChanger(
+  dispatch: any,
+  formData: any,
+  id: string | undefined
+) {
+  await fetch(`${baseUrl}/group/changegroupcover/${id}`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      Accept: "*/*",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data?.error?.message?.toString());
+      });
+    }
+  });
+
+  GetGroupDetail(dispatch, id);
+}
+
 export const { setGroup, setLoading, setError } = GroupSlice.actions;
 export default GroupSlice.reducer;

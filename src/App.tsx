@@ -37,7 +37,7 @@ const App = () => {
             <Route path="/group/:id" element={<PrivateRoute><Group /></PrivateRoute>} />
             <Route path="/groups" element={<PrivateRoute><Groups /></PrivateRoute>} />
             <Route path="/groups/create" element={<PrivateRoute><GroupCreate /></PrivateRoute>} />
-            <Route path="/group/setting" element={<PrivateRoute><GroupSetting /></PrivateRoute>} />
+            <Route path="/group/setting/:id" element={<PrivateRoute><GroupSetting /></PrivateRoute>} />
             <Route path="/forums" element={<PrivateRoute><Forums /></PrivateRoute>} />
             <Route path="/forum/:id" element={<PrivateRoute><ForumDetail /></PrivateRoute>} />
             <Route path="/forum/create" element={<PrivateRoute><ForumCreate /></PrivateRoute>} />

@@ -8,15 +8,20 @@ import GroupAdmin from "../../components/GroupAdmin/GroupAdmin";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store";
-import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
+import {
+  GetGroupDetail,
+  GroupCoverPhotoChanger,
+  GroupProfilePhotoChanger,
+} from "../../store/Group/GroupDetailSlice";
 import { useDispatch } from "react-redux";
 import { CreatePost } from "../../store/Post/PostSlice";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { JoinGroup } from "../../store/Group/GroupSlice";
+import { JoinGroup, LeaveGroup } from "../../store/Group/GroupSlice";
 
 const Group = () => {
+  const [isMember, setIsMember] = useState(false);
   const [groupPosts, setGroupPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -53,8 +58,12 @@ const Group = () => {
   const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
   const joinGroupHandler = async () => {
-    JoinGroup(dispatch, id)
+    JoinGroup(dispatch, id);
   };
+
+  const leaveGroupHandler = async () => {
+    LeaveGroup(dispatch,id);
+  }
 
   const getGroupPosts = async () => {
     setLoading(true);
@@ -80,9 +89,45 @@ const Group = () => {
     setGroupPosts(response);
   };
 
+  const profilePhotoHandler = (event: any) => {
+    profilePhotoChangeHandler(event.target.files[0]);
+  };
+
+  const coverPhotoHandler = (event: any) => {
+    coverPhotoChangeHandler(event.target.files[0]);
+  };
+
+  const profilePhotoChangeHandler = async (photo: any) => {
+    const formData = new FormData();
+    formData.append("imagefile", photo);
+
+    GroupProfilePhotoChanger(dispatch, formData, id);
+  };
+
+  const coverPhotoChangeHandler = async (photo: any) => {
+    const formData = new FormData();
+    formData.append("imagefile", photo);
+
+    GroupCoverPhotoChanger(dispatch, formData, id);
+  };
+
+  const checkIsMember = () => {
+    console.log(groupDetail.group.groupMembers);
+    if (groupDetail.group.groupMembers !== undefined) {
+      groupDetail.group.groupMembers.map((gm: any) => {
+        if (
+          gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id
+        ) {
+          setIsMember(true);
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     GetGroupDetail(dispatch, id);
     getGroupPosts();
+    checkIsMember();
   }, []);
 
   return (
@@ -90,11 +135,29 @@ const Group = () => {
     <section
       className={`group-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
-      <div className="profile-section__background">
-        <img
-          src={require("../../assets/images/auth-poster.jpg")}
-          alt="Group Background"
-        />
+      <div className="group-section__background">
+        {groupDetail.group.coverImage !== null ? (
+          <img
+            src={`https://localhost:7101/img/${groupDetail.group.coverImage}`}
+            alt="Group Avatar"
+          />
+        ) : (
+          <img
+            src={`https://localhost:7101/img/defaultbackground.jpg`}
+            alt="Group Avatar"
+          />
+        )}
+        <form>
+          <label className="backgroundphoto-label">
+            <input
+              type="file"
+              accept="image/*"
+              name="imagefile"
+              onChange={coverPhotoHandler}
+            />
+            <i className="fa-solid fa-camera"></i>
+          </label>
+        </form>
       </div>
       <Container>
         <Row>
@@ -103,10 +166,28 @@ const Group = () => {
               {/* Group Avatar - START */}
               <div className="group__details">
                 <div className="group-avatar">
-                  <img
-                    src={`https://localhost:7101/img/${groupDetail.group.groupImage}`}
-                    alt="Group Avatar"
-                  />
+                  {groupDetail.group.profileImage !== null ? (
+                    <img
+                      src={`https://localhost:7101/img/${groupDetail.group.profileImage}`}
+                      alt="Group Avatar"
+                    />
+                  ) : (
+                    <img
+                      src={`https://localhost:7101/img/noprofilephoto.jpg`}
+                      alt="Group Avatar"
+                    />
+                  )}
+                  <form>
+                    <label className="profilphoto-label">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="imagefile"
+                        onChange={profilePhotoHandler}
+                      />
+                      <i className="fa-solid fa-camera"></i>
+                    </label>
+                  </form>
                 </div>
               </div>
               {/* Group Avatar - END */}
@@ -140,14 +221,37 @@ const Group = () => {
               className="d-flex justify-content-center align-items-center"
             >
               <div className="group__request">
-                <form>
-                  <Button
-                    type="submit"
-                    innerText="Join Group"
-                    className="btn btn-primary"
-                    onClick={joinGroupHandler}
-                  />
-                </form>
+                {JSON.stringify(groupDetail.group) !== "{}" ? (
+                  groupDetail.group.groupAdmin.id !==
+                  JSON.parse(localStorage.getItem("user") || "{}").user.id ? (
+                    <form>
+                      {isMember === false ? (
+                        <Button
+                          type="submit"
+                          innerText="Join Group"
+                          className="btn btn-primary"
+                          onClick={joinGroupHandler}
+                        />
+                      ) : (
+                        <Button
+                          type="submit"
+                          innerText="Leave Group"
+                          className="btn btn-danger"
+                          onClick={leaveGroupHandler}
+                        />
+                      )}
+                    </form>
+                  ) : (
+                    <Link
+                      to={`/group/setting/${id}`}
+                      className="btn btn-primary"
+                    >
+                      <i className="fa-solid fa-gear"></i> Setting
+                    </Link>
+                  )
+                ) : (
+                  ""
+                )}
               </div>
             </Col>
           </div>
