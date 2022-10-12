@@ -8,7 +8,7 @@ import GroupAdmin from "../../components/GroupAdmin/GroupAdmin";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import {
   GetGroupDetail,
@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { CreatePost } from "../../store/Post/PostSlice";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { JoinGroup, LeaveGroup } from "../../store/Group/GroupSlice";
+import { CreateNotification } from "../../store/Notification/NotificationSlice";
 
 const Group = () => {
   const [isMember, setIsMember] = useState(false);
@@ -59,11 +60,18 @@ const Group = () => {
 
   const joinGroupHandler = async () => {
     JoinGroup(dispatch, id);
+
+    const notification = {
+      message: "joined to your group",
+      receiverId: groupDetail.group.groupAdmin.id,
+    };
+
+    CreateNotification(notification);
   };
 
   const leaveGroupHandler = async () => {
-    LeaveGroup(dispatch,id);
-  }
+    LeaveGroup(dispatch, id);
+  };
 
   const getGroupPosts = async () => {
     setLoading(true);
@@ -114,13 +122,11 @@ const Group = () => {
   const checkIsMember = () => {
     console.log(groupDetail.group.groupMembers);
     if (groupDetail.group.groupMembers !== undefined) {
-      groupDetail.group.groupMembers.map((gm: any) => {
-        if (
-          gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id
-        ) {
-          setIsMember(true);
-        }
-      });
+      groupDetail.group.groupMembers.map(
+        (gm: any) =>
+          gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id &&
+          setIsMember(true)
+      );
     }
   };
 
@@ -128,7 +134,7 @@ const Group = () => {
     GetGroupDetail(dispatch, id);
     getGroupPosts();
     checkIsMember();
-  }, []);
+  });
 
   return (
     // Group Section - START

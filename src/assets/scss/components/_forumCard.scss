@@ -3,7 +3,7 @@
   border-radius: 5px;
   padding: 24px;
   margin: 15px 0;
-  background-color: $global-bg-color;
+  background-color: #eaeff8;
 
   @media screen and (max-width: 820px) {
     flex-direction: column;
@@ -29,8 +29,8 @@
   &__statistics {
     @include flex(center, center);
     flex-direction: column;
-    border-left: 1px solid $global-border-color;
-    border-right: 1px solid $global-border-color;
+    border-left: 1px solid $white;
+    border-right: 1px solid $white;
     color: $global-font-color;
     padding: 0 5px;
 

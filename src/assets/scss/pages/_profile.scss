@@ -140,7 +140,7 @@
     }
 
     &__request {
-      @include flex(end, center);
+      @include flex(flex-end, center);
 
       @media screen and (max-width: 992px) {
         @include flex(center, center);

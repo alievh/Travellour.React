@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../UI/Button";
 import { JoinGroup, LeaveGroup } from "../../store/Group/GroupSlice";
 import { useDispatch } from "react-redux";
+import { CreateNotification } from "../../store/Notification/NotificationSlice";
 
 const GroupCard: React.FC<{
   groupAdminId: string;
@@ -16,23 +17,30 @@ const GroupCard: React.FC<{
 
   const joinGroupHandler = () => {
     JoinGroup(dispatch, props.groupId);
+
+    const notification = {
+      message: "joined to your group",
+      receiverId: props.groupAdminId,
+    };
+
+    CreateNotification(notification);
   };
 
   const leaveGroupHandler = () => {
     LeaveGroup(dispatch, props.groupId);
-  }
+  };
 
   const checkIsMember = () => {
-    props.groupMembers.map((gm: any) => {
-      if (gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id) {
-        setIsMember(true);
-      }
-    });
+    props.groupMembers.map(
+      (gm: any) =>
+        gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id &&
+        setIsMember(true)
+    );
   };
 
   useEffect(() => {
     checkIsMember();
-  }, []);
+  });
 
   return (
     <div className="card" style={{ width: "20rem" }}>
