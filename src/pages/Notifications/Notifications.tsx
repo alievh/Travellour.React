@@ -21,6 +21,8 @@ const Notifications = () => {
 
   const notifications = useSelector((state: any) => state.NotificationSlice);
 
+  console.log(notifications);
+
   useEffect(() => {
     GetNotifications(dispatch);
     GetUserData(dispatch);
@@ -48,6 +50,7 @@ const Notifications = () => {
                       notificationContent={n.message}
                       notificationStatus={n.notificationStatus}
                       postId={n.post.id}
+                      createDate={n.fromCreateDate}
                     />
                   ) : (
                     <Notification
@@ -58,6 +61,7 @@ const Notifications = () => {
                       userUsername={n.sender.userName}
                       notificationContent={n.message}
                       notificationStatus={n.notificationStatus}
+                      createDate={n.fromCreateDate}
                     />
                   )
                 )

@@ -175,7 +175,7 @@ const Profile = () => {
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}
                       userLastname={p.user.lastname}
-                      createdDate="6 hours"
+                      createdDate={p.fromCreateDate}
                       postContent={p.content}
                       postImages={p.imageUrls}
                       likeCount={p.likeCount}
@@ -191,7 +191,7 @@ const Profile = () => {
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}
                       userLastname={p.user.lastname}
-                      createdDate="6 hours"
+                      createdDate={p.fromCreateDate}
                       postContent={p.content}
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}

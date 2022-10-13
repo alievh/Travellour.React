@@ -48,6 +48,8 @@ const Newsfeed = () => {
 
   const posts = useSelector((state: any) => state.PostSlice);
 
+  console.log(posts);
+
   useEffect(() => {
     GetPosts(dispatch);
     const connection = new HubConnectionBuilder()
@@ -114,7 +116,7 @@ const Newsfeed = () => {
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}
                       userLastname={p.user.lastname}
-                      createdDate="6 hours"
+                      createdDate={p.fromCreateDate}
                       postContent={p.content}
                       postImages={p.imageUrls}
                       likeCount={p.likeCount}
@@ -130,7 +132,7 @@ const Newsfeed = () => {
                       userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                       userFirstname={p.user.firstname}
                       userLastname={p.user.lastname}
-                      createdDate="6 hours"
+                      createdDate={p.fromCreateDate}
                       postContent={p.content}
                       likeCount={p.likeCount}
                       commentCount={p.commentCount}

@@ -12,9 +12,8 @@ import {
   AddLike,
   DeleteLike,
 } from "../../store/Post/PostActionSlice";
-import {
-  CreateNotification,
-} from "../../store/Notification/NotificationSlice";
+import { CreateNotification } from "../../store/Notification/NotificationSlice";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Post: React.FC<{
   postId: string;
@@ -117,7 +116,7 @@ const Post: React.FC<{
                 {props.userFirstname} {props.userLastname}
               </Link>
             )}
-            <span>{props.createdDate} ago</span>
+            <span>{props.createdDate}</span>
           </div>
         </div>
         {JSON.parse(localStorage.getItem("user") || "{}").user.id ===

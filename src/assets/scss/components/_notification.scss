@@ -60,16 +60,10 @@
     }
   }
 
-  &__remove {
-    button {
-      background: rgba(241, 70, 70, 0.08627450980392157);
-      border-color: rgba(241, 70, 70, 0.08627450980392157);
-      color: $color-theme-danger;
-
-      &:hover {
-        color: $white;
-        background-color: $color-theme-danger;
-      }
+  &__date {
+    span {
+      color: $global-font-color;
+      font-size: 14px;
     }
   }
 }

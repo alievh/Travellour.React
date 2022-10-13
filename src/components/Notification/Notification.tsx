@@ -13,6 +13,7 @@ const Notification: React.FC<{
   notificationContent: string;
   notificationStatus: number;
   postId?: string;
+  createDate: string;
 }> = (props) => {
   const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ const Notification: React.FC<{
           </Link>
         </div>
       </Col>
-      <Col lg="10">
+      <Col lg="8">
         <div className="notification__message">
           <p>
             <Link
@@ -58,6 +59,11 @@ const Notification: React.FC<{
               ""
             )}
           </p>
+        </div>
+      </Col>
+      <Col lg="2">
+        <div className="notification__date">
+          <span>{props.createDate}</span>
         </div>
       </Col>
     </div>
