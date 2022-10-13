@@ -81,5 +81,22 @@
         border-color: $primary-dark;
       }
     }
+
+    .leave-event-button {
+      background-color: #f62817;
+      color: $white;
+      border-color: #f62817;
+      padding: 8px 32px;
+
+      @media screen and (max-width: 400px) {
+        padding: 4px 16px;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: #e41b17;
+        border-color: #e41b17;
+      }
+    }
   }
 }

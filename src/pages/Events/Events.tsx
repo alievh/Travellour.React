@@ -7,7 +7,7 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store";
-import { GetEvents } from "../../store/Event/EventSlice";
+import { GetEvents, GetJoinedEvents } from "../../store/Event/EventSlice";
 import { useDispatch } from "react-redux";
 
 const Events = () => {
@@ -17,7 +17,15 @@ const Events = () => {
     (state) => state.sidebarToggle.isActive
   );
 
-  const events = useSelector((state: any) => state.EventSlice)
+  const events = useSelector((state: any) => state.EventSlice);
+
+  const allEventsHandler = () => {
+    GetEvents(dispatch);
+  }
+
+  const joinedEventsHandler = () => {
+    GetJoinedEvents(dispatch);
+  }
 
   useEffect(() => {
     GetEvents(dispatch);
@@ -48,8 +56,22 @@ const Events = () => {
               <div className="events-container__filter">
                 <div className="filter-left">
                   <ul>
-                    <li>All Events</li>
-                    <li>Joined Events</li>
+                    <li>
+                      <Button
+                        type="button"
+                        innerText="All Events"
+                        className="all-events"
+                        onClick={allEventsHandler}
+                      />
+                    </li>
+                    <li>
+                      <Button
+                        type="button"
+                        innerText="Joined Events"
+                        className="joined-events"
+                        onClick={joinedEventsHandler}
+                      />
+                    </li>
                   </ul>
                 </div>
                 <div className="filter-right">
@@ -67,6 +89,8 @@ const Events = () => {
                     eventContent={e.eventDescription}
                     eventTitle={e.eventTitle}
                     eventImages={e.imageUrls}
+                    eventMembers={e.eventMembers}
+                    eventCreatorId={e.eventCreatorId}
                   />
                 ))}
               </div>

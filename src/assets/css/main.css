@@ -605,6 +605,25 @@ body {
   border-color: #47a2e5;
 }
 
+.events-container__event .event-request .leave-event-button {
+  background-color: #f62817;
+  color: #fff;
+  border-color: #f62817;
+  padding: 8px 32px;
+}
+
+@media screen and (max-width: 400px) {
+  .events-container__event .event-request .leave-event-button {
+    padding: 4px 16px;
+    font-size: 14px;
+  }
+}
+
+.events-container__event .event-request .leave-event-button:hover {
+  background-color: #e41b17;
+  border-color: #e41b17;
+}
+
 .post {
   background-color: #fff;
   border-radius: 5px;
@@ -3009,6 +3028,12 @@ body {
   .events-container__filter ul li {
     margin: 5px 0;
   }
+}
+
+.events-container__filter .filter-left button {
+  background-color: transparent;
+  border: none;
+  color: #6f7f92;
 }
 
 @media screen and (max-width: 500px) {

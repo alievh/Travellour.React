@@ -44,6 +44,29 @@ export async function GetEvents(dispatch: any) {
   dispatch(setEvents(response));
 }
 
+export async function GetJoinedEvents(dispatch: any) {
+  dispatch(setLoading(true));
+  const response = await fetch(`${baseUrl}/event/joinedeventsget`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      dispatch(setLoading(false));
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        dispatch(setError(data.error.message.toString()));
+      });
+    }
+  });
+  dispatch(setEvents(response));
+}
+
 export async function CreateEvent(formData: any) {
   await fetch(`${baseUrl}/event/eventcreate`, {
     method: "POST",
@@ -63,6 +86,50 @@ export async function CreateEvent(formData: any) {
       });
     }
   });
+}
+
+export async function JoinEvent(dispatch: any, id: string | undefined) {
+  await fetch(`${baseUrl}/event/eventjoin/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+
+  GetEvents(dispatch);
+}
+
+export async function LeaveEvent(dispatch: any, id: string | undefined) {
+  await fetch(`${baseUrl}/event/eventleave/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+
+  GetEvents(dispatch);
 }
 
 export const { setEvents, setLoading, setError } = EventSlice.actions;

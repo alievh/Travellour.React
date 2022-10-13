@@ -29,9 +29,13 @@ const Notification: React.FC<{
     >
       <Col lg="2" className="d-flex justify-content-center">
         <div className="notification__avatar">
-          <a href="#">
-            <img src={`https://localhost:7101/img/${props.userImage}`} />
-          </a>
+          <Link to={`/user/${props.userId}`}>
+            <img
+              onClick={setCheckedNotificationHandler}
+              src={`https://localhost:7101/img/${props.userImage}`}
+              alt="profileImage"
+            />
+          </Link>
         </div>
       </Col>
       <Col lg="10">
@@ -41,7 +45,9 @@ const Notification: React.FC<{
               to={`/user/${props.userId}`}
               className="notification__message-username"
             >
-              @{props.userUsername}
+              <span onClick={setCheckedNotificationHandler}>
+                @{props.userUsername}
+              </span>
             </Link>{" "}
             {props.notificationContent}{" "}
             {props.postId !== undefined ? (
