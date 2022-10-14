@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../components/UI/Button";
 import Event from "../../components/Event/Event";
@@ -7,11 +7,12 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store";
-import { GetEvents, GetJoinedEvents } from "../../store/Event/EventSlice";
+import { GetEvents, GetJoinedEvents, SearchEvent } from "../../store/Event/EventSlice";
 import { useDispatch } from "react-redux";
 
 const Events = () => {
   const dispatch = useDispatch();
+  const [eventName, setEventName] = useState();  
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
@@ -27,6 +28,15 @@ const Events = () => {
     GetJoinedEvents(dispatch);
   }
 
+  const eventNameHandler = (event: any) => {
+    setEventName(event.target.value);
+  }
+
+  const searchEventHandler = (event: any) => {
+    event.preventDefault();
+    SearchEvent(dispatch, eventName);
+  }
+
   useEffect(() => {
     GetEvents(dispatch);
   }, []);
@@ -40,8 +50,8 @@ const Events = () => {
             {/* Events Search - START */}
             <div className="friends__search-section">
               <div className="friends__search">
-                <form>
-                  <input type="text" placeholder="Search Event"></input>
+                <form onSubmit={searchEventHandler}>
+                  <input type="text" placeholder="Search Event" onChange={eventNameHandler}></input>
                   <Button
                     buttonIcon="fa-solid fa-magnifying-glass"
                     type="submit"

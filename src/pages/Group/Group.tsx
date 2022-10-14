@@ -134,7 +134,7 @@ const Group = () => {
     GetGroupDetail(dispatch, id);
     getGroupPosts();
     checkIsMember();
-  });
+  }, []);
 
   return (
     // Group Section - START

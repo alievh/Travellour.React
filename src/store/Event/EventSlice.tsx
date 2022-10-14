@@ -44,6 +44,29 @@ export async function GetEvents(dispatch: any) {
   dispatch(setEvents(response));
 }
 
+export async function SearchEvent(dispatch: any, eventName: string | undefined) {
+  dispatch(setLoading(true));
+  const response = await fetch(`${baseUrl}/event/eventsearch/${eventName}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      dispatch(setLoading(false));
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        dispatch(setError(data.error.message.toString()));
+      });
+    }
+  });
+  dispatch(setEvents(response));
+}
+
 export async function GetJoinedEvents(dispatch: any) {
   dispatch(setLoading(true));
   const response = await fetch(`${baseUrl}/event/joinedeventsget`, {

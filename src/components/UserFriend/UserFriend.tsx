@@ -9,6 +9,7 @@ const UserFriend: React.FC<{
   imageUrl: string;
   firstName: string;
   lastName: string;
+  userName: string;
 }> = (props) => {
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ const UserFriend: React.FC<{
               {props.firstName} {props.lastName}
             </Link>
           </h5>
-          <span>Active</span>
+          <span>@{props.userName}</span>
         </div>
       </div>
       <div className="user-friend__request">

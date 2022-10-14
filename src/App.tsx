@@ -20,6 +20,7 @@ import ForumDetail from "./pages/Forums/ForumDetail";
 import User from "./pages/User/User";
 import SinglePost from "./pages/SinglePost/SinglePost";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Messages from "./pages/Messages/Messages";
 
 const App = () => {
 
@@ -48,6 +49,7 @@ const App = () => {
           </Route>
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
       </BrowserRouter>
     </div>

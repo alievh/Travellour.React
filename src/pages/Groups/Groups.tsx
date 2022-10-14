@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -10,11 +10,12 @@ import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
-import { GetGroups, GetMyGroups } from "../../store/Group/GroupSlice";
+import { GetGroups, GetMyGroups, SearchGroup } from "../../store/Group/GroupSlice";
 import { useDispatch } from "react-redux";
 
 const Groups = () => {
   const dispatch = useDispatch();
+  const [groupName, setGroupName] = useState();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
@@ -30,6 +31,15 @@ const Groups = () => {
     GetGroups(dispatch);
   };
 
+  const groupNameHandler = (event: any) => {
+    setGroupName(event.target.value);
+  }
+
+  const groupSearchHandler = (event: any) => {
+    event.preventDefault();
+    SearchGroup(dispatch, groupName);
+  }
+
   useEffect(() => {
     GetGroups(dispatch);
   }, []);
@@ -43,8 +53,8 @@ const Groups = () => {
             {/* Groups Search - START */}
             <section className="friends__search-section">
               <div className="friends__search">
-                <form>
-                  <input type="text" placeholder="Search Group"></input>
+                <form onSubmit={groupSearchHandler}>
+                  <input type="text" placeholder="Search Group" onChange={groupNameHandler}></input>
                   <Button
                     buttonIcon="fa-solid fa-magnifying-glass"
                     type="submit"

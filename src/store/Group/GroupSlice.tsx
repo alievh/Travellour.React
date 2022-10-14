@@ -191,5 +191,29 @@ export async function ChangeGroup(dispatch: any, group: any) {
   GetGroups(dispatch);
 }
 
+export async function SearchGroup(dispatch: any, groupName: string | undefined) {
+  dispatch(setLoading(true));
+  const response = await fetch(`${baseUrl}/group/groupsearch/${groupName}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      dispatch(setLoading(false));
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        dispatch(setError(data.error.message.toString()));
+      });
+    }
+  });
+
+  dispatch(setGroups(response));
+}
+
 export const { setGroups, setLoading, setError } = GroupSlice.actions;
 export default GroupSlice.reducer;

@@ -6,6 +6,10 @@ import Col from "../Bootstrap/Col";
 import Row from "../Bootstrap/Row";
 import Slider from "../Slider/Slider";
 import Button from "../UI/Button";
+import Modal from "react-modal";
+import EventMember from "../EventMember/EventMember";
+
+Modal.setAppElement("#root");
 
 const Event: React.FC<{
   eventCreatorId: string;
@@ -16,7 +20,16 @@ const Event: React.FC<{
   eventMembers: any;
 }> = (props) => {
   const dispatch = useDispatch();
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [isMember, setIsMember] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const joinEventHandler = () => {
     JoinEvent(dispatch, props.eventId);
@@ -43,14 +56,40 @@ const Event: React.FC<{
     }
   };
 
+  console.log(props.eventMembers);
+
   useEffect(() => {
     checkIsMember();
-  });
+  }, []);
 
   return (
     <div className="events-container__event">
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className="members-modal"
+        contentLabel="Example Modal"
+      >
+        <div className="event-members">
+          {props.eventMembers.length > 0 ? (
+            props.eventMembers.map((m: any) => (
+              <EventMember
+                userId={m.id}
+                userName={m.userName}
+                firstName={m.firstname}
+                lastName={m.lastname}
+              />
+            ))
+          ) : (
+            <p>No members found!</p>
+          )}
+        </div>
+        <button onClick={closeModal} className="btn">
+          Close
+        </button>
+      </Modal>
       <Row className="justify-content-between">
-        <Col lg="3" className="event-image">
+        <Col lg="2" className="event-image">
           {props.eventImages.length > 1 ? (
             <Slider images={props.eventImages} />
           ) : (
@@ -60,11 +99,11 @@ const Event: React.FC<{
             />
           )}
         </Col>
-        <Col lg="6" className="event-content">
+        <Col lg="5" className="event-content">
           <h4>{props.eventTitle}</h4>
           <p>{props.eventContent}</p>
         </Col>
-        <Col lg="3" className="event-request">
+        <Col lg="4" className="event-request">
           {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
           props.eventCreatorId ? (
             isMember === false ? (
@@ -85,6 +124,12 @@ const Event: React.FC<{
           ) : (
             ""
           )}
+          <Button
+            type="button"
+            className="btn members-event-button"
+            innerText="Members"
+            onClick={openModal}
+          />
         </Col>
       </Row>
     </div>

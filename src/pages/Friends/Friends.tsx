@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -10,16 +10,28 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
 import { RootState } from "../../store";
-import { GetAllFriend } from "../../store/Friend/FriendSlice";
+import { GetAllFriend, SearchFriend } from "../../store/Friend/FriendSlice";
+import Input from "../../components/UI/Input";
 
 const Friends = () => {
   const dispatch = useDispatch();
+  const [searchFriend, setSearchFriend] = useState();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
   const allFriends = useSelector((state: any) => state.FriendSlice);
+
+  const searchInputHandler = (event: any) => {
+    setSearchFriend(event.target.value);
+  }
+
+  const searchHandler = (event: any) => {
+    event.preventDefault();
+    console.log("hello");
+    SearchFriend(dispatch, searchFriend);
+  }
 
   useEffect(() => {
     GetAllFriend(dispatch);
@@ -34,8 +46,8 @@ const Friends = () => {
             {/* Friends Search - START*/}
             <section className="friends__search-section">
               <div className="friends__search">
-                <form>
-                  <input type="text" placeholder="Search Friend"></input>
+                <form onSubmit={searchHandler}>
+                  <input type="text" placeholder="Search Friend" onChange={searchInputHandler}></input>
                   <Button
                     buttonIcon="fa-solid fa-magnifying-glass"
                     type="submit"
@@ -56,6 +68,7 @@ const Friends = () => {
                       firstName={f.firstname}
                       lastName={f.lastname}
                       imageUrl={f.profileImage}
+                      userName={f.userName}
                     />
                   ))}
                 </div>

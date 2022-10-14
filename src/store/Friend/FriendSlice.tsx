@@ -45,6 +45,30 @@ export async function GetAllFriend(dispatch: any) {
   dispatch(setFriends(response));
 }
 
+export async function SearchFriend(dispatch: any, username: string | undefined) {
+  dispatch(setLoading(true));
+  const response = await fetch(`${baseUrl}/friend/friendsearch/${username}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      dispatch(setLoading(false));
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        dispatch(setError(data.error.message.toString()));
+      });
+    }
+  });
+
+  dispatch(setFriends(response));
+}
+
 export async function RemoveFriend(dispatch: any, id: string | undefined) {
   await fetch(`${baseUrl}/friend/deletefriend/${id}`, {
     method: "PUT",
@@ -85,8 +109,9 @@ export async function CancelFriendRequest(dispatch: any, id: string | undefined)
       });
     }
   });
-
 }
+
+
 
 export const { setFriends, setLoading, setError } = FriendSlice.actions;
 export default FriendSlice.reducer;
