@@ -119,22 +119,23 @@ const Group = () => {
     GroupCoverPhotoChanger(dispatch, formData, id);
   };
 
-  const checkIsMember = () => {
-    console.log(groupDetail.group.groupMembers);
-    if (groupDetail.group.groupMembers !== undefined) {
-      groupDetail.group.groupMembers.map(
-        (gm: any) =>
-          gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id &&
-          setIsMember(true)
-      );
-    }
-  };
-
   useEffect(() => {
     GetGroupDetail(dispatch, id);
     getGroupPosts();
-    checkIsMember();
   }, []);
+
+  useEffect(() => {
+    if (groupDetail.group.groupMembers !== undefined) {
+      setIsMember(
+        groupDetail.group.groupMembers.some(
+          (n: any) =>
+            n.id === JSON.parse(localStorage.getItem("user") || "{}").user.id
+        )
+      );
+    } else {
+      setIsMember(false);
+    }
+  }, [groupDetail.group.groupMembers]);
 
   return (
     // Group Section - START

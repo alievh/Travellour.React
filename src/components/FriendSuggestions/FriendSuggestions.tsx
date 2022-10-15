@@ -1,5 +1,5 @@
-import FriendSuggestion from "./FriendSuggestion";
 import { useEffect } from "react";
+import FriendSuggestion from "./FriendSuggestion";
 import { useSelector } from "react-redux";
 import { GetFriendSuggestions } from "../../store/Friend/FriendSuggestionSlice";
 import { useDispatch } from "react-redux";

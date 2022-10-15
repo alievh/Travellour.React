@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { login } from "../../store/Auth/AuthSlice";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 import { GetUserData } from "../../store/User/UserData";
 
 const Login = () => {
@@ -54,12 +53,6 @@ const Login = () => {
 
     navigate("/newsfeed");
   }
-
-  useEffect(() => {
-    const connection = new HubConnectionBuilder()
-      .withUrl("https://localhost:7101/onlinehub")
-      .build();
-  }, []);
 
   return (
     <main>

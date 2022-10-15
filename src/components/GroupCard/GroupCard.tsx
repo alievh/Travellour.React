@@ -30,17 +30,14 @@ const GroupCard: React.FC<{
     LeaveGroup(dispatch, props.groupId);
   };
 
-  const checkIsMember = () => {
-    props.groupMembers.map(
-      (gm: any) =>
-        gm.id === JSON.parse(localStorage.getItem("user") || "{}").user.id &&
-        setIsMember(true)
-    );
-  };
-
   useEffect(() => {
-    checkIsMember();
-  });
+    setIsMember(
+      props.groupMembers.some(
+        (n: any) =>
+          n.id === JSON.parse(localStorage.getItem("user") || "{}").user.id
+      )
+    );
+  }, [props.groupMembers]);
 
   return (
     <div className="card" style={{ width: "20rem" }}>

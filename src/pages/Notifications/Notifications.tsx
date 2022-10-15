@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useSelector } from "react-redux";
@@ -7,7 +8,6 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
-import { useEffect } from "react";
 import { GetNotifications } from "../../store/Notification/NotificationSlice";
 import { useDispatch } from "react-redux";
 import { GetUserData } from "../../store/User/UserData";

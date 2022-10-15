@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import FriendRequest from "./FriendRequest";
-import { FriendRequestSlice, GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
+import { GetFriendRequests } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 

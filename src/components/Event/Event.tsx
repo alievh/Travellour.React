@@ -46,21 +46,14 @@ const Event: React.FC<{
     LeaveEvent(dispatch, props.eventId);
   };
 
-  const checkIsMember = () => {
-    if (props.eventMembers.length > 0) {
-      props.eventMembers.map(
-        (e: any) =>
-          e.id === JSON.parse(localStorage.getItem("user") || "{}").user.id &&
-          setIsMember(true)
-      );
-    }
-  };
-
-  console.log(props.eventMembers);
-
   useEffect(() => {
-    checkIsMember();
-  }, []);
+    setIsMember(
+      props.eventMembers.some(
+        (n: any) =>
+          n.id === JSON.parse(localStorage.getItem("user") || "{}").user.id
+      )
+    );
+  }, [props.eventMembers]);
 
   return (
     <div className="events-container__event">
@@ -74,6 +67,7 @@ const Event: React.FC<{
           {props.eventMembers.length > 0 ? (
             props.eventMembers.map((m: any) => (
               <EventMember
+                key={m.id}
                 userId={m.id}
                 userName={m.userName}
                 firstName={m.firstname}

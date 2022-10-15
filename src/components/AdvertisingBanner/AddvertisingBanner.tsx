@@ -1,5 +1,3 @@
-import React from "react";
-
 const AddvertisingBanner = () => {
   return (
     <div className="advertising-banner">

@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../UI/Button";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
-import { GetPosts } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
-import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { Link } from "react-router-dom";
 import { DeleteComment } from "../../store/Post/PostActionSlice";
 

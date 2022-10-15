@@ -117,7 +117,6 @@ export async function JoinGroup(dispatch: any, id: string | undefined) {
     }
   });
 
-  GetGroupDetail(dispatch, id);
   GetGroups(dispatch);
 }
 
@@ -140,7 +139,6 @@ export async function LeaveGroup(dispatch: any, id: string | undefined) {
     }
   });
 
-  GetGroupDetail(dispatch, id);
   GetGroups(dispatch);
 }
 
@@ -163,8 +161,8 @@ export async function KickFromGroup(dispatch: any, userId: string | undefined, g
     }
   });
 
-  GetGroupDetail(dispatch, groupId);
   GetGroups(dispatch);
+  GetGroupDetail(dispatch, groupId);
 }
 
 export async function ChangeGroup(dispatch: any, group: any) {

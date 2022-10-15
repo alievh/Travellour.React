@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import AuthPoster from "../../components/AuthPoster/AuthPoster";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     setLoading(true);
-    const response = await fetch(`${baseUrl}/authenticate/register`, {
+    await fetch(`${baseUrl}/authenticate/register`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
