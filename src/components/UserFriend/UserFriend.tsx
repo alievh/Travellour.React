@@ -23,12 +23,11 @@ const UserFriend: React.FC<{
     <div className="user-friend">
       <div className="user-friend__info">
         <div className="user-friend__avatar">
+          
           {onlineUsers.isOnline !== undefined
-            ? onlineUsers.isOnline.map((u: any) => {
-                if (u === props.userId) {
-                  return <span></span>;
-                }
-              })
+            ? onlineUsers.isOnline.map((u: any) =>
+                u === props.userId ? <span></span> : ""
+              )
             : ""}
           <Link to={`/user/${props.userId}`}>
             <img
@@ -53,9 +52,9 @@ const UserFriend: React.FC<{
           innerText="Unfriend"
           onClick={removeFriendHandler}
         />
-        <a href="#">
+        <Link to="/newsfeed">
           <i className="fa-regular fa-envelope"></i>
-        </a>
+        </Link>
       </div>
     </div>
   );

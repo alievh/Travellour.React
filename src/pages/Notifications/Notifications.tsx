@@ -21,12 +21,10 @@ const Notifications = () => {
 
   const notifications = useSelector((state: any) => state.NotificationSlice);
 
-  console.log(notifications);
-
   useEffect(() => {
     GetNotifications(dispatch);
     GetUserData(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     // Notifications Section - START

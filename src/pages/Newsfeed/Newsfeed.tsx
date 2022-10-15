@@ -48,8 +48,6 @@ const Newsfeed = () => {
 
   const posts = useSelector((state: any) => state.PostSlice);
 
-  console.log(posts);
-
   useEffect(() => {
     GetPosts(dispatch);
     const connection = new HubConnectionBuilder()
@@ -64,14 +62,14 @@ const Newsfeed = () => {
             "IsOnline",
             JSON.parse(localStorage.getItem("user") || "{}").user.id
           )
-          .catch((error) => console.log(error))
+          .catch((error: any) => console.log(error))
       )
       .then(() =>
-        connection.on("activeUser", (id) => {
+        connection.on("activeUser", (id: any) => {
           AddOnlineUser(dispatch, id);
         })
       );
-  }, []);
+  }, [dispatch]);
 
   return (
     // Newsfeed Section - START

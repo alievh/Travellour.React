@@ -13,7 +13,6 @@ import {
   DeleteLike,
 } from "../../store/Post/PostActionSlice";
 import { CreateNotification } from "../../store/Notification/NotificationSlice";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Post: React.FC<{
   postId: string;
@@ -141,7 +140,7 @@ const Post: React.FC<{
           ) : (
             <img
               src={`https://localhost:7101/img/${props.postImages[0]}`}
-              alt="post-image"
+              alt="PostImage"
               className="post-image"
             />
           )

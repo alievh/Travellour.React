@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     GetUserData(dispatch);
-  }, []);
+  }, [dispatch]);
 
   const sideBarToggleHandler = () => {
     dispatch(sidebarToggleAction.toggleSidebar());

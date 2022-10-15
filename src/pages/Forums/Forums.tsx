@@ -20,7 +20,7 @@ const Forums = () => {
 
   useEffect(() => {
     GetForums(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     // Forums Section - START

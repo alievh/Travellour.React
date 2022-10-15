@@ -76,7 +76,7 @@ const Navbar = () => {
 
   useEffect(() => {
     GetUserData(dispatch);
-  }, []);
+  }, [dispatch]);
 
   const logoutHandler = () => {
     console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);

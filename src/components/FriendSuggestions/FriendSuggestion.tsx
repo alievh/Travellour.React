@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const FriendSuggestion: React.FC<{
   id: string;

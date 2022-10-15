@@ -41,7 +41,7 @@ export async function SendFriendRequest(dispatch: any, id: string | undefined) {
     }
   });
 
-  GetProfile(dispatch);
+  GetProfile(dispatch, id);
   GetFriendSuggestions(dispatch);
 }
 

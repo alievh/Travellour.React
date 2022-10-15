@@ -39,7 +39,7 @@ const Events = () => {
 
   useEffect(() => {
     GetEvents(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     // Events Section - START

@@ -91,7 +91,7 @@ const Password = () => {
 
   useEffect(() => {
     userData();
-  }, []);
+  }, [userData]);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -149,6 +149,8 @@ const Password = () => {
             {/* Password User Input - START */}
             <div className="password-section__user-input">
               <h4>Password Change</h4>
+              {loading && <p>Loading...</p>}
+              {error && <p>{error}</p>}
               <form onSubmit={changePassword}>
                 <Input
                   type="password"

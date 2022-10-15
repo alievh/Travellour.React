@@ -11,7 +11,6 @@ import Button from "../../components/UI/Button";
 import UserFriend from "../../components/UserFriend/UserFriend";
 import { RootState } from "../../store";
 import { GetAllFriend, SearchFriend } from "../../store/Friend/FriendSlice";
-import Input from "../../components/UI/Input";
 
 const Friends = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const Friends = () => {
 
   useEffect(() => {
     GetAllFriend(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     // Friends Section - START

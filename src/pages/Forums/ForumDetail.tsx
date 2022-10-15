@@ -37,9 +37,11 @@ const ForumDetail = () => {
 
   const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
 
+  console.log(forumDetail);
+
   useEffect(() => {
     GetForumDetail(dispatch, id);
-  }, []);
+  }, [dispatch, id]);
 
   return (
     // Forums Section - START

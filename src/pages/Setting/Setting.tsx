@@ -40,7 +40,7 @@ const Setting = () => {
       userName: userName.current?.value,
     };
 
-    const response = await fetch(`${baseUrl}/user/userupdate`, {
+    await fetch(`${baseUrl}/user/userupdate`, {
       method: "POST",
       body: JSON.stringify(changeInformation),
       headers: {
@@ -90,7 +90,7 @@ const Setting = () => {
 
   useEffect(() => {
     userData();
-  }, []);
+  }, [userData]);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -148,6 +148,7 @@ const Setting = () => {
             <div className="setting-section__personal-info">
               <h4>Personal Information</h4>
               {/* Setting Form - START */}
+              {error && <p>{error}</p>}
               <form onSubmit={submitHandler}>
                 <div className="form-fullname">
                   <Col lg="5">

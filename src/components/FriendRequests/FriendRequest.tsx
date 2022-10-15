@@ -6,8 +6,7 @@ import {
 } from "../../store/Friend/FriendRequestSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { CreateNotification, GetNotifications } from "../../store/Notification/NotificationSlice";
-import { HubConnectionBuilder } from "@microsoft/signalr";
+import { CreateNotification } from "../../store/Notification/NotificationSlice";
 
 const FriendRequest: React.FC<{
   userId: string;
@@ -38,7 +37,10 @@ const FriendRequest: React.FC<{
       <div className="friend-request__info">
         <div className="friend-request__user-avatar">
           <Link to={`/user/${props.userId}`}>
-            <img src={`https://localhost:7101/img/${props.imageUrl}`} />
+            <img
+              src={`https://localhost:7101/img/${props.imageUrl}`}
+              alt="UserImage"
+            />
           </Link>
         </div>
         <div className="user-details">

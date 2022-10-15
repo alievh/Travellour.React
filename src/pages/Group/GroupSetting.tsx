@@ -51,7 +51,7 @@ const GroupSetting = () => {
 
   useEffect(() => {
     GetGroupDetail(dispatch, id);
-  }, []);
+  }, [dispatch, id]);
 
   return (
     // Group Setting Section - START

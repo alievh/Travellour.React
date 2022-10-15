@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-
 import sidebarToggleSlice from "./sidebarToggle";
 import AuthSlice from "./Auth/AuthSlice";
 import UserDataSlice from "./User/UserData";
@@ -18,6 +17,7 @@ import PostActionSlice from "./Post/PostActionSlice";
 import OnlineUserSlice from "./Online/OnlineUserSlice";
 import NotificationSlice from "./Notification/NotificationSlice";
 import SinglePostSlice from "./Post/SinglePostSlice";
+import UserPostSlice from "./Post/UserPostsSlice";
 
 const store = configureStore({
   reducer: {
@@ -30,6 +30,7 @@ const store = configureStore({
     GroupSlice: GroupSlice,
     GroupDetailSlice: GroupDetailSlice,
     PostSlice: PostSlice,
+    UserPostsSlice: UserPostSlice,
     SinglePostSlice: SinglePostSlice,
     PostActionSlice: PostActionSlice,
     ProfileSlice: ProfileSlice,

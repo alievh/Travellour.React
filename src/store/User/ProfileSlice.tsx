@@ -21,22 +21,17 @@ export const ProfileSlice = createSlice({
   },
 });
 
-export async function GetProfile(dispatch: any) {
+export async function GetProfile(dispatch: any, id: string | undefined) {
   dispatch(setLoading(true));
-  const response = await fetch(
-    `${baseUrl}/user/userprofile/${
-      JSON.parse(localStorage.getItem("user") || "{}").user.id
-    }`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }
-  ).then((res) => {
+  const response = await fetch(`${baseUrl}/user/userprofile/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+    },
+  }).then((res) => {
     dispatch(setLoading(false));
     if (res.ok) {
       return res.json();
@@ -50,10 +45,14 @@ export async function GetProfile(dispatch: any) {
   dispatch(setProfile(response));
 }
 
-export async function ProfilePhotoChanger(dispatch:any, formData: any) {
+export async function ProfilePhotoChanger(
+  dispatch: any,
+  formData: any,
+  id: string | undefined
+) {
   await fetch(`${baseUrl}/user/changeprofilephoto`, {
     method: "POST",
-     body: formData,
+    body: formData,
     headers: {
       Authorization: `Bearer ${
         JSON.parse(localStorage.getItem("user") || "{}").token
@@ -70,10 +69,14 @@ export async function ProfilePhotoChanger(dispatch:any, formData: any) {
     }
   });
 
-  GetProfile(dispatch);
+  GetProfile(dispatch, id);
 }
 
-export async function CoverPhotoChanger(dispatch: any, formData: any) {
+export async function CoverPhotoChanger(
+  dispatch: any,
+  formData: any,
+  id: string | undefined
+) {
   await fetch(`${baseUrl}/user/changecoverphoto`, {
     method: "POST",
     body: formData,
@@ -93,7 +96,7 @@ export async function CoverPhotoChanger(dispatch: any, formData: any) {
     }
   });
 
-  GetProfile(dispatch);
+  GetProfile(dispatch, id);
 }
 
 export const { setProfile, setLoading, setError } = ProfileSlice.actions;

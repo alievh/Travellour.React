@@ -11,8 +11,8 @@ const Slider: React.FC<{
     >
       <div className="carousel-inner">
         {props.images.map((i) => 
-          <div className="carousel-item active">
-            <img key={i} src={`https://localhost:7101/img/${i}`} className="d-block w-100 post-image" alt="PostImage" />
+          <div key={i} className="carousel-item active">
+            <img  src={`https://localhost:7101/img/${i}`} className="d-block w-100 post-image" alt="PostImage" />
           </div>
         )}
       </div>

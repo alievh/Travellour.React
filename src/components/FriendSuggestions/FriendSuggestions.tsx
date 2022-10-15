@@ -12,7 +12,7 @@ const FriendSuggestions = () => {
 
   useEffect(() => {
     GetFriendSuggestions(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="friend-suggestions">

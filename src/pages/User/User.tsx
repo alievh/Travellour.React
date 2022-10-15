@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
@@ -9,7 +9,6 @@ import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
 import { useDispatch } from "react-redux";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
@@ -21,75 +20,27 @@ import {
   CancelFriendRequest,
   RemoveFriend,
 } from "../../store/Friend/FriendSlice";
+import { GetUserPosts } from "../../store/Post/UserPostsSlice";
+import { GetProfile } from "../../store/User/ProfileSlice";
 
 const User = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState();
-  const [userPosts, setUserPosts] = useState([]);
-  const [user, setUser] = useState({
-    coverImage: "",
-    profileImage: "",
-    userName: "",
-    lastname: "",
-    firstname: "",
-    postCount: 0,
-    friendCount: 0,
-    status: 4,
-  });
   const { id } = useParams();
 
-  const userPost = useCallback(async () => {
-    const postInfo = await fetch(`${baseUrl}/post/userpost/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
+  const userPosts = useSelector((state: any) => state.UserPostsSlice);
 
-    setUserPosts(postInfo);
-  }, []);
-
-  const userData = useCallback(async () => {
-    const userInfo = await fetch(`${baseUrl}/user/userprofile/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUser(userInfo);
-  }, []);
+  const userProfile = useSelector((state: any) => state.ProfileSlice);
 
   useEffect(() => {
-    userPost();
-    userData();
-  }, [userData, userPost]);
+    GetProfile(dispatch, id);
+    GetUserPosts(dispatch, id);
+  }, [dispatch, id])
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
+
+  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
 
   const friendAddHandler = () => {
     SendFriendRequest(dispatch, id);
@@ -97,7 +48,7 @@ const User = () => {
 
   const cancelRequestHandler = () => {
     CancelFriendRequest(dispatch, id);
-    userData();
+    GetProfile(dispatch, id);
   };
 
   const unfriendHandler = () => {
@@ -112,19 +63,17 @@ const User = () => {
     AcceptFriendRequest(dispatch, id);
   };
 
-  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
-
   return (
     // User Section - START
     <section
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        {user.coverImage === "" ? (
+        {userProfile.profile.coverImage === undefined ? (
           ""
         ) : (
           <img
-            src={`https://localhost:7101/img/${user.coverImage}`}
+            src={`https://localhost:7101/img/${userProfile.profile.coverImage}`}
             alt="Profile Background"
           />
         )}
@@ -133,44 +82,42 @@ const User = () => {
         <Row>
           {/* User - START */}
           <div className="user">
-            <div className="user__statistics col-lg-2">
+            <div className="user__statistics col-lg-3">
               <ul>
                 <li>
-                  <span>{user.postCount}</span>
+                  <span>{userProfile.profile.postCount}</span>
                   <span>Post</span>
                 </li>
                 <li>
-                  <span>{user.friendCount}</span>
+                  <span>{userProfile.profile.friendCount}</span>
                   <span>Friends</span>
                 </li>
               </ul>
             </div>
-            <div className="user__details col-lg-6">
+            <div className="user__details col-lg-5">
               <div className="user-avatar">
-                {user.profileImage === "" ? (
+                {userProfile.profile.profileImage === undefined ? (
                   ""
                 ) : (
                   <img
-                    src={`https://localhost:7101/img/${user.profileImage}`}
+                    src={`https://localhost:7101/img/${userProfile.profile.profileImage}`}
                     alt="User Avatar"
                   />
                 )}
               </div>
               <h5>
-                {user.firstname} {user.lastname}
+                {userProfile.profile.firstname} {userProfile.profile.lastname}
               </h5>
-              <span>@{user.userName}</span>
+              <span>@{userProfile.profile.userName}</span>
               {onlineUsers.isOnline !== undefined
-                ? onlineUsers.isOnline.map((u: any) => {
-                    if (u === id) {
-                      return <p className="online-user">Online</p>;
-                    }
-                  })
+                ? onlineUsers.isOnline.map((u: any) =>
+                    u === id ? <p className="online-user">Online</p> : ""
+                  )
                 : ""}
             </div>
             <div className="user__request col-lg-4">
               <form>
-                {user.status === 4 ? (
+                {userProfile.profile.status === 4 ? (
                   <Button
                     type="submit"
                     innerText="Add Friend"
@@ -178,7 +125,7 @@ const User = () => {
                     buttonIcon="fa-solid fa-user-plus"
                     onClick={friendAddHandler}
                   />
-                ) : user.status === 0 ? (
+                ) : userProfile.profile.status === 0 ? (
                   <Button
                     type="submit"
                     innerText="Cancel"
@@ -186,7 +133,7 @@ const User = () => {
                     buttonIcon="fa-solid fa-user-slash"
                     onClick={cancelRequestHandler}
                   />
-                ) : user.status === 2 ? (
+                ) : userProfile.profile.status === 2 ? (
                   <>
                     <Button
                       type="submit"
@@ -203,7 +150,7 @@ const User = () => {
                       onClick={rejectRequestHandler}
                     />
                   </>
-                ) : user.status === 1 ? (
+                ) : userProfile.profile.status === 1 ? (
                   <Button
                     type="submit"
                     innerText="Unfriend"
@@ -230,7 +177,7 @@ const User = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                {userPosts.map((p: any) =>
+                {userPosts.userPosts.length > 0 ? userPosts.userPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post
                       key={p.id}
@@ -263,7 +210,7 @@ const User = () => {
                       comments={p.comments}
                     />
                   )
-                )}
+                ) : ""}
               </div>
             </section>
           </Col>

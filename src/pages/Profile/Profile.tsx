@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
@@ -7,7 +7,6 @@ import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { useDispatch } from "react-redux";
 import {
   CoverPhotoChanger,
@@ -15,10 +14,9 @@ import {
   ProfilePhotoChanger,
 } from "../../store/User/ProfileSlice";
 import { Link } from "react-router-dom";
+import { GetUserPosts } from "../../store/Post/UserPostsSlice";
 
 const Profile = () => {
-  const [error, setError] = useState();
-  const [userPosts, setUserPosts] = useState([]);
   const dispatch = useDispatch();
 
   const profilePhotoHandler = (event: any) => {
@@ -29,56 +27,45 @@ const Profile = () => {
     coverPhotoChangeHandler(event.target.files[0]);
   };
 
-  const userPost = useCallback(async () => {
-    const postInfo = await fetch(
-      `${baseUrl}/post/userpost/${
-        JSON.parse(localStorage.getItem("user") || "{}").user.id
-      }`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user") || "{}").token
-          }`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setUserPosts(postInfo);
-  }, []);
-
   useEffect(() => {
-    GetProfile(dispatch);
-    userPost();
-  }, [userPost]);
+    GetProfile(
+      dispatch,
+      JSON.parse(localStorage.getItem("user") || "{}").user.id
+    );
+    GetUserPosts(
+      dispatch,
+      JSON.parse(localStorage.getItem("user") || "{}").user.id
+    );
+  }, [dispatch]);
 
   const profilePhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    ProfilePhotoChanger(dispatch, formData);
+    ProfilePhotoChanger(
+      dispatch,
+      formData,
+      JSON.parse(localStorage.getItem("user") || "{}").user.id
+    );
   };
 
   const coverPhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    CoverPhotoChanger(dispatch, formData);
+    CoverPhotoChanger(
+      dispatch,
+      formData,
+      JSON.parse(localStorage.getItem("user") || "{}").user.id
+    );
   };
 
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
   const profileData = useSelector((state: any) => state.ProfileSlice);
+
+  const userPosts = useSelector((state: any) => state.UserPostsSlice);
 
   return (
     // Profile Section - START
@@ -110,7 +97,7 @@ const Profile = () => {
         <Row>
           {/* Profile - START */}
           <div className="user">
-            <div className="user__statistics col-lg-2">
+            <div className="user__statistics col-lg-3">
               <ul>
                 <li>
                   <span>{profileData.profile.postCount}</span>
@@ -124,7 +111,7 @@ const Profile = () => {
                 </li>
               </ul>
             </div>
-            <div className="user__details col-lg-6">
+            <div className="user__details col-lg-5">
               <div className="user-avatar">
                 {JSON.stringify(profileData.profile) === "{}" ? (
                   ""
@@ -154,7 +141,7 @@ const Profile = () => {
             <div className="user__request col-lg-4">
               <form>
                 <Link to="/setting" className="btn btn-primary">
-                <i className="fa-solid fa-gear"></i> Setting
+                  <i className="fa-solid fa-gear"></i> Setting
                 </Link>
               </form>
             </div>
@@ -166,40 +153,42 @@ const Profile = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                {userPosts.map((p: any) =>
-                  p.images !== null ? (
-                    <Post
-                      key={p.id}
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate={p.fromCreateDate}
-                      postContent={p.content}
-                      postImages={p.imageUrls}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  ) : (
-                    <Post
-                      key={p.id}
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate={p.fromCreateDate}
-                      postContent={p.content}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  )
-                )}
+                {userPosts.userPosts.length > 0
+                  ? userPosts.userPosts.map((p: any) =>
+                      p.images !== null ? (
+                        <Post
+                          key={p.id}
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate={p.fromCreateDate}
+                          postContent={p.content}
+                          postImages={p.imageUrls}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      ) : (
+                        <Post
+                          key={p.id}
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate={p.fromCreateDate}
+                          postContent={p.content}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      )
+                    )
+                  : ""}
               </div>
             </section>
           </Col>

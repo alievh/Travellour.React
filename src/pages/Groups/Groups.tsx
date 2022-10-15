@@ -42,7 +42,7 @@ const Groups = () => {
 
   useEffect(() => {
     GetGroups(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     // Groups Section - START

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -73,7 +73,7 @@ const Group = () => {
     LeaveGroup(dispatch, id);
   };
 
-  const getGroupPosts = async () => {
+  const getGroupPosts = useCallback(async () => {
     setLoading(true);
     const response = await fetch(`${baseUrl}/group/Grouppostgetall/${id}`, {
       method: "GET",
@@ -95,7 +95,7 @@ const Group = () => {
     });
 
     setGroupPosts(response);
-  };
+  }, [id]);
 
   const profilePhotoHandler = (event: any) => {
     profilePhotoChangeHandler(event.target.files[0]);
@@ -119,10 +119,12 @@ const Group = () => {
     GroupCoverPhotoChanger(dispatch, formData, id);
   };
 
+  console.log(groupDetail);
+
   useEffect(() => {
     GetGroupDetail(dispatch, id);
     getGroupPosts();
-  }, []);
+  }, [dispatch, getGroupPosts, id]);
 
   useEffect(() => {
     if (groupDetail.group.groupMembers !== undefined) {
@@ -143,7 +145,8 @@ const Group = () => {
       className={`group-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="group-section__background">
-        {groupDetail.group.coverImage !== null ? (
+        {JSON.stringify(groupDetail.group) !== "{}" &&
+        groupDetail.group.coverImage !== null ? (
           <img
             src={`https://localhost:7101/img/${groupDetail.group.coverImage}`}
             alt="Group Avatar"
@@ -154,17 +157,23 @@ const Group = () => {
             alt="Group Avatar"
           />
         )}
-        <form>
-          <label className="backgroundphoto-label">
-            <input
-              type="file"
-              accept="image/*"
-              name="imagefile"
-              onChange={coverPhotoHandler}
-            />
-            <i className="fa-solid fa-camera"></i>
-          </label>
-        </form>
+        {JSON.stringify(groupDetail.group) !== "{}" &&
+        JSON.parse(localStorage.getItem("user") || "{}").user.id ===
+          groupDetail.group.groupAdmin.id ? (
+          <form>
+            <label className="backgroundphoto-label">
+              <input
+                type="file"
+                accept="image/*"
+                name="imagefile"
+                onChange={coverPhotoHandler}
+              />
+              <i className="fa-solid fa-camera"></i>
+            </label>
+          </form>
+        ) : (
+          ""
+        )}
       </div>
       <Container>
         <Row>
@@ -173,7 +182,8 @@ const Group = () => {
               {/* Group Avatar - START */}
               <div className="group__details">
                 <div className="group-avatar">
-                  {groupDetail.group.profileImage !== null ? (
+                  {JSON.stringify(groupDetail.group) !== "{}" &&
+                  groupDetail.group.profileImage !== null ? (
                     <img
                       src={`https://localhost:7101/img/${groupDetail.group.profileImage}`}
                       alt="Group Avatar"
@@ -184,17 +194,23 @@ const Group = () => {
                       alt="Group Avatar"
                     />
                   )}
-                  <form>
-                    <label className="profilphoto-label">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name="imagefile"
-                        onChange={profilePhotoHandler}
-                      />
-                      <i className="fa-solid fa-camera"></i>
-                    </label>
-                  </form>
+                  {JSON.stringify(groupDetail.group) !== "{}" &&
+                  JSON.parse(localStorage.getItem("user") || "{}").user.id ===
+                    groupDetail.group.groupAdmin.id ? (
+                    <form>
+                      <label className="profilphoto-label">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          name="imagefile"
+                          onChange={profilePhotoHandler}
+                        />
+                        <i className="fa-solid fa-camera"></i>
+                      </label>
+                    </form>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               {/* Group Avatar - END */}
@@ -288,6 +304,7 @@ const Group = () => {
               </div>
               <div className="newsfeed-section__posts">
                 {loading && <p className="loading">Loading...</p>}
+                {error && <p>{error}</p>}
                 {groupPosts.map((p: any) =>
                   p.images !== null ? (
                     <Post

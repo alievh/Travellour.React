@@ -22,7 +22,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     GetSinglePost(dispatch, id);
-  }, []);
+  }, [dispatch, id]);
 
   const post = useSelector((state: any) => state.SinglePostSlice.post);
   console.log(post);
