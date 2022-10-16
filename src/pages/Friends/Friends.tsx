@@ -60,7 +60,7 @@ const Friends = () => {
               <div className="friends__container">
                 {/* Friends - START */}
                 <div className="user-friends">
-                  {allFriends.friends.map((f: any) => (
+                  {allFriends.friends.length > 0 ? allFriends.friends.map((f: any) => (
                     <UserFriend
                       key={f.id}
                       userId={f.id}
@@ -69,7 +69,7 @@ const Friends = () => {
                       imageUrl={f.profileImage}
                       userName={f.userName}
                     />
-                  ))}
+                  )) : <p>No friend found!</p>}
                 </div>
                 {/* Friends - END */}
               </div>

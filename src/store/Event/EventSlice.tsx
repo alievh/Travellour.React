@@ -90,7 +90,7 @@ export async function GetJoinedEvents(dispatch: any) {
   dispatch(setEvents(response));
 }
 
-export async function CreateEvent(formData: any) {
+export async function CreateEvent(dispatch: any, formData: any) {
   await fetch(`${baseUrl}/event/eventcreate`, {
     method: "POST",
     body: formData,
@@ -109,6 +109,8 @@ export async function CreateEvent(formData: any) {
       });
     }
   });
+
+  GetEvents(dispatch);
 }
 
 export async function JoinEvent(dispatch: any, id: string | undefined) {

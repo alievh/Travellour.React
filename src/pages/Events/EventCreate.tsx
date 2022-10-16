@@ -11,8 +11,10 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import { RootState } from "../../store";
 import { CreateEvent } from "../../store/Event/EventSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const EventCreate = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -44,7 +46,7 @@ const EventCreate = () => {
       formData.append("imagefiles", eventImages[i]);
     }
 
-    CreateEvent(formData);
+    CreateEvent(dispatch, formData);
     navigate("/events");
   };
 
