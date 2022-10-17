@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { JoinEvent, LeaveEvent } from "../../store/Event/EventSlice";
+import { DeleteEvent, JoinEvent, LeaveEvent } from "../../store/Event/EventSlice";
 import { CreateNotification } from "../../store/Notification/NotificationSlice";
 import Col from "../Bootstrap/Col";
 import Row from "../Bootstrap/Row";
@@ -45,6 +45,10 @@ const Event: React.FC<{
   const leaveEventHandler = () => {
     LeaveEvent(dispatch, props.eventId);
   };
+
+  const deleteEventHandler = () => {
+    DeleteEvent(dispatch, props.eventId);
+  }
 
   useEffect(() => {
     setIsMember(
@@ -124,6 +128,17 @@ const Event: React.FC<{
             innerText="Members"
             onClick={openModal}
           />
+          {JSON.parse(localStorage.getItem("user") || "{}").user.id ===
+          props.eventCreatorId ? (
+            <Button
+              type="button"
+              className="delete-event"
+              buttonIcon="fa-solid fa-trash"
+              onClick={deleteEventHandler}
+            />
+          ) : (
+            ""
+          )}
         </Col>
       </Row>
     </div>

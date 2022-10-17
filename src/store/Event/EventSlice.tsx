@@ -157,5 +157,27 @@ export async function LeaveEvent(dispatch: any, id: string | undefined) {
   GetEvents(dispatch);
 }
 
+export async function DeleteEvent(dispatch: any, id: string | undefined) {
+  await fetch(`${baseUrl}/event/eventdelete/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem("user") || "{}").token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((data) => {
+        setError(data.error.message.toString());
+      });
+    }
+  });
+
+  GetEvents(dispatch);
+}
+
 export const { setEvents, setLoading, setError } = EventSlice.actions;
 export default EventSlice.reducer;

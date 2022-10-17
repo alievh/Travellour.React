@@ -9,9 +9,12 @@ import Col from "../../components/Bootstrap/Col";
 import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { GetUserData } from "../../store/User/UserData";
-import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
+import { GetNotificationPagination } from "../../store/Notification/NotificationPaginationSlice";
+import Notification from "../../components/Notification/Notification";
+import { GetFriendRequestsPagination } from "../../store/Friend/FriendRequestPaginationSlice";
+import FriendRequest from "../../components/FriendRequests/FriendRequest";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -76,6 +79,8 @@ const Navbar = () => {
 
   useEffect(() => {
     GetUserData(dispatch);
+    GetNotificationPagination(dispatch);
+    GetFriendRequestsPagination(dispatch);
   }, [dispatch]);
 
   const logoutHandler = () => {
@@ -106,11 +111,25 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const searchHandler = (event: any) => {
+    if(event.target.value.lenght > 0) {
+
+    }
+  }
+
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
   );
 
   const user = useSelector((state: any) => state.UserDataSlice);
+
+  const notifications = useSelector(
+    (state: any) => state.NotificationPaginationSlice
+  );
+
+  const friendRequests = useSelector(
+    (state: any) => state.FriendRequestPaginationSlice
+  );
 
   return (
     // Navbar - START
@@ -128,7 +147,10 @@ const Navbar = () => {
                     className="form-control"
                     placeholder="Search Here"
                     aria-label="Search"
+                    onChange={searchHandler}
                   />
+                </div>
+                <div className="search-results">
                 </div>
               </div>
               {/* Navbar Search - END */}
@@ -144,8 +166,25 @@ const Navbar = () => {
                     />
                     {friendRequestsToggle ? (
                       <div className="friend-dropdown">
+                        <h5>Friend Requests</h5>
                         <div className="friend-dropdown__body">
-                          <FriendRequests />
+                          {friendRequests.friendRequestsPagination.length >
+                          0 ? (
+                            friendRequests.friendRequestsPagination.map(
+                              (f: any) => (
+                                <FriendRequest
+                                  key={f.id}
+                                  userId={f.id}
+                                  userFirstName={f.firstname}
+                                  userLastName={f.lastname}
+                                  userName={f.userName}
+                                  imageUrl={f.profileImage}
+                                />
+                              )
+                            )
+                          ) : (
+                            <p>You have no pending friends requests.</p>
+                          )}
                         </div>
                       </div>
                     ) : (
@@ -192,8 +231,40 @@ const Navbar = () => {
                       <div className="notification-dropdown">
                         <h5>Notifications</h5>
                         <div className="notification-dropdown__body">
-                          <p>You have no pending friends requests.</p>
+                          {notifications.notificationPagination.length > 0 ? (
+                            notifications.notificationPagination.map((n: any) =>
+                              n.post !== null ? (
+                                <Notification
+                                  key={n.id}
+                                  notificationId={n.id}
+                                  userId={n.sender.id}
+                                  userImage={n.sender.profileImage.imageUrl}
+                                  userUsername={n.sender.userName}
+                                  notificationContent={n.message}
+                                  notificationStatus={n.notificationStatus}
+                                  postId={n.post.id}
+                                  createDate={n.fromCreateDate}
+                                />
+                              ) : (
+                                <Notification
+                                  key={n.id}
+                                  notificationId={n.id}
+                                  userId={n.sender.id}
+                                  userImage={n.sender.profileImage.imageUrl}
+                                  userUsername={n.sender.userName}
+                                  notificationContent={n.message}
+                                  notificationStatus={n.notificationStatus}
+                                  createDate={n.fromCreateDate}
+                                />
+                              )
+                            )
+                          ) : (
+                            <p>You don't have any notification.</p>
+                          )}
                         </div>
+                        <Link to="/notifications" className="see-more">
+                          See More
+                        </Link>
                       </div>
                     ) : (
                       ""

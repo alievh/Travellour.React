@@ -59,7 +59,7 @@
   }
 
   .event-request {
-    @include flex(center, center);
+    @include flex(flex-end, center);
 
     @media screen and (max-width: 1200px) {
       width: 100%;
@@ -115,6 +115,15 @@
         background-color: $primary-dark;
         border-color: $primary-dark;
         color: $white;
+      }
+    }
+
+    .delete-event {
+      border: none;
+      background-color: transparent;
+      
+      i {
+        color: #f14646;
       }
     }
   }

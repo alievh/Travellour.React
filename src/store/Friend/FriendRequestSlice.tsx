@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
+import { GetFriendRequestsPagination } from "./FriendRequestPaginationSlice";
 import { GetAllFriend } from "./FriendSlice";
 
 export const FriendRequestSlice = createSlice({
@@ -68,6 +69,7 @@ export async function AcceptFriendRequest(
     }
   });
 
+  GetFriendRequestsPagination(dispatch);
   GetFriendRequests(dispatch);
   GetAllFriend(dispatch);
 }
@@ -94,6 +96,7 @@ export async function RejectFriendRequest(
     }
   });
 
+  GetFriendRequestsPagination(dispatch);
   GetFriendRequests(dispatch);
 }
 
