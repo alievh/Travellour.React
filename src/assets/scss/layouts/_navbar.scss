@@ -39,9 +39,22 @@
         background-color: $global-bg-color;
         border-color: $global-bg-color;
   
-        @media screen and (max-width: 850px) {
+        @media screen and (max-width: 1365px) {
+          width: 40rem;
+        }
+
+        @media screen and (max-width: 1200px) {
+          width: 30rem;
+        }
+  
+        @media screen and (max-width: 960px) {
+          width: 25rem;
+        }
+
+        @media screen and (max-width: 930px) {
           display: none;
         }
+
   
         &:focus {
           box-shadow: none;
@@ -55,23 +68,22 @@
           font-size: 14px;
         }
   
-        @media screen and (max-width: 1200px) {
-          width: 25rem;
-        }
-  
-        @media screen and (max-width: 960px) {
-          width: 15rem;
-        }
+        
       }
     }
 
-    // .search-results {
-    //   position: absolute;
-    //   top: 90px;
-    //   width: 100%;
-    //   height: 200px;
-    //   background-color: red;
-    // }
+    .search-results {
+      position: absolute;
+      border-radius: 5px;
+      padding: 0 20px;
+      top: 75px;
+      width: 100%;
+      background-color: $white;
+
+      @media screen and (max-width: 930px) {
+        display: none;
+      }
+    }
   }
 
   &__navigation {

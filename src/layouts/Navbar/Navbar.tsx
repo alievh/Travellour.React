@@ -15,11 +15,14 @@ import { GetNotificationPagination } from "../../store/Notification/Notification
 import Notification from "../../components/Notification/Notification";
 import { GetFriendRequestsPagination } from "../../store/Friend/FriendRequestPaginationSlice";
 import FriendRequest from "../../components/FriendRequests/FriendRequest";
+import { GetSearchUser } from "../../store/User/SearchUserSlice";
+import SearchUser from "../../components/SearchUser/SearchUser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [searchResultActive, setSearchResultActive] = useState(false);
   const [friendRequestsToggle, setFriendRequestsToggle] = useState(false);
   const [messageToggle, setMessageToggle] = useState(false);
   const [notificationToggle, setNotificationToggle] = useState(false);
@@ -29,11 +32,13 @@ const Navbar = () => {
     if (
       messageToggle === true ||
       notificationToggle === true ||
-      profileToggle === true
+      profileToggle === true ||
+      searchResultActive === true
     ) {
       setMessageToggle(false);
       setNotificationToggle(false);
       setProfileToggle(false);
+      setSearchResultActive(false);
     }
     setFriendRequestsToggle(!friendRequestsToggle);
   };
@@ -42,11 +47,14 @@ const Navbar = () => {
     if (
       friendRequestsToggle === true ||
       notificationToggle === true ||
-      profileToggle === true
+      profileToggle === true ||
+      searchResultActive === true
     ) {
       setFriendRequestsToggle(false);
       setNotificationToggle(false);
       setProfileToggle(false);
+      setSearchResultActive(false);
+
     }
     setMessageToggle(!messageToggle);
   };
@@ -55,11 +63,14 @@ const Navbar = () => {
     if (
       messageToggle === true ||
       friendRequestsToggle === true ||
-      profileToggle === true
+      profileToggle === true ||
+      searchResultActive === true
     ) {
       setMessageToggle(false);
       setFriendRequestsToggle(false);
       setProfileToggle(false);
+      setSearchResultActive(false);
+
     }
     setNotificationToggle(!notificationToggle);
   };
@@ -68,20 +79,16 @@ const Navbar = () => {
     if (
       messageToggle === true ||
       friendRequestsToggle === true ||
-      notificationToggle === true
+      notificationToggle === true ||
+      searchResultActive === true
     ) {
       setMessageToggle(false);
       setFriendRequestsToggle(false);
       setNotificationToggle(false);
+      setSearchResultActive(false);
     }
     setProfileToggle(!profileToggle);
   };
-
-  useEffect(() => {
-    GetUserData(dispatch);
-    GetNotificationPagination(dispatch);
-    GetFriendRequestsPagination(dispatch);
-  }, [dispatch]);
 
   const logoutHandler = () => {
     console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
@@ -111,11 +118,28 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const searchHandler = (event: any) => {
-    if(event.target.value.lenght > 0) {
+  const searchInputHandler = (event: any) => {
+    searchHandler(event.target.value);
+  };
 
+  const searchHandler = (input: string) => {
+    if (input.length > 2) {
+      setSearchResultActive(true);
+      setMessageToggle(false);
+      setFriendRequestsToggle(false);
+      setNotificationToggle(false);
+      setProfileToggle(false);
+      GetSearchUser(dispatch, input);
+    } else {
+      setSearchResultActive(false);
     }
-  }
+  };
+
+  useEffect(() => {
+    GetUserData(dispatch);
+    GetNotificationPagination(dispatch);
+    GetFriendRequestsPagination(dispatch);
+  }, [dispatch]);
 
   const sidebarIsActive = useSelector(
     (state: any) => state.sidebarToggle.isActive
@@ -131,6 +155,9 @@ const Navbar = () => {
     (state: any) => state.FriendRequestPaginationSlice
   );
 
+  const searchUsers = useSelector((state: any) => state.SearchUserSlice);
+
+
   return (
     // Navbar - START
     <nav className={`nav-bar ${!sidebarIsActive && "sidebar-notactive"}`}>
@@ -143,15 +170,32 @@ const Navbar = () => {
                 <div className="form-outline">
                   <input
                     type="search"
-                    id="seatch"
+                    id="search"
+                    name="main-search"
                     className="form-control"
                     placeholder="Search Here"
                     aria-label="Search"
-                    onChange={searchHandler}
+                    onChange={searchInputHandler}
                   />
                 </div>
-                <div className="search-results">
-                </div>
+                {searchResultActive && (
+                  <div className="search-results">
+                    {searchUsers.searchUser.length > 0 ? (
+                      searchUsers.searchUser.map((u: any) => (
+                        <SearchUser
+                          key={u.id}
+                          id={u.id}
+                          imageUrl={u.profileImage}
+                          userFirstName={u.firstname}
+                          userLastName={u.lastname}
+                          userName={u.userName}
+                        />
+                      ))
+                    ) : (
+                      <p>No user found!</p>
+                    )}
+                  </div>
+                )}
               </div>
               {/* Navbar Search - END */}
               {/* Navbar Navigation - START */}
