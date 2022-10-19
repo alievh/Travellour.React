@@ -202,6 +202,8 @@ const User = () => {
                           commentCount={p.commentCount}
                           likes={p.likes}
                           comments={p.comments}
+                          groupId={undefined}
+                          postOwnerId={p.user.id}
                         />
                       ) : (
                         <Post
@@ -217,6 +219,8 @@ const User = () => {
                           commentCount={p.commentCount}
                           likes={p.likes}
                           comments={p.comments}
+                          groupId={undefined}
+                          postOwnerId={p.user.id}
                         />
                       )
                     )

@@ -276,7 +276,6 @@ const Group = () => {
                 </form>
               </div>
               <div className="newsfeed-section__posts">
-                {groupPosts.loading && <p className="loading">Loading...</p>}
                 {groupPosts.error && <p>{groupPosts.error}</p>}
                 {groupPosts.groupPosts.length > 0
                   ? groupPosts.groupPosts.map((p: any) =>
@@ -294,6 +293,8 @@ const Group = () => {
                           commentCount={p.commentCount}
                           likes={p.likes}
                           comments={p.comments}
+                          groupId={id}
+                          postOwnerId={undefined}
                         />
                       ) : (
                         <Post
@@ -308,6 +309,8 @@ const Group = () => {
                           commentCount={p.commentCount}
                           likes={p.likes}
                           comments={p.comments}
+                          groupId={id}
+                          postOwnerId={undefined}
                         />
                       )
                     )

@@ -31,7 +31,7 @@ const ForumDetail = () => {
       content: commentContent,
     };
 
-    AddComment(dispatch, comment, id);
+    AddComment(dispatch, comment, id, undefined, undefined);
     setCommentContent("");
   };
 
@@ -72,6 +72,8 @@ const ForumDetail = () => {
                         commentContent={c.content}
                         postId={undefined}
                         forumId={id}
+                        groupId={undefined}
+                        postOwnerId={undefined}
                       />
                     ))}
                 </div>

@@ -102,6 +102,8 @@ const Newsfeed = () => {
                       commentCount={p.commentCount}
                       likes={p.likes}
                       comments={p.comments}
+                      groupId={undefined}
+                      postOwnerId={undefined}
                     />
                   ) : (
                     <Post
@@ -117,6 +119,8 @@ const Newsfeed = () => {
                       commentCount={p.commentCount}
                       likes={p.likes}
                       comments={p.comments}
+                      groupId={undefined}
+                      postOwnerId={undefined}
                     />
                   )
                 )}

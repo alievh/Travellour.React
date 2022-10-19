@@ -52,6 +52,8 @@ const SinglePost = () => {
                       commentCount={post.commentCount}
                       likes={post.likes}
                       comments={post.comments}
+                      groupId={undefined}
+                      postOwnerId={undefined}
                     />
                   ) : (
                     <Post
@@ -67,6 +69,8 @@ const SinglePost = () => {
                       commentCount={post.commentCount}
                       likes={post.likes}
                       comments={post.comments}
+                      groupId={undefined}
+                      postOwnerId={undefined}
                     />
                   )
                 ) : (

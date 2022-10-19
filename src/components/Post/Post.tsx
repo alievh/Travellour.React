@@ -27,13 +27,15 @@ const Post: React.FC<{
   commentCount: string;
   likes: Array<any>;
   comments: Array<any>;
+  groupId: string | undefined;
+  postOwnerId: string | undefined;
 }> = (props) => {
   const dispatch = useDispatch();
   const [commentIsActive, setCommentIsActive] = useState(false);
   const [commentContent, setCommentContent] = useState("");
 
   const addLikeHandler = async () => {
-    AddLike(dispatch, props.postId, props.userId);
+    AddLike(dispatch, props.postId, props.userId, props.groupId);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -49,7 +51,7 @@ const Post: React.FC<{
   };
 
   const deleteLikeHandler = async () => {
-    DeleteLike(dispatch, props.postId, props.userId);
+    DeleteLike(dispatch, props.postId, props.userId, props.groupId);
   };
 
   const commentContentHandler = (event: any) => {
@@ -63,7 +65,7 @@ const Post: React.FC<{
       content: commentContent,
     };
 
-    AddComment(dispatch, comment, undefined);
+    AddComment(dispatch, comment, undefined, props.userId, props.groupId);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -200,6 +202,8 @@ const Post: React.FC<{
                 commentContent={c.content}
                 postId={c.postId}
                 forumId={undefined}
+                groupId={props.groupId}
+                postOwnerId={props.postOwnerId}
               />
             ))}
         </div>
