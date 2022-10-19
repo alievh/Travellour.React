@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
 
-export const FriendRequestPaginationSlice = createSlice({
-  name: "friendRequestPagination",
+export const GroupPostSlice = createSlice({
+  name: "groupPosts",
   initialState: {
-    friendRequestsPagination: [],
+    groupPosts: [],
     loading: false,
     error: null,
   },
   reducers: {
-    setFriendRequestsPagination: (state, action) => {
-      state.friendRequestsPagination = action.payload;
+    setGroupPosts: (state, action) => {
+      state.groupPosts = action.payload;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -21,9 +21,9 @@ export const FriendRequestPaginationSlice = createSlice({
   },
 });
 
-export async function GetFriendRequestsPagination(dispatch: any) {
+export async function GetGroupPosts(dispatch: any, id: string | undefined) {
   dispatch(setLoading(true));
-  const response = await fetch(`${baseUrl}/friend/friendrequestspagination`, {
+  const response = await fetch(`${baseUrl}/group/Grouppostgetall/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -42,9 +42,8 @@ export async function GetFriendRequestsPagination(dispatch: any) {
     }
   });
 
-  dispatch(setFriendRequestsPagination(response));
+  dispatch(setGroupPosts(response));
 }
 
-export const { setFriendRequestsPagination, setLoading, setError } =
-  FriendRequestPaginationSlice.actions;
-export default FriendRequestPaginationSlice.reducer;
+export const { setGroupPosts, setLoading, setError } = GroupPostSlice.actions;
+export default GroupPostSlice.reducer;

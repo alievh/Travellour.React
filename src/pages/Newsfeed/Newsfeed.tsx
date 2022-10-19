@@ -11,7 +11,6 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import { RootState } from "../../store";
 import { CreatePost, GetPosts } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const Newsfeed = () => {
@@ -50,25 +49,7 @@ const Newsfeed = () => {
 
   useEffect(() => {
     GetPosts(dispatch);
-    const connection = new HubConnectionBuilder()
-      .withUrl("https://localhost:7101/onlinehub")
-      .build();
-
-    connection
-      .start()
-      .then(() =>
-        connection
-          .invoke(
-            "IsOnline",
-            JSON.parse(localStorage.getItem("user") || "{}").user.id
-          )
-          .catch((error: any) => console.log(error))
-      )
-      .then(() =>
-        connection.on("activeUser", (id: any) => {
-          AddOnlineUser(dispatch, id);
-        })
-      );
+    AddOnlineUser(dispatch);
   }, [dispatch]);
 
   return (

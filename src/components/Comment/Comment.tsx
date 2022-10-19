@@ -11,12 +11,13 @@ const Comment: React.FC<{
   userFirstname: string;
   userLastname: string;
   commentContent: string;
-  forumId?: string;
+  postId: string | undefined;
+  forumId: string | undefined;
 }> = (props) => {
   const dispatch = useDispatch();
 
   const deleteCommentHandler = async () => {
-    DeleteComment(dispatch, props.commentId, props.forumId);
+    DeleteComment(dispatch, props.commentId, props.postId , props.forumId);
   };
 
   return (

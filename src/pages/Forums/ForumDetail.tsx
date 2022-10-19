@@ -70,6 +70,7 @@ const ForumDetail = () => {
                         userFirstname={c.user.firstname}
                         userLastname={c.user.lastname}
                         commentContent={c.content}
+                        postId={undefined}
                         forumId={id}
                       />
                     ))}

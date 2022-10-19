@@ -25,7 +25,6 @@ const SinglePost = () => {
   }, [dispatch, id]);
 
   const post = useSelector((state: any) => state.SinglePostSlice.post);
-  console.log(post);
 
   return (
     // Newsfeed Section - START

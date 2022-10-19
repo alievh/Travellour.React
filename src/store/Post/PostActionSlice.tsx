@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
 import { GetForumDetail } from "../Forum/ForumDetailSlice";
 import { GetPosts } from "./PostSlice";
+import { GetSinglePost } from "./SinglePostSlice";
+import { GetUserPosts } from "./UserPostsSlice";
 
 export const PostSlice = createSlice({
   name: "posts",
@@ -23,7 +25,11 @@ export const PostSlice = createSlice({
   },
 });
 
-export async function AddLike(dispatch: any, id: string | undefined) {
+export async function AddLike(
+  dispatch: any,
+  id: string | undefined,
+  userId: string | undefined
+) {
   await fetch(`${baseUrl}/post/likeadd/${id}`, {
     method: "POST",
     headers: {
@@ -43,9 +49,11 @@ export async function AddLike(dispatch: any, id: string | undefined) {
   });
 
   GetPosts(dispatch);
+  GetSinglePost(dispatch, id);
+  GetUserPosts(dispatch, userId);
 }
 
-export async function DeleteLike(dispatch: any, id: string | undefined) {
+export async function DeleteLike(dispatch: any, id: string | undefined, userId: string | undefined) {
   await fetch(`${baseUrl}/post/likedelete/${id}`, {
     method: "PUT",
     headers: {
@@ -65,9 +73,15 @@ export async function DeleteLike(dispatch: any, id: string | undefined) {
   });
 
   GetPosts(dispatch);
+  GetSinglePost(dispatch, id);
+  GetUserPosts(dispatch, userId);
 }
 
-export async function AddComment(dispatch: any, comment: any, id? : string | undefined) {
+export async function AddComment(
+  dispatch: any,
+  comment: any,
+  id: string | undefined
+) {
   await fetch(`${baseUrl}/post/commentadd`, {
     method: "POST",
     body: JSON.stringify(comment),
@@ -87,10 +101,10 @@ export async function AddComment(dispatch: any, comment: any, id? : string | und
     }
   });
 
-  if(id === undefined) {
+  if (id === undefined) {
     GetPosts(dispatch);
-
-  }else if(id !== undefined) {
+    GetSinglePost(dispatch, comment.postId);
+  } else if (id !== undefined) {
     GetForumDetail(dispatch, id);
   }
 }
@@ -98,6 +112,7 @@ export async function AddComment(dispatch: any, comment: any, id? : string | und
 export async function DeleteComment(
   dispatch: any,
   id: string | undefined,
+  postId: string | undefined,
   forumId: string | undefined
 ) {
   await fetch(`${baseUrl}/post/commentdelete/${id}`, {
@@ -122,6 +137,7 @@ export async function DeleteComment(
     GetForumDetail(dispatch, forumId);
   } else if (forumId === undefined) {
     GetPosts(dispatch);
+    GetSinglePost(dispatch, postId);
   }
 }
 export const { setPosts, setLoading, setError } = PostSlice.actions;

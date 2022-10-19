@@ -22,6 +22,7 @@ import {
 } from "../../store/Friend/FriendSlice";
 import { GetUserPosts } from "../../store/Post/UserPostsSlice";
 import { GetProfile } from "../../store/User/ProfileSlice";
+import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -31,16 +32,17 @@ const User = () => {
 
   const userProfile = useSelector((state: any) => state.ProfileSlice);
 
-  useEffect(() => {
-    GetProfile(dispatch, id);
-    GetUserPosts(dispatch, id);
-  }, [dispatch, id])
+  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
   );
 
-  const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
+  useEffect(() => {
+    GetProfile(dispatch, id);
+    GetUserPosts(dispatch, id);
+    AddOnlineUser(dispatch);
+  }, [dispatch, id]);
 
   const friendAddHandler = () => {
     SendFriendRequest(dispatch, id);
@@ -111,7 +113,13 @@ const User = () => {
               <span>@{userProfile.profile.userName}</span>
               {onlineUsers.isOnline !== undefined
                 ? onlineUsers.isOnline.map((u: any) =>
-                    u === id ? <p className="online-user">Online</p> : ""
+                    u === id ? (
+                      <p key={u} className="online-user">
+                        Online
+                      </p>
+                    ) : (
+                      ""
+                    )
                   )
                 : ""}
             </div>
@@ -177,40 +185,42 @@ const User = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               <div className="newsfeed-section__posts">
-                {userPosts.userPosts.length > 0 ? userPosts.userPosts.map((p: any) =>
-                  p.images !== null ? (
-                    <Post
-                      key={p.id}
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate="6 hours"
-                      postContent={p.content}
-                      postImages={p.imageUrls}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  ) : (
-                    <Post
-                      key={p.id}
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate="6 hours"
-                      postContent={p.content}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  )
-                ) : ""}
+                {userPosts.userPosts.length > 0
+                  ? userPosts.userPosts.map((p: any) =>
+                      p.images !== null ? (
+                        <Post
+                          key={p.id}
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate="6 hours"
+                          postContent={p.content}
+                          postImages={p.imageUrls}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      ) : (
+                        <Post
+                          key={p.id}
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate="6 hours"
+                          postContent={p.content}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      )
+                    )
+                  : ""}
               </div>
             </section>
           </Col>

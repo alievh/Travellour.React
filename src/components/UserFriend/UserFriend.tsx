@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import { RemoveFriend } from "../../store/Friend/FriendSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const UserFriend: React.FC<{
   userId: string;
@@ -19,11 +20,14 @@ const UserFriend: React.FC<{
 
   const onlineUsers = useSelector((state: any) => state.OnlineUserSlice);
 
+  useEffect(() => {
+    AddOnlineUser(dispatch);
+  }, [dispatch])
+
   return (
     <div className="user-friend">
       <div className="user-friend__info">
         <div className="user-friend__avatar">
-          
           {onlineUsers.isOnline !== undefined
             ? onlineUsers.isOnline.map((u: any) =>
                 u === props.userId ? <span></span> : ""

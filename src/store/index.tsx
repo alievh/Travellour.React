@@ -21,6 +21,7 @@ import UserPostSlice from "./Post/UserPostsSlice";
 import NotificationPaginationSlice from "./Notification/NotificationPaginationSlice";
 import FriendRequestPaginationSlice from "./Friend/FriendRequestPaginationSlice";
 import SearchUserSlice from "./User/SearchUserSlice";
+import GroupPostSlice from "./Group/GroupPostSlice";
 
 const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ const store = configureStore({
     ForumDetailSlice: ForumDetailSlice,
     GroupSlice: GroupSlice,
     GroupDetailSlice: GroupDetailSlice,
+    GroupPostSlice: GroupPostSlice,
     PostSlice: PostSlice,
     UserPostsSlice: UserPostSlice,
     SinglePostSlice: SinglePostSlice,
@@ -44,9 +46,10 @@ const store = configureStore({
     OnlineUserSlice: OnlineUserSlice,
     NotificationSlice: NotificationSlice,
     NotificationPaginationSlice: NotificationPaginationSlice,
-    SearchUserSlice: SearchUserSlice
+    SearchUserSlice: SearchUserSlice,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(thunk),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(thunk),
 });
 
 export default store;

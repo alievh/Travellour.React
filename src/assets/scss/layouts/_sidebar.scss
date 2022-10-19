@@ -9,8 +9,6 @@
   background-color: $white;
   z-index: 10;
 
-  
-
   &__toggle {
     cursor: pointer;
     @include flex(center, center);
@@ -117,7 +115,7 @@
     &__main {
       transform: translate3d(0px, 0px, 0px);
       height: 100vh;
-      
+
       @media screen and (max-height: 670px) {
         overflow-y: scroll;
 
@@ -201,16 +199,18 @@
       left: 0;
       padding: 16px 16px;
 
-      @media screen and (max-width: 1220px) {
-        padding: 16px 8px;
-      }
+      &.sidebar-active {
+        @media screen and (max-width: 1220px) {
+          padding: 16px 8px;
+        }
 
-      @media screen and (max-width: 720px) {
-        padding: 16px 6px;
-      }
+        @media screen and (max-width: 720px) {
+          padding: 16px 6px;
+        }
 
-      @media screen and (max-width: 390px) {
-        padding: 16px 3px;
+        @media screen and (max-width: 390px) {
+          padding: 16px 3px;
+        }
       }
     }
 

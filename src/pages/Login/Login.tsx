@@ -39,7 +39,8 @@ const Login = () => {
         return res.json();
       } else {
         return res.json().then((data) => {
-          setError(data.error.message.toString());
+          console.log(data);
+          setError(data.title.toString());
         });
       }
     });
@@ -69,7 +70,7 @@ const Login = () => {
                   world
                 </p>
                 {isLoading && <p className="loading">Please wait...</p>}
-                {error !== null ? <p>{error}</p> : ""}
+                {error && <p className="login-error">{error}</p>}
               </div>
               {/* Login Form - START */}
               <form onSubmit={loginHandler} className="auth-container__form">

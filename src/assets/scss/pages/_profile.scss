@@ -82,7 +82,11 @@
     }
 
     &__statistics {
-      @include flex(center, center);
+      @include flex(flex-start, center);
+
+      @media screen and (max-width: 992px) {
+        @include flex(center, center);
+      }
 
       ul {
         @include flex(none, none);
@@ -208,7 +212,7 @@
         object-fit: cover;
       }
 
-      @media screen and (max-width: 1032px) {
+      @media screen and (max-width: 992px) {
         left: 38%;
         top: -170px;
         width: 120px;

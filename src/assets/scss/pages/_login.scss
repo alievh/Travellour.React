@@ -75,6 +75,14 @@
         color: $primary;
         border-radius: 5px;
       }
+
+      .login-error {
+        color: #f14646; 
+      }
+
+      p {
+        margin: 0;
+      }
     }
 
     .form-group {

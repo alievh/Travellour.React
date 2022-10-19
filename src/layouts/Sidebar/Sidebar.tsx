@@ -122,7 +122,13 @@ const Sidebar = () => {
         </div>
         {/* Sidebar Section Main - END */}
         {/* Sidebar Section Footer - START */}
-        <div className="sidebar-section__footer">
+        <div
+          className={
+            isSidebarActive
+              ? "sidebar-section__footer sidebar-active"
+              : "sidebar-section__footer"
+          }
+        >
           <div className="sidebar-section__settings">
             <ul className={isSidebarActive ? "list" : "list sidebar-notactive"}>
               <SidebarItem iconClass="fa-solid fa-lock" url="/password" />

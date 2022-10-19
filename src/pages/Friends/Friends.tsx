@@ -28,7 +28,6 @@ const Friends = () => {
 
   const searchHandler = (event: any) => {
     event.preventDefault();
-    console.log("hello");
     SearchFriend(dispatch, searchFriend);
   }
 

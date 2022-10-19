@@ -46,11 +46,15 @@ const Register = () => {
         return res.json();
       } else {
         return res.json().then((data) => {
-          setError(data.error.message.toString());
+          console.log(data);
+          setError(data.message.toString());
         });
       }
     });
+
   }
+
+  console.log(error);
 
   return (
     <main>
@@ -63,7 +67,7 @@ const Register = () => {
               <div className="auth-container__title">
                 <h4>Travellour</h4>
                 {loading && <p className="loading">Loading...</p>}
-                {error !== null ? <p>{error}</p> : ""}
+                {error && <p className="register-error">{error}</p>}
               </div>
               {/* Register Form - START */}
               <form onSubmit={addUserHandler} className="auth-container__form">

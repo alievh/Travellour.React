@@ -33,7 +33,7 @@ const Post: React.FC<{
   const [commentContent, setCommentContent] = useState("");
 
   const addLikeHandler = async () => {
-    AddLike(dispatch, props.postId);
+    AddLike(dispatch, props.postId, props.userId);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -49,7 +49,7 @@ const Post: React.FC<{
   };
 
   const deleteLikeHandler = async () => {
-    DeleteLike(dispatch, props.postId);
+    DeleteLike(dispatch, props.postId, props.userId);
   };
 
   const commentContentHandler = (event: any) => {
@@ -63,7 +63,7 @@ const Post: React.FC<{
       content: commentContent,
     };
 
-    AddComment(dispatch, comment);
+    AddComment(dispatch, comment, undefined);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -198,6 +198,8 @@ const Post: React.FC<{
                 userFirstname={c.user.firstname}
                 userLastname={c.user.lastname}
                 commentContent={c.content}
+                postId={c.postId}
+                forumId={undefined}
               />
             ))}
         </div>

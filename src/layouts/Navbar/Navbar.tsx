@@ -6,11 +6,9 @@ import Button from "../../components/UI/Button";
 import ContainerFluid from "../../components/Bootstrap/ContainerFluid";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import { logout } from "../../store/Auth/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { GetUserData } from "../../store/User/UserData";
-import { HubConnectionBuilder } from "@microsoft/signalr";
-import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
+import { RemoveOnlineUser } from "../../store/Online/OnlineUserSlice";
 import { GetNotificationPagination } from "../../store/Notification/NotificationPaginationSlice";
 import Notification from "../../components/Notification/Notification";
 import { GetFriendRequestsPagination } from "../../store/Friend/FriendRequestPaginationSlice";
@@ -91,30 +89,7 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    console.log(JSON.parse(localStorage.getItem("user") || "{}").user.id);
-    const connection = new HubConnectionBuilder()
-      .withUrl("https://localhost:7101/onlinehub")
-      .build();
-
-    connection
-      .start()
-      .then(() => {
-        connection
-          .invoke(
-            "IsOffline",
-            JSON.parse(localStorage.getItem("user") || "{}").user.id
-          )
-          .catch((error) => console.log(error));
-
-        dispatch(logout());
-        localStorage.removeItem("user");
-      })
-      .then(() =>
-        connection.on("activeUser", (id) => {
-          AddOnlineUser(dispatch, id);
-        })
-      );
-
+    RemoveOnlineUser(dispatch);    
     navigate("/");
   };
 

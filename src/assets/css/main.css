@@ -1431,19 +1431,19 @@ body {
 }
 
 @media screen and (max-width: 1220px) {
-  .sidebar .sidebar-section__footer {
+  .sidebar .sidebar-section__footer.sidebar-active {
     padding: 16px 8px;
   }
 }
 
 @media screen and (max-width: 720px) {
-  .sidebar .sidebar-section__footer {
+  .sidebar .sidebar-section__footer.sidebar-active {
     padding: 16px 6px;
   }
 }
 
 @media screen and (max-width: 390px) {
-  .sidebar .sidebar-section__footer {
+  .sidebar .sidebar-section__footer.sidebar-active {
     padding: 16px 3px;
   }
 }
@@ -1579,7 +1579,7 @@ body {
   }
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 980px) {
   .nav-bar__container .nav-bar__search input {
     width: 25rem;
   }
@@ -1610,6 +1610,11 @@ body {
   top: 75px;
   width: 100%;
   background-color: #fff;
+}
+
+.nav-bar__container .search-results p {
+  margin: 10px 0;
+  text-align: center;
 }
 
 @media screen and (max-width: 930px) {
@@ -2014,6 +2019,14 @@ body {
   border-radius: 5px;
 }
 
+.login-section .auth-container__title .login-error {
+  color: #f14646;
+}
+
+.login-section .auth-container__title p {
+  margin: 0;
+}
+
 .login-section .auth-container .form-group input {
   padding: 0.7rem 2rem;
   margin-bottom: 14px;
@@ -2159,6 +2172,10 @@ body {
   background-color: #eaeff8;
   color: #4fb5ff;
   border-radius: 5px;
+}
+
+.register-section .auth-container__title .register-error {
+  color: #f14646;
 }
 
 .register-section .auth-container .form-group input {
@@ -2451,8 +2468,16 @@ body {
 
 .profile-section .user__statistics {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+  .profile-section .user__statistics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .profile-section .user__statistics ul {
@@ -2597,7 +2622,7 @@ body {
   object-fit: cover;
 }
 
-@media screen and (max-width: 1032px) {
+@media screen and (max-width: 992px) {
   .profile-section .user .user-avatar {
     left: 38%;
     top: -170px;

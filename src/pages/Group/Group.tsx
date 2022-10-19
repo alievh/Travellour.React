@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/UI/Button";
 import { useSelector } from "react-redux";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
@@ -17,15 +17,12 @@ import {
 } from "../../store/Group/GroupDetailSlice";
 import { useDispatch } from "react-redux";
 import { CreatePost } from "../../store/Post/PostSlice";
-import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { JoinGroup, LeaveGroup } from "../../store/Group/GroupSlice";
 import { CreateNotification } from "../../store/Notification/NotificationSlice";
+import { GetGroupPosts } from "../../store/Group/GroupPostSlice";
 
 const Group = () => {
   const [isMember, setIsMember] = useState(false);
-  const [groupPosts, setGroupPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
   const [postContent, setPostContent] = useState("");
   const [fileUpload, setFileUpload] = useState("");
   const dispatch = useDispatch();
@@ -58,6 +55,8 @@ const Group = () => {
 
   const groupDetail = useSelector((state: any) => state.GroupDetailSlice);
 
+  const groupPosts = useSelector((state: any) => state.GroupPostSlice);
+
   const joinGroupHandler = async () => {
     JoinGroup(dispatch, id);
 
@@ -72,30 +71,6 @@ const Group = () => {
   const leaveGroupHandler = async () => {
     LeaveGroup(dispatch, id);
   };
-
-  const getGroupPosts = useCallback(async () => {
-    setLoading(true);
-    const response = await fetch(`${baseUrl}/group/Grouppostgetall/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user") || "{}").token
-        }`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        setLoading(false);
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          setError(data.error.message.toString());
-        });
-      }
-    });
-
-    setGroupPosts(response);
-  }, [id]);
 
   const profilePhotoHandler = (event: any) => {
     profilePhotoChangeHandler(event.target.files[0]);
@@ -119,12 +94,10 @@ const Group = () => {
     GroupCoverPhotoChanger(dispatch, formData, id);
   };
 
-  console.log(groupDetail);
-
   useEffect(() => {
     GetGroupDetail(dispatch, id);
-    getGroupPosts();
-  }, [dispatch, getGroupPosts, id]);
+    GetGroupPosts(dispatch, id);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (groupDetail.group.groupMembers !== undefined) {
@@ -303,40 +276,42 @@ const Group = () => {
                 </form>
               </div>
               <div className="newsfeed-section__posts">
-                {loading && <p className="loading">Loading...</p>}
-                {error && <p>{error}</p>}
-                {groupPosts.map((p: any) =>
-                  p.images !== null ? (
-                    <Post
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate="6 hours"
-                      postContent={p.content}
-                      postImages={p.imageUrls}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  ) : (
-                    <Post
-                      postId={p.id}
-                      userId={p.user.id}
-                      userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
-                      userFirstname={p.user.firstname}
-                      userLastname={p.user.lastname}
-                      createdDate="6 hours"
-                      postContent={p.content}
-                      likeCount={p.likeCount}
-                      commentCount={p.commentCount}
-                      likes={p.likes}
-                      comments={p.comments}
-                    />
-                  )
-                )}
+                {groupPosts.loading && <p className="loading">Loading...</p>}
+                {groupPosts.error && <p>{groupPosts.error}</p>}
+                {groupPosts.groupPosts.length > 0
+                  ? groupPosts.groupPosts.map((p: any) =>
+                      p.images !== null ? (
+                        <Post
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate="6 hours"
+                          postContent={p.content}
+                          postImages={p.imageUrls}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      ) : (
+                        <Post
+                          postId={p.id}
+                          userId={p.user.id}
+                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userFirstname={p.user.firstname}
+                          userLastname={p.user.lastname}
+                          createdDate="6 hours"
+                          postContent={p.content}
+                          likeCount={p.likeCount}
+                          commentCount={p.commentCount}
+                          likes={p.likes}
+                          comments={p.comments}
+                        />
+                      )
+                    )
+                  : ""}
               </div>
             </section>
             {/* Group Posts - END */}
