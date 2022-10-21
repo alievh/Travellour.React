@@ -10,16 +10,18 @@ import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingB
 import GroupMember from "../../components/GroupMember/GroupMember";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GetGroupDetail } from "../../store/Group/GroupDetailSlice";
 import { useDispatch } from "react-redux";
 import { ChangeGroup } from "../../store/Group/GroupSlice";
 
 const GroupSetting = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
 
-  const dispatch = useDispatch();
   const { id } = useParams();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
@@ -41,7 +43,7 @@ const GroupSetting = () => {
       groupDescription: groupDescription,
     };
 
-    ChangeGroup(dispatch, groupUpdate);
+    ChangeGroup(dispatch,navigate, groupUpdate);
     setGroupName("");
     setGroupDescription("");
   };
@@ -50,8 +52,8 @@ const GroupSetting = () => {
   console.log(group);
 
   useEffect(() => {
-    GetGroupDetail(dispatch, id);
-  }, [dispatch, id]);
+    GetGroupDetail(dispatch,navigate, id);
+  }, [dispatch,navigate, id]);
 
   return (
     // Group Setting Section - START

@@ -38,8 +38,8 @@ const GroupCreate = () => {
   const groupCreateHandler = async () => {
     const groupCreate = {
       groupName: groupName,
-      groupDescription: groupDescription
-    }
+      groupDescription: groupDescription,
+    };
 
     CreateGroup(dispatch, groupCreate);
     navigate("/groups");

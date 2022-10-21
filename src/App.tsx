@@ -15,6 +15,7 @@ import Groups from "./pages/Groups/Groups";
 import Login from "./pages/Login/Login";
 import Messages from "./pages/Messages/Messages";
 import Newsfeed from "./pages/Newsfeed/Newsfeed";
+import PageNotFound from "./pages/NotFound/PageNotFound";
 import Notifications from "./pages/Notifications/Notifications";
 import Password from "./pages/Password/Password";
 import Profile from "./pages/Profile/Profile";
@@ -52,6 +53,8 @@ const App = () => {
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/notfound" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

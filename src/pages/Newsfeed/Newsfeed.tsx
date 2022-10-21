@@ -16,6 +16,7 @@ import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 const Newsfeed = () => {
   const dispatch = useDispatch();
   const [fileUpload, setFileUpload] = useState("");
+  const [images, setImages] = useState([]);
   const [postContent, setPostContent] = useState("");
 
   const postContentHandler = (
@@ -26,6 +27,13 @@ const Newsfeed = () => {
 
   const fileUploadHandler = (event: any) => {
     setFileUpload(event.target.files);
+    const selectedFIles: any = [];
+    const targetFiles = event.target.files;
+    const targetFilesObject = [...targetFiles];
+    targetFilesObject.map((file) => {
+      return selectedFIles.push(URL.createObjectURL(file));
+    });
+    setImages(selectedFIles);
   };
 
   const postCreateHandler = async (event: any) => {
@@ -63,9 +71,19 @@ const Newsfeed = () => {
               <div className="newsfeed-section__post-create">
                 <form onSubmit={postCreateHandler}>
                   <textarea
+                    placeholder="Type..."
                     onChange={postContentHandler}
                     value={postContent}
                   ></textarea>
+                  <div className="uploaded-images">
+                    {images.length > 0
+                      ? images.map((i: any) => (
+                          <div key={i} className="uploaded-image">
+                            <img src={i} />
+                          </div>
+                        ))
+                      : ""}
+                  </div>
                   <div className="post-create__bottom">
                     <label>
                       <input

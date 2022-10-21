@@ -1,0 +1,24 @@
+@import "../abstracts/mixins";
+
+.page-not-found {
+  width: 100%;
+  height: 100vh;
+  @include flex(center, center);
+
+  .content {
+    @include flex(center,center);
+    flex-direction: column;
+
+    h1 {
+        font-size: 10rem;
+    }
+
+    h5 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 14px;
+    }
+  }
+}

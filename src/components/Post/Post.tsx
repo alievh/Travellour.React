@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Slider from "../Slider/Slider";
 import Button from "../UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../UI/Input";
 import Col from "../Bootstrap/Col";
 import { DeletePost } from "../../store/Post/PostSlice";
@@ -31,11 +31,12 @@ const Post: React.FC<{
   postOwnerId: string | undefined;
 }> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [commentIsActive, setCommentIsActive] = useState(false);
   const [commentContent, setCommentContent] = useState("");
 
   const addLikeHandler = async () => {
-    AddLike(dispatch, props.postId, props.userId, props.groupId);
+    AddLike(dispatch,navigate, props.postId, props.userId, props.groupId);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -51,7 +52,7 @@ const Post: React.FC<{
   };
 
   const deleteLikeHandler = async () => {
-    DeleteLike(dispatch, props.postId, props.userId, props.groupId);
+    DeleteLike(dispatch,navigate, props.postId, props.userId, props.groupId);
   };
 
   const commentContentHandler = (event: any) => {
@@ -60,23 +61,26 @@ const Post: React.FC<{
 
   const addCommentHandler = async (event: any) => {
     event.preventDefault();
-    const comment = {
-      postId: props.postId,
-      content: commentContent,
-    };
-
-    AddComment(dispatch, comment, undefined, props.userId, props.groupId);
-
-    if (
-      JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
-    ) {
-      const notification = {
-        message: "commented to your",
-        receiverId: props.userId,
+    if (commentContent.length > 0) {
+      const comment = {
         postId: props.postId,
+        content: commentContent,
       };
 
-      CreateNotification(notification);
+      AddComment(dispatch,navigate, comment, undefined, props.userId, props.groupId);
+
+      if (
+        JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+        props.userId
+      ) {
+        const notification = {
+          message: "commented to your",
+          receiverId: props.userId,
+          postId: props.postId,
+        };
+
+        CreateNotification(notification);
+      }
     }
 
     setCommentContent("");

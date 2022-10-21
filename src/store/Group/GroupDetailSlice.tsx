@@ -21,7 +21,11 @@ export const GroupSlice = createSlice({
   },
 });
 
-export async function GetGroupDetail(dispatch: any, id: string | undefined) {
+export async function GetGroupDetail(
+  dispatch: any,
+  navigate: any,
+  id: string | undefined
+) {
   dispatch(setLoading(true));
   const response = await fetch(`${baseUrl}/group/groupprofile/${id}`, {
     method: "GET",
@@ -37,7 +41,7 @@ export async function GetGroupDetail(dispatch: any, id: string | undefined) {
       return res.json();
     } else {
       return res.json().then((data) => {
-        dispatch(setError(data.error.message.toString()));
+        navigate("/notfound");
       });
     }
   });
@@ -47,6 +51,7 @@ export async function GetGroupDetail(dispatch: any, id: string | undefined) {
 
 export async function GroupProfilePhotoChanger(
   dispatch: any,
+  navigate: any,
   formData: any,
   id: string | undefined
 ) {
@@ -71,11 +76,12 @@ export async function GroupProfilePhotoChanger(
     }
   });
 
-  GetGroupDetail(dispatch, id);
+  GetGroupDetail(dispatch,navigate, id);
 }
 
 export async function GroupCoverPhotoChanger(
   dispatch: any,
+  navigate: any,
   formData: any,
   id: string | undefined
 ) {
@@ -98,7 +104,7 @@ export async function GroupCoverPhotoChanger(
     }
   });
 
-  GetGroupDetail(dispatch, id);
+  GetGroupDetail(dispatch,navigate, id);
 }
 
 export const { setGroup, setLoading, setError } = GroupSlice.actions;

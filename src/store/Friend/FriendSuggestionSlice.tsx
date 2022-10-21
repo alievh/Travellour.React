@@ -22,7 +22,11 @@ export const FriendSuggestionsSlice = createSlice({
   },
 });
 
-export async function SendFriendRequest(dispatch: any, id: string | undefined) {
+export async function SendFriendRequest(
+  dispatch: any,
+  navigate: any,
+  id: string | undefined
+) {
   await fetch(`${baseUrl}/friend/addfriend/${id}`, {
     method: "POST",
     headers: {
@@ -41,7 +45,7 @@ export async function SendFriendRequest(dispatch: any, id: string | undefined) {
     }
   });
 
-  GetProfile(dispatch, id);
+  GetProfile(dispatch, navigate, id);
   GetFriendSuggestions(dispatch);
 }
 

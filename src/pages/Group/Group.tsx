@@ -8,7 +8,7 @@ import GroupAdmin from "../../components/GroupAdmin/GroupAdmin";
 import Container from "../../components/Bootstrap/Container";
 import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import {
   GetGroupDetail,
@@ -22,10 +22,13 @@ import { CreateNotification } from "../../store/Notification/NotificationSlice";
 import { GetGroupPosts } from "../../store/Group/GroupPostSlice";
 
 const Group = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isMember, setIsMember] = useState(false);
   const [postContent, setPostContent] = useState("");
   const [fileUpload, setFileUpload] = useState("");
-  const dispatch = useDispatch();
+  
   const { id } = useParams();
 
   const postCreateHandler = () => {
@@ -84,20 +87,20 @@ const Group = () => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    GroupProfilePhotoChanger(dispatch, formData, id);
+    GroupProfilePhotoChanger(dispatch,navigate, formData, id);
   };
 
   const coverPhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
     formData.append("imagefile", photo);
 
-    GroupCoverPhotoChanger(dispatch, formData, id);
+    GroupCoverPhotoChanger(dispatch,navigate, formData, id);
   };
 
   useEffect(() => {
-    GetGroupDetail(dispatch, id);
+    GetGroupDetail(dispatch,navigate, id);
     GetGroupPosts(dispatch, id);
-  }, [dispatch, id]);
+  }, [dispatch,navigate, id]);
 
   useEffect(() => {
     if (groupDetail.group.groupMembers !== undefined) {

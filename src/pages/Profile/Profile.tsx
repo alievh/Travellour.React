@@ -13,11 +13,12 @@ import {
   GetProfile,
   ProfilePhotoChanger,
 } from "../../store/User/ProfileSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GetUserPosts } from "../../store/Post/UserPostsSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const profilePhotoHandler = (event: any) => {
     profilePhotoChangeHandler(event.target.files[0]);
@@ -30,13 +31,14 @@ const Profile = () => {
   useEffect(() => {
     GetProfile(
       dispatch,
+      navigate,
       JSON.parse(localStorage.getItem("user") || "{}").user.id
     );
     GetUserPosts(
       dispatch,
       JSON.parse(localStorage.getItem("user") || "{}").user.id
     );
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   const profilePhotoChangeHandler = async (photo: any) => {
     const formData = new FormData();
@@ -44,6 +46,7 @@ const Profile = () => {
 
     ProfilePhotoChanger(
       dispatch,
+      navigate,
       formData,
       JSON.parse(localStorage.getItem("user") || "{}").user.id
     );
@@ -55,6 +58,7 @@ const Profile = () => {
 
     CoverPhotoChanger(
       dispatch,
+      navigate,
       formData,
       JSON.parse(localStorage.getItem("user") || "{}").user.id
     );

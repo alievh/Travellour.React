@@ -8,7 +8,7 @@ import Post from "../../components/Post/Post";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import { useDispatch } from "react-redux";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
@@ -26,6 +26,8 @@ import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
 
 const User = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const userPosts = useSelector((state: any) => state.UserPostsSlice);
@@ -39,18 +41,18 @@ const User = () => {
   );
 
   useEffect(() => {
-    GetProfile(dispatch, id);
+    GetProfile(dispatch, navigate, id);
     GetUserPosts(dispatch, id);
     AddOnlineUser(dispatch);
-  }, [dispatch, id]);
+  }, [dispatch, navigate, id]);
 
   const friendAddHandler = () => {
-    SendFriendRequest(dispatch, id);
+    SendFriendRequest(dispatch, navigate, id);
   };
 
   const cancelRequestHandler = () => {
     CancelFriendRequest(dispatch, id);
-    GetProfile(dispatch, id);
+    GetProfile(dispatch, navigate, id);
   };
 
   const unfriendHandler = () => {

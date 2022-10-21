@@ -28,6 +28,7 @@ export const PostSlice = createSlice({
 
 export async function AddLike(
   dispatch: any,
+  navigate: any,
   id: string | undefined,
   userId: string | undefined,
   groupId: string | undefined
@@ -51,7 +52,7 @@ export async function AddLike(
   });
 
   GetPosts(dispatch);
-  GetSinglePost(dispatch, id);
+  GetSinglePost(dispatch, navigate, id);
   if (userId !== undefined) {
     GetUserPosts(dispatch, userId);
   }
@@ -62,6 +63,7 @@ export async function AddLike(
 
 export async function DeleteLike(
   dispatch: any,
+  navigate: any,
   id: string | undefined,
   userId: string | undefined,
   groupId: string | undefined
@@ -85,7 +87,7 @@ export async function DeleteLike(
   });
 
   GetPosts(dispatch);
-  GetSinglePost(dispatch, id);
+  GetSinglePost(dispatch, navigate, id);
   if (userId !== undefined) {
     GetUserPosts(dispatch, userId);
   }
@@ -96,6 +98,7 @@ export async function DeleteLike(
 
 export async function AddComment(
   dispatch: any,
+  navigate: any,
   comment: any,
   id: string | undefined,
   userId: string | undefined,
@@ -128,14 +131,15 @@ export async function AddComment(
   }
   if (id === undefined) {
     GetPosts(dispatch);
-    GetSinglePost(dispatch, comment.postId);
+    GetSinglePost(dispatch, navigate, comment.postId);
   } else if (id !== undefined) {
-    GetForumDetail(dispatch, id);
+    GetForumDetail(dispatch, navigate, id);
   }
 }
 
 export async function DeleteComment(
   dispatch: any,
+  navigate: any,
   id: string | undefined,
   postId: string | undefined,
   forumId: string | undefined,
@@ -160,17 +164,17 @@ export async function DeleteComment(
     }
   });
 
-  if(postOwenerId !== undefined) {
+  if (postOwenerId !== undefined) {
     GetUserPosts(dispatch, postOwenerId);
   }
-  if(groupId !== undefined) {
+  if (groupId !== undefined) {
     GetGroupPosts(dispatch, groupId);
   }
   if (forumId !== undefined) {
-    GetForumDetail(dispatch, forumId);
+    GetForumDetail(dispatch, navigate, forumId);
   } else if (forumId === undefined) {
     GetPosts(dispatch);
-    GetSinglePost(dispatch, postId);
+    GetSinglePost(dispatch, navigate, postId);
   }
 }
 export const { setPosts, setLoading, setError } = PostSlice.actions;

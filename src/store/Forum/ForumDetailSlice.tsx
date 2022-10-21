@@ -21,7 +21,7 @@ export const ForumDetailSlice = createSlice({
   },
 });
 
-export async function GetForumDetail(dispatch: any, id: string | undefined) {
+export async function GetForumDetail(dispatch: any,navigate: any, id: string | undefined) {
   dispatch(setLoading(true));
   const response = await fetch(`${baseUrl}/forum/${id}`, {
     method: "GET",
@@ -37,7 +37,8 @@ export async function GetForumDetail(dispatch: any, id: string | undefined) {
       return res.json();
     } else {
       return res.json().then((data) => {
-        dispatch(setError(data.error.message.toString()));
+        // dispatch(setError(data.message.toString()));
+        navigate("/notfound");
       });
     }
   });

@@ -5,7 +5,7 @@ import Row from "../../components/Bootstrap/Row";
 import Col from "../../components/Bootstrap/Col";
 import Comment from "../../components/Comment/Comment";
 import Button from "../../components/UI/Button";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import { GetForumDetail } from "../../store/Forum/ForumDetailSlice";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ import { AddComment } from "../../store/Post/PostActionSlice";
 const ForumDetail = () => {
   const [commentContent, setCommentContent] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
@@ -31,17 +32,15 @@ const ForumDetail = () => {
       content: commentContent,
     };
 
-    AddComment(dispatch, comment, id, undefined, undefined);
+    AddComment(dispatch, navigate, comment, id, undefined, undefined);
     setCommentContent("");
   };
 
   const forumDetail = useSelector((state: any) => state.ForumDetailSlice);
 
-  console.log(forumDetail);
-
   useEffect(() => {
-    GetForumDetail(dispatch, id);
-  }, [dispatch, id]);
+    GetForumDetail(dispatch, navigate, id);
+  }, [dispatch, navigate, id]);
 
   return (
     // Forums Section - START

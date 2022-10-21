@@ -21,7 +21,11 @@ export const ProfileSlice = createSlice({
   },
 });
 
-export async function GetProfile(dispatch: any, id: string | undefined) {
+export async function GetProfile(
+  dispatch: any,
+  navigate: any,
+  id: string | undefined
+) {
   dispatch(setLoading(true));
   const response = await fetch(`${baseUrl}/user/userprofile/${id}`, {
     method: "GET",
@@ -37,7 +41,8 @@ export async function GetProfile(dispatch: any, id: string | undefined) {
       return res.json();
     } else {
       return res.json().then((data) => {
-        dispatch(setError(data.error.message.toString()));
+        // dispatch(setError(data.error.message.toString()));
+        navigate("/notfound");
       });
     }
   });
@@ -47,6 +52,7 @@ export async function GetProfile(dispatch: any, id: string | undefined) {
 
 export async function ProfilePhotoChanger(
   dispatch: any,
+  navigate: any,
   formData: any,
   id: string | undefined
 ) {
@@ -69,11 +75,12 @@ export async function ProfilePhotoChanger(
     }
   });
 
-  GetProfile(dispatch, id);
+  GetProfile(dispatch, navigate, id);
 }
 
 export async function CoverPhotoChanger(
   dispatch: any,
+  navigate: any,
   formData: any,
   id: string | undefined
 ) {
@@ -96,7 +103,7 @@ export async function CoverPhotoChanger(
     }
   });
 
-  GetProfile(dispatch, id);
+  GetProfile(dispatch, navigate, id);
 }
 
 export const { setProfile, setLoading, setError } = ProfileSlice.actions;

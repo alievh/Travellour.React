@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SendFriendRequest } from "../../store/Friend/FriendSuggestionSlice";
 import { useDispatch } from "react-redux";
 
@@ -12,9 +12,10 @@ const FriendSuggestion: React.FC<{
   userName: string;
 }> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const friendAddHandler = async () => {
-    SendFriendRequest(dispatch, props.id);
+    SendFriendRequest(dispatch,navigate, props.id);
   };
 
   return (

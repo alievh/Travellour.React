@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../UI/Button";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DeleteComment } from "../../store/Post/PostActionSlice";
 
 const Comment: React.FC<{
@@ -17,10 +17,12 @@ const Comment: React.FC<{
   postOwnerId: string | undefined;
 }> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const deleteCommentHandler = async () => {
     DeleteComment(
       dispatch,
+      navigate,
       props.commentId,
       props.postId,
       props.forumId,

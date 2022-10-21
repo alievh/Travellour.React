@@ -142,7 +142,7 @@ export async function LeaveGroup(dispatch: any, id: string | undefined) {
   GetGroups(dispatch);
 }
 
-export async function KickFromGroup(dispatch: any, userId: string | undefined, groupId: string | undefined) {
+export async function KickFromGroup(dispatch: any,navigate: any, userId: string | undefined, groupId: string | undefined) {
   await fetch(`${baseUrl}/group/groupkick/${userId}/${groupId}`, {
     method: "POST",
     headers: {
@@ -162,10 +162,10 @@ export async function KickFromGroup(dispatch: any, userId: string | undefined, g
   });
 
   GetGroups(dispatch);
-  GetGroupDetail(dispatch, groupId);
+  GetGroupDetail(dispatch,navigate, groupId);
 }
 
-export async function ChangeGroup(dispatch: any, group: any) {
+export async function ChangeGroup(dispatch: any,navigate: any, group: any) {
   await fetch(`${baseUrl}/group/groupchange`, {
     method: "POST",
     body: JSON.stringify(group),
@@ -185,7 +185,7 @@ export async function ChangeGroup(dispatch: any, group: any) {
     }
   });
 
-  GetGroupDetail(dispatch, group.id);
+  GetGroupDetail(dispatch,navigate, group.id);
   GetGroups(dispatch);
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { KickFromGroup } from "../../store/Group/GroupSlice";
 import { useDispatch } from "react-redux";
 
@@ -12,9 +12,10 @@ const GroupMember: React.FC<{
   groupId: string | undefined;
 }> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const kickHandler = () => {
-    KickFromGroup(dispatch, props.userId, props.groupId)
+    KickFromGroup(dispatch,navigate, props.userId, props.groupId)
   }
 
   return (
