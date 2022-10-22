@@ -1,4 +1,4 @@
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import AddvertisingBanner from "../../components/AdvertisingBanner/AddvertisingBanner";
 import Container from "../../components/Bootstrap/Container";
@@ -6,48 +6,15 @@ import Row from "../../components/Bootstrap/Row";
 import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import Post from "../../components/Post/Post";
 import Col from "../../components/Bootstrap/Col";
-import Button from "../../components/UI/Button";
 import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggestions";
 import { RootState } from "../../store";
-import { CreatePost, GetPosts } from "../../store/Post/PostSlice";
+import { GetPosts } from "../../store/Post/PostSlice";
 import { useDispatch } from "react-redux";
 import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
+import PostCreate from "../../components/Post/PostCreate";
 
 const Newsfeed = () => {
   const dispatch = useDispatch();
-  const [fileUpload, setFileUpload] = useState("");
-  const [images, setImages] = useState([]);
-  const [postContent, setPostContent] = useState("");
-
-  const postContentHandler = (
-    event: FormEvent & { target: HTMLTextAreaElement }
-  ) => {
-    setPostContent(event.target.value);
-  };
-
-  const fileUploadHandler = (event: any) => {
-    setFileUpload(event.target.files);
-    const selectedFIles: any = [];
-    const targetFiles = event.target.files;
-    const targetFilesObject = [...targetFiles];
-    targetFilesObject.map((file) => {
-      return selectedFIles.push(URL.createObjectURL(file));
-    });
-    setImages(selectedFIles);
-  };
-
-  const postCreateHandler = async (event: any) => {
-    event.preventDefault();
-    const formData = new FormData();
-    for (let i = 0; i < fileUpload.length; i++) {
-      formData.append("imagefiles", fileUpload[i]);
-    }
-    formData.append("content", postContent);
-
-    CreatePost(dispatch, formData);
-
-    setPostContent("");
-  };
 
   const sidebarIsActive = useSelector<RootState, boolean>(
     (state) => state.sidebarToggle.isActive
@@ -68,38 +35,7 @@ const Newsfeed = () => {
           <Col xl="8" sm="12">
             <section className="newsfeed-section">
               {/* Post Create - START */}
-              <div className="newsfeed-section__post-create">
-                <form onSubmit={postCreateHandler}>
-                  <textarea
-                    placeholder="Type..."
-                    onChange={postContentHandler}
-                    value={postContent}
-                  ></textarea>
-                  <div className="uploaded-images">
-                    {images.length > 0
-                      ? images.map((i: any) => (
-                          <div key={i} className="uploaded-image">
-                            <img src={i} />
-                          </div>
-                        ))
-                      : ""}
-                  </div>
-                  <div className="post-create__bottom">
-                    <label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name="imagefiles"
-                        multiple
-                        onChange={fileUploadHandler}
-                      />
-                      <i className="fa-solid fa-image"></i>
-                      Upload Photo
-                    </label>
-                    <Button type="submit" className="btn" innerText="Share" />
-                  </div>
-                </form>
-              </div>
+              <PostCreate />
               {/* Post Create - END */}
               {/* Newsfeed Posts - START */}
               <div className="newsfeed-section__posts">

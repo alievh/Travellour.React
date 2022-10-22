@@ -10,6 +10,7 @@ const Input: React.FC<{
   ref?: any;
   multiple?: any;
   value?: string;
+  autoComplete?: string;
   onChange? : ChangeEventHandler;
 }> = React.forwardRef((props, forRef?: any) => {
   const mainDivClassName = "form-group " + props.mainDivClass;
@@ -27,6 +28,7 @@ const Input: React.FC<{
         name={props.name}
         multiple
         value={props.value}
+        autoComplete={props.autoComplete}
       />
     </div>
   );

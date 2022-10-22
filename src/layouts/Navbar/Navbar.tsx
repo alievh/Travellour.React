@@ -151,6 +151,7 @@ const Navbar = () => {
                     placeholder="Search Here"
                     aria-label="Search"
                     onChange={searchInputHandler}
+                    autoComplete="off"
                   />
                 </div>
                 {searchResultActive && (

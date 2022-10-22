@@ -222,6 +222,7 @@ const Post: React.FC<{
                   mainDivClass="d-flex align-items-center"
                   onChange={commentContentHandler}
                   value={commentContent}
+                  autoComplete="off"
                 />
               </Col>
               <Col
