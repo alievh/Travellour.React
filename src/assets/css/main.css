@@ -168,7 +168,7 @@ body {
   height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 18px;
+  margin-right: 12px;
 }
 
 @media screen and (max-width: 390px) {
@@ -178,11 +178,26 @@ body {
   }
 }
 
-.friend-request__user-avatar img {
+.friend-request__user-avatar a {
+  display: block;
   width: 100%;
+  height: 100%;
+}
+
+.friend-request__user-avatar a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.friend-request__action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .friend-request__action button {
+  padding: 5px 10px;
   margin-right: 5px;
 }
 
@@ -306,8 +321,8 @@ body {
 .user-friend__avatar span {
   display: block;
   position: absolute;
-  right: 3px;
-  top: 5px;
+  right: 5px;
+  top: 8px;
   border-radius: 50%;
   width: 10px;
   height: 10px;
@@ -1305,7 +1320,86 @@ body {
   border-color: #47a2e5;
 }
 
+.user-message-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.user-message-container .user-message {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.user-message-container .user-message .message-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.user-message-container .user-message .message-content p {
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 0;
+  color: #000;
+}
+
+.user-message-container .user-message .message-content span {
+  font-size: 11px;
+}
+
+.friend-message-container {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.friend-message-container .friend-message {
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.friend-message-container .friend-message__avatar {
+  width: 45px;
+  height: 45px;
+}
+
+.friend-message-container .friend-message__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.friend-message-container .friend-message .message-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.friend-message-container .friend-message .message-content p {
+  background-color: #eaeff8;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 0;
+  color: #000;
+}
+
+.friend-message-container .friend-message .message-content span {
+  font-size: 11px;
+}
+
 .sidebar {
+  max-width: 270px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -1390,8 +1484,8 @@ body {
   padding: 16px 0 24px 0;
   border-bottom: 1px solid #f1f1f1;
   display: flex;
-  justify-content: left;
-  align-items: none;
+  justify-content: flex-start;
+  align-items: center;
   margin-bottom: 24px;
 }
 
@@ -1411,6 +1505,7 @@ body {
 }
 
 .sidebar .sidebar-section__profile .profile-userinfo {
+  max-width: 140px;
   display: flex;
   justify-content: center;
   align-items: none;
@@ -1525,6 +1620,7 @@ body {
 }
 
 .sidebar .sidebar-section__footer {
+  max-width: 270px;
   display: flex;
   justify-content: none;
   align-items: center;
@@ -2582,22 +2678,21 @@ body {
   font-weight: 600;
 }
 
+.profile-section .user__details h5 {
+  text-align: center;
+}
+
 .profile-section .user__request {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1032px) {
   .profile-section .user__request {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-}
-
-@media screen and (max-width: 1032px) {
-  .profile-section .user__request {
     margin-top: 15px;
   }
 }
@@ -4575,10 +4670,176 @@ body {
 .messages-section {
   width: 100%;
   height: 100vh;
+  background-color: #fff;
 }
 
-.messages-section div {
+.messages-section__container {
   height: 100%;
+}
+
+.messages-section__container .row {
+  height: 100%;
+}
+
+.messages-section__container .row .nopadding {
+  padding: 0;
+  height: 100%;
+}
+
+.messages-section__users-container {
+  width: 100%;
+  height: 100%;
+  border-right: 2px solid #f1f1f1;
+}
+
+.messages-section__users-container .users-container__header {
+  padding: 32px 32px 0 32px;
+  margin-bottom: 16px;
+  height: 15%;
+}
+
+.messages-section__users-container .users-container__title {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.messages-section__users-container .users-container__title h4 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.messages-section__users-container .users-container__title .home-link a {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #eaeff8;
+  border-radius: 5px;
+  color: #4fb5ff;
+  transition: 0.3s ease-in;
+}
+
+.messages-section__users-container .users-container__title .home-link a:hover {
+  background-color: #4fb5ff;
+  color: #fff;
+  transition: 0.3s ease-out;
+}
+
+.messages-section__users-container .users-container__search {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.messages-section__users-container .users-container__search input {
+  width: 100%;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.messages-section__users-container .users-container__search input:focus-visible {
+  outline: none;
+}
+
+.messages-section__users-container .users-container__search input::placeholder {
+  font-size: 14px;
+}
+
+.messages-section__users-container .users-container__users {
+  width: 100%;
+  height: 82%;
+  overflow-y: scroll;
+}
+
+.messages-section__users-container .users-container__users::-webkit-scrollbar {
+  display: none;
+}
+
+.messages-section__users-container .users-container__users .user {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  padding: 8px 16px;
+  background-color: white;
+}
+
+.messages-section__messages-container {
+  width: 100%;
+  height: 100%;
+}
+
+.messages-section__messages-container .messages-container__header {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  padding: 0 24px;
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.messages-section__messages-container .messages-container__header .friend-suggestion {
+  margin: 0;
+}
+
+.messages-section__messages-container .messages-container__body {
+  width: 100%;
+  height: 82%;
+  background-color: #fff;
+  overflow-y: scroll;
+  background-color: #fafafa;
+  padding: 8px 18px;
+}
+
+.messages-section__messages-container .messages-container__body::-webkit-scrollbar {
+  display: none;
+}
+
+.messages-section__messages-container .messages-container__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 8%;
+  border-top: 2px solid #f1f1f1;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area textarea {
+  width: 80%;
+  resize: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-color: #6f7f92;
+  font-size: 14px;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area textarea::placeholder {
+  font-size: 14px;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area textarea:focus-visible {
+  outline: none;
+}
+
+.messages-section__messages-container .messages-container__footer .text-area .send-message {
+  color: #4fb5ff;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
 }
 
 .page-not-found {

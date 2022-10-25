@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../Fetch/FetchConfiguration";
+import { GetUserData } from "./UserData";
 
 export const ProfileSlice = createSlice({
   name: "profile",
@@ -76,6 +77,7 @@ export async function ProfilePhotoChanger(
   });
 
   GetProfile(dispatch, navigate, id);
+  GetUserData(dispatch);
 }
 
 export async function CoverPhotoChanger(
@@ -104,6 +106,7 @@ export async function CoverPhotoChanger(
   });
 
   GetProfile(dispatch, navigate, id);
+  GetUserData(dispatch);
 }
 
 export const { setProfile, setLoading, setError } = ProfileSlice.actions;

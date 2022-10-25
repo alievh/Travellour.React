@@ -2,6 +2,7 @@
 @import "../abstracts/variables";
 
 .sidebar {
+  max-width: 270px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -73,7 +74,7 @@
     &__profile {
       padding: 16px 0 24px 0;
       border-bottom: 1px solid $global-border-color;
-      @include flex(left, none);
+      @include flex(flex-start, center);
       margin-bottom: 24px;
 
       .profile-avatar {
@@ -90,6 +91,7 @@
       }
 
       .profile-userinfo {
+        max-width: 140px;
         @include flex(center, none);
         flex-direction: column;
         margin-left: 16px;
@@ -192,6 +194,7 @@
     }
 
     &__footer {
+      max-width: 270px;
       @include flex(none, center);
       background-color: $white;
       position: fixed;

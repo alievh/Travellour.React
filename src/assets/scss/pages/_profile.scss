@@ -141,19 +141,20 @@
         color: $global-font-color;
         font-weight: 600;
       }
+
+      h5 {
+        text-align: center;
+      }
     }
 
     &__request {
       @include flex(flex-end, center);
 
-      @media screen and (max-width: 992px) {
-        @include flex(center, center);
-      }
-
       @media screen and (max-width: 1032px) {
+        @include flex(center, center);
         margin-top: 15px;
       }
-
+      
       form {
         @media screen and (max-width: 450px) {
           @include flex(none, center);

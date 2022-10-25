@@ -19,7 +19,7 @@ const Register = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  async function addUserHandler(event: React.FormEvent) {
+  async function addUserHandler(event: any) {
     event.preventDefault();
 
     const user = {
@@ -54,7 +54,6 @@ const Register = () => {
 
   }
 
-  console.log(error);
 
   return (
     <main>
@@ -121,7 +120,7 @@ const Register = () => {
                   id="confirm-password"
                   placeholder="Enter confirm password"
                   type="password"
-                  ref={password}
+                  ref={confirmPassword}
                 />
                 <div className="auth-container__gender">
                   <input name="gender" id="genderMale" type="radio" value="0" />

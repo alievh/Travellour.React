@@ -60,6 +60,8 @@ function PostCreate() {
     CreatePost(dispatch, formData);
 
     setPostContent("");
+    setImages([]);
+    setFileUpload("");
   };
 
   return (

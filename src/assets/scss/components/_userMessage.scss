@@ -1,0 +1,27 @@
+.user-message-container {
+  @include flex(flex-end, center);
+  width: 100%;
+  margin: 10px 0;
+
+  .user-message {
+    width: 40%;
+    @include flex(flex-end, center);
+
+    .message-content {
+      @include flex(center, flex-end);
+      flex-direction: column;
+      padding-left: 10px;
+
+      p {
+        background-color: #eaeff8;
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 0;
+        color: $black;
+      }
+      span {
+        font-size: 11px;
+      }
+    }
+  }
+}

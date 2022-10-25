@@ -1,10 +1,170 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
 .messages-section {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
+  background-color: $white;
 
-    div {
+  &__container {
+    height: 100%;
+
+    .row {
+      height: 100%;
+
+      .nopadding {
+        padding: 0;
         height: 100%;
+      }
     }
+  }
 
-    
+  &__users-container {
+    width: 100%;
+    height: 100%;
+    border-right: 2px solid $global-border-color;
+
+    .users-container {
+      &__header {
+        padding: 32px 32px 0 32px;
+        margin-bottom: 16px;
+        height: 15%;
+      }
+
+      &__title {
+        margin-bottom: 10px;
+        @include flex(space-between, center);
+
+        h4 {
+          font-size: 28px;
+          font-weight: 700;
+        }
+
+        .home-link {
+          a {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #eaeff8;
+            border-radius: 5px;
+            color: $primary;
+            transition: 0.3s ease-in;
+
+            &:hover {
+              background-color: $primary;
+              color: $white;
+              transition: 0.3s ease-out;
+            }
+          }
+        }
+      }
+
+      &__search {
+        padding-bottom: 10px;
+        border-bottom: 1px solid $global-border-color;
+        input {
+          width: 100%;
+          border: none;
+          padding: 5px 10px;
+          border-radius: 5px;
+          background-color: $global-bg-color;
+
+          &:focus-visible {
+            outline: none;
+          }
+
+          &::placeholder {
+            font-size: 14px;
+          }
+        }
+      }
+
+      &__users {
+        width: 100%;
+        height: 82%;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .user {
+          @include flex(none, center);
+          width: 100%;
+          height: 70px;
+          padding: 8px 16px;
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  &__messages-container {
+    width: 100%;
+    height: 100%;
+
+    .messages-container {
+      &__header {
+        @include flex(none, center);
+        width: 100%;
+        height: 10%;
+        padding: 0 24px;
+        border-bottom: 2px solid $global-border-color;
+
+        .friend-suggestion {
+          margin: 0;
+        }
+      }
+
+      &__body {
+        width: 100%;
+        height: 82%;
+        background-color: $white;
+        overflow-y: scroll;
+        background-color: #fafafa;
+        padding: 8px 18px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      &__footer {
+        @include flex(center, center);
+        width: 100%;
+        height: 8%;
+        border-top: 2px solid $global-border-color;
+
+        .text-area {
+          @include flex(center, center);
+          width: 80%;
+          textarea {
+            width: 80%;
+            resize: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border-color: $global-font-color;
+            font-size: 14px;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            &::placeholder {
+              font-size: 14px;
+            }
+
+            &:focus-visible {
+              outline: none;
+            }
+          }
+
+          .send-message {
+            color: $primary;
+            border: none;
+            background-color: transparent;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
 }
