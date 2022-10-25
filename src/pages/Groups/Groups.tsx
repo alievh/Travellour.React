@@ -12,6 +12,7 @@ import FriendSuggestions from "../../components/FriendSuggestions/FriendSuggesti
 import { RootState } from "../../store";
 import { GetGroups, GetMyGroups, SearchGroup } from "../../store/Group/GroupSlice";
 import { useDispatch } from "react-redux";
+import Loading from "../../components/Loading/Loading";
 
 const Groups = () => {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const Groups = () => {
                   </div>
                   {/* Groups Filter - END */}
                   {/* Groups - START */}
-                  {groups.loading && <p className="loading">Loading...</p>}
+                  {groups.loading && <Loading />}
                   {groups.groups.map((g: any) => (
                     <GroupCard
                       key={g.id}

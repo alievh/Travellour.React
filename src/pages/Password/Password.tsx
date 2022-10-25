@@ -9,6 +9,7 @@ import Input from "../../components/UI/Input";
 import { logout } from "../../store/Auth/AuthSlice";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { RootState } from "../../store";
+import Loading from "../../components/Loading/Loading";
 
 const Password = () => {
   const oldPassword = useRef<HTMLInputElement>(null);
@@ -149,39 +150,41 @@ const Password = () => {
             {/* Password User Input - START */}
             <div className="password-section__user-input">
               <h4>Password Change</h4>
-              {loading && <p>Loading...</p>}
+              {loading && <Loading />}
               {error && <p>{error}</p>}
-              <form onSubmit={changePassword}>
-                <Input
-                  type="password"
-                  id="current-password"
-                  placeholder="Current Password"
-                  label="Type your current password"
-                  mainDivClass="password-change"
-                  ref={oldPassword}
-                />
-                <Input
-                  type="password"
-                  id="new-password"
-                  placeholder="New Password"
-                  label="Type your new password"
-                  mainDivClass="password-change"
-                  ref={newPassword}
-                />
-                <Input
-                  type="password"
-                  id="again-new-password"
-                  placeholder="Retype password"
-                  label="Retype your new password"
-                  mainDivClass="password-change"
-                  ref={newPasswordAgain}
-                />
-                <Button
-                  type="submit"
-                  className="btn btn-primary"
-                  innerText="Change Password"
-                />
-              </form>
+              {!loading && (
+                <form onSubmit={changePassword}>
+                  <Input
+                    type="password"
+                    id="current-password"
+                    placeholder="Current Password"
+                    label="Type your current password"
+                    mainDivClass="password-change"
+                    ref={oldPassword}
+                  />
+                  <Input
+                    type="password"
+                    id="new-password"
+                    placeholder="New Password"
+                    label="Type your new password"
+                    mainDivClass="password-change"
+                    ref={newPassword}
+                  />
+                  <Input
+                    type="password"
+                    id="again-new-password"
+                    placeholder="Retype password"
+                    label="Retype your new password"
+                    mainDivClass="password-change"
+                    ref={newPasswordAgain}
+                  />
+                  <Button
+                    type="submit"
+                    className="btn btn-primary"
+                    innerText="Change Password"
+                  />
+                </form>
+              )}
             </div>
             {/* Password User Input - END */}
           </Col>

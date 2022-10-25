@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { logout } from "../../store/Auth/AuthSlice";
 import { RootState } from "../../store";
+import Loading from "../../components/Loading/Loading";
 
 const Setting = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Setting = () => {
   const lastName = useRef<HTMLInputElement>(null);
   const userName = useRef<HTMLInputElement>(null);
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   const sidebarIsActive = useSelector<RootState, boolean>(
@@ -40,6 +42,7 @@ const Setting = () => {
       userName: userName.current?.value,
     };
 
+    setLoading(true);
     await fetch(`${baseUrl}/user/userupdate`, {
       method: "POST",
       body: JSON.stringify(changeInformation),
@@ -51,6 +54,7 @@ const Setting = () => {
       },
     }).then((res) => {
       if (res.ok) {
+        setLoading(false);
         logoutHandler();
         return res.json();
       } else {
@@ -148,48 +152,51 @@ const Setting = () => {
             <div className="setting-section__personal-info">
               <h4>Personal Information</h4>
               {/* Setting Form - START */}
+              {loading && <Loading />}
               {error && <p>{error}</p>}
-              <form onSubmit={submitHandler}>
-                <div className="form-fullname">
-                  <Col lg="5">
-                    <Input
-                      type="text"
-                      id="firstname"
-                      placeholder="Firstname"
-                      label="Type Firstname"
-                      mainDivClass="form-firstname"
-                      ref={firstName}
-                    />
-                  </Col>
-                  <Col lg="5">
-                    <Input
-                      type="text"
-                      id="lastname"
-                      placeholder="Lastname"
-                      label="Type Lastname"
-                      mainDivClass="form-lastname"
-                      ref={lastName}
-                    />
-                  </Col>
-                </div>
+              {!loading && (
+                <form onSubmit={submitHandler}>
+                  <div className="form-fullname">
+                    <Col lg="5">
+                      <Input
+                        type="text"
+                        id="firstname"
+                        placeholder="Firstname"
+                        label="Type Firstname"
+                        mainDivClass="form-firstname"
+                        ref={firstName}
+                      />
+                    </Col>
+                    <Col lg="5">
+                      <Input
+                        type="text"
+                        id="lastname"
+                        placeholder="Lastname"
+                        label="Type Lastname"
+                        mainDivClass="form-lastname"
+                        ref={lastName}
+                      />
+                    </Col>
+                  </div>
 
-                <div className="form-username">
-                  <Col lg="10">
-                    <Input
-                      type="text"
-                      id="username"
-                      placeholder="Username"
-                      label="Type Username"
-                      ref={userName}
-                    />
-                  </Col>
-                </div>
-                <Button
-                  type="submit"
-                  innerText="Save Changes"
-                  className="btn"
-                />
-              </form>
+                  <div className="form-username">
+                    <Col lg="10">
+                      <Input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        label="Type Username"
+                        ref={userName}
+                      />
+                    </Col>
+                  </div>
+                  <Button
+                    type="submit"
+                    innerText="Save Changes"
+                    className="btn"
+                  />
+                </form>
+              )}
               {/* Setting Form - END */}
             </div>
           </Col>

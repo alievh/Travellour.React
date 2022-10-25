@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
 import { login } from "../../store/Auth/AuthSlice";
 import { GetUserData } from "../../store/User/UserData";
+import Loading from "../../components/Loading/Loading";
 
 const Login = () => {
   const userName = useRef<HTMLInputElement>(null);
@@ -69,45 +70,47 @@ const Login = () => {
                   Welcome to Travellour, a platform to connect with the social
                   world
                 </p>
-                {isLoading && <p className="loading">Please wait...</p>}
+                {isLoading && <Loading />}
                 {error && <p className="login-error">{error}</p>}
               </div>
               {/* Login Form - START */}
-              <form onSubmit={loginHandler} className="auth-container__form">
-                <Input
-                  label="Username"
-                  id="username"
-                  placeholder="Enter username"
-                  type="text"
-                  ref={userName}
-                />
-                <Input
-                  label="Password"
-                  id="password"
-                  placeholder="Enter password"
-                  type="password"
-                  ref={password}
-                />
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
+              {!isLoading && (
+                <form onSubmit={loginHandler} className="auth-container__form">
+                  <Input
+                    label="Username"
+                    id="username"
+                    placeholder="Enter username"
+                    type="text"
+                    ref={userName}
                   />
-                  <label className="form-check-label" htmlFor="exampleCheck1">
-                    Remember Me
-                  </label>
-                </div>
-                <Button
-                  type="submit"
-                  className="btn btn-primary"
-                  innerText="Sign in"
-                />
-              </form>
-              {/* Login Form - END */}
+                  <Input
+                    label="Password"
+                    id="password"
+                    placeholder="Enter password"
+                    type="password"
+                    ref={password}
+                  />
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="exampleCheck1"
+                    />
+                    <label className="form-check-label" htmlFor="exampleCheck1">
+                      Remember Me
+                    </label>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="btn btn-primary"
+                    innerText="Sign in"
+                  />
+                </form>
+              )}
               <div className="register-link">
                 Don't Have An Account? <Link to="/register">Sign Up</Link>
               </div>
+              {/* Login Form - END */}
             </div>
           </div>
         </Col>

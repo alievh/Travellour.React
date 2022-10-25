@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { RootState } from "../../store";
 import { GetForums } from "../../store/Forum/ForumSlice";
 import { useDispatch } from "react-redux";
+import Loading from "../../components/Loading/Loading";
 
 const Forums = () => {
   const dispatch = useDispatch();
@@ -35,15 +36,16 @@ const Forums = () => {
               </div>
               {/* Forums - START */}
               <div className="forums-container__forums">
-                {forums.loading && <p className="loading">Loading...</p>}
-                {forums.forums.map((f: any) => (
-                  <ForumCard
-                    key={f.id}
-                    id={f.id}
-                    title={f.forumTitle}
-                    commentCount={f.commentCount}
-                  />
-                ))}
+                {forums.loading && <Loading />}
+                {!forums.loading &&
+                  forums.forums.map((f: any) => (
+                    <ForumCard
+                      key={f.id}
+                      id={f.id}
+                      title={f.forumTitle}
+                      commentCount={f.commentCount}
+                    />
+                  ))}
               </div>
               {/* Forums - END */}
             </Col>

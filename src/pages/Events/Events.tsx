@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { RootState } from "../../store";
 import { GetEvents, GetJoinedEvents, SearchEvent } from "../../store/Event/EventSlice";
 import { useDispatch } from "react-redux";
+import Loading from "../../components/Loading/Loading";
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -91,7 +92,7 @@ const Events = () => {
               {/* Events Filter - END */}
               {/* Events - START */}
               <div className="events-container__events">
-                {events.loading && <p className="loading">Loading...</p>}
+                {events.loading && <Loading />}
                 {events.events.map((e: any) => (
                   <Event
                     key={e.id}

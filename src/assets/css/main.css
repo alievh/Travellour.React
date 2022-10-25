@@ -1398,6 +1398,55 @@ body {
   font-size: 11px;
 }
 
+.lds-facebook-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.lds-facebook-container .lds-facebook {
+  width: 80px;
+  position: relative;
+  height: 80px;
+}
+
+.lds-facebook-container .lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #4fb5ff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook-container .lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.lds-facebook-container .lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook-container .lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
 .sidebar {
   max-width: 270px;
   height: 100vh;
@@ -3482,15 +3531,6 @@ body {
   color: #fff;
   background-color: #4fb5ff;
   transition: 0.5s ease-out;
-}
-
-.events-container__events .loading {
-  background-color: #eaeff8;
-  padding: 5px 0;
-  border-radius: 5px;
-  color: #4fb5ff;
-  width: 100%;
-  text-align: center;
 }
 
 .event-create {

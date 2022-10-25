@@ -11,6 +11,7 @@ import { RootState } from "../../store";
 import { GetNotifications } from "../../store/Notification/NotificationSlice";
 import { useDispatch } from "react-redux";
 import { GetUserData } from "../../store/User/UserData";
+import Loading from "../../components/Loading/Loading";
 
 const Notifications = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,10 @@ const Notifications = () => {
           <Col xl="8" sm="12">
             {/* Notifications - START */}
             <div className="notifications-container">
+              {notifications.notifications.length > 0 &&
+                notifications.loading && <Loading />}
               {notifications.notifications.length > 0 ? (
+                !notifications.loading &&
                 notifications.notifications.map((n: any) =>
                   n.post !== null ? (
                     <Notification

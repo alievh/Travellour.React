@@ -6,6 +6,7 @@ import Col from "../../components/Bootstrap/Col";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../store/Fetch/FetchConfiguration";
+import Loading from "../../components/Loading/Loading";
 
 const Register = () => {
   const firstName = useRef<HTMLInputElement>(null);
@@ -51,9 +52,7 @@ const Register = () => {
         });
       }
     });
-
   }
-
 
   return (
     <main>
@@ -65,80 +64,90 @@ const Register = () => {
             <div className="auth-container">
               <div className="auth-container__title">
                 <h4>Travellour</h4>
-                {loading && <p className="loading">Loading...</p>}
+                {loading && <Loading />}
                 {error && <p className="register-error">{error}</p>}
               </div>
               {/* Register Form - START */}
-              <form onSubmit={addUserHandler} className="auth-container__form">
-                <div className="d-flex">
+              {!loading && (
+                <form
+                  onSubmit={addUserHandler}
+                  className="auth-container__form"
+                >
+                  <div className="d-flex">
+                    <Input
+                      label="Firstname"
+                      id="firstname"
+                      placeholder="Firstname"
+                      type="text"
+                      mainDivClass="me-2"
+                      ref={firstName}
+                    />
+                    <Input
+                      label="Lastname"
+                      id="lastname"
+                      placeholder="Lastname"
+                      type="text"
+                      ref={lastName}
+                    />
+                  </div>
                   <Input
-                    label="Firstname"
-                    id="firstname"
-                    placeholder="Firstname"
+                    label="Username"
+                    id="username"
+                    placeholder="Enter username"
                     type="text"
-                    mainDivClass="me-2"
-                    ref={firstName}
+                    ref={userName}
                   />
                   <Input
-                    label="Lastname"
-                    id="lastname"
-                    placeholder="Lastname"
-                    type="text"
-                    ref={lastName}
+                    label="Email"
+                    id="email"
+                    placeholder="Enter email"
+                    type="email"
+                    ref={email}
                   />
-                </div>
-                <Input
-                  label="Username"
-                  id="username"
-                  placeholder="Enter username"
-                  type="text"
-                  ref={userName}
-                />
-                <Input
-                  label="Email"
-                  id="email"
-                  placeholder="Enter email"
-                  type="email"
-                  ref={email}
-                />
-                <Input
-                  label="Birthday"
-                  id="birthday"
-                  type="date"
-                  placeholder="Enter Birthday"
-                  ref={birthday}
-                />
-                <Input
-                  label="Password"
-                  id="password"
-                  placeholder="Enter password"
-                  type="password"
-                  ref={password}
-                />
-                <Input
-                  label="Confirm Password"
-                  id="confirm-password"
-                  placeholder="Enter confirm password"
-                  type="password"
-                  ref={confirmPassword}
-                />
-                <div className="auth-container__gender">
-                  <input name="gender" id="genderMale" type="radio" value="0" />
-                  <label htmlFor="genderMale">Male</label>
-                  <input
-                    name="gender"
-                    id="genderFemale"
-                    type="radio"
-                    value="1"
+                  <Input
+                    label="Birthday"
+                    id="birthday"
+                    type="date"
+                    placeholder="Enter Birthday"
+                    ref={birthday}
                   />
-                  <label htmlFor="genderMale">Female</label>
-                </div>
-                <Button
-                  type="submit"
-                  className="btn btn-primary"
-                  innerText="Register"
-                />
-              </form>
+                  <Input
+                    label="Password"
+                    id="password"
+                    placeholder="Enter password"
+                    type="password"
+                    ref={password}
+                  />
+                  <Input
+                    label="Confirm Password"
+                    id="confirm-password"
+                    placeholder="Enter confirm password"
+                    type="password"
+                    ref={confirmPassword}
+                  />
+                  <div className="auth-container__gender">
+                    <input
+                      name="gender"
+                      id="genderMale"
+                      type="radio"
+                      value="0"
+                    />
+                    <label htmlFor="genderMale">Male</label>
+                    <input
+                      name="gender"
+                      id="genderFemale"
+                      type="radio"
+                      value="1"
+                    />
+                    <label htmlFor="genderMale">Female</label>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="btn btn-primary"
+                    innerText="Register"
+                  />
+                </form>
+              )}
               {/* Register Form - END */}
               <div className="login-link">
                 Already Have An Account? <Link to="/">Login</Link>

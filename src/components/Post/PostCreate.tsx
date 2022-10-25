@@ -27,9 +27,9 @@ function PostCreate() {
   };
 
   useEffect(() => {
-    setPostContent(postContent + finalTranscript);
+    setPostContent(p => p + finalTranscript);
     resetTranscript();
-  }, [finalTranscript]);
+  }, [finalTranscript, resetTranscript]);
 
 
   const postContentHandler = (
