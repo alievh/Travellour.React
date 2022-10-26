@@ -27,10 +27,9 @@ function PostCreate() {
   };
 
   useEffect(() => {
-    setPostContent(p => p + finalTranscript);
+    setPostContent((p) => p + finalTranscript);
     resetTranscript();
   }, [finalTranscript, resetTranscript]);
-
 
   const postContentHandler = (
     event: FormEvent & { target: HTMLTextAreaElement }

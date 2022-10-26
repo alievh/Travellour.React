@@ -1,0 +1,36 @@
+@import "../abstracts/mixins";
+
+.message-user {
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #fafafa;
+    }
+
+    .user-information {
+        @include flex(none, center);
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        
+
+        .user-details {
+            margin-left: 10px;
+            h6 {
+                margin: 0;
+            }
+        }
+    }
+}
