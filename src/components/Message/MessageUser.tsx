@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { GetMessages, GetSelectedUser } from "../../store/Message/MessageSlice";
 
 const MessageUser: React.FC<{
   id: string;
@@ -6,8 +8,15 @@ const MessageUser: React.FC<{
   userFirstName: string;
   userLastName: string;
 }> = (props) => {
+  const dispatch = useDispatch();
+
+  const getMessagesHandler = () => {
+    GetSelectedUser(dispatch, props.id);
+    GetMessages(dispatch, props.id);
+  };
+
   return (
-    <li className="message-user">
+    <li className="message-user" onClick={getMessagesHandler}>
       <div className="user-information">
         <div className="user-avatar">
             <img

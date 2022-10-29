@@ -22,6 +22,7 @@ import NotificationPaginationSlice from "./Notification/NotificationPaginationSl
 import FriendRequestPaginationSlice from "./Friend/FriendRequestPaginationSlice";
 import SearchUserSlice from "./User/SearchUserSlice";
 import GroupPostSlice from "./Group/GroupPostSlice";
+import MessageSlice from "./Message/MessageSlice";
 
 const store = configureStore({
   reducer: {
@@ -47,6 +48,7 @@ const store = configureStore({
     NotificationSlice: NotificationSlice,
     NotificationPaginationSlice: NotificationPaginationSlice,
     SearchUserSlice: SearchUserSlice,
+    MessageSlice: MessageSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(thunk),

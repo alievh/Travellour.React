@@ -5,6 +5,7 @@ const FriendMessage: React.FC<{
   friendName: string;
   friendSurname: string;
   message: string;
+  date: string;
 }> = (props) => {
   return (
     <div className="friend-message-container">
@@ -14,7 +15,7 @@ const FriendMessage: React.FC<{
         </div>
         <div className="message-content">
           <p>{props.message}</p>
-          <span>14:00PM</span>
+          <span>{props.date}</span>
         </div>
       </div>
     </div>
