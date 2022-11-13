@@ -72,6 +72,7 @@ const Register = () => {
                 <form
                   onSubmit={addUserHandler}
                   className="auth-container__form"
+                  autoComplete="off"
                 >
                   <div className="d-flex">
                     <Input

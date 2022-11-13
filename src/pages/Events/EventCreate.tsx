@@ -71,7 +71,7 @@ const EventCreate = () => {
               {/* Event Create Filter - END */}
               {/* Event Create Form -START */}
               <div className="event-create-container__form">
-                <form onSubmit={eventCreateHandler}>
+                <form onSubmit={eventCreateHandler} autoComplete="off">
                   <div className="form-title">
                     <Input
                       placeholder="Event Title"

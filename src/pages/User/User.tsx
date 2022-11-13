@@ -23,6 +23,7 @@ import {
 import { GetUserPosts } from "../../store/Post/UserPostsSlice";
 import { GetProfile } from "../../store/User/ProfileSlice";
 import { AddOnlineUser } from "../../store/Online/OnlineUserSlice";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -171,12 +172,9 @@ const User = () => {
                 ) : (
                   ""
                 )}
-                <Button
-                  type="submit"
-                  innerText="Message"
-                  className="btn message"
-                  buttonIcon="fa-solid fa-message"
-                />
+                <Link to="/messages" className="btn message">
+                  <i className="fa-solid fa-message"></i>Message
+                </Link>
               </form>
             </div>
           </div>

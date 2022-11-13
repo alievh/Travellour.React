@@ -5,6 +5,7 @@ const Button: React.FC<{
   className: string;
   buttonIcon?: string;
   innerText?: string;
+  disabled?: any;
   onClick?: MouseEventHandler;
 }> = (props) => {
   return (
@@ -12,6 +13,7 @@ const Button: React.FC<{
       type={props.type}
       onClick={props.onClick}
       className={props.className}
+      disabled={props.disabled}
     >
       {props.buttonIcon !== null && <i className={props.buttonIcon}></i>}
       {props.innerText !== null && <span>{props.innerText}</span>}

@@ -2355,12 +2355,19 @@ body {
   margin: 0;
 }
 
+.login-section .auth-container .form-group {
+  margin-bottom: 14px;
+}
+
 .login-section .auth-container .form-group input {
   padding: 0.7rem 2rem;
-  margin-bottom: 14px;
   background-color: #f8f9fa;
   border-color: #ddd;
   border-radius: 0;
+}
+
+.login-section .auth-container .form-group input.error-border {
+  border-color: #f14646;
 }
 
 .login-section .auth-container .form-group input:focus {
@@ -2384,6 +2391,12 @@ body {
   .login-section .auth-container .form-group input::placeholder {
     font-size: 12px;
   }
+}
+
+.login-section .auth-container .form-group .input-errors {
+  color: #f14646;
+  font-size: 14px;
+  padding-left: 5px;
 }
 
 .login-section .auth-container button {
@@ -2848,17 +2861,17 @@ body {
   border-color: #fff;
 }
 
-.profile-section .user__request button.message {
+.profile-section .user__request button i {
+  margin: 0 5px;
+}
+
+.profile-section .user__request .message {
   background-color: #4fb5ff;
   color: #fff;
 }
 
-.profile-section .user__request button.message:hover {
+.profile-section .user__request .message:hover {
   background-color: #47a2e5;
-}
-
-.profile-section .user__request button i {
-  margin: 0 5px;
 }
 
 .profile-section .user__request a {

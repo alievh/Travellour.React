@@ -174,17 +174,17 @@
           border-color: $white;
         }
 
-        &.message {
-          background-color: $primary;
-          color: $white;
-
-          &:hover {
-            background-color: $primary-dark;
-          }
-        }
-
         i {
           margin: 0 5px;
+        }
+      }
+
+      .message {
+        background-color: $primary;
+        color: $white;
+
+        &:hover {
+          background-color: $primary-dark;
         }
       }
 

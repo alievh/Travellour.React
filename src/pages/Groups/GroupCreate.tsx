@@ -63,7 +63,7 @@ const GroupCreate = () => {
               {/* Group Create Filter - END */}
               {/* Group Create Form - START */}
               <div className="group-create-container__form">
-                <form onSubmit={groupCreateHandler}>
+                <form onSubmit={groupCreateHandler} autoComplete="off">
                   <div className="form-name">
                     <Input
                       placeholder="Group Name"

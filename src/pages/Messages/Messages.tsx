@@ -3,7 +3,6 @@ import Col from "../../components/Bootstrap/Col";
 import ContainerFluid from "../../components/Bootstrap/ContainerFluid";
 import Row from "../../components/Bootstrap/Row";
 import { Link } from "react-router-dom";
-import SearchUser from "../../components/SearchUser/SearchUser";
 import FriendMessage from "../../components/Message/FriendMessage";
 import UserMessage from "../../components/Message/UserMessage";
 import MessageUser from "../../components/Message/MessageUser";
@@ -80,7 +79,7 @@ const Messages = () => {
             </Col>
             <Col lg="9" md="8" sm="8" className="nopadding no-message">
               <div className="no-message-container">
-                <img src="https://www.kindpng.com/picc/m/341-3415527_transparent-message-icon-png-love-message-png-png.png" />
+                <img src="https://www.kindpng.com/picc/m/341-3415527_transparent-message-icon-png-love-message-png-png.png" alt="no-message" />
                 <p>Select user to talk</p>
               </div>
             </Col>
@@ -139,7 +138,7 @@ const Messages = () => {
                     ""
                   )}
                 </div>
-                <div className="messages-container__body">
+                <div className="messages-container__body" id="message-body">
                   {messages.messages.length > 0
                     ? messages.messages.map((m: any) =>
                         m.user.id ===

@@ -56,7 +56,7 @@ const UserFriend: React.FC<{
           innerText="Unfriend"
           onClick={removeFriendHandler}
         />
-        <Link to="/newsfeed">
+        <Link to="/messages">
           <i className="fa-regular fa-envelope"></i>
         </Link>
       </div>

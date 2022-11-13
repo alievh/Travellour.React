@@ -86,12 +86,17 @@
     }
 
     .form-group {
+      margin-bottom: 14px;
+
       input {
         padding: 0.7rem 2rem;
-        margin-bottom: 14px;
         background-color: $global-bg-color;
         border-color: #ddd;
         border-radius: 0;
+
+        &.error-border {
+          border-color: #f14646;
+        }
 
         &:focus {
           box-shadow: none;
@@ -113,6 +118,12 @@
             font-size: 12px;
           }
         }
+      }
+
+      .input-errors {
+        color: #f14646;
+        font-size: 14px;
+        padding-left: 5px; 
       }
     }
 

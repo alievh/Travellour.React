@@ -67,7 +67,7 @@ const ForumCreate = () => {
               {/* Forum Create Filter - END */}
               {/* Forum Create Form - START */}
               <div className="forum-create-container__form">
-                <form onSubmit={forumCreateHandler}>
+                <form onSubmit={forumCreateHandler} autoComplete="off">
                   <div className="form-title">
                     <Input
                       placeholder="Forum Title"
