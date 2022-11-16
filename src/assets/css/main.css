@@ -1377,8 +1377,10 @@ body {
 }
 
 .friend-message-container .friend-message__avatar {
-  width: 45px;
+  min-width: 45px;
   height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .friend-message-container .friend-message__avatar img {
@@ -2519,9 +2521,18 @@ body {
   color: #f14646;
 }
 
+.register-section .auth-container__form .gender-error {
+  color: #f14646;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.register-section .auth-container .form-group {
+  margin-bottom: 14px;
+}
+
 .register-section .auth-container .form-group input {
   padding: 0.6rem 1.5rem;
-  margin-bottom: 14px;
   background-color: #f8f9fa;
   border-color: #ddd;
   border-radius: 0;
@@ -2570,6 +2581,16 @@ body {
   .register-section .auth-container .form-group input::placeholder {
     font-size: 12px;
   }
+}
+
+.register-section .auth-container .form-group input.error-border {
+  border-color: #f14646;
+}
+
+.register-section .auth-container .form-group .input-errors {
+  color: #f14646;
+  font-size: 14px;
+  padding-left: 5px;
 }
 
 .register-section .auth-container label {

@@ -47,7 +47,7 @@ const Sidebar = () => {
           >
             <Link to="/newsfeed">
               <img
-                src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/themes/socialv-theme/assets/images/logo-mini.svg"
+                src="https://wordpress.iqonic.design/product/wp/socialv/wp-content/themes/socialv-themes/assets/images/logo-mini.svg"
                 alt="logo"
               />
               {isSidebarActive && <h2>Travellour</h2>}

@@ -9,8 +9,10 @@
     @include flex(flex-start, center);
 
     &__avatar {
-      width: 45px;
+      min-width: 45px;
       height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
 
       img {
         width: 100%;
