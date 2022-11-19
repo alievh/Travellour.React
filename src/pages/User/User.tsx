@@ -221,6 +221,7 @@ const User = () => {
                           comments={p.comments}
                           groupId={undefined}
                           postOwnerId={p.user.id}
+                          group={p.group}
                         />
                       )
                     )

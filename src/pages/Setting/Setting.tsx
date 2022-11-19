@@ -155,7 +155,7 @@ const Setting = () => {
               {loading && <Loading />}
               {error && <p>{error}</p>}
               {!loading && (
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} autoComplete="off">
                   <div className="form-fullname">
                     <Col lg="5">
                       <Input

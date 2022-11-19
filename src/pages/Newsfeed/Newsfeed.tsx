@@ -58,6 +58,7 @@ const Newsfeed = () => {
                       comments={p.comments}
                       groupId={undefined}
                       postOwnerId={undefined}
+                      group={p.group}
                     />
                   ) : (
                     <Post
@@ -75,6 +76,7 @@ const Newsfeed = () => {
                       comments={p.comments}
                       groupId={undefined}
                       postOwnerId={undefined}
+                      group={p.group}
                     />
                   )
                 )}

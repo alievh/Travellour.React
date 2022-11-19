@@ -153,7 +153,7 @@ const Password = () => {
               {loading && <Loading />}
               {error && <p>{error}</p>}
               {!loading && (
-                <form onSubmit={changePassword}>
+                <form onSubmit={changePassword} autoComplete="off">
                   <Input
                     type="password"
                     id="current-password"

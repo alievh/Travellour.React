@@ -29,6 +29,7 @@ const Post: React.FC<{
   comments: Array<any>;
   groupId: string | undefined;
   postOwnerId: string | undefined;
+  group?: any | null;
 }> = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Post: React.FC<{
   const [commentContent, setCommentContent] = useState("");
 
   const addLikeHandler = async () => {
-    AddLike(dispatch,navigate, props.postId, props.userId, props.groupId);
+    AddLike(dispatch, navigate, props.postId, props.userId, props.groupId);
 
     if (
       JSON.parse(localStorage.getItem("user") || "{}").user.id !== props.userId
@@ -52,7 +53,7 @@ const Post: React.FC<{
   };
 
   const deleteLikeHandler = async () => {
-    DeleteLike(dispatch,navigate, props.postId, props.userId, props.groupId);
+    DeleteLike(dispatch, navigate, props.postId, props.userId, props.groupId);
   };
 
   const commentContentHandler = (event: any) => {
@@ -67,7 +68,14 @@ const Post: React.FC<{
         content: commentContent,
       };
 
-      AddComment(dispatch,navigate, comment, undefined, props.userId, props.groupId);
+      AddComment(
+        dispatch,
+        navigate,
+        comment,
+        undefined,
+        props.userId,
+        props.groupId
+      );
 
       if (
         JSON.parse(localStorage.getItem("user") || "{}").user.id !==
@@ -111,16 +119,23 @@ const Post: React.FC<{
             )}
           </div>
           <div className="owner-info">
-            {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
-            props.userId ? (
-              <Link to={`/user/${props.userId}`}>
-                {props.userFirstname} {props.userLastname}
-              </Link>
-            ) : (
-              <Link to="/profile">
-                {props.userFirstname} {props.userLastname}
-              </Link>
-            )}
+            <div className="">
+              {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
+              props.userId ? (
+                <Link to={`/user/${props.userId}`}>
+                  {props.userFirstname} {props.userLastname}
+                </Link>
+              ) : (
+                <Link to="/profile">
+                  {props.userFirstname} {props.userLastname}
+                </Link>
+              )}
+              {props.group !== null && props.group !== undefined ? (
+                <span> - from {props.group.groupName}</span>
+              ) : (
+                ""
+              )}
+            </div>
             <span>{props.createdDate}</span>
           </div>
         </div>
