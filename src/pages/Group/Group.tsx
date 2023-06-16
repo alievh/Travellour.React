@@ -286,7 +286,7 @@ const Group = () => {
                         <Post
                           postId={p.id}
                           userId={p.user.id}
-                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userImage={p.user.profileImage === null ? null :`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                           userFirstname={p.user.firstname}
                           userLastname={p.user.lastname}
                           createdDate="6 hours"
@@ -303,7 +303,7 @@ const Group = () => {
                         <Post
                           postId={p.id}
                           userId={p.user.id}
-                          userImage={`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
+                          userImage={p.user.profileImage === null ? null :`https://localhost:7101/img/${p.user.profileImage.imageUrl}`}
                           userFirstname={p.user.firstname}
                           userLastname={p.user.lastname}
                           createdDate="6 hours"
@@ -329,7 +329,7 @@ const Group = () => {
                 <GroupAdmin
                   adminId={groupDetail.group.groupAdmin.id}
                   adminImage={
-                    groupDetail.group.groupAdmin.profileImage.imageUrl
+                    groupDetail.group.groupAdmin.profileImage === null ? null : groupDetail.group.groupAdmin.profileImage.imageUrl
                   }
                   adminFirstName={groupDetail.group.groupAdmin.firstname}
                   adminLastName={groupDetail.group.groupAdmin.lastname}

@@ -17,7 +17,7 @@ import { CreateNotification } from "../../store/Notification/NotificationSlice";
 const Post: React.FC<{
   postId: string;
   userId: string;
-  userImage: string;
+  userImage?: string | null;
   userFirstname: string;
   userLastname: string;
   createdDate: string;
@@ -110,11 +110,25 @@ const Post: React.FC<{
             {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
             props.userId ? (
               <Link to={`/user/${props.userId}`}>
-                <img src={props.userImage} alt="PostImage" />
+                {props.userImage === null ? (
+                  <img
+                    src={require("../../assets/images/defaultprofilephoto.jpg")}
+                    alt="PostImage"
+                  />
+                ) : (
+                  <img src={props.userImage} alt="PostImage" />
+                )}
               </Link>
             ) : (
               <Link to="/profile">
-                <img src={props.userImage} alt="PostImage" />
+                {props.userImage === null ? (
+                  <img
+                    src={require("../../assets/images/defaultprofilephoto.jpg")}
+                    alt="PostImage"
+                  />
+                ) : (
+                  <img src={props.userImage} alt="PostImage" />
+                )}
               </Link>
             )}
           </div>
@@ -215,7 +229,7 @@ const Post: React.FC<{
                 key={c.id}
                 commentId={c.id}
                 userId={c.user.id}
-                userImage={c.user.profileImage.imageUrl}
+                userImage={c.user.profileImage === null ? null : c.user.profileImage.imageUrl}
                 userFirstname={c.user.firstname}
                 userLastname={c.user.lastname}
                 commentContent={c.content}

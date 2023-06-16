@@ -19,15 +19,22 @@ const MessageUser: React.FC<{
     <li className="message-user" onClick={getMessagesHandler}>
       <div className="user-information">
         <div className="user-avatar">
+          {props.imageUrl === null ? (
+            <img
+              src={require("../../assets/images/defaultprofilephoto.jpg")}
+              alt="UserProfileImage"
+            />
+          ) : (
             <img
               src={`https://localhost:7101/img/${props.imageUrl}`}
               alt="UserProfileImage"
             />
+          )}
         </div>
         <div className="user-details">
-            <h6>
-              {props.userFirstName} {props.userLastName}
-            </h6>
+          <h6>
+            {props.userFirstName} {props.userLastName}
+          </h6>
         </div>
       </div>
     </li>

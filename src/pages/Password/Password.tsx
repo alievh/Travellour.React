@@ -112,8 +112,11 @@ const Password = () => {
             <div className="setting-section__user">
               <div className="user-info">
                 <div className="user-avatar">
-                  {user.profileImage === "" ? (
-                    ""
+                  {user.profileImage === null ? (
+                    <img
+                    src={require("../../assets/images/defaultprofilephoto.jpg")}
+                    alt="User Avatar"
+                  />
                   ) : (
                     <img
                       src={`https://localhost:7101/img/${user.profileImage}`}

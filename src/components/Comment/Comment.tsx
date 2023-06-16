@@ -38,19 +38,35 @@ const Comment: React.FC<{
           {JSON.parse(localStorage.getItem("user") || "{}").user.id !==
           props.userId ? (
             <Link to={`/user/${props.userId}`}>
-              <img
-                src={`https://localhost:7101/img/${props.userImage}`}
-                className="comment-user__avatar-img"
-                alt="UserImage"
-              />
+              {props.userImage === null ? (
+                <img
+                  src={require("../../assets/images/defaultprofilephoto.jpg")}
+                  className="comment-user__avatar-img"
+                  alt="UserImage"
+                />
+              ) : (
+                <img
+                  src={`https://localhost:7101/img/${props.userImage}`}
+                  className="comment-user__avatar-img"
+                  alt="UserImage"
+                />
+              )}
             </Link>
           ) : (
             <Link to="/profile">
-              <img
-                src={`https://localhost:7101/img/${props.userImage}`}
-                className="comment-user__avatar-img"
-                alt="UserImage"
-              />
+              {props.userImage === null ? (
+                <img
+                  src={require("../../assets/images/defaultprofilephoto.jpg")}
+                  className="comment-user__avatar-img"
+                  alt="UserImage"
+                />
+              ) : (
+                <img
+                  src={`https://localhost:7101/img/${props.userImage}`}
+                  className="comment-user__avatar-img"
+                  alt="UserImage"
+                />
+              )}
             </Link>
           )}
         </div>

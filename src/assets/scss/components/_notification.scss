@@ -3,7 +3,7 @@
 
 .notification {
   @include flex(none, center);
-  padding: 10px 0;
+  padding: 8px 0 !important;
   margin-bottom: 12px;
   border: 1px solid #eaeff8;
   border-radius: 5px;

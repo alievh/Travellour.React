@@ -52,7 +52,6 @@ const Navbar = () => {
       setNotificationToggle(false);
       setProfileToggle(false);
       setSearchResultActive(false);
-
     }
     setMessageToggle(!messageToggle);
   };
@@ -68,7 +67,6 @@ const Navbar = () => {
       setFriendRequestsToggle(false);
       setProfileToggle(false);
       setSearchResultActive(false);
-
     }
     setNotificationToggle(!notificationToggle);
   };
@@ -89,7 +87,7 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    RemoveOnlineUser(dispatch);    
+    RemoveOnlineUser(dispatch);
     navigate("/");
   };
 
@@ -131,7 +129,6 @@ const Navbar = () => {
   );
 
   const searchUsers = useSelector((state: any) => state.SearchUserSlice);
-
 
   return (
     // Navbar - START
@@ -258,7 +255,7 @@ const Navbar = () => {
                                   key={n.id}
                                   notificationId={n.id}
                                   userId={n.sender.id}
-                                  userImage={n.sender.profileImage.imageUrl}
+                                  userImage={n.sender.profileImage !== null ? n.sender.profileImage.imageUrl : null}
                                   userUsername={n.sender.userName}
                                   notificationContent={n.message}
                                   notificationStatus={n.notificationStatus}
@@ -295,14 +292,19 @@ const Navbar = () => {
                       className="nav-bar__user-avatar"
                       onClick={profileToggleHandler}
                     >
-                      {JSON.stringify(user.userData) === "{}" ? (
-                        ""
-                      ) : (
-                        <img
-                          src={`https://localhost:7101/img/${user.userData.profileImage}`}
-                          alt="User Avatar"
-                        />
-                      )}
+                      {JSON.stringify(user.userData) !== "{}" ? (
+                        user.userData.profileImage === null ? (
+                          <img
+                            src={require("../../assets/images/defaultprofilephoto.jpg")}
+                            alt="User Avatar"
+                          />
+                        ) : (
+                          <img
+                            src={`https://localhost:7101/img/${user.userData.profileImage}`}
+                            alt="User Avatar"
+                          />
+                        )
+                      ) : null}
                     </div>
                     {profileToggle ? (
                       <div className="profile-dropdown">

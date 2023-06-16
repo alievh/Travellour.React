@@ -67,6 +67,7 @@ const User = () => {
   const acceptRequestHandler = () => {
     AcceptFriendRequest(dispatch, id);
   };
+  console.log(userProfile);
 
   return (
     // User Section - START
@@ -74,8 +75,11 @@ const User = () => {
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        {userProfile.profile.coverImage === undefined ? (
-          ""
+        {userProfile.profile.coverImage === "" ? (
+          <img
+            src={require("../../assets/images/defaultbackground.jpg")}
+            alt="Profile Background"
+          />
         ) : (
           <img
             src={`https://localhost:7101/img/${userProfile.profile.coverImage}`}
@@ -101,14 +105,17 @@ const User = () => {
             </div>
             <div className="user__details col-lg-5">
               <div className="user-avatar">
-                {userProfile.profile.profileImage === undefined ? (
-                  ""
+                {JSON.stringify(userProfile.profile) !== '{}' ? userProfile.profile.profileImage === "" ? (
+                  <img
+                  src={require("../../assets/images/defaultprofilephoto.jpg")}
+                  alt="User Avatar"
+                />
                 ) : (
                   <img
                     src={`https://localhost:7101/img/${userProfile.profile.profileImage}`}
                     alt="User Avatar"
                   />
-                )}
+                ): null}
               </div>
               <h5>
                 {userProfile.profile.firstname} {userProfile.profile.lastname}

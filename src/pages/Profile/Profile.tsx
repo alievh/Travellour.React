@@ -70,21 +70,26 @@ const Profile = () => {
   const profileData = useSelector((state: any) => state.ProfileSlice);
 
   const userPosts = useSelector((state: any) => state.UserPostsSlice);
-
+  console.log(profileData.profile.coverImage);
   return (
     // Profile Section - START
     <section
       className={`profile-section ${!sidebarIsActive && "sidebar-notactive"}`}
     >
       <div className="profile-section__background">
-        {JSON.stringify(profileData.profile) === "{}" ? (
-          ""
-        ) : (
-          <img
-            src={`https://localhost:7101/img/${profileData.profile.coverImage}`}
-            alt="Profile Background"
-          />
-        )}
+        {JSON.stringify(profileData.profile) !== "{}" ? (
+          profileData.profile.coverImage === "" ? (
+            <img
+              src={require("../../assets/images/defaultbackground.jpg")}
+              alt="Profile Background"
+            />
+          ) : (
+            <img
+              src={`https://localhost:7101/img/${profileData.profile.coverImage}`}
+              alt="Profile Background"
+            />
+          )
+        ) : null}
         <form>
           <label className="backgroundphoto-label">
             <input
@@ -117,14 +122,19 @@ const Profile = () => {
             </div>
             <div className="user__details col-lg-5">
               <div className="user-avatar">
-                {JSON.stringify(profileData.profile) === "{}" ? (
-                  ""
-                ) : (
-                  <img
-                    src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
-                    alt="User Avatar"
-                  />
-                )}
+                {JSON.stringify(profileData.profile) !== "{}" ? (
+                  profileData.profile.profileImage === "" ? (
+                    <img
+                      src={require("../../assets/images/defaultprofilephoto.jpg")}
+                      alt="User Avatar"
+                    />
+                  ) : (
+                    <img
+                      src={`https://localhost:7101/img/${profileData.profile.profileImage}`}
+                      alt="User Avatar"
+                    />
+                  )
+                ) : null}
                 <form>
                   <label className="profilphoto-label">
                     <input

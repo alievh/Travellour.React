@@ -37,10 +37,13 @@ const FriendRequest: React.FC<{
       <div className="friend-request__info">
         <div className="friend-request__user-avatar">
           <Link to={`/user/${props.userId}`}>
-            <img
+            {props.imageUrl === null ? <img
+              src={require("../../assets/images/defaultprofilephoto.jpg")}
+              alt="UserImage"
+            /> : <img
               src={`https://localhost:7101/img/${props.imageUrl}`}
               alt="UserImage"
-            />
+            />}
           </Link>
         </div>
         <div className="user-details">

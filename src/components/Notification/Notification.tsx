@@ -31,11 +31,19 @@ const Notification: React.FC<{
       <Col lg="2" className="d-flex justify-content-center">
         <div className="notification__avatar">
           <Link to={`/user/${props.userId}`}>
-            <img
-              onClick={setCheckedNotificationHandler}
-              src={`https://localhost:7101/img/${props.userImage}`}
-              alt="profileImage"
-            />
+            {props.userImage === null ? (
+              <img
+                onClick={setCheckedNotificationHandler}
+                src={require("../../assets/images/defaultprofilephoto.jpg")}
+                alt="profileImage"
+              />
+            ) : (
+              <img
+                onClick={setCheckedNotificationHandler}
+                src={`https://localhost:7101/img/${props.userImage}`}
+                alt="profileImage"
+              />
+            )}
           </Link>
         </div>
       </Col>

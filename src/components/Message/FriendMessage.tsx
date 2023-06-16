@@ -11,7 +11,17 @@ const FriendMessage: React.FC<{
     <div className="friend-message-container">
       <div className="friend-message">
         <div className="friend-message__avatar">
-          <img src={`https://localhost:7101/img/${props.friendImage}`} alt="userImage" />
+          {props.friendImage === null ? (
+            <img
+              src={require("../../assets/images/defaultprofilephoto.jpg")}
+              alt="userImage"
+            />
+          ) : (
+            <img
+              src={`https://localhost:7101/img/${props.friendImage}`}
+              alt="userImage"
+            />
+          )}
         </div>
         <div className="message-content">
           <p>{props.message}</p>

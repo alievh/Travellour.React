@@ -314,6 +314,7 @@ body {
 
 .user-friend__avatar img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -1003,7 +1004,7 @@ body {
   display: flex;
   justify-content: none;
   align-items: center;
-  padding: 10px 0;
+  padding: 8px 0 !important;
   margin-bottom: 12px;
   border: 1px solid #eaeff8;
   border-radius: 5px;

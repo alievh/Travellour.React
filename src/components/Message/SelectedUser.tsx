@@ -11,10 +11,17 @@ const SelectedUser: React.FC<{
     <div className="selected-user-information">
       <div className="user-avatar">
         <Link to={`user/${props.id}`}>
-          <img
-            src={`https://localhost:7101/img/${props.imageUrl}`}
-            alt="UserProfileImage"
-          />
+          {props.imageUrl === null ? (
+            <img
+              src={require("../../assets/images/defaultprofilephoto.jpg")}
+              alt="UserProfileImage"
+            />
+          ) : (
+            <img
+              src={`https://localhost:7101/img/${props.imageUrl}`}
+              alt="UserProfileImage"
+            />
+          )}
         </Link>
       </div>
       <div className="user-details">

@@ -15,7 +15,7 @@ const FriendSuggestion: React.FC<{
   const navigate = useNavigate();
 
   const friendAddHandler = async () => {
-    SendFriendRequest(dispatch,navigate, props.id);
+    SendFriendRequest(dispatch, navigate, props.id);
   };
 
   return (
@@ -23,7 +23,17 @@ const FriendSuggestion: React.FC<{
       <div className="friend-information">
         <div className="user-avatar">
           <Link to={`/user/${props.id}`}>
-            <img src={`https://localhost:7101/img/${props.imageUrl}`} alt="UserProfileImage" />
+            {props.imageUrl === null ? (
+              <img
+                src={require("../../assets/images/defaultprofilephoto.jpg")}
+                alt="UserProfileImage"
+              />
+            ) : (
+              <img
+                src={`https://localhost:7101/img/${props.imageUrl}`}
+                alt="UserProfileImage"
+              />
+            )}
           </Link>
         </div>
         <div className="user-details">

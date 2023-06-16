@@ -59,8 +59,13 @@ const Sidebar = () => {
         <div className="sidebar-section__main">
           <div className="sidebar-section__profile">
             <div className="profile-avatar">
-              {user.userData.profileImage === undefined ? (
-                ""
+              {user.userData.profileImage === null ? (
+                <Link to="/profile">
+                <img
+                  src={require("../../assets/images/defaultprofilephoto.jpg")}
+                  alt="User Avatar"
+                />
+              </Link>
               ) : (
                 <Link to="/profile">
                   <img
